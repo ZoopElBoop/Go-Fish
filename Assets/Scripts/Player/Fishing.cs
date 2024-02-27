@@ -25,7 +25,8 @@ public class Fishing : MonoBehaviour
     private GameObject mouseFxInstance;
 
     [Header("Slider For Fishing (to be moved to seperate ui script)")]
-    public Slider _Slider;
+    public Slider _fishCaughtSlider;
+    public Slider _fishingThrowSlider;
 
     private bool isFishing;
     private bool barAtTop;
@@ -45,9 +46,10 @@ public class Fishing : MonoBehaviour
     private bool inBoat;
 
     [Header("Charge Up Velocity Limit & Minimum")]
-    [Range(1f, 30.0f)]
+    [Range(1f, 50.0f)]
     public float _chargeUpMax = 15f;
-    public float _chargeUpMin = 1f;
+    [Range(0.01f, 0.3f)]
+    public float _chargeUpMultiplier = 0.1f;
     private float throwCharge = 1.0f;
 
     [Header("Gizmos")]
@@ -88,14 +90,17 @@ public class Fishing : MonoBehaviour
             {
                 //Used for charging up lob, if player is not in a boat
                 if (throwCharge < _chargeUpMax)
-                {
-                    throwCharge += 10.0f * Time.deltaTime;
-                    print(throwCharge);
-                }
-
+                    throwCharge += _chargeUpMultiplier;
+                
                 ObliterateBobber();
+
+                if (!_fishingThrowSlider.gameObject.activeSelf)
+                    _fishingThrowSlider.gameObject.SetActive(true);
+
+                _fishingThrowSlider.value = Mathf.InverseLerp(0f, _chargeUpMax, throwCharge);
             }
-            else if (Input.GetMouseButtonUp(0) && throwCharge > _chargeUpMin && !inBoat)
+
+            else if (Input.GetMouseButtonUp(0) && throwCharge > 1f && !inBoat)
                 LobBobber();
             else if (Input.GetMouseButtonDown(0) && inBoat)
                 LobBobber();
@@ -109,7 +114,7 @@ public class Fishing : MonoBehaviour
             {
                 ObliterateBobber();
 
-                if (_Slider.value >= 0.4 && _Slider.value <= 0.6)
+                if (_fishCaughtSlider.value >= 0.4 && _fishCaughtSlider.value <= 0.6)
                     Caught();
                 else
                     Escape();
@@ -191,6 +196,9 @@ public class Fishing : MonoBehaviour
 
     private void LobBobber()
     {
+        _fishingThrowSlider.value = 0f;
+        _fishingThrowSlider.gameObject.SetActive(false);
+
         ObliterateBobber();
 
         if (inBoat)
@@ -226,8 +234,6 @@ public class Fishing : MonoBehaviour
         else
         {
             throwCharge = Mathf.RoundToInt(throwCharge);
-            
-            print(throwCharge);
 
             SpawnBobber(transform.forward, throwCharge);
 
@@ -261,7 +267,7 @@ public class Fishing : MonoBehaviour
         isFishing = true;
         caughtFish = fish;
         print("caught!!");
-        _Slider.gameObject.SetActive(true);
+        _fishCaughtSlider.gameObject.SetActive(true);
     }
 
     public void CamBoatSwitch(Camera boatCam)
@@ -288,16 +294,16 @@ public class Fishing : MonoBehaviour
     {
         if (!barAtTop)
         {
-            _Slider.value += 0.25f * Time.deltaTime;
+            _fishCaughtSlider.value += 0.25f * Time.deltaTime;
 
-            if (_Slider.value >= 1)
+            if (_fishCaughtSlider.value >= 1)
                 barAtTop = true;
         }
         else
         {
-            _Slider.value -= 0.25f * Time.deltaTime;
+            _fishCaughtSlider.value -= 0.25f * Time.deltaTime;
 
-            if (_Slider.value <= 0)
+            if (_fishCaughtSlider.value <= 0)
                 barAtTop = false;
         }
     }
@@ -307,15 +313,15 @@ public class Fishing : MonoBehaviour
         EventManager.Instance.FishCaught(caughtFish);
         numCaught++;
         catches.text = "CAUGHT FISH :" + numCaught;
-        _Slider.value = 0.5f;
-        _Slider.gameObject.SetActive(false);
+        _fishCaughtSlider.value = 0.5f;
+        _fishCaughtSlider.gameObject.SetActive(false);
     }
 
     void Escape()
     {
         caughtFish.GetComponent<FishControl>().Escape(transform);
-        _Slider.value = 0.5f;
-        _Slider.gameObject.SetActive(false);
+        _fishCaughtSlider.value = 0.5f;
+        _fishCaughtSlider.gameObject.SetActive(false);
     }
 
     private void OnDrawGizmos()
