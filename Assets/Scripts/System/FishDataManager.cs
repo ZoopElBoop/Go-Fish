@@ -21,14 +21,16 @@ public class FishDataManager : MonoBehaviour
     }
     private void OnValidate()
     {
-        //checks to ensure no duplicates found
+/*        //checks to ensure no duplicates found
         for (int i = 0; i < fishData.Length - 1; i++)
         {
+            //print(fishData[i]);
+
             if (fishData[i] == fishData[i + 1])
             {
                 Debug.LogError($"Duplicate {fishData[i].name} found, pls fix");
             }
-        }
+        }*/
         
     }
 }

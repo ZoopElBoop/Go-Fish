@@ -18,7 +18,5 @@ public class fpsCounter : MonoBehaviour
             delay = 0;
             fps.text = (int)(1f / Time.unscaledDeltaTime) + " FPS";
         }
-
-
     }
 }

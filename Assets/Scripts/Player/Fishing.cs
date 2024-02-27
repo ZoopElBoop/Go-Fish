@@ -77,6 +77,8 @@ public class Fishing : MonoBehaviour
         mouseFxInstance = Instantiate(_mouseFx, transform.position, Quaternion.identity);
         mouseFxInstance.SetActive(false);
 
+        mouseFxInstance.transform.parent = transform;
+
         /*        Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;*/
     }
@@ -249,7 +251,7 @@ public class Fishing : MonoBehaviour
         bobberInstance.GetComponent<Rigidbody>().velocity = direction * velocity;
 
         if (gizmosActive)
-            Debug.DrawRay(bobberInstance.transform.position, direction * velocity, Color.red, 2.0f);
+            Debug.DrawRay(bobberInstance.transform.position, direction * velocity, Color.green, 2.0f);
     }
 
     private (bool success, Vector3 position) GetMousePosition()
@@ -343,13 +345,14 @@ public class Fishing : MonoBehaviour
             else
                 Gizmos.color = Color.red;
 
-            if (throwPos != Vector3.zero)
-            {
-                Gizmos.DrawWireSphere(throwPos, 1f);
-            }
+            if (throwPos != Vector3.zero)        
+                Gizmos.DrawWireSphere(throwPos, 1f);          
 
             if (throwCharge > 1)
+            {
+                Gizmos.color = Color.red;
                 Gizmos.DrawRay(_bobberSpawnPoint.position, transform.forward * throwCharge);
+            }
         }
     }
     
