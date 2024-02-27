@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bfed5eab5039a546a85aa6bcf63148f, type: 3}
+  m_Name: Fishk
+  m_EditorClassIdentifier: 
+  _Fishk: {fileID: 1825884053310765428, guid: e27944fb9c7198146b5a3e1a34f0cbed, type: 3}
+  _Health: 1
+  _Speed: 1
+  _canBeCaught: 1
+  _spawnDepthStart: -1
+  _spawnDepthHigh: -5
+  _spawnDepthEnd: -10
+  _Rarity: 1
+  _moveHeightLimit: -1
+  _moveDepthLimit: -10
+  _collisionRange: 1
+  _despawnRangeMulti: 1
+  _baseValue: 0.1
+  _valueChangeCoefficient: 0.1
