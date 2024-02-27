@@ -12,9 +12,9 @@ public class Fishing : MonoBehaviour
 
     public Transform _bobberSpawnPoint;
 
-    [Range(5f, 30.0f)]
+    [Range(10f, 30.0f)]
     public float _bobberSpawnRangeMax = 3f;
-    [Range(0.1f, 5.0f)]
+    [Range(0.1f, 10.0f)]
     public float _bobberSpawnRangeMin = 12f;
 
     [Header("Bobber Raycast Mask Detection")]
@@ -107,13 +107,14 @@ public class Fishing : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                isFishing = false;
                 ObliterateBobber();
 
                 if (_Slider.value >= 0.4 && _Slider.value <= 0.6)
                     Caught();
                 else
                     Escape();
+
+                StartCoroutine(fishingCooldown());
             }               
         }
 
@@ -133,7 +134,7 @@ public class Fishing : MonoBehaviour
         if (inBoat)
             mouseMoveFx();
     }
-
+    public float distanceBetween = 0f;
     private void mouseMoveFx()
     {
         //gets position of mouse in relation to world space
@@ -141,7 +142,7 @@ public class Fishing : MonoBehaviour
 
         if (success)
         {
-            float distanceBetween = Vector3.Distance(_bobberSpawnPoint.position, position);
+            distanceBetween = Vector3.Distance(_bobberSpawnPoint.position, position);
 
             //Disables target reticle if outside range limits
             if (distanceBetween > _bobberSpawnRangeMax || distanceBetween < _bobberSpawnRangeMin)
@@ -165,6 +166,12 @@ public class Fishing : MonoBehaviour
         }
         else
             mouseFxInstance.SetActive(false);       
+    }
+
+    IEnumerator fishingCooldown()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isFishing = false;
     }
 
     private void RotatePlayerToMouse(Vector3 pos)
@@ -211,7 +218,7 @@ public class Fishing : MonoBehaviour
 
                 //Adds velocity so bobber goes in mouse direction
                 //needs rework as bobber overshoots at close distances & undershoots at far distances
-                SpawnBobber((position - _bobberSpawnPoint.position), velocityMarkiplier);
+                SpawnBobber(position - _bobberSpawnPoint.position, velocityMarkiplier);
             }
             else
                 Debug.LogWarning("Unable to find position to throw bobber: ABORTING SPAWN");

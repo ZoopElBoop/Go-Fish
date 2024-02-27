@@ -8,16 +8,21 @@ public class wob : MonoBehaviour
 
     private bool hasCaught = false;
 
-    private void Update()
+    private void Awake()
     {
-        if (transform.position.y < 0.5)
-            attractPoint.SetActive(true);
+        attractPoint.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<FishControl>() != null && !hasCaught)
             FishCatch(other.gameObject);    //this is bad code
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 4)
+            attractPoint.SetActive(true);
     }
 
     private void FishCatch(GameObject fish)
