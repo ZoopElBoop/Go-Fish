@@ -20,7 +20,7 @@ MonoBehaviour:
   _spawnDepthHigh: -5
   _spawnDepthEnd: -10
   _Rarity: 0.518
-  _moveHeightLimit: -1
+  _moveHeightLimit: -1.5
   _moveDepthLimit: -77.5
   _collisionRange: 1
   _despawnRangeMulti: 1
