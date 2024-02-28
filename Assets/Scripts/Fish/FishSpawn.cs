@@ -8,7 +8,6 @@ public class FishSpawn : MonoBehaviour
     [Header("Spawn & Despawn Range")]
     [Range(0f, 100f)]
     public float _spawnRange;
-
     [Range(0f, 100f)]
     public float _destroyRange;
 
@@ -18,12 +17,12 @@ public class FishSpawn : MonoBehaviour
     public List<GameObject> _spawnedFish = new();
 
     [Header("Gizmos")]
-    public bool gizmosActive;
-    public bool debugLog;
+    [SerializeField] private bool gizmosActive;
+    [SerializeField] private bool debugLog;
 
     //REMOVE LATER
     [Header("Spawned Fish Text (to be moved to seperate ui script)")]
-    public TMP_Text fishies; 
+    [SerializeField] private TMP_Text fishies; 
 
     private void Start()
     {

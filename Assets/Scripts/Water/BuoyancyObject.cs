@@ -8,28 +8,28 @@ using UnityEngine;
 public class BuoyancyObject : MonoBehaviour
 {
     [Header("Floating Points")]
-    public List<Transform> _floatingPoint = new();
+    [SerializeField] private List<Transform> _floatingPoint = new();
     private int floatingPointsUnderwater;
 
     [Header("Drag Coefficients")]
-    public float _underwaterDrag = 3f;
-    public float _underwaterAngularDrag = 1f;
-    public float _airDrag = 0f;
-    public float _airAngularDrag = 0.05f;
+    [SerializeField] private float _underwaterDrag = 3f;
+    [SerializeField] private float _underwaterAngularDrag = 1f;
+    [SerializeField] private float _airDrag = 0f;
+    [SerializeField] private float _airAngularDrag = 0.05f;
 
     [Header("Float Effects")]
     [Range(1.0f, 100.0f)]
     public float _floatingPower = 15f;
-    public float _waterHeight = -100f;
+    [SerializeField] private float _waterHeight = -100f;
 
-    Rigidbody rb;
+    [SerializeField] Rigidbody rb;
 
     private bool isUnderwater;
 
     [Header("Gizmos")]
-    public bool gizmosActive;
+    [SerializeField] private bool gizmosActive;
     [Range(0.1f, 2.0f)]
-    public float gizmosSize = 1f;
+    [SerializeField] private float gizmosSize = 1f;
 
     // Start is called before the first frame update
     void Start()

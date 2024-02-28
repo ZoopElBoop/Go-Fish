@@ -7,37 +7,37 @@ using UnityEngine.UI;
 public class Fishing : MonoBehaviour
 {
     [Header("Bobber Settings")]
-    public GameObject _Bobber;
-    private GameObject bobberInstance;
+    [SerializeField] private GameObject _Bobber;
+    [SerializeField] private GameObject bobberInstance;
 
     public Transform _bobberSpawnPoint;
 
-    [Range(10f, 30.0f)]
-    public float _bobberSpawnRangeMax = 3f;
+    [Range(10.0f, 30.0f)]
+    [SerializeField] private float _bobberSpawnRangeMax = 3f;
     [Range(0.1f, 10.0f)]
-    public float _bobberSpawnRangeMin = 12f;
+    [SerializeField] private float _bobberSpawnRangeMin = 12f;
 
     [Header("Bobber Raycast Mask Detection")]
-    public LayerMask groundMask;
+    [SerializeField] private LayerMask groundMask;
 
     [Header("Mouse Crossshair For Boat Fishing")]
-    public GameObject _mouseFx;
+    [SerializeField] private GameObject _mouseFx;
     private GameObject mouseFxInstance;
 
     [Header("Slider For Fishing (to be moved to seperate ui script)")]
-    public Slider _fishCaughtSlider;
-    public Slider _fishingThrowSlider;
+    [SerializeField] private Slider _fishCaughtSlider;
+    [SerializeField] private Slider _fishingThrowSlider;
 
     private bool isFishing;
     private bool barAtTop;
 
     [Header("Fishing Line (might move to seprate script)")]
-    public LineRenderer _LineRenderer;
+    [SerializeField] private LineRenderer _LineRenderer;
 
     private GameObject caughtFish;
 
     [Header("Caught Fish Text (to be moved to seperate ui script)")]
-    public TMP_Text catches;
+    [SerializeField] private TMP_Text catches;
     private int numCaught = 0;
 
     private Camera mainCamera;
@@ -46,20 +46,20 @@ public class Fishing : MonoBehaviour
     private bool inBoat;
 
     [Header("Charge Up Velocity Limit & Minimum")]
-    [Range(1f, 50.0f)]
-    public float _chargeUpMax = 15f;
+    [Range(1.0f, 50.0f)]
+    [SerializeField] private float _chargeUpMax = 15f;
     [Range(0.01f, 0.3f)]
-    public float _chargeUpMultiplier = 0.1f;
+    [SerializeField] private float _chargeUpMultiplier = 0.1f;
     private float throwCharge = 1.0f;
 
     [Header("Gizmos")]
 
-    public bool gizmosActive = true;
+    [SerializeField] private bool gizmosActive = true;
     private bool spawnFail;
     private Vector3 throwPos;
 
     [Header("TESTING (WILL BE REMOVED)")]
-    public float TestVelocityMultiplier; //remove once velocity range is fixed
+    [SerializeField] private float TestVelocityMultiplier; //remove once velocity range is fixed
 
 
     private void Start() 
@@ -121,7 +121,7 @@ public class Fishing : MonoBehaviour
                 else
                     Escape();
 
-                StartCoroutine(fishingCooldown());
+                StartCoroutine(FishingCooldown());
             }               
         }
 
@@ -139,10 +139,10 @@ public class Fishing : MonoBehaviour
     private void FixedUpdate()
     {
         if (inBoat)
-            mouseMoveFx();
+            MouseMoveFx();
     }
     public float distanceBetween = 0f;
-    private void mouseMoveFx()
+    private void MouseMoveFx()
     {
         //gets position of mouse in relation to world space
         var (success, position) = GetMousePosition();
@@ -164,10 +164,8 @@ public class Fishing : MonoBehaviour
             {
                 mouseFxInstance.SetActive(true);
                 mouseFxInstance.transform.position = position;
-            }
-
-            //Move roatation limits (+/- 90)
-            //Do this at somepoint
+            }else
+                mouseFxInstance.SetActive(false);
 
             RotatePlayerToMouse(position);
         }
@@ -175,7 +173,7 @@ public class Fishing : MonoBehaviour
             mouseFxInstance.SetActive(false);       
     }
 
-    IEnumerator fishingCooldown()
+    IEnumerator FishingCooldown()
     {
         yield return new WaitForSeconds(0.1f);
         isFishing = false;
@@ -185,6 +183,10 @@ public class Fishing : MonoBehaviour
     {
         //Sets players rotation to bobber
         //Needs rework as if boat is not flat, wierd things happen
+
+        //Move roatation limits (+/- 90)
+        //Do this at some point
+
         transform.LookAt(pos, Vector3.forward);
 
         transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
@@ -275,8 +277,11 @@ public class Fishing : MonoBehaviour
     public void CamBoatSwitch(Camera boatCam)
     {
         //TBRD
-        mainCamera.enabled = false;
+        mainCamera.gameObject.SetActive(false);
         mainCamera = boatCam;
+
+        _fishingThrowSlider.value = 0f;
+        _fishingThrowSlider.gameObject.SetActive(false);
 
         inBoat = true;
     }
@@ -285,11 +290,12 @@ public class Fishing : MonoBehaviour
     {
         //TBRD
         mainCamera = playerCamera;
-        mainCamera.enabled = true;
+        mainCamera.gameObject.SetActive(true);
+        mouseFxInstance.SetActive(false);
 
         inBoat = false;
 
-        throwCharge = 0f;
+        throwCharge = 1f;
     }
 
     void Bargame()
@@ -338,6 +344,12 @@ public class Fishing : MonoBehaviour
             {
                 Gizmos.color = Color.black;
                 Gizmos.DrawWireSphere(mouseFxInstance.transform.position, 1f);
+            }
+
+            if (bobberInstance != null)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(bobberInstance.transform.position, 1f);
             }
 
             if (!spawnFail)

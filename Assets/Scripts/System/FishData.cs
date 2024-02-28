@@ -10,45 +10,34 @@ public class FishData : ScriptableObject
     public GameObject _Fishk;
 
     [Header("Base Fish Vaules")]
-    [Min(1f)]
-    public int _Health = 1;
-    [Min(0.1f)]
-    public float _Speed = 1;
+    [Min(1.0f)] public int _Health = 1;
+    [Min(0.1f)] public float _Speed = 1;
 
     [Header("Can It Be Caught By A Rod?")]
     public bool _canBeCaught = false;
 
     [Header("Probability Spawning Points")]
-    [Range(-100f, -1f)]
-    public float _spawnDepthStart = -1f;
-    [Range(-100f, -2f)]
-    public float _spawnDepthHigh = -5f;
-    [Range(-100f, -3f)]
-    public float _spawnDepthEnd = -10f;
+    [Range(-100f, -1.0f)] public float _spawnDepthStart = -1f;
+    [Range(-100f, -2.0f)] public float _spawnDepthHigh = -5f;
+    [Range(-100f, -3.0f)] public float _spawnDepthEnd = -10f;
 
     [Header("Rarity Markiplier")]
-    [Range(0.1f, 2f)]
-    public float _Rarity = 1f;
+    [Range(0.1f, 2.0f)] public float _Rarity = 1f;
 
     [Header("Limits To How High & Low Fish Can Swim")]
-    [Range(-100, 0.0f)]
-    public float _moveHeightLimit = -1f;
-    [Range(-100f, -1f)]
-    public float _moveDepthLimit = -10f;
+
+    [Range(-100f, 0.0f)] public float _moveHeightLimit = -1f;
+    [Range(-100f, -1.0f)] public float _moveDepthLimit = -10f;
 
     [Header("Area Needed To Be Clear To Spawn")]
-    [Range(0.1f, 10.0f)]
-    public float _collisionRange = 1;
+    [Range(0.1f, 10.0f)] public float _collisionRange = 1;
 
     [Header("Despawn Range Multiplier")]
-    [Range(0.5f, 1.5f)]
-    public float _despawnRangeMulti = 1;
+    [Range(0.5f, 1.5f)] public float _despawnRangeMulti = 1;
 
     [Header("Base Value & Range To Price Changes")]
-    [Min(0.1f)]
-    public float _baseValue = 0.1f;
-    [Min(0.1f)]
-    public float _valueChangeCoefficient = 0.1f;
+    [Min(0.1f)] public float _baseValue = 0.1f;
+    [Min(0.1f)] public float _valueChangeCoefficient = 0.1f;
 
     private void OnValidate()
     {

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4993717847340044072}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Buoyent Point (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6695181130663157383}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Buoyent Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 4284379987178296372}
   - component: {fileID: 1811289475278979464}
   - component: {fileID: 5577783588979857074}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,13 +89,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037875068765238721}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09879999, y: 0.045399997, z: -0.30159998}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 0, y: 0.1, z: -0.15}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5009278244963359766}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!20 &4284379987178296372
 Camera:
   m_ObjectHideFlags: 0
@@ -103,7 +103,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037875068765238721}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -208,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2855099075246166191}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Buoyent Point (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2657618429283141010}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5365319725939894900}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Buoyent Point (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,27 +303,27 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.82
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
@@ -379,6 +379,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: boot
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -498,7 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Speed: 5
   _playerPos: {fileID: 2657618429283141010}
-  _boatCam: {fileID: 0}
+  _boatCam: {fileID: 4284379987178296372}
 --- !u!54 &3234651118123382836
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -548,6 +553,6 @@ MonoBehaviour:
   _airDrag: 0
   _airAngularDrag: 0.05
   _floatingPower: 50
-  _waterHeight: 0.5
+  _waterHeight: 0.75
   gizmosActive: 1
   gizmosSize: 1
