@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bfed5eab5039a546a85aa6bcf63148f, type: 3}
-  m_Name: f
+  m_Name: tortl
   m_EditorClassIdentifier: 
-  _Fishk: {fileID: 6886861871015768344, guid: 3b26008cd4d933940ad5aedb4c17cf96, type: 3}
+  _Fishk: {fileID: 5354247507827787981, guid: e55c5977890c73645be283737a94118b, type: 3}
   _Health: 1
   _Speed: 1
   _canBeCaught: 1
   _spawnDepthStart: -1
   _spawnDepthHigh: -5
   _spawnDepthEnd: -10
-  _Rarity: 0.1
+  _Rarity: 0.2
   _moveHeightLimit: -1.5
   _moveDepthLimit: -100
-  _collisionRange: 1
+  _collisionRange: 4
   _despawnRangeMulti: 1
   _baseValue: 0.1
   _valueChangeCoefficient: 0.1

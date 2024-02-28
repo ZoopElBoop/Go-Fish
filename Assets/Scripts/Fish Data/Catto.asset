@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bfed5eab5039a546a85aa6bcf63148f, type: 3}
-  m_Name: fis
+  m_Name: Catto
   m_EditorClassIdentifier: 
-  _Fishk: {fileID: 1858830571037122237, guid: e35ad415e4956e940b5dbdf951f78d19, type: 3}
+  _Fishk: {fileID: 8585649664234380318, guid: 9b86686b8a8e554438fe489e03cabf1c, type: 3}
   _Health: 1
   _Speed: 1
   _canBeCaught: 1
   _spawnDepthStart: -1
   _spawnDepthHigh: -5
   _spawnDepthEnd: -10
-  _Rarity: 1
+  _Rarity: 0.2
   _moveHeightLimit: -1.5
   _moveDepthLimit: -77.5
-  _collisionRange: 1
+  _collisionRange: 5
   _despawnRangeMulti: 1
   _baseValue: 0.1
   _valueChangeCoefficient: 0.1

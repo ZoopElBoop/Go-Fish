@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bfed5eab5039a546a85aa6bcf63148f, type: 3}
-  m_Name: Fishk
+  m_Name: Jello
   m_EditorClassIdentifier: 
-  _Fishk: {fileID: 1825884053310765428, guid: e27944fb9c7198146b5a3e1a34f0cbed, type: 3}
+  _Fishk: {fileID: 7683416736483790789, guid: cb87856b3b01a4249b3f6f02cc93fc70, type: 3}
   _Health: 1
   _Speed: 1
   _canBeCaught: 1
   _spawnDepthStart: -1
   _spawnDepthHigh: -5
   _spawnDepthEnd: -10
-  _Rarity: 1
+  _Rarity: 0.364
   _moveHeightLimit: -1.5
   _moveDepthLimit: -10
-  _collisionRange: 1
+  _collisionRange: 3
   _despawnRangeMulti: 1
   _baseValue: 0.1
   _valueChangeCoefficient: 0.1
