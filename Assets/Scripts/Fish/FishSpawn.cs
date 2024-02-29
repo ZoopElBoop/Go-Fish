@@ -33,7 +33,7 @@ public class FishSpawn : MonoBehaviour
 
     private void SpawnTypeOf() 
     {
-        float[,] fishProbability = new float[FishDataManager.Instance.fishData.Length, 2]; //Contains index to fishdata array & empty probability factor
+        float[,] fishProbability = new float[FishDataManager.Instance.fishData.Length, 2];      //Contains index to fishdata array & empty probability factor
         float totalProbabilityValue = 0f;
 
         for (int i = 0; i < FishDataManager.Instance.fishData.Length; i++)
@@ -186,7 +186,7 @@ public class FishSpawn : MonoBehaviour
             /*        for (int i= 0; i < _spawnedFish.Count; i++)
                         Gizmos.DrawWireSphere(_spawnedFish[i].transform.position, fishCollisonRange);*/
 
-            Gizmos.color = Color.black;
+            Gizmos.color = Color.red;
 
             Gizmos.DrawWireSphere(transform.position, _destroyRange);
         }

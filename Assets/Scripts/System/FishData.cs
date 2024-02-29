@@ -9,7 +9,7 @@ public class FishData : ScriptableObject
     [Header("Fish Prefab")]
     public GameObject _Fishk;
 
-    [Header("Base Fish Vaules")]
+    [Header("Base Fish Values")]
     [Min(1.0f)] public int _Health = 1;
     [Min(0.1f)] public float _Speed = 1;
 
