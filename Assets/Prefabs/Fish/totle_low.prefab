@@ -79,6 +79,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: totle_low
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffc3b0dbed1ed9349bea557cc189740b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Fish
+      objectReference: {fileID: 0}
     - target: {fileID: 8123140325829994652, guid: ffc3b0dbed1ed9349bea557cc189740b,
         type: 3}
       propertyPath: m_IsActive

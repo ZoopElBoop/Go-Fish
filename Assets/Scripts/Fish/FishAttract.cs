@@ -6,7 +6,7 @@ public class FishAttract : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<FishControl>() != null)
-            other.gameObject.GetComponent<FishControl>().Attract(transform);    //this is bad code
+        if (other.gameObject.CompareTag("Fish"))
+            other.gameObject.GetComponent<FishControl>().Attract(transform);
     }
 }

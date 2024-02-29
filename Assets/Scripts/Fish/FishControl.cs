@@ -6,6 +6,9 @@ public class FishControl : MonoBehaviour
 {
     private Rigidbody rb;
     private bool beSpinning = false;
+    private bool beAttracted = false;
+
+    private Transform attractPoint;
 
     public FishData Data;
 
@@ -19,6 +22,8 @@ public class FishControl : MonoBehaviour
     public float HeightMax;
     public float DepthMax;
 
+    public bool canBeFished;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,7 +35,9 @@ public class FishControl : MonoBehaviour
 
         HeightMax = Data._moveHeightLimit;
         DepthMax = Data._moveDepthLimit;
-        
+
+        canBeFished = Data._canBeCaught;
+
         ChangeDirection(30f, 180f);
         rb.velocity = transform.forward * 2;
     }
@@ -44,6 +51,9 @@ public class FishControl : MonoBehaviour
 
         if (transform.position.y > HeightMax || transform.position.y < DepthMax)
             transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
+
+        if (beAttracted)
+            transform.LookAt(new Vector3(attractPoint.position.x, attractPoint.position.y, attractPoint.position.z));
     }
 
     private void LateUpdate()
@@ -52,8 +62,14 @@ public class FishControl : MonoBehaviour
 
         if (distanceBetween > _destroyRange)
         {
-            Destroy(gameObject);
+            DIEFISHDIE();
             print("Fish OBLITERATED: Despawned");
+        }
+
+        if (HP <= 0)
+        {
+            DIEFISHDIE();
+            print("Fish OBLITERATED: Killed");
         }
     }
 
@@ -62,10 +78,15 @@ public class FishControl : MonoBehaviour
         transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-xRange, xRange), transform.eulerAngles.y + Random.Range(-yRange, yRange), 0f);    //requires overhaul for x rotation later on
     }
 
+    void DIEFISHDIE() 
+    {
+        EventManager.Instance.FishCaught(gameObject);
+    }
+
     public void Attract(Transform focusPos) 
     {
-        transform.LookAt(new Vector3(focusPos.position.x, focusPos.position.y, focusPos.position.z));
-       
+        attractPoint = focusPos;
+
         print("fish be lookin " + focusPos.position);
     }
     public void Flee(Transform focusPos) 

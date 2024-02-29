@@ -10,7 +10,7 @@ public class FishData : ScriptableObject
     public GameObject _Fishk;
 
     [Header("Base Fish Values")]
-    [Min(1.0f)] public int _Health = 1;
+    [Min(1)] public int _Health = 1;
     [Min(0.1f)] public float _Speed = 1;
 
     [Header("Can It Be Caught By A Rod?")]

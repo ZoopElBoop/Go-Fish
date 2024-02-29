@@ -15,7 +15,7 @@ public class wob : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<FishControl>() != null && !hasCaught)
+        if (other.gameObject.CompareTag("Fish") && !hasCaught)
             FishCatch(other.gameObject);    //this is bad code
     }
 
@@ -27,13 +27,18 @@ public class wob : MonoBehaviour
 
     private void FishCatch(GameObject fish)
     {
-        hasCaught = true;
+        FishControl fc = fish.GetComponent<FishControl>();
 
-        fish.GetComponent<FishControl>().Caught();
+        if (fc.canBeFished)
+        {
+            hasCaught = true;
 
-        EventManager.Instance.FishFished(fish);
+            EventManager.Instance.FishFished(fish);
 
-        Destroy(attractPoint);
-        Destroy(this);
+            Destroy(attractPoint);
+            Destroy(this);
+        }
+        else
+            Debug.LogWarning($"cannot catch {fish.name}");
     }
 }

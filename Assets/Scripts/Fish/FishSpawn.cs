@@ -16,7 +16,7 @@ public class FishSpawn : MonoBehaviour
     [Header("List Of Active Fish")]
     public List<GameObject> _spawnedFish = new();
 
-    [Header("Gizmos")]
+    [Header("DEBUG")]
     [SerializeField] private bool gizmosActive;
     [SerializeField] private bool debugLog;
 
@@ -74,7 +74,7 @@ public class FishSpawn : MonoBehaviour
             print("---");
             for (int i = 0; i < fishProbability.GetLength(0); i++)
             {
-                print(fishProbability[i, 0]);
+                print(FishDataManager.Instance.fishData[i].name);
                 print(fishProbability[i, 1]);
             }
             print("---");
@@ -152,9 +152,9 @@ public class FishSpawn : MonoBehaviour
         fishScript._dataIndex = index;
     }
 
-    private void Update()   //this should be moved to fish control in future as it still throws errors, but only extreamly rarely with 500+ fish spawned
-    {                       //i mean i could always just supress the error 
-        if (!activeTime)                //Dodgy interval spawn, to be changed at some point
+    private void Update()
+    { 
+        if (!activeTime && _spawnedFish.Count < 5)     //Dodgy interval spawn, to be changed at some point
             StartCoroutine(CallSpawn());
 
         fishies.text = _spawnedFish.Count + " Fish";    //TESTING, remove later
@@ -162,7 +162,7 @@ public class FishSpawn : MonoBehaviour
 
     private void ObliterateFish(GameObject fish) 
     {
-        //_spawnedFish.Remove(fish);
+        _spawnedFish.Remove(fish);
         Destroy(fish);
         print("Fish OBLITERATED: Fished");
     }
