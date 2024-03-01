@@ -6,11 +6,14 @@ public class wob : MonoBehaviour
 {
     public GameObject attractPoint;
 
+    private Rigidbody rb;
     private bool hasCaught = false;
 
     private void Awake()
     {
         attractPoint.SetActive(false);
+        Debug.Break();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,11 +22,11 @@ public class wob : MonoBehaviour
             FishCatch(other.gameObject);    //this is bad code
     }
 
-    private void OnCollisionEnter(Collision collision)
+/*    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 4)
             attractPoint.SetActive(true);
-    }
+    }*/
 
     private void FishCatch(GameObject fish)
     {
@@ -36,9 +39,15 @@ public class wob : MonoBehaviour
             EventManager.Instance.FishFished(fish);
 
             Destroy(attractPoint);
-            Destroy(this);
+            enabled = false;
         }
         else
             Debug.LogWarning($"cannot catch {fish.name}");
+    }
+
+    private void Update()
+    {
+        if (rb.velocity.magnitude < 1f)
+            attractPoint.SetActive(true);
     }
 }

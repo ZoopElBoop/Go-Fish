@@ -51,9 +51,9 @@ public class FishControl : MonoBehaviour
 
         if (transform.position.y > HeightMax || transform.position.y < DepthMax)
             transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
-
+/*
         if (beAttracted)
-            transform.LookAt(new Vector3(attractPoint.position.x, attractPoint.position.y, attractPoint.position.z));
+            transform.LookAt(new Vector3(attractPoint.position.x, attractPoint.position.y, attractPoint.position.z));*/
     }
 
     private void LateUpdate()
@@ -82,10 +82,13 @@ public class FishControl : MonoBehaviour
     {
         EventManager.Instance.FishCaught(gameObject);
     }
-
+    private Vector3 aaaa;
     public void Attract(Transform focusPos) 
     {
         attractPoint = focusPos;
+        aaaa = focusPos.position;
+
+        transform.LookAt(new Vector3(attractPoint.position.x, attractPoint.position.y, attractPoint.position.z));
 
         print("fish be lookin " + focusPos.position);
     }
@@ -118,6 +121,12 @@ public class FishControl : MonoBehaviour
         rb.velocity = Vector3.zero;
 
         Flee(focusPos);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attractPoint != null)
+            Gizmos.DrawCube(aaaa, new Vector3(1f, 1f, 1f));
     }
 }
 

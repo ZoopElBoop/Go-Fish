@@ -53,7 +53,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1619342014476579129
 Rigidbody:
@@ -319,5 +319,6 @@ MonoBehaviour:
   _airAngularDrag: 0.05
   _floatingPower: 65
   _waterHeight: 0.1
+  rb: {fileID: 0}
   gizmosActive: 0
   gizmosSize: 1
