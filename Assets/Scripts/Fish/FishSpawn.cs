@@ -71,13 +71,13 @@ public class FishSpawn : MonoBehaviour
         {
             print("RND VAL: " + randVal);
 
-            print("---");
+            print("/---/");
             for (int i = 0; i < fishProbability.GetLength(0); i++)
             {
                 print(FishDataManager.Instance.fishData[i].name);
                 print(fishProbability[i, 1]);
             }
-            print("---");
+            print("/---/");
         }
 
         int index = 0;

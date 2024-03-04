@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FishControl : MonoBehaviour
@@ -39,7 +40,6 @@ public class FishControl : MonoBehaviour
         canBeFished = Data._canBeCaught;
 
         ChangeDirection(30f, 180f);
-        rb.velocity = transform.forward * 2;
     }
 
     private void FixedUpdate()
@@ -82,11 +82,10 @@ public class FishControl : MonoBehaviour
     {
         EventManager.Instance.FishCaught(gameObject);
     }
-    private Vector3 aaaa;
+
     public void Attract(Transform focusPos) 
     {
         attractPoint = focusPos;
-        aaaa = focusPos.position;
 
         transform.LookAt(new Vector3(attractPoint.position.x, attractPoint.position.y, attractPoint.position.z));
 
@@ -121,12 +120,6 @@ public class FishControl : MonoBehaviour
         rb.velocity = Vector3.zero;
 
         Flee(focusPos);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (attractPoint != null)
-            Gizmos.DrawCube(aaaa, new Vector3(1f, 1f, 1f));
     }
 }
 

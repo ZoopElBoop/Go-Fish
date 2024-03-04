@@ -12,7 +12,6 @@ public class wob : MonoBehaviour
     private void Awake()
     {
         attractPoint.SetActive(false);
-        Debug.Break();
         rb = GetComponent<Rigidbody>();
     }
 
