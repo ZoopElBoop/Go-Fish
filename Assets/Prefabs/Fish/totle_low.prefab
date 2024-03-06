@@ -16,17 +16,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ffc3b0dbed1ed9349bea557cc189740b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.746222
+      value: -3.66
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffc3b0dbed1ed9349bea557cc189740b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.74
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffc3b0dbed1ed9349bea557cc189740b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.091545
+      value: -36.37
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffc3b0dbed1ed9349bea557cc189740b,
         type: 3}
@@ -167,7 +167,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -223,5 +223,9 @@ MonoBehaviour:
   _dataIndex: 0
   HP: 0
   Speed: 0
-  HeightMax: 0
-  DepthMax: 0
+  canBeFished: 0
+  colliderSize: {x: 5.89, y: 4.33, z: 10}
+  colliderRange: 10
+  ba: 0
+  viewCollisionBox: 0
+  isHit: 0000000000

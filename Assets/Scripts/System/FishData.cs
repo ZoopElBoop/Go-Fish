@@ -12,6 +12,7 @@ public class FishData : ScriptableObject
     [Header("Base Fish Values")]
     [Min(1)] public int _Health = 1;
     [Min(0.1f)] public float _Speed = 1;
+    [Min(0.1f)] public float _rotationSpeed = 1;
 
     [Header("Can It Be Caught By A Rod?")]
     public bool _canBeCaught = false;

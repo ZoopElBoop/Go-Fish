@@ -7,6 +7,8 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager Instance;
 
+    public Vector3 aaaaaaaaaaaaaaaaaaaa;
+
     private void Awake()
     {
         if (Instance == null)
