@@ -29,6 +29,8 @@ public class FishControl : MonoBehaviour
     private bool isTurning;
 
     [Header("Collision Detection Settings")]
+
+    public bool canCheckCollisions = true;
     public Vector3 colliderSize;
     public float colliderRange;
     private GameObject collisionBox;
@@ -41,7 +43,6 @@ public class FishControl : MonoBehaviour
     private List<Collider> meshies = new();
 
     [Header("DEBUG")]
-    public bool ba;
     public bool viewCollisionBox;
     public bool[] isHit = new bool[5]; //0 - front, 1 - right, 2 - left, 3 - top, 4 - bottom
 
@@ -96,8 +97,7 @@ public class FishControl : MonoBehaviour
 
                 if (transform.position.y > HeightMax || transform.position.y < DepthMax)
                     transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);*/
-
-        if (!ba)
+        if (canCheckCollisions)
             CollisionDetect();
 
         ChangeDirection();
@@ -134,19 +134,15 @@ public class FishControl : MonoBehaviour
 
         List<int> posClearIndex = new();
 
-        for (int x = 0; x < 5; x++)
-            isHit[x] = false;
-
         for (int i = 0; i < 5; i++)
         {
             Collider[] itemsReturned = CheckPositionForColliders(Positions[i]);
 
-            if (i == 0 && itemsReturned[0] == null)     //Checks if front is clear, if so prevents other checks as not required.
-            {
-                isHit[i] = false;
-                return;
-            }
+            isHit[i] = false;
 
+            if (i == 0 && itemsReturned[0] == null)     //Checks if front is clear, if so prevents other checks as not required.
+                return;
+            
             if (i == 3 && transform.position.y + colliderSize.y > HeightMax || i == 4 && transform.position.y - colliderSize.y < DepthMax)
             {
                 print(i + "ignored");
@@ -160,8 +156,6 @@ public class FishControl : MonoBehaviour
             }
             else
             {
-                isHit[i] = false;
-
                 if (CanMoveToPos(Positions[i]))
                     posClearIndex.Add(i);
                 else
@@ -169,7 +163,7 @@ public class FishControl : MonoBehaviour
             }
         }
 
-        ba = true;
+        canCheckCollisions = false;
 
         if (!posClearIndex.Any())
         {
@@ -186,6 +180,8 @@ public class FishControl : MonoBehaviour
 
         RotateTo(Positions[posClearIndex[randPick]]);
 
+        print("Picked: " + randPick);
+
         if (viewCollisionBox)
         {
             collisionBox.SetActive(true);
@@ -201,8 +197,6 @@ public class FishControl : MonoBehaviour
             collisionBox.transform.localScale = new Vector3(colliderSize.x, colliderSize.y, colliderRange);
         }else
             collisionBox.SetActive(false);
-
-        print("picked " + randPick);
     }
 
     private Collider[] CheckPositionForColliders(Vector3 positionToCheck)
@@ -216,7 +210,6 @@ public class FishControl : MonoBehaviour
 
     private bool CanMoveToPos( Vector3 endPosition)
     {
-
         Vector3 targetDir = endPosition - transform.position;
 
         var angle = Quaternion.LookRotation(targetDir, transform.up);
@@ -241,21 +234,6 @@ public class FishControl : MonoBehaviour
         print("-----------------");
 
         return false;
-
-
-        /*        float rayDistance = Vector3.Distance(transform.position, endPosition);
-
-                RaycastHit[] hits;
-
-                hits = Physics.RaycastAll(transform.position, (endPosition - transform.position), rayDistance);
-
-                if (hits.Length > 0)
-                {
-                    for (int i = 0; i < hits.Length; i++)   //to ignore fish colliders, really jank ik but it be worky, as long as each part of fish have collider < 1f away from origin
-                        if (hits[i].distance > 1f)
-                            return false;
-                }
-                return true;*/
     }
 
 /*    private void IgnoreColliders(bool reset)
@@ -279,7 +257,7 @@ public class FishControl : MonoBehaviour
         {
             print("aaa");
             isTurning = false;
-            ba = false;
+            canCheckCollisions = true;
 
             //Debug.Break();
         }
