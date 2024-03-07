@@ -89,11 +89,11 @@ public class FishControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = transform.forward * Speed;
+        /*rb.velocity = transform.forward * Speed;
         if (beSpinning)
             transform.Rotate(0f, 5f, 0f, Space.Self);
         else
-            rb.velocity = transform.forward * Speed;/*
+            rb.velocity = transform.forward * Speed;*//*
 
                 if (transform.position.y > HeightMax || transform.position.y < DepthMax)
                     transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);*/
@@ -122,9 +122,11 @@ public class FishControl : MonoBehaviour
         }*/
     }
 
+    public int randPick = 2;
+
     private void CollisionDetect()
     {
-        Vector3[] Positions = {
+/*        Vector3[] Positions = {
             transform.position + (transform.forward * colliderRange),                                                   //front
             transform.position + (transform.forward * colliderRange) + (transform.right * colliderSize.x) * 1.5f,       //right
             transform.position + (transform.forward * colliderRange) + (-transform.right * colliderSize.x) * 1.5f,      //left
@@ -177,12 +179,25 @@ public class FishControl : MonoBehaviour
         int randPick = Random.Range(0, posClearIndex.Count);
 
         Debug.DrawLine(transform.position, Positions[posClearIndex[randPick]], Color.green, 2f);
+*/
 
-        RotateTo(Positions[posClearIndex[randPick]]);
+        switch (randPick)
+        {
+            case 1:
+                RotateTo(Vector2.up);
+                break;
+            case 2:
+                RotateTo(-Vector2.up);
+                break;
+            case 3:
+                RotateTo(Vector2.right);
+                break;
+            case 4:
+                RotateTo(-Vector2.right);
+                break;
+        }
 
-        print("Picked: " + randPick);
-
-        if (viewCollisionBox)
+/*        if (viewCollisionBox)
         {
             collisionBox.SetActive(true);
 
@@ -196,7 +211,9 @@ public class FishControl : MonoBehaviour
 
             collisionBox.transform.localScale = new Vector3(colliderSize.x, colliderSize.y, colliderRange);
         }else
-            collisionBox.SetActive(false);
+            collisionBox.SetActive(false);*/
+
+        //print("picked " + randPick);
     }
 
     private Collider[] CheckPositionForColliders(Vector3 positionToCheck)
@@ -236,49 +253,49 @@ public class FishControl : MonoBehaviour
         return false;
     }
 
-/*    private void IgnoreColliders(bool reset)
-    {
-        for (int i = 0; i < meshies.Count; i++)
+    /*    private void IgnoreColliders(bool reset)
         {
-            if (!reset)
-                meshies[i].gameObject.layer = LayerIgnoreRaycast;
-            else
-                meshies[i].gameObject.layer = 0;
-        }
-        print(meshies[0].gameObject.layer);
-    }*/
+            for (int i = 0; i < meshies.Count; i++)
+            {
+                if (!reset)
+                    meshies[i].gameObject.layer = LayerIgnoreRaycast;
+                else
+                    meshies[i].gameObject.layer = 0;
+            }
+            print(meshies[0].gameObject.layer);
+        }*/
 
     private void ChangeDirection()
     {
-        if (isTurning)
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, rotationSpeed * Time.deltaTime);
-
         if (isTurning && transform.rotation == rotationEnd)
         {
             print("aaa");
             isTurning = false;
             canCheckCollisions = true;
-
-            //Debug.Break();
         }
+
+        if (isTurning)
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, rotationSpeed * Time.deltaTime);
     }
 
-    private void RotateTo(Vector2 rotationAngle) 
+    private void RotateTo(Vector2 rotationAngle)    //Rotates fish by set angle values
     {
         Vector3 rotationFixedAngle = new (
             Mathf.Clamp(rotationAngle.x, -30, 30),
-            Mathf.Clamp(rotationAngle.y, -100, 100),
+            Mathf.Clamp(rotationAngle.y, -360, 360),
             0f);
 
-        print(rotationAngle);
+        print(rotationFixedAngle);
 
-        rotationEnd = Quaternion.Euler(rotationAngle.x, rotationAngle.y, rotationFixedAngle.z);
+        rotationEnd = Quaternion.Euler(rotationFixedAngle.x, rotationFixedAngle.y, 0); //+ transform.eulerAngles;
+
+        rotationEnd *= transform.rotation; 
         print(rotationEnd);
-
+        print(" ");
         isTurning = true;
     }
 
-    private void RotateTo(Vector3 rotationTarget)
+    private void RotateTo(Vector3 rotationTarget)       //Rotates player to point
     {
         Vector3 relativePos = rotationTarget - transform.position; 
 
