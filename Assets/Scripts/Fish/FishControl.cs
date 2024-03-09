@@ -97,10 +97,10 @@ public class FishControl : MonoBehaviour
 
                 if (transform.position.y > HeightMax || transform.position.y < DepthMax)
                     transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);*/
-        if (canCheckCollisions)
-            CollisionDetect();
+/*        if (canCheckCollisions)
+            CollisionDetect();*/
 
-        ChangeDirection();
+        //ChangeDirection();
     }
     
     private void LateUpdate()
@@ -225,7 +225,7 @@ public class FishControl : MonoBehaviour
         return hitColliders;
     }
 
-    private bool CanMoveToPos( Vector3 endPosition)
+    private bool CanMoveToPos(Vector3 endPosition)
     {
         Vector3 targetDir = endPosition - transform.position;
 
@@ -267,7 +267,7 @@ public class FishControl : MonoBehaviour
 
     private void ChangeDirection()
     {
-        if (isTurning && transform.rotation == rotationEnd)
+      /*  if (isTurning && transform.rotation == rotationEnd)
         {
             print("aaa");
             isTurning = false;
@@ -275,7 +275,7 @@ public class FishControl : MonoBehaviour
         }
 
         if (isTurning)
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, rotationSpeed * Time.deltaTime);*/
     }
 
     private void RotateTo(Vector2 rotationAngle)    //Rotates fish by set angle values
@@ -285,13 +285,28 @@ public class FishControl : MonoBehaviour
             Mathf.Clamp(rotationAngle.y, -360, 360),
             0f);
 
-        print(rotationFixedAngle);
+/*        if (transform.eulerAngles.x > 30 && rotationAngle.x >= 1)
+        {
+            print("limit hit, low");
+            rotationFixedAngle = Vector3.zero;
+        }
+        else if (transform.eulerAngles.x == 330 && rotationAngle.x <= 1)
+        {
+            print("limit hit, high");
+            rotationFixedAngle = Vector3.zero;
+        }
+*/
 
-        rotationEnd = Quaternion.Euler(rotationFixedAngle.x, rotationFixedAngle.y, 0); //+ transform.eulerAngles;
 
-        rotationEnd *= transform.rotation; 
-        print(rotationEnd);
-        print(" ");
+        //print(rotationFixedAngle);
+
+        rotationEnd = Quaternion.Euler(1, 0, 0); //+ transform.eulerAngles;
+
+        transform.rotation *= rotationEnd;
+
+        //rotationEnd *= transform.rotation; 
+        //print(rotationEnd);
+        //print(" ");
         isTurning = true;
     }
 
@@ -392,13 +407,6 @@ public class FishControl : MonoBehaviour
                 Gizmos.color = Color.green;
 
             Gizmos.DrawWireCube((Vector3.forward * colliderRange) + (-Vector3.up * colliderSize.y) * 1.5f, colliderSize / 1.05f);
-
-            if (isHit[4])
-                Gizmos.color = Color.red;
-            else
-                Gizmos.color = Color.green;
-
-            //Gizmos.DrawWireCube((Vector3.forward * colliderRange) + (-Vector3.up * colliderSize) + (-Vector3.right * colliderSize), Vector3.one * (colliderSize - 0.25f));
         }
     }
 }
