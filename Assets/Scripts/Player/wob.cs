@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class wob : MonoBehaviour
+public class Wob : MonoBehaviour
 {
     public GameObject attractPoint;
+    public Transform followPoint;
 
     private Rigidbody rb;
     private bool hasCaught = false;
@@ -18,14 +20,8 @@ public class wob : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Fish") && !hasCaught)
-            FishCatch(other.gameObject);    //this is bad code
+            FishCatch(other.gameObject);    
     }
-
-/*    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == 4)
-            attractPoint.SetActive(true);
-    }*/
 
     private void FishCatch(GameObject fish)
     {
@@ -35,10 +31,11 @@ public class wob : MonoBehaviour
         {
             hasCaught = true;
 
+            followPoint = fish.transform;
+
             EventManager.Instance.FishFished(fish);
 
             Destroy(attractPoint);
-            enabled = false;
         }
         else
             Debug.LogWarning($"cannot catch {fish.name}");
@@ -46,7 +43,18 @@ public class wob : MonoBehaviour
 
     private void Update()
     {
-        if (rb.velocity.magnitude < 1f)
+        if (attractPoint != null && rb.velocity.magnitude < 1f)
             attractPoint.SetActive(true);
+
+        if (hasCaught && followPoint == null)
+            Debug.Break();
+        if (hasCaught)
+        {
+            var velocity = followPoint.position - transform.position;
+            //var dir = velocity.normalized;
+            //print(dir);
+
+            rb.AddForce(2000 * Time.deltaTime * velocity);
+        }
     }
 }

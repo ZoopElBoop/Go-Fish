@@ -17,7 +17,7 @@ public class FishDataManager : MonoBehaviour
             DontDestroyOnLoad(Instance);
         }
         else
-            Destroy(gameObject);
+            Destroy(this);
     }
     private void OnValidate()
     {

@@ -7,8 +7,6 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager Instance;
 
-    public Vector3 aaaaaaaaaaaaaaaaaaaa;
-
     private void Awake()
     {
         if (Instance == null)
@@ -17,30 +15,50 @@ public class EventManager : MonoBehaviour
             DontDestroyOnLoad(Instance);
         }
         else
-            Destroy(gameObject);      
+            Destroy(this);      
     }
 
+    //When fish is caught by the wobber
     public event Action<GameObject> OnFishFished; 
     public void FishFished(GameObject Catch) 
     {
         OnFishFished?.Invoke(Catch);
     }
 
-
+    //When player wins the fishing mini-game
     public event Action<GameObject> OnFishCaught;
-    public void FishCaught(GameObject fishToKill)
+    public void FishCaught(GameObject caughtFish)
     {
-        OnFishCaught?.Invoke(fishToKill);
+        caughtFish.GetComponent<FishControl>().FishToPlayer();
+
+        OnFishCaught?.Invoke(caughtFish);
     }
 
 
+    //When fish despwans
+    public event Action<GameObject> OnFishDespawn;
+    public void FishDespawn(GameObject fishToKill)
+    {
+        OnFishDespawn?.Invoke(fishToKill);
+    }
+
+
+    //When fish is destroyed
+    public event Action<GameObject> OnFishDisable;
+    public void FishDisable(GameObject fishToKill)
+    {
+        OnFishDisable?.Invoke(fishToKill);
+    }
+
+
+    //When player enters boat
     public event Action<Camera> OnBoatEnter;
     public void BoatEnter(Camera boatCam)
     {
         OnBoatEnter?.Invoke(boatCam);
     }
 
-
+    //when player exits boat
     public event Action OnBoatExit;
     public void BoatExit()
     {

@@ -65,6 +65,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1318609316591368451, guid: ffc3b0dbed1ed9349bea557cc189740b,
         type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1318609316591368451, guid: ffc3b0dbed1ed9349bea557cc189740b,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -81,8 +86,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ffc3b0dbed1ed9349bea557cc189740b,
         type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffc3b0dbed1ed9349bea557cc189740b,
+        type: 3}
       propertyPath: m_TagString
       value: Fish
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123140325829994652, guid: ffc3b0dbed1ed9349bea557cc189740b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8123140325829994652, guid: ffc3b0dbed1ed9349bea557cc189740b,
         type: 3}
@@ -217,7 +232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779dcb5786728ee47b35da8caea7d655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotatePos: {fileID: 0}
   Data: {fileID: 0}
   _playerPos: {fileID: 0}
   _destroyRange: 0
@@ -228,13 +242,10 @@ MonoBehaviour:
   Speed: 10
   rotationSpeed: 100
   canBeFished: 0
-  meshies: []
-  canCheckCollisions: 1
   colliderSize: {x: 5.89, y: 4.33, z: 10}
   colliderRange: 15
-  moveDirection: 0
   rotationEnd: {x: 0, y: 0, z: 0, w: 0}
   initialAngle: {x: 0, y: 0, z: 0}
   newAngle: {x: 0, y: 0, z: 0}
+  rayMinDistance: 0
   viewCollisionBox: 0
-  isHit: 0000000000

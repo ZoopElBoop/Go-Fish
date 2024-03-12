@@ -125,9 +125,18 @@ public class Fishing : MonoBehaviour
             }               
         }
 
-        //Checks if bobber exists, if so enables line to it
+        //Checks if bobber exists, if so enables line to it & checks if it is too far from player
         if (bobberInstance != null)
         {
+            if (IsBobberTooFar())
+            {
+                ObliterateBobber();
+
+                print("too far");
+                if (caughtFish != null)
+                    Escape();
+            }
+
             _LineRenderer.enabled = true;
             _LineRenderer.SetPosition(0, _bobberSpawnPoint.position);
             _LineRenderer.SetPosition(1, bobberInstance.transform.position);
@@ -149,10 +158,10 @@ public class Fishing : MonoBehaviour
 
         if (success)
         {
-            distanceBetween = Vector3.Distance(_bobberSpawnPoint.position, position);
+            distanceBetween = (_bobberSpawnPoint.position - position).sqrMagnitude;
 
             //Disables target reticle if outside range limits
-            if (distanceBetween > _bobberSpawnRangeMax || distanceBetween < _bobberSpawnRangeMin)
+            if (distanceBetween > (_bobberSpawnRangeMax  * _bobberSpawnRangeMax) || distanceBetween < (_bobberSpawnRangeMin * _bobberSpawnRangeMin))
             {
                 mouseFxInstance.SetActive(false);
                 RotatePlayerToMouse(position);
@@ -256,6 +265,13 @@ public class Fishing : MonoBehaviour
             Debug.DrawRay(bobberInstance.transform.position, direction * velocity, Color.green, 2.0f);
     }
 
+    private bool IsBobberTooFar()
+    {
+        float distanceBetween = (_bobberSpawnPoint.position - bobberInstance.transform.position).sqrMagnitude;
+
+        return distanceBetween > 40 * 40;
+    }
+
     private (bool success, Vector3 position) GetMousePosition()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -270,6 +286,7 @@ public class Fishing : MonoBehaviour
     {
         isFishing = true;
         caughtFish = fish;
+        //fish.GetComponent<FishControl>().Caught();
         print("caught!!");
         _fishCaughtSlider.gameObject.SetActive(true);
     }
@@ -318,7 +335,10 @@ public class Fishing : MonoBehaviour
 
     void Caught() 
     {
-        EventManager.Instance.FishCaught(caughtFish);
+        //caughtFish.GetComponent<FishControl>().isAboutToDie = true;
+        //EventManager.Instance.FishCaught(caughtFish);
+        caughtFish.GetComponent<FishControl>().FishToPlayer();
+
         numCaught++;
         catches.text = "CAUGHT FISH :" + numCaught;
         _fishCaughtSlider.value = 0.5f;

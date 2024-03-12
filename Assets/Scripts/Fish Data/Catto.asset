@@ -15,6 +15,7 @@ MonoBehaviour:
   _Fishk: {fileID: 8585649664234380318, guid: 9b86686b8a8e554438fe489e03cabf1c, type: 3}
   _Health: 1
   _Speed: 1
+  _rotationSpeed: 5
   _canBeCaught: 0
   _spawnDepthStart: -50
   _spawnDepthHigh: -80

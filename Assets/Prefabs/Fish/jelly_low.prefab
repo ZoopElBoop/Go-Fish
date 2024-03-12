@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cd1792a1855cdbd4282dfb29d8b7ca87,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.940569
+      value: 2.91
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd1792a1855cdbd4282dfb29d8b7ca87,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.36
+      value: -1.2325633
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd1792a1855cdbd4282dfb29d8b7ca87,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.2044773
+      value: -12.607679
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd1792a1855cdbd4282dfb29d8b7ca87,
         type: 3}
@@ -68,6 +68,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: jelly_low
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cd1792a1855cdbd4282dfb29d8b7ca87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cd1792a1855cdbd4282dfb29d8b7ca87,
         type: 3}
@@ -162,7 +167,16 @@ MonoBehaviour:
   _playerPos: {fileID: 0}
   _destroyRange: 0
   _dataIndex: 0
-  HP: 0
-  Speed: 0
   HeightMax: 0
   DepthMax: 0
+  HP: 0
+  Speed: 0
+  rotationSpeed: 0
+  canBeFished: 0
+  colliderSize: {x: 2.98, y: 7.44, z: 3.52}
+  colliderRange: 15
+  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
+  initialAngle: {x: 0, y: 0, z: 0}
+  newAngle: {x: 0, y: 0, z: 0}
+  rayMinDistance: 10
+  viewCollisionBox: 0

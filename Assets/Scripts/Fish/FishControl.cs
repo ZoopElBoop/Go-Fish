@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(FishToPlayer))]
+
 public class FishControl : MonoBehaviour
 {
     private Rigidbody rb;
-    private bool beSpinning = false;
-    private bool beAttracted = false;
+    public bool isAboutToDie = false;
 
     private Transform attractPoint;
-    public Transform rotatePos;
 
     [Header("Fish Data")]
     public FishData Data;
@@ -33,7 +33,7 @@ public class FishControl : MonoBehaviour
 
     //public List<Collider> meshies = new();
 
-    public bool canCheckCollisions = true;
+    private bool canCheckCollisions = true;
     public Vector3 colliderSize;
     public float colliderRange;
     private GameObject collisionBox;
@@ -57,22 +57,22 @@ public class FishControl : MonoBehaviour
         viewCollisionBox = false;
 
         rb = GetComponent<Rigidbody>();
-        /*
 
-                Data = FishDataManager.Instance.fishData[_dataIndex];
 
-                HP = Data._Health;
-                Speed = Data._Speed;
-                rotationSpeed = Data._rotationSpeed;
+        Data = FishDataManager.Instance.fishData[_dataIndex];
 
-                HeightMax = Data._moveHeightLimit;
-                DepthMax = Data._moveDepthLimit;
+        HP = Data._Health;
+        Speed = Data._Speed;
+        rotationSpeed = Data._rotationSpeed;
 
-                canBeFished = Data._canBeCaught;
+        HeightMax = Data._moveHeightLimit;
+        DepthMax = Data._moveDepthLimit;
 
-                */
+        canBeFished = Data._canBeCaught;
 
-        //transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
+
+
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
 
         /*       for (int i = 0; i < transform.childCount; i++)
         {
@@ -86,6 +86,10 @@ public class FishControl : MonoBehaviour
 
         LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "ignore raycast" layer
 
+        LayerIgnoreRaycast = LayerMask.NameToLayer("Water");
+
+        LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "water" layer
+
         collisionBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
         collisionBox.layer = LayerIgnoreRaycast;
         collisionBox.SetActive(false);
@@ -94,67 +98,59 @@ public class FishControl : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = transform.forward * Speed;
-        /*
-        if (beSpinning)
-            transform.Rotate(0f, 5f, 0f, Space.Self);
-        else
-            rb.velocity = transform.forward * Speed;*//*
-
-                if (transform.position.y > HeightMax || transform.position.y < DepthMax)
-                    transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);*/
-        /*        if (canCheckCollisions)
-                    CollisionDetect();*/
 
         ChangeDirection();
 
         CollisionDetect();
-
-        //var distanceBetween = Vector3.Distance(transform.position, _playerPos.position);
-        /*
-                float distanceBetween = (_playerPos.position - transform.position).sqrMagnitude;    //this might be more efficent than Vector3.Distance since it doesn't do any square rooting
-
-                if (distanceBetween > _destroyRange * _destroyRange)                                //squared to make up for no square rooting in previous line
-                {
-                    DIEFISHDIE();
-                    print("Fish OBLITERATED: Despawned");
-                }
-        */
     }
 
     private void Update()
     {
-/*        if (HP <= 0)
+        if (transform.position.y > HeightMax || transform.position.y < DepthMax)
+        {
+            transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
+        }
+
+        float distanceBetween = (_playerPos.position - transform.position).sqrMagnitude;    //this might be more efficent than Vector3.Distance since it doesn't do any square rooting
+
+        if (distanceBetween > _destroyRange * _destroyRange)                                //squared to make up for no square rooting in previous line
         {
             DIEFISHDIE();
-            print("Fish OBLITERATED: Killed");
+            print("Fish OBLITERATED: Despawned");
         }
-        */
+
+        /*        if (HP <= 0)
+                {
+                    DIEFISHDIE();
+                    print("Fish OBLITERATED: Killed");
+                }
+                */
     }
 
     private void CollisionDetect()
     {
         /*
-        Collision detect has 3 seperate systems that operate deping on the fishes position
+        Collision detect has 3 seperate systems that operate depending on the fishes position
 
         1. Fish Front Detection
             Every 2ms a box check is made in front of the fish, if nothing is found the detection is complete,
-            If something is found the function will commit to the next system if it hasn't been called in the previous frame,
-            If the nect system has alredy been called the function calls a new Rotate() action with the alredy defined direction.
+            If something is found the function will commit to the next system if it hasn't already been called in the previous frame,
+            If the next system has already been called the function calls a new Rotate() action with the already defined direction.
 
         2. Ray Checks
             Four rays are fired in front of the fish, each returns the distance & closest point of contact with a collider (if possible),
-            Rays are checked to ensure they don't exceed fish height & depth limits, and that they are above a minimum distance metric
-            Rays that pass this check have their data passed further on, and a check is made to fish the furthest ray contact,
-            If two or more rays have the same highest distance one of the rays will be randomly selected
+            Rays are checked to ensure they don't exceed fish height & depth limits and that they are above a minimum distance,
+            Rays that pass this check have their data passed further on and a check is made to find the furthest ray contact,
+            If two or more rays have the same highest distance one of the rays will be randomly selected.
 
         3. Rotation
-            After the correct direction is found the angle of movemnt is converted to a quaternion (kill me) and the fish is lerped to the new rotation,
-            If the fish front check is still detecting something the fish will continue roatating in this direction
+            After the correct direction is found the angle of movement is converted to a quaternion (kill me) and the fish is lerped to the new rotation,
+            If the fish front check is still detecting something the fish will continue roatating in this direction.
 
         ISSUES:
 
-            Fish cannot turn fast enough in tight corners
-            If the collison box is detecting, a new rotation direction cannot be applied
+            Fish cannot turn fast enough in tight corners.
+            If the collison box is detecting, a new rotation direction cannot be applied.
         */
 
         Vector3[] Positions = {
@@ -188,7 +184,7 @@ public class FishControl : MonoBehaviour
         {
             (rayDistance[i], rayPoint[i]) = DistanceFromContact(Positions[i + 1] - transform.position);
 
-            if (i == 3 && transform.position.y + colliderSize.y > HeightMax || i == 4 && transform.position.y - colliderSize.y < DepthMax)
+            if (i == 3 && transform.position.y > HeightMax || i == 4 && transform.position.y < DepthMax)
             {
                 print(i + "ignored");
                 continue;
@@ -209,7 +205,7 @@ public class FishControl : MonoBehaviour
 
         if (!posClearIndex.Any())
         {
-            RotateTo(new Vector3(transform.position.x - Positions[0].x, transform.position.y - Positions[0].y, 0f));
+            RotateTo(new Vector3(transform.position.x - Positions[0].x, transform.position.y - Positions[0].y, 0f), false);
             return;
         }
 
@@ -266,18 +262,18 @@ public class FishControl : MonoBehaviour
 
         if (hits < 1)
         {
-            return (-1, Vector3.zero);      //Ray hit nothing
+            return (-1, Vector3.zero);                                              //Ray hit nothing
         }
         else if (hits > 1)
         {
-            colliderFound = RaycastArraySort(colliderFound);    //sorts RaycastHit array by smallest distance
+            colliderFound = RaycastArraySort(colliderFound);                        //sorts RaycastHit array by smallest distance
 
             for (int i = 0; i < colliderFound.Length; i++)           
                 if (colliderFound[i].distance != 0)                
                     return (colliderFound[i].distance, colliderFound[i].point);     //Ray hit more than 1 item, sorted to item closest to player                 
         }
 
-        return (colliderFound[0].distance, colliderFound[0].point);     //Ray hit 1 item
+        return (colliderFound[0].distance, colliderFound[0].point);                 //Ray hit 1 item
     }
 
     private RaycastHit[] RaycastArraySort(RaycastHit[] arr)
@@ -414,10 +410,16 @@ public class FishControl : MonoBehaviour
         isTurning = true;
     }
 
-    private void RotateTo(Vector3 rotationTarget)       //Rotates player to point
+    private void RotateTo(Vector3 rotationTarget, bool checkArea)       //Rotates player to point
     {
         initialAngle.x = Mathf.DeltaAngle(0, transform.eulerAngles.x);
         initialAngle.y = transform.eulerAngles.y;
+
+        if (checkArea && !CanMoveToPosition(rotationTarget))
+        {
+            print("cannot reach");
+            return;
+        }
 
         Vector3 relativePos = rotationTarget - transform.position; 
 
@@ -435,14 +437,14 @@ public class FishControl : MonoBehaviour
     {
         if (collisionBox != null)
             Destroy(collisionBox);      //TBC
-        EventManager.Instance.FishCaught(gameObject);
+        EventManager.Instance.FishDespawn(gameObject);
     }
 
     public void Attract(Transform focusPos)
     {
         attractPoint = focusPos;
 
-        RotateTo(focusPos.position);
+        RotateTo(focusPos.position, true);
 
         print("fish be lookin " + focusPos.position);
 
@@ -451,14 +453,18 @@ public class FishControl : MonoBehaviour
 
     IEnumerator AttractReset() 
     {
-        yield return new WaitForSeconds(0.1f);
-        //yeild return new WaitForSeconds(1f);
-        
+        yield return new WaitForSeconds(1f);
+
+        if (attractPoint != null && (attractPoint.position - transform.position).sqrMagnitude > 25)
+        {
+            Attract(attractPoint);
+            print("hité");
+        }
     }
 
     public void Flee(Transform focusPos)
     {
-        RotateTo(new Vector3(transform.position.x - focusPos.position.x, transform.position.y - focusPos.position.y, 0f));
+        RotateTo(new Vector3(transform.position.x - focusPos.position.x, transform.position.y - focusPos.position.y, 0f), false);
         //ChangeDirection(30f, 60f);
 
         print("fish be runnin");
@@ -470,8 +476,6 @@ public class FishControl : MonoBehaviour
 
         print("i be catght");
 
-        beSpinning = true;
-
         rb.velocity = Vector3.zero;
     }
 
@@ -480,11 +484,21 @@ public class FishControl : MonoBehaviour
         //Logic for when fish escapes from caught event
 
         print("ran awaaaaaaaaaaaaaaaaa");
-        beSpinning = false;
 
         rb.velocity = Vector3.zero;
 
         Flee(focusPos);
+    }
+
+    public void FishToPlayer() 
+    {
+        var FTPscript = gameObject.GetComponent<FishToPlayer>();
+
+        FTPscript.enabled = true;
+        FTPscript.Player = _playerPos;
+
+        rb.velocity = Vector3.zero;
+        enabled = false;
     }
 
     private void OnDrawGizmosSelected()
@@ -494,7 +508,6 @@ public class FishControl : MonoBehaviour
             Gizmos.matrix = transform.localToWorldMatrix;
 
             Gizmos.DrawWireCube(Vector3.forward * colliderRange, colliderSize / 1.05f);
-
         }
     }
 }

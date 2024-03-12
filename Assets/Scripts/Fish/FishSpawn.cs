@@ -29,13 +29,18 @@ public class FishSpawn : MonoBehaviour
 
     private void Start()
     {
-        EventManager.Instance.OnFishCaught += ObliterateFish;
+        EventManager.Instance.OnFishDisable += ObliterateFish;
+        EventManager.Instance.OnFishDespawn += ObliterateFish;
 
         SpawnTypeOf();
 
         LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
 
         LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "ignore raycast" layer
+
+        LayerIgnoreRaycast = LayerMask.NameToLayer("Water");
+
+        LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "water" layer
     }
 
     private void SpawnTypeOf() 
@@ -141,7 +146,10 @@ public class FishSpawn : MonoBehaviour
 
             if (spawnPos.y > -2f)  //To be reworked for water surface & floor detection
                 continue;
-          
+
+            if (!InWater(spawnPos))
+                continue;
+
             Collider[] hitColliders = new Collider[1];  //literally the most useless array, but since OverlapSphere only takes an array here it stays
 
             Physics.OverlapSphereNonAlloc(spawnPos, FishDataManager.Instance.fishData[index]._collisionRange, hitColliders);
@@ -159,20 +167,20 @@ public class FishSpawn : MonoBehaviour
         fishScript._dataIndex = index;
     }
 
-    private bool inWater() 
+    private bool InWater(Vector3 pos) 
     {
-/*        Ray ray = new(transform.position, dir);
+        Ray ray = new(pos, (-Vector3.up + pos) - pos);
 
-        RaycastHit[] colliderFound = new RaycastHit[10];
+        RaycastHit[] colliderFound = new RaycastHit[1];
 
-        Physics.RaycastNonAlloc(ray, colliderFound, 30f, LayersToIgnore, QueryTriggerInteraction.Ignore);
-*/
-        return true;
+        int hits = Physics.RaycastNonAlloc(ray, colliderFound, 350f, LayersToIgnore, QueryTriggerInteraction.Ignore);
+
+        return hits > 0;
     }
 
     private void Update()
     { 
-        if (!activeTime && _spawnedFish.Count < 5)     //Dodgy interval spawn, to be changed at some point
+        if (!activeTime && _spawnedFish.Count < 10)     //Dodgy interval spawn, to be changed at some point
             StartCoroutine(CallSpawn());
 
         fishies.text = _spawnedFish.Count + " Fish";    //TESTING, remove later
@@ -182,7 +190,6 @@ public class FishSpawn : MonoBehaviour
     {
         _spawnedFish.Remove(fish);
         Destroy(fish);
-        print("Fish OBLITERATED: Fished");
     }
 
     IEnumerator CallSpawn()
@@ -212,6 +219,7 @@ public class FishSpawn : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.Instance.OnFishCaught -= ObliterateFish;
+        EventManager.Instance.OnFishDisable -= ObliterateFish;
+        EventManager.Instance.OnFishDespawn -= ObliterateFish;
     }
 }

@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4bac8df96d7f43a4190d9803e0dffb18,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.7
+      value: 20.939901
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bac8df96d7f43a4190d9803e0dffb18,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.87665725
+      value: -1.2325633
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bac8df96d7f43a4190d9803e0dffb18,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.0278416
+      value: -12.607679
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bac8df96d7f43a4190d9803e0dffb18,
         type: 3}
@@ -58,6 +58,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6072391574331347817, guid: 4bac8df96d7f43a4190d9803e0dffb18,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3961296531711985894, guid: 4bac8df96d7f43a4190d9803e0dffb18,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 495975331598566030, guid: 4bac8df96d7f43a4190d9803e0dffb18,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -68,6 +78,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: cat_LOW
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4bac8df96d7f43a4190d9803e0dffb18,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4bac8df96d7f43a4190d9803e0dffb18,
         type: 3}
@@ -168,7 +183,16 @@ MonoBehaviour:
   _playerPos: {fileID: 0}
   _destroyRange: 0
   _dataIndex: 0
-  HP: 0
-  Speed: 0
   HeightMax: 0
   DepthMax: 0
+  HP: 0
+  Speed: 0
+  rotationSpeed: 0
+  canBeFished: 0
+  colliderSize: {x: 25, y: 15, z: 60}
+  colliderRange: 0
+  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
+  initialAngle: {x: 0, y: 0, z: 0}
+  newAngle: {x: 0, y: 0, z: 0}
+  rayMinDistance: 10
+  viewCollisionBox: 0

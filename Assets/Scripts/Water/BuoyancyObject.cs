@@ -31,7 +31,6 @@ public class BuoyancyObject : MonoBehaviour
     [Range(0.1f, 2.0f)]
     [SerializeField] private float gizmosSize = 1f;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -57,7 +56,7 @@ public class BuoyancyObject : MonoBehaviour
         { 
             float diff = _floatingPoint[i].position.y - _waterHeight;
 
-            if (diff < 0)
+            if (diff < 0)   //checks if flaoting point is below waterline
             {
                 rb.AddForceAtPosition(Vector3.up * _floatingPower * Mathf.Abs(diff), _floatingPoint[i].transform.position, ForceMode.Force);
                 floatingPointsUnderwater++;
@@ -78,7 +77,7 @@ public class BuoyancyObject : MonoBehaviour
             
     }
 
-    void SwitchState(bool Underwater) 
+    void SwitchState(bool Underwater)   //switches phyiscs values depending on if object is in water
     {
         if (Underwater)
         {
