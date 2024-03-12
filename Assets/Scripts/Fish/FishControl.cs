@@ -286,8 +286,6 @@ public class FishControl : MonoBehaviour
 
         Debug.DrawRay(transform.position, dir * 100, Color.red, Mathf.Infinity);
 
-        print("========================");
-
         if (hits < 1)
             return (-1, Vector3.zero);
         else if (hits > 1)
@@ -301,8 +299,7 @@ public class FishControl : MonoBehaviour
                 {
                     rayDistances.Add(colliderFound[i].distance);
                     rayPoint.Add(colliderFound[i].point);
-                }
-                
+                }         
             }
 
             rayDistances.Sort();
@@ -316,15 +313,10 @@ public class FishControl : MonoBehaviour
                     itemFound = i;
             }
 
-
-            for (int i = 0; i < rayDistances.Count; i++)
-                print(i + " " + rayDistances[i] + " " + rayPoint[i]);
-
             return (rayDistances[0], rayPoint[itemFound]);
         }
         else
-            return (colliderFound[0].distance, colliderFound[0].point);
-        
+            return (colliderFound[0].distance, colliderFound[0].point);  
     }
 
     private bool CanMoveToPos(Vector3 endPosition)
