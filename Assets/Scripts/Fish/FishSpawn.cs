@@ -22,13 +22,20 @@ public class FishSpawn : MonoBehaviour
 
     //REMOVE LATER
     [Header("Spawned Fish Text (to be moved to seperate ui script)")]
-    [SerializeField] private TMP_Text fishies; 
+    [SerializeField] private TMP_Text fishies;
+
+    private int LayerIgnoreRaycast;
+    private LayerMask LayersToIgnore = -1;
 
     private void Start()
     {
         EventManager.Instance.OnFishCaught += ObliterateFish;
 
         SpawnTypeOf();
+
+        LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
+
+        LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "ignore raycast" layer
     }
 
     private void SpawnTypeOf() 
@@ -150,6 +157,17 @@ public class FishSpawn : MonoBehaviour
         fishScript._playerPos = transform;
         fishScript._destroyRange = _destroyRange * FishDataManager.Instance.fishData[index]._despawnRangeMulti;
         fishScript._dataIndex = index;
+    }
+
+    private bool inWater() 
+    {
+        Ray ray = new(transform.position, dir);
+
+        RaycastHit[] colliderFound = new RaycastHit[10];
+
+        Physics.RaycastNonAlloc(ray, colliderFound, 30f, LayersToIgnore, QueryTriggerInteraction.Ignore);
+
+        return true;
     }
 
     private void Update()

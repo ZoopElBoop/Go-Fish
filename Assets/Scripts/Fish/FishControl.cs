@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,13 +31,13 @@ public class FishControl : MonoBehaviour
 
     [Header("Collision Detection Settings")]
 
-    public List<Collider> meshies = new();
+    //public List<Collider> meshies = new();
 
     public bool canCheckCollisions = true;
     public Vector3 colliderSize;
     public float colliderRange;
     private GameObject collisionBox;
-    public int moveDirection;
+    private int moveDirection;
 
     private int LayerIgnoreRaycast;
     private LayerMask LayersToIgnore = -1;
@@ -48,16 +47,14 @@ public class FishControl : MonoBehaviour
     public Vector3 initialAngle = new();
     public Vector3 newAngle;
 
+    public float rayMinDistance;
+
     [Header("DEBUG")]
     public bool viewCollisionBox;
-    public bool[] isHit = new bool[5]; //0 - front, 1 - right, 2 - left, 3 - top, 4 - bottom
-
-    public bool STOPPPP;
-    public float rayMinDistance;
 
     void Start()
     {
-        //viewCollisionBox = false;
+        viewCollisionBox = false;
 
         rb = GetComponent<Rigidbody>();
         /*
@@ -73,15 +70,17 @@ public class FishControl : MonoBehaviour
 
                 canBeFished = Data._canBeCaught;
 
-                ChangeDirection(30f, 180f);*/
+                */
 
-        for (int i = 0; i < transform.childCount; i++)
+        //transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
+
+        /*       for (int i = 0; i < transform.childCount; i++)
         {
             Collider childCollider = transform.GetChild(i).GetComponent<MeshCollider>();
 
             if (childCollider != false)
                 meshies.Add(childCollider);
-        }
+        }*/
 
         LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
 
@@ -94,7 +93,7 @@ public class FishControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //rb.velocity = transform.forward * Speed;
+        rb.velocity = transform.forward * Speed;
         /*
         if (beSpinning)
             transform.Rotate(0f, 5f, 0f, Space.Self);
@@ -106,10 +105,9 @@ public class FishControl : MonoBehaviour
         /*        if (canCheckCollisions)
                     CollisionDetect();*/
 
-        //ChangeDirection();
+        ChangeDirection();
 
-        if (!STOPPPP)
-            CollisionDetect();
+        CollisionDetect();
 
         //var distanceBetween = Vector3.Distance(transform.position, _playerPos.position);
         /*
@@ -132,139 +130,95 @@ public class FishControl : MonoBehaviour
         }
         */
     }
-
+    public List<int> posClearIndex = new();
     private void CollisionDetect()
     {
         Vector3[] Positions = {
-            transform.position + (transform.forward * colliderRange),                                                   //front
+            transform.position + (transform.forward * colliderRange),                                            //front
             transform.position + (transform.forward * colliderRange) + (transform.right * colliderSize.x),       //right
             transform.position + (transform.forward * colliderRange) + (-transform.right * colliderSize.x),      //left
             transform.position + (transform.forward * colliderRange) + (transform.up * colliderSize.y),          //top-centre
             transform.position + (transform.forward * colliderRange) + (-transform.up * colliderSize.y)          //bottom-centre
         };
 
-        List<int> posClearIndex = new();
+        posClearIndex.Clear();
 
         if (CheckPositionForColliders(Positions[0]))
         {
             canCheckCollisions = true;
-            print("empty");
             return;
         }
         else
         {
-            print("something found");
-
             if (!canCheckCollisions)
+            {
                 SetRotation();
+                return; 
+            }
         }
 
-        STOPPPP = true;
+        float[] rayDistance = new float[4];
+        Vector3[] rayPoint = new Vector3[4];
 
         for (int i = 0; i < 4; i++)
         {
-            float[] rayDistance = new float[4];
-            Vector3[] rayPoint = new Vector3[4];
-
             (rayDistance[i], rayPoint[i]) = DistanceFromContact(Positions[i + 1] - transform.position);
 
-            print(rayDistance[i]);
-            print(rayPoint[i]);
-
-            GameObject killme = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            killme.transform.position = rayPoint[i];
-
-            SetCollisionBox(rayPoint[3], rayDistance[3]);
-
-            if (rayDistance[i] == -1 || rayDistance[i] >= rayMinDistance)
-                CanMoveToPos(rayPoint[i]);
-            
-
-/*            if (i == 3 && transform.position.y + colliderSize.y > HeightMax || i == 4 && transform.position.y - colliderSize.y < DepthMax)
+            if (i == 3 && transform.position.y + colliderSize.y > HeightMax || i == 4 && transform.position.y - colliderSize.y < DepthMax)
             {
                 print(i + "ignored");
-                isHit[i] = true;
                 continue;
-            }*/
+            }
 
-/*            else
+            if (rayDistance[i] == -1 || rayDistance[i] >= rayMinDistance)
             {
-                if (CanMoveToPos(Positions[i]))
+
+                if (true)//CanMoveToPos(rayPoint[i]))
+                {
                     posClearIndex.Add(i);
-                else
-                    Debug.DrawLine(transform.position, Positions[i], Color.red, 4f);
-            }*/
+                    //Debug.DrawLine(transform.position, Positions[i], Color.green, 4f);
+                }
+            }
         }
 
+        canCheckCollisions = false;
 
-
-
-
-
-
-
-
-
-/*
         if (!posClearIndex.Any())
         {
-            Debug.Log("nah");
+            RotateTo(new Vector3(transform.position.x - Positions[0].x, transform.position.y - Positions[0].y, 0f));
             return;
         }
 
+        int arrSize = posClearIndex.Count;
+
+        for (int i = 0; i < arrSize; i++)
+        {
+            if (rayDistance[i] == -1)
+                continue;
+
+            for (int x = 0; x < arrSize; x++)
+            {
+                if (rayDistance[i] < rayDistance[x] || rayDistance[x] == -1)
+                {
+                    print("REMOVED: " + rayDistance[i]);
+                    posClearIndex.Remove(i);
+                    break;
+                }
+            }
+        }
+
         for (int i = 0; i < posClearIndex.Count; i++)
-            Debug.DrawLine(transform.position, Positions[posClearIndex[i]], Color.black, 2f);*/
+            Debug.DrawLine(transform.position, Positions[posClearIndex[i] + 1], Color.black, 5f);
 
-        //int randPick = Random.Range(0, posClearIndex.Count);
+        int randPick = Random.Range(0, posClearIndex.Count);
 
-        //moveDirection = posClearIndex[randPick];
+        moveDirection = posClearIndex[randPick];
 
-        //SetRotation();
+        SetRotation();
 
-        //SetCollisionBox(Positions[moveDirection]);
+        //SetCollisionBox(rayPoint[randPick], rayDistance[randPick]);
 
-        //canCheckCollisions = false;
-
-        //print("picked " + randPick);
-    }
-
-    private void SetCollisionBox(Vector3 pos, float distance) 
-    {
-        if (viewCollisionBox)
-        {
-            collisionBox.SetActive(true);
-
-            collisionBox.transform.position = (pos + transform.position) / 2;
-
-            Vector3 targetDir = pos - transform.position;
-
-            Quaternion angle = Quaternion.LookRotation(targetDir, transform.up);
-
-            collisionBox.transform.rotation = angle;
-
-            collisionBox.transform.localScale = new Vector3(colliderSize.x, colliderSize.y, distance);
-        }
-        else
-            collisionBox.SetActive(false);
-    }
-
-    private void SetRotation() 
-    {
-        switch (moveDirection)
-        {
-            case 1:
-                RotateTo(Vector2.up);
-                break;
-            case 2:
-                RotateTo(-Vector2.up);
-                break;
-            case 3:
-                RotateTo(-Vector2.right);
-                break;
-            case 4:
-                RotateTo(Vector2.right);
-                break;
-        }
+        print("picked " + randPick);
     }
 
     private bool CheckPositionForColliders(Vector3 positionToCheck)
@@ -282,42 +236,43 @@ public class FishControl : MonoBehaviour
 
         RaycastHit[] colliderFound = new RaycastHit[10];
 
-        int hits = Physics.RaycastNonAlloc(ray, colliderFound, 50f, LayersToIgnore, QueryTriggerInteraction.Ignore);
+        int hits = Physics.RaycastNonAlloc(ray, colliderFound, 30f, LayersToIgnore, QueryTriggerInteraction.Ignore);
 
-        Debug.DrawRay(transform.position, dir * 100, Color.red, Mathf.Infinity);
+        //Debug.DrawRay(transform.position, dir * 2, Color.red, Mathf.Infinity);
 
         if (hits < 1)
+        {
             return (-1, Vector3.zero);
+        }
         else if (hits > 1)
         {
-            List<float> rayDistances = new();
-            List<Vector3> rayPoint = new();
+            colliderFound = RaycastArraySort(colliderFound);
 
-            for (int i = 0; i < colliderFound.Length; i++)
-            {
-                if (colliderFound[i].distance != 0)
-                {
-                    rayDistances.Add(colliderFound[i].distance);
-                    rayPoint.Add(colliderFound[i].point);
-                }         
-            }
-
-            rayDistances.Sort();
-
-            int itemFound = 0;
-            float dist = (rayPoint[0] - transform.position).sqrMagnitude;
-
-            for (int i = 0; i < rayPoint.Count; i++)
-            {
-                if ((rayPoint[i] - transform.position).sqrMagnitude < dist)
-                    itemFound = i;
-            }
-
-            return (rayDistances[0], rayPoint[itemFound]);
+            for (int i = 0; i < colliderFound.Length; i++)           
+                if (colliderFound[i].distance != 0)                
+                    return (colliderFound[i].distance, colliderFound[i].point);                    
         }
-        else
-            return (colliderFound[0].distance, colliderFound[0].point);  
+        
+        return (colliderFound[0].distance, colliderFound[0].point);  
     }
+
+    private RaycastHit[] RaycastArraySort(RaycastHit[] arr)
+    {
+        for (int i = 1; i < arr.Length; i++)
+        {
+            RaycastHit key = arr[i];
+            int j = i - 1;
+
+            while (j >= 0 && arr[j].distance > key.distance)
+            {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+        return arr;
+    }
+
 
     private bool CanMoveToPos(Vector3 endPosition)
     {
@@ -341,7 +296,7 @@ public class FishControl : MonoBehaviour
             for (int i = 0; i < Hits; i++)
             {
                 if (hitColliders[i] != null)
-                    print(hitColliders[i].name);
+                    print("HIT:" + hitColliders[i].name);
             }
 
             print("-----------------");
@@ -361,14 +316,49 @@ public class FishControl : MonoBehaviour
             print(meshies[0].gameObject.layer);
         }*/
 
+    /*    private void SetCollisionBox(Vector3 pos, float distance) 
+    {
+        if (viewCollisionBox)
+        {
+            collisionBox.SetActive(true);
+
+            collisionBox.transform.position = (pos + transform.position) / 2;
+
+            Vector3 targetDir = pos - transform.position;
+
+            Quaternion angle = Quaternion.LookRotation(targetDir, transform.up);
+
+            collisionBox.transform.rotation = angle;
+
+            collisionBox.transform.localScale = new Vector3(colliderSize.x, colliderSize.y, distance);
+        }
+        else
+            collisionBox.SetActive(false);
+    }*/
+
+    private void SetRotation()
+    {
+        switch (moveDirection + 1)
+        {
+            case 1:
+                RotateTo(Vector2.up);
+                break;
+            case 2:
+                RotateTo(-Vector2.up);
+                break;
+            case 3:
+                RotateTo(-Vector2.right);
+                break;
+            case 4:
+                RotateTo(Vector2.right);
+                break;
+        }
+    }
+
     private void ChangeDirection()
     {
-        if (isTurning && transform.rotation == rotationEnd)
-        {
-            print("aaa");
-            isTurning = false;
-            canCheckCollisions = true;
-        }
+        if (isTurning && transform.rotation == rotationEnd)     
+            isTurning = false;      
 
         if (isTurning)
         {
@@ -479,51 +469,8 @@ public class FishControl : MonoBehaviour
         {
             Gizmos.matrix = transform.localToWorldMatrix;
 
-            if (isHit[0])
-                Gizmos.color = Color.red;
-            else
-                Gizmos.color = Color.green;
-
             Gizmos.DrawWireCube(Vector3.forward * colliderRange, colliderSize / 1.05f);
 
-        }
-    }
-
-    private int Vector3Compare(Vector3 value1, Vector3 value2)
-    {
-        if (value1.x < value2.x)
-        {
-            return -1;
-        }
-        else if (value1.x == value2.x)
-        {
-            if (value1.y < value2.y)
-            {
-                return -1;
-            }
-            else if (value1.y == value2.y)
-            {
-                if (value1.z < value2.z)
-                {
-                    return -1;
-                }
-                else if (value1.z == value2.z)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return 1;
-                }
-            }
-            else
-            {
-                return 1;
-            }
-        }
-        else
-        {
-            return 1;
         }
     }
 }
