@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class FishControl : MonoBehaviour
+public class BACKUP : MonoBehaviour
 {
     private Rigidbody rb;
     private bool beSpinning = false;
@@ -51,9 +50,6 @@ public class FishControl : MonoBehaviour
     [Header("DEBUG")]
     public bool viewCollisionBox;
     public bool[] isHit = new bool[5]; //0 - front, 1 - right, 2 - left, 3 - top, 4 - bottom
-
-    public bool STOPPPP;
-    public float rayMinDistance;
 
     void Start()
     {
@@ -106,10 +102,9 @@ public class FishControl : MonoBehaviour
         /*        if (canCheckCollisions)
                     CollisionDetect();*/
 
-        //ChangeDirection();
+        ChangeDirection();
 
-        if (!STOPPPP)
-            CollisionDetect();
+        CollisionDetect();
 
         //var distanceBetween = Vector3.Distance(transform.position, _playerPos.position);
         /*
@@ -145,67 +140,47 @@ public class FishControl : MonoBehaviour
 
         List<int> posClearIndex = new();
 
-        if (CheckPositionForColliders(Positions[0]))
+        for (int i = 0; i < 5; i++)
         {
-            canCheckCollisions = true;
-            print("empty");
-            return;
-        }
-        else
-        {
-            print("something found");
+            Collider[] itemsReturned = CheckPositionForColliders(Positions[i]);
 
-            if (!canCheckCollisions)
+            isHit[i] = false;
+
+            if (i == 0 && itemsReturned[0] == null)
+            {
+                canCheckCollisions = true;
+                //print("cler");
+                return;
+            }
+            else if (!canCheckCollisions)
+            {
                 SetRotation();
-        }
+                print("set rot");
+                return;
+            }
 
-        STOPPPP = true;
-
-        for (int i = 0; i < 4; i++)
-        {
-            float[] rayDistance = new float[4];
-            Vector3[] rayPoint = new Vector3[4];
-
-            (rayDistance[i], rayPoint[i]) = DistanceFromContact(Positions[i + 1] - transform.position);
-
-            print(rayDistance[i]);
-            print(rayPoint[i]);
-
-            GameObject killme = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            killme.transform.position = rayPoint[i];
-
-            SetCollisionBox(rayPoint[3], rayDistance[3]);
-
-            if (rayDistance[i] == -1 || rayDistance[i] >= rayMinDistance)
-                CanMoveToPos(rayPoint[i]);
-            
-
-/*            if (i == 3 && transform.position.y + colliderSize.y > HeightMax || i == 4 && transform.position.y - colliderSize.y < DepthMax)
+            if (i == 3 && transform.position.y + colliderSize.y > HeightMax || i == 4 && transform.position.y - colliderSize.y < DepthMax)
             {
                 print(i + "ignored");
                 isHit[i] = true;
                 continue;
-            }*/
+            }
 
-/*            else
+            if (itemsReturned[0] != null)
+            {
+                isHit[i] = true;
+            }
+            else
             {
                 if (CanMoveToPos(Positions[i]))
                     posClearIndex.Add(i);
                 else
                     Debug.DrawLine(transform.position, Positions[i], Color.red, 4f);
-            }*/
+            }
         }
 
+        print("aaaa");
 
-
-
-
-
-
-
-
-
-/*
         if (!posClearIndex.Any())
         {
             Debug.Log("nah");
@@ -213,22 +188,24 @@ public class FishControl : MonoBehaviour
         }
 
         for (int i = 0; i < posClearIndex.Count; i++)
-            Debug.DrawLine(transform.position, Positions[posClearIndex[i]], Color.black, 2f);*/
+            Debug.DrawLine(transform.position, Positions[posClearIndex[i]], Color.black, 2f);
 
-        //int randPick = Random.Range(0, posClearIndex.Count);
+        int randPick = Random.Range(0, posClearIndex.Count);
 
-        //moveDirection = posClearIndex[randPick];
+        moveDirection = posClearIndex[randPick];
 
-        //SetRotation();
+        SetRotation();
 
-        //SetCollisionBox(Positions[moveDirection]);
+        SetCollisionBox(Positions[moveDirection]);
 
-        //canCheckCollisions = false;
+        canCheckCollisions = false;
 
-        //print("picked " + randPick);
+        Debug.DrawLine(transform.position, Positions[moveDirection], Color.green, 2f);
+
+        print("picked " + randPick);
     }
 
-    private void SetCollisionBox(Vector3 pos, float distance) 
+    private void SetCollisionBox(Vector3 pos) 
     {
         if (viewCollisionBox)
         {
@@ -242,7 +219,7 @@ public class FishControl : MonoBehaviour
 
             collisionBox.transform.rotation = angle;
 
-            collisionBox.transform.localScale = new Vector3(colliderSize.x, colliderSize.y, distance);
+            collisionBox.transform.localScale = new Vector3(colliderSize.x, colliderSize.y, colliderRange);
         }
         else
             collisionBox.SetActive(false);
@@ -267,64 +244,13 @@ public class FishControl : MonoBehaviour
         }
     }
 
-    private bool CheckPositionForColliders(Vector3 positionToCheck)
+    private Collider[] CheckPositionForColliders(Vector3 positionToCheck)
     {
-        Collider[] hitColliders = new Collider[1];
+        Collider[] hitColliders = new Collider[10];
 
         Physics.OverlapBoxNonAlloc(positionToCheck, colliderSize / 2, hitColliders, transform.rotation, LayersToIgnore,  QueryTriggerInteraction.Ignore);
 
-        return hitColliders[0] == null;
-    }
-
-    private (float distanceTo, Vector3 contactPoint) DistanceFromContact(Vector3 dir) 
-    {
-        Ray ray = new(transform.position, dir);
-
-        RaycastHit[] colliderFound = new RaycastHit[10];
-
-        int hits = Physics.RaycastNonAlloc(ray, colliderFound, 50f, LayersToIgnore, QueryTriggerInteraction.Ignore);
-
-        Debug.DrawRay(transform.position, dir * 100, Color.red, Mathf.Infinity);
-
-        print("========================");
-
-        if (hits < 1)
-            return (-1, Vector3.zero);
-        else if (hits > 1)
-        {
-            List<float> rayDistances = new();
-            List<Vector3> rayPoint = new();
-
-            for (int i = 0; i < colliderFound.Length; i++)
-            {
-                if (colliderFound[i].distance != 0)
-                {
-                    rayDistances.Add(colliderFound[i].distance);
-                    rayPoint.Add(colliderFound[i].point);
-                }
-                
-            }
-
-            rayDistances.Sort();
-
-            int itemFound = 0;
-            float dist = (rayPoint[0] - transform.position).sqrMagnitude;
-
-            for (int i = 0; i < rayPoint.Count; i++)
-            {
-                if ((rayPoint[i] - transform.position).sqrMagnitude < dist)
-                    itemFound = i;
-            }
-
-
-            for (int i = 0; i < rayDistances.Count; i++)
-                print(i + " " + rayDistances[i] + " " + rayPoint[i]);
-
-            return (rayDistances[0], rayPoint[itemFound]);
-        }
-        else
-            return (colliderFound[0].distance, colliderFound[0].point);
-        
+        return hitColliders;
     }
 
     private bool CanMoveToPos(Vector3 endPosition)
@@ -483,6 +409,19 @@ public class FishControl : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        Vector3[] Positions = {
+            transform.position + (transform.forward * colliderRange),                                                   //front
+            transform.position + (transform.forward * colliderRange) + (transform.right * colliderSize.x),       //right
+            transform.position + (transform.forward * colliderRange) + (-transform.right * colliderSize.x),      //left
+            transform.position + (transform.forward * colliderRange) + (transform.up * colliderSize.y),          //top-centre
+            transform.position + (transform.forward * colliderRange) + (-transform.up * colliderSize.y)          //bottom-centre
+        };
+
+        Debug.DrawRay(transform.position, -Positions[1]);
+        Debug.DrawRay(transform.position, -Positions[2]);
+        Debug.DrawRay(transform.position, -Positions[3]);
+        Debug.DrawRay(transform.position, -Positions[4]);
+
         if (viewCollisionBox)
         {
             Gizmos.matrix = transform.localToWorldMatrix;
@@ -494,48 +433,36 @@ public class FishControl : MonoBehaviour
 
             Gizmos.DrawWireCube(Vector3.forward * colliderRange, colliderSize / 1.05f);
 
-        }
-    }
-
-    private int Vector3Compare(Vector3 value1, Vector3 value2)
-    {
-        if (value1.x < value2.x)
-        {
-            return -1;
-        }
-        else if (value1.x == value2.x)
-        {
-            if (value1.y < value2.y)
-            {
-                return -1;
-            }
-            else if (value1.y == value2.y)
-            {
-                if (value1.z < value2.z)
-                {
-                    return -1;
-                }
-                else if (value1.z == value2.z)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return 1;
-                }
-            }
+            if (isHit[1])
+                Gizmos.color = Color.red;
             else
-            {
-                return 1;
-            }
-        }
-        else
-        {
-            return 1;
+                Gizmos.color = Color.green;
+
+            Gizmos.DrawWireCube((Vector3.forward * colliderRange) + (Vector3.right * colliderSize.x) * 1.5f, colliderSize / 1.05f);
+
+            if (isHit[2])
+                Gizmos.color = Color.red;
+            else
+                Gizmos.color = Color.green;
+
+            Gizmos.DrawWireCube((Vector3.forward * colliderRange) + (-Vector3.right * colliderSize.x) * 1.5f, colliderSize / 1.05f);
+
+            if (isHit[3])
+                Gizmos.color = Color.red;
+            else
+                Gizmos.color = Color.green;
+
+            Gizmos.DrawWireCube((Vector3.forward * colliderRange) + (Vector3.up * colliderSize.y) * 1.5f, colliderSize / 1.05f);
+
+            if (isHit[4])
+                Gizmos.color = Color.red;
+            else
+                Gizmos.color = Color.green;
+
+            Gizmos.DrawWireCube((Vector3.forward * colliderRange) + (-Vector3.up * colliderSize.y) * 1.5f, colliderSize / 1.05f);
         }
     }
 }
-
 
 /*
     Fishstreet Boys - I want to fish.

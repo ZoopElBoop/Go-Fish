@@ -217,15 +217,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779dcb5786728ee47b35da8caea7d655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotatePos: {fileID: 0}
   Data: {fileID: 0}
   _playerPos: {fileID: 0}
   _destroyRange: 0
   _dataIndex: 0
+  HeightMax: 10
+  DepthMax: -10
   HP: 0
-  Speed: 0
+  Speed: 10
+  rotationSpeed: 100
   canBeFished: 0
+  meshies: []
+  canCheckCollisions: 1
   colliderSize: {x: 5.89, y: 4.33, z: 10}
-  colliderRange: 10
-  ba: 0
+  colliderRange: 15
+  moveDirection: 0
+  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
+  initialAngle: {x: 0, y: 0, z: 0}
+  newAngle: {x: 0, y: 0, z: 0}
   viewCollisionBox: 0
   isHit: 0000000000
