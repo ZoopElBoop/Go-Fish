@@ -161,12 +161,12 @@ public class FishSpawn : MonoBehaviour
 
     private bool inWater() 
     {
-        Ray ray = new(transform.position, dir);
+/*        Ray ray = new(transform.position, dir);
 
         RaycastHit[] colliderFound = new RaycastHit[10];
 
         Physics.RaycastNonAlloc(ray, colliderFound, 30f, LayersToIgnore, QueryTriggerInteraction.Ignore);
-
+*/
         return true;
     }
 

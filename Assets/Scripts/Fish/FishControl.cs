@@ -130,9 +130,33 @@ public class FishControl : MonoBehaviour
         }
         */
     }
-    public List<int> posClearIndex = new();
+
     private void CollisionDetect()
     {
+        /*
+        Collision detect has 3 seperate systems that operate deping on the fishes position
+
+        1. Fish Front Detection
+            Every 2ms a box check is made in front of the fish, if nothing is found the detection is complete,
+            If something is found the function will commit to the next system if it hasn't been called in the previous frame,
+            If the nect system has alredy been called the function calls a new Rotate() action with the alredy defined direction.
+
+        2. Ray Checks
+            Four rays are fired in front of the fish, each returns the distance & closest point of contact with a collider (if possible),
+            Rays are checked to ensure they don't exceed fish height & depth limits, and that they are above a minimum distance metric
+            Rays that pass this check have their data passed further on, and a check is made to fish the furthest ray contact,
+            If two or more rays have the same highest distance one of the rays will be randomly selected
+
+        3. Rotation
+            After the correct direction is found the angle of movemnt is converted to a quaternion (kill me) and the fish is lerped to the new rotation,
+            If the fish front check is still detecting something the fish will continue roatating in this direction
+
+        ISSUES:
+
+            Fish cannot turn fast enough in tight corners
+            If the collison box is detecting, a new rotation direction cannot be applied
+        */
+
         Vector3[] Positions = {
             transform.position + (transform.forward * colliderRange),                                            //front
             transform.position + (transform.forward * colliderRange) + (transform.right * colliderSize.x),       //right
@@ -141,7 +165,7 @@ public class FishControl : MonoBehaviour
             transform.position + (transform.forward * colliderRange) + (-transform.up * colliderSize.y)          //bottom-centre
         };
 
-        posClearIndex.Clear();
+        List<int> posClearIndex = new();
 
         if (CheckPositionForColliders(Positions[0]))
         {
@@ -191,9 +215,9 @@ public class FishControl : MonoBehaviour
 
         int arrSize = posClearIndex.Count;
 
-        for (int i = 0; i < arrSize; i++)
+        for (int i = 0; i < arrSize; i++)   //finds ray(s) that have no distance or the highest distance
         {
-            if (rayDistance[i] == -1)
+            if (rayDistance[i] == -1)       //ignores rays with no hits recorded
                 continue;
 
             for (int x = 0; x < arrSize; x++)
@@ -242,18 +266,18 @@ public class FishControl : MonoBehaviour
 
         if (hits < 1)
         {
-            return (-1, Vector3.zero);
+            return (-1, Vector3.zero);      //Ray hit nothing
         }
         else if (hits > 1)
         {
-            colliderFound = RaycastArraySort(colliderFound);
+            colliderFound = RaycastArraySort(colliderFound);    //sorts RaycastHit array by smallest distance
 
             for (int i = 0; i < colliderFound.Length; i++)           
                 if (colliderFound[i].distance != 0)                
-                    return (colliderFound[i].distance, colliderFound[i].point);                    
+                    return (colliderFound[i].distance, colliderFound[i].point);     //Ray hit more than 1 item, sorted to item closest to player                 
         }
-        
-        return (colliderFound[0].distance, colliderFound[0].point);  
+
+        return (colliderFound[0].distance, colliderFound[0].point);     //Ray hit 1 item
     }
 
     private RaycastHit[] RaycastArraySort(RaycastHit[] arr)
@@ -274,7 +298,7 @@ public class FishControl : MonoBehaviour
     }
 
 
-    private bool CanMoveToPos(Vector3 endPosition)
+    private bool CanMoveToPosition(Vector3 endPosition)
     {
         Vector3 targetDir = endPosition - transform.position;
 
