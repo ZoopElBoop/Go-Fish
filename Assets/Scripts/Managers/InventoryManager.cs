@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,36 +44,21 @@ public class InventoryManager : MonoBehaviour
                 count = 0
             });
         }
-
-        print(fishStoredSub[0].fishName);
     }
 
-    public void StoreOnPlayer(FishControl fishScript)
-    {
-        int i = fishScript._dataIndex;
+    public void StoreOnPlayer(FishControl fishScript) { fishStoredPlayer[fishScript._dataIndex].count++; }
+    public void StoreOnBoat(FishControl fishScript) { fishStoredBoat[fishScript._dataIndex].count++; }
+    public void StoreOnSub(FishControl fishScript) { fishStoredSub[fishScript._dataIndex].count++; }
 
-        fishStoredPlayer[i].count++;
-        print("====");
-        print(fishStoredPlayer[i].fishName);
-        print(fishStoredPlayer[i].count);
-    }
-
-    public void StoreOnBoat(FishControl fishScript)
-    {
-        fishStoredBoat[fishScript._dataIndex].count++;
-    }
-
-    public void StoreOnSub(FishControl fishScript)
-    {
-        fishStoredSub[fishScript._dataIndex].count++;
-    }
+    public void RemoveFromPlayer(int index) { fishStoredPlayer[index].count--; }
+    public void RemoveFromBoat(int index) { fishStoredBoat[index].count--; }
+    public void RemoveFromSub(int index) { fishStoredSub[index].count--; }
 
     public List<FishStoredData> GetFromPlayer() { return fishStoredPlayer; }
     public List<FishStoredData> GetFromBoat() { return fishStoredBoat; }
     public List<FishStoredData> GetFromSub() { return fishStoredSub; }
 
 }
-
 
 public class FishStoredData
 {

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Fishing : MonoBehaviour
 {
+    [Header("Rod Gamneobject")]
+    [SerializeField] private GameObject fishingRod;
+
     [Header("Bobber Settings")]
     [SerializeField] private GameObject _Bobber;
     [SerializeField] private GameObject bobberInstance;
@@ -44,6 +47,7 @@ public class Fishing : MonoBehaviour
     private Camera playerCamera;
 
     private bool inBoat;
+    private bool rodEquiped = false;
 
     [Header("Charge Up Velocity Limit & Minimum")]
     [Range(1.0f, 50.0f)]
@@ -79,21 +83,60 @@ public class Fishing : MonoBehaviour
 
         mouseFxInstance.transform.parent = transform;
 
+        fishingRod.SetActive(false);
+        _LineRenderer.enabled = false;
+
         /*        Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;*/
     }
 
     private void Update() 
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            //Resets fishing if player de-equips rod while fishing
+            if (rodEquiped)
+            {
+                ObliterateBobber();
+                _LineRenderer.enabled = false;
+                _fishingThrowSlider.gameObject.SetActive(false);
+                isFishing = false;
+
+                throwCharge = 1f;
+
+                if (caughtFish != null)
+                    Escape();
+            }
+
+            rodEquiped = !rodEquiped;
+            fishingRod.SetActive(rodEquiped);
+        }
+
+        if (rodEquiped)
+        {
+            FishingControl();
+
+            BobberLine();           
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (inBoat)
+            MouseMoveFx();
+    }
+
+    private void FishingControl() 
+    {
         //Player start fishing 
-        if (!isFishing) 
+        if (!isFishing)
         {
             if (Input.GetMouseButton(0) && !inBoat)
             {
                 //Used for charging up lob, if player is not in a boat
                 if (throwCharge < _chargeUpMax)
                     throwCharge += _chargeUpMultiplier;
-                
+
                 ObliterateBobber();
 
                 if (!_fishingThrowSlider.gameObject.activeSelf)
@@ -108,7 +151,7 @@ public class Fishing : MonoBehaviour
                 LobBobber();
         }
         //Used for once player has caught fish
-        else 
+        else
         {
             Bargame();
 
@@ -122,9 +165,12 @@ public class Fishing : MonoBehaviour
                     Escape();
 
                 StartCoroutine(FishingCooldown());
-            }               
+            }
         }
+    }
 
+    private void BobberLine() 
+    {
         //Checks if bobber exists, if so enables line to it & checks if it is too far from player
         if (bobberInstance != null)
         {
@@ -145,11 +191,6 @@ public class Fishing : MonoBehaviour
             _LineRenderer.enabled = false;
     }
 
-    private void FixedUpdate()
-    {
-        if (inBoat)
-            MouseMoveFx();
-    }
     public float distanceBetween = 0f;
     private void MouseMoveFx()
     {
@@ -169,7 +210,7 @@ public class Fishing : MonoBehaviour
             }
 
             //Enables target reticle if inside range limits & currently not fishing
-            if (!isFishing)
+            if (!isFishing && rodEquiped)
             {
                 mouseFxInstance.SetActive(true);
                 mouseFxInstance.transform.position = position;

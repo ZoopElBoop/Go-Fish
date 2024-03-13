@@ -86,9 +86,9 @@ public class FishControl : MonoBehaviour
 
         LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "water" layer
 
-        collisionBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
+/*        collisionBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
         collisionBox.layer = LayerIgnoreRaycast;
-        collisionBox.SetActive(false);
+        collisionBox.SetActive(false);*/
     }
 
     private void FixedUpdate()

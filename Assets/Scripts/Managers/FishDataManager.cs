@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FishDataManager : MonoBehaviour
@@ -22,9 +19,6 @@ public class FishDataManager : MonoBehaviour
         else
             Destroy(this);
         fishData = fishDataInput;
-
-        print(fishData[0].name);
-        print(fishData[1].name);
     }
     private void OnValidate()
     {
@@ -65,5 +59,4 @@ public class FishDataManager : MonoBehaviour
     public float GetRarity(int index) { return fishData[index]._Rarity; }
     public float GetValue(int index) { return fishData[index]._baseValue; }
     public float GetValueCoefficient(int index) { return fishData[index]._valueChangeCoefficient; }
-
 }
