@@ -40,6 +40,8 @@ public class EventManager : MonoBehaviour
     public void FishDespawn(GameObject fishToKill)
     {
         OnFishDespawn?.Invoke(fishToKill);
+
+        GameManager.Instance.RemoveFishFromBuffer(fishToKill);
     }
 
 
@@ -48,6 +50,8 @@ public class EventManager : MonoBehaviour
     public void FishDisable(GameObject fishToKill)
     {
         OnFishDisable?.Invoke(fishToKill);
+
+        GameManager.Instance.RemoveFishFromBuffer(fishToKill);
     }
 
 

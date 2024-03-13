@@ -13,7 +13,6 @@ public class FishControl : MonoBehaviour
     private Transform attractPoint;
 
     [Header("Fish Data")]
-    public FishData Data;
 
     [HideInInspector] public Transform _playerPos;
     [HideInInspector] public float _destroyRange;
@@ -58,17 +57,14 @@ public class FishControl : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
 
+        HP = FishDataManager.Instance.GetHealth(_dataIndex);
+        Speed = FishDataManager.Instance.GetSpeed(_dataIndex);
+        rotationSpeed = FishDataManager.Instance.GetRotationSpeed(_dataIndex);
 
-        Data = FishDataManager.Instance.fishData[_dataIndex];
+        HeightMax = FishDataManager.Instance.GetHeightLimit(_dataIndex);
+        DepthMax = FishDataManager.Instance.GetDepthLimit(_dataIndex);
 
-        HP = Data._Health;
-        Speed = Data._Speed;
-        rotationSpeed = Data._rotationSpeed;
-
-        HeightMax = Data._moveHeightLimit;
-        DepthMax = Data._moveDepthLimit;
-
-        canBeFished = Data._canBeCaught;
+        canBeFished = FishDataManager.Instance.GetCanBeCaught(_dataIndex);
 
 
 
@@ -437,7 +433,10 @@ public class FishControl : MonoBehaviour
     {
         if (collisionBox != null)
             Destroy(collisionBox);      //TBC
+
         EventManager.Instance.FishDespawn(gameObject);
+
+        //Debug.Break();
     }
 
     public void Attract(Transform focusPos)

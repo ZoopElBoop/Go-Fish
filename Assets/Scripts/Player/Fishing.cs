@@ -337,12 +337,25 @@ public class Fishing : MonoBehaviour
     {
         //caughtFish.GetComponent<FishControl>().isAboutToDie = true;
         //EventManager.Instance.FishCaught(caughtFish);
-        caughtFish.GetComponent<FishControl>().FishToPlayer();
+        var fc = caughtFish.GetComponent<FishControl>();
+
+        if (fc == null)
+        {
+            Debug.LogError("uh oh");
+            Debug.Break();
+        }
+
+        fc.FishToPlayer();
 
         numCaught++;
         catches.text = "CAUGHT FISH :" + numCaught;
         _fishCaughtSlider.value = 0.5f;
         _fishCaughtSlider.gameObject.SetActive(false);
+
+        if (inBoat)
+            InventoryManager.Instance.StoreOnBoat(fc);
+        else
+            InventoryManager.Instance.StoreOnPlayer(fc);
     }
 
     void Escape()

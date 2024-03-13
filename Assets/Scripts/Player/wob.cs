@@ -46,9 +46,7 @@ public class Wob : MonoBehaviour
         if (attractPoint != null && rb.velocity.magnitude < 1f)
             attractPoint.SetActive(true);
 
-        if (hasCaught && followPoint == null)
-            Debug.Break();
-        if (hasCaught)
+        if (hasCaught && followPoint != null)
         {
             var velocity = followPoint.position - transform.position;
             //var dir = velocity.normalized;

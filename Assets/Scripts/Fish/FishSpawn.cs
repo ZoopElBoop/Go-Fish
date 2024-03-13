@@ -13,9 +13,6 @@ public class FishSpawn : MonoBehaviour
 
     private bool activeTime = false;
 
-    [Header("List Of Active Fish")]
-    public List<GameObject> _spawnedFish = new();
-
     [Header("DEBUG")]
     [SerializeField] private bool gizmosActive;
     [SerializeField] private bool debugLog;
@@ -29,9 +26,6 @@ public class FishSpawn : MonoBehaviour
 
     private void Start()
     {
-        EventManager.Instance.OnFishDisable += ObliterateFish;
-        EventManager.Instance.OnFishDespawn += ObliterateFish;
-
         SpawnTypeOf();
 
         LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
@@ -45,25 +39,25 @@ public class FishSpawn : MonoBehaviour
 
     private void SpawnTypeOf() 
     {
-        float[,] fishProbability = new float[FishDataManager.Instance.fishData.Length, 2];      //Contains index to fishdata array & empty probability factor
+        float[,] fishProbability = new float[FishDataManager.Instance.GetFishDataSize(), 2];      //Contains index to fishdata array & empty probability factor
         float totalProbabilityValue = 0f;
 
-        for (int i = 0; i < FishDataManager.Instance.fishData.Length; i++)
+        for (int i = 0; i < FishDataManager.Instance.GetFishDataSize(); i++)
         {
-            float spawnStart = FishDataManager.Instance.fishData[i]._spawnDepthStart;
-            float spawnEnd = FishDataManager.Instance.fishData[i]._spawnDepthEnd;
+            float spawnStart = FishDataManager.Instance.GetSpawnStart(i);
+            float spawnEnd = FishDataManager.Instance.GetSpawnEnd(i);
             float playerYPos = transform.position.y;
 
             if (playerYPos - _spawnRange > spawnStart || playerYPos + _spawnRange < spawnEnd)
                 continue;
 
-            float spawnHigh = FishDataManager.Instance.fishData[i]._spawnDepthHigh;
+            float spawnHigh = FishDataManager.Instance.GetSpawnHigh(i);
             float distanceToHigh;
 
             if (playerYPos > spawnHigh)     //why try to do all the math stuff when unity has an inbuilt func for that, not reading docs meant i wasted like 5 hours on this, lmao
-                distanceToHigh = Mathf.InverseLerp(spawnStart + _spawnRange, spawnHigh, playerYPos) * FishDataManager.Instance.fishData[i]._Rarity;
+                distanceToHigh = Mathf.InverseLerp(spawnStart + _spawnRange, spawnHigh, playerYPos) * FishDataManager.Instance.GetRarity(i);
             else
-                distanceToHigh = Mathf.InverseLerp(spawnEnd - _spawnRange, spawnHigh, playerYPos) * FishDataManager.Instance.fishData[i]._Rarity;
+                distanceToHigh = Mathf.InverseLerp(spawnEnd - _spawnRange, spawnHigh, playerYPos) * FishDataManager.Instance.GetRarity(i);
 
             fishProbability[i, 0] = i;
             fishProbability[i, 1] = distanceToHigh;
@@ -86,7 +80,7 @@ public class FishSpawn : MonoBehaviour
             print("/---/");
             for (int i = 0; i < fishProbability.GetLength(0); i++)
             {
-                print(FishDataManager.Instance.fishData[i].name);
+                print(FishDataManager.Instance.GetFishName(i));
                 print(fishProbability[i, 1]);
             }
             print("/---/");
@@ -119,7 +113,7 @@ public class FishSpawn : MonoBehaviour
         if (debugLog)
         {
             print("IND FOUND: " + index);
-            print("SPAWNING " + FishDataManager.Instance.fishData[index].name);
+            print("SPAWNING " + FishDataManager.Instance.GetFishName(index));
             print("////////////////////////////////////////////////////////////////////////");
         }
 
@@ -128,7 +122,7 @@ public class FishSpawn : MonoBehaviour
 
     public void _Spawn(int index)
     {
-        GameObject fishToSpawn = FishDataManager.Instance.fishData[index]._Fishk;
+        GameObject fishToSpawn = FishDataManager.Instance.GetFish(index);
         Vector3 spawnPos;
         int spawnIteration = 0;     
 
@@ -152,18 +146,18 @@ public class FishSpawn : MonoBehaviour
 
             Collider[] hitColliders = new Collider[1];  //literally the most useless array, but since OverlapSphere only takes an array here it stays
 
-            Physics.OverlapSphereNonAlloc(spawnPos, FishDataManager.Instance.fishData[index]._collisionRange, hitColliders);
+            Physics.OverlapSphereNonAlloc(spawnPos, FishDataManager.Instance.GetCollisionRange(index), hitColliders);
 
             if (hitColliders[0] == null)    //So for some reason if the collider detects nothing it dosen't return a empty array but an array with an NULL proterty, WHY???????????        
                 break;
         }
         GameObject tempFishHolder = Instantiate(fishToSpawn, spawnPos, Quaternion.identity);    //temp fix for now, obliterate later
                                                                                                 //fun story so theres a 1 in 100 chance the fish dosen't get the _playerPos & _destroyRange variables
-        _spawnedFish.Add(tempFishHolder);                                                       //since im stupid and set fishscript to fishToSpawn, but cuz i want to set the fish to a list a temp variable is needed atm
+        GameManager.Instance.AddFishToBuffer(tempFishHolder);                                   //since im stupid and set fishscript to fishToSpawn, but cuz i want to set the fish to a list a temp variable is needed atm
                                                                                                 //when i decide to be competent ima redo this bit :)
         var fishScript = tempFishHolder.GetComponent<FishControl>();
         fishScript._playerPos = transform;
-        fishScript._destroyRange = _destroyRange * FishDataManager.Instance.fishData[index]._despawnRangeMulti;
+        fishScript._destroyRange = _destroyRange * FishDataManager.Instance.GetDespawnMultiplier(index);
         fishScript._dataIndex = index;
     }
 
@@ -179,17 +173,13 @@ public class FishSpawn : MonoBehaviour
     }
 
     private void Update()
-    { 
-        if (!activeTime && _spawnedFish.Count < 10)     //Dodgy interval spawn, to be changed at some point
-            StartCoroutine(CallSpawn());
-
-        fishies.text = _spawnedFish.Count + " Fish";    //TESTING, remove later
-    }
-
-    private void ObliterateFish(GameObject fish) 
     {
-        _spawnedFish.Remove(fish);
-        Destroy(fish);
+        var SpawnedFish = GameManager.Instance.GetFishBufferSize();
+
+        if (!activeTime && SpawnedFish < 10)     //Dodgy interval spawn, to be changed at some point
+            SpawnTypeOf();
+
+        fishies.text = SpawnedFish + " Fish";    //TESTING, remove later
     }
 
     IEnumerator CallSpawn()
@@ -215,11 +205,5 @@ public class FishSpawn : MonoBehaviour
 
             Gizmos.DrawWireSphere(transform.position, _destroyRange);
         }
-    }
-
-    private void OnDisable()
-    {
-        EventManager.Instance.OnFishDisable -= ObliterateFish;
-        EventManager.Instance.OnFishDespawn -= ObliterateFish;
     }
 }

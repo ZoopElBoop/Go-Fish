@@ -38,7 +38,6 @@ public class Boat : MonoBehaviour
                 EventManager.Instance.BoatExit();
             }
         }
-
     }
 
     private void OnTriggerEnter(Collider other)

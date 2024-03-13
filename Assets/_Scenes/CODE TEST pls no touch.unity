@@ -2123,24 +2123,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725967298}
   m_CullTransparentMesh: 1
---- !u!1 &1898070456 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5119528874970478230, guid: 0641f21c40dd26f4281a45d499d19d57,
-    type: 3}
-  m_PrefabInstance: {fileID: 8103609788429086919}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1898070460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898070456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6b2823d67c2c844d89b29b3245316e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2140579712
 GameObject:
   m_ObjectHideFlags: 0
@@ -2307,13 +2289,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 272690689633903174, guid: 177ad34de4090e94282797269a19e141,
         type: 3}
+      propertyPath: _spawnRange
+      value: 14.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 272690689633903174, guid: 177ad34de4090e94282797269a19e141,
+        type: 3}
       propertyPath: gizmosActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 272690689633903174, guid: 177ad34de4090e94282797269a19e141,
         type: 3}
       propertyPath: _destroyRange
-      value: 30
+      value: 19.8
       objectReference: {fileID: 0}
     - target: {fileID: 1167194963957598639, guid: 177ad34de4090e94282797269a19e141,
         type: 3}
@@ -2492,28 +2479,28 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2569525689953128123, guid: 0641f21c40dd26f4281a45d499d19d57,
+    - target: {fileID: 15786308626783109, guid: 0641f21c40dd26f4281a45d499d19d57,
         type: 3}
-      propertyPath: fishData.Array.size
-      value: 1
+      propertyPath: arr.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2569525689953128123, guid: 0641f21c40dd26f4281a45d499d19d57,
         type: 3}
-      propertyPath: 'fishData.Array.data[0]'
+      propertyPath: fishDataInput.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2569525689953128123, guid: 0641f21c40dd26f4281a45d499d19d57,
+        type: 3}
+      propertyPath: 'fishDataInput.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 8e48c361e0c0f254a85a7e371ec978eb,
         type: 2}
     - target: {fileID: 2569525689953128123, guid: 0641f21c40dd26f4281a45d499d19d57,
         type: 3}
-      propertyPath: 'fishData.Array.data[1]'
+      propertyPath: 'fishDataInput.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: ae6a91ea249be0b4eaac2374d515f7dc,
         type: 2}
-    - target: {fileID: 2991716267802634616, guid: 0641f21c40dd26f4281a45d499d19d57,
-        type: 3}
-      propertyPath: aaaaaaaaaaaaaaaaaaaa.x
-      value: -2.67
-      objectReference: {fileID: 0}
     - target: {fileID: 5119528874970478230, guid: 0641f21c40dd26f4281a45d499d19d57,
         type: 3}
       propertyPath: m_Name
@@ -2572,11 +2559,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5119528874970478230, guid: 0641f21c40dd26f4281a45d499d19d57,
-        type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 1898070460}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0641f21c40dd26f4281a45d499d19d57, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
