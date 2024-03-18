@@ -18,19 +18,23 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(Instance);
         }
         else
-            Destroy(this);  
-    }  
+            Destroy(this);
+
+        Application.targetFrameRate = 60;
+    }
 
     public void AddFishToBuffer(GameObject fishToAdd) 
     {
-        activeFishBuffer.Add(fishToAdd); 
+        activeFishBuffer.Add(fishToAdd);
     }
 
     public void RemoveFishFromBuffer(GameObject fishToRemove) 
     {
-        activeFishBuffer.Remove(fishToRemove);
+        fishToRemove.SetActive(false);
 
-        Destroy(fishToRemove); 
+        activeFishBuffer.RemoveAll(s => s.activeSelf == false);
+
+        ObjectPoolManager.Instance.DespawnObject(fishToRemove);
     }
 
     public List<GameObject> GetFishBuffer() { return activeFishBuffer; }

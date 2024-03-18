@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Fishing : MonoBehaviour
 {
-    [Header("Rod Gamneobject")]
+    [Header("Rod Settings")]
     [SerializeField] private GameObject fishingRod;
 
     [Header("Bobber Settings")]
@@ -27,26 +27,19 @@ public class Fishing : MonoBehaviour
     [SerializeField] private GameObject _mouseFx;
     private GameObject mouseFxInstance;
 
-    [Header("Slider For Fishing (to be moved to seperate ui script)")]
-    [SerializeField] private Slider _fishCaughtSlider;
-    [SerializeField] private Slider _fishingThrowSlider;
-
-    private bool isFishing;
-    private bool barAtTop;
-
-    [Header("Fishing Line (might move to seprate script)")]
+    [Header("Fishing Line")]
     [SerializeField] private LineRenderer _LineRenderer;
 
+    //Cache of caught fish
     private GameObject caughtFish;
 
-    [Header("Caught Fish Text (to be moved to seperate ui script)")]
-    [SerializeField] private TMP_Text catches;
-    private int numCaught = 0;
-
+    //Cameras for switching between boat/1st person for racasts, to be changed
     private Camera mainCamera;
     private Camera playerCamera;
 
+    //Bool states
     private bool inBoat;
+    private bool isFishing;
     private bool rodEquiped = false;
 
     [Header("Charge Up Velocity Limit & Minimum")]
@@ -54,10 +47,9 @@ public class Fishing : MonoBehaviour
     [SerializeField] private float _chargeUpMax = 15f;
     [Range(0.01f, 0.3f)]
     [SerializeField] private float _chargeUpMultiplier = 0.1f;
-    private float throwCharge = 1.0f;
+    public float throwCharge;
 
     [Header("Gizmos")]
-
     [SerializeField] private bool gizmosActive = true;
     private bool spawnFail;
     private Vector3 throwPos;
@@ -99,10 +91,8 @@ public class Fishing : MonoBehaviour
             {
                 ObliterateBobber();
                 _LineRenderer.enabled = false;
-                _fishingThrowSlider.gameObject.SetActive(false);
+                UIManager.Instance.ThrowSliderActive(false);
                 isFishing = false;
-
-                throwCharge = 1f;
 
                 if (caughtFish != null)
                     Escape();
@@ -139,10 +129,8 @@ public class Fishing : MonoBehaviour
 
                 ObliterateBobber();
 
-                if (!_fishingThrowSlider.gameObject.activeSelf)
-                    _fishingThrowSlider.gameObject.SetActive(true);
-
-                _fishingThrowSlider.value = Mathf.InverseLerp(0f, _chargeUpMax, throwCharge);
+                UIManager.Instance.ThrowSliderActive(true);
+                UIManager.Instance.ThrowSlider(_chargeUpMax, throwCharge);
             }
 
             else if (Input.GetMouseButtonUp(0) && throwCharge > 1f && !inBoat)
@@ -153,13 +141,13 @@ public class Fishing : MonoBehaviour
         //Used for once player has caught fish
         else
         {
-            Bargame();
-
             if (Input.GetMouseButtonDown(0))
             {
                 ObliterateBobber();
 
-                if (_fishCaughtSlider.value >= 0.4 && _fishCaughtSlider.value <= 0.6)
+                float sliderVal = UIManager.Instance.GetFishingSliderValue();
+
+                if (sliderVal >= 0.4 && sliderVal <= 0.6)
                     Caught();
                 else
                     Escape();
@@ -172,13 +160,12 @@ public class Fishing : MonoBehaviour
     private void BobberLine() 
     {
         //Checks if bobber exists, if so enables line to it & checks if it is too far from player
-        if (bobberInstance != null)
+        if (bobberInstance != null && bobberInstance.activeSelf)
         {
             if (IsBobberTooFar())
             {
                 ObliterateBobber();
 
-                print("too far");
                 if (caughtFish != null)
                     Escape();
             }
@@ -245,13 +232,12 @@ public class Fishing : MonoBehaviour
     private void ObliterateBobber() 
     {
         if (bobberInstance != null)
-            Destroy(bobberInstance);
+            bobberInstance.SetActive(false);
     }
 
     private void LobBobber()
     {
-        _fishingThrowSlider.value = 0f;
-        _fishingThrowSlider.gameObject.SetActive(false);
+        UIManager.Instance.ThrowSliderActive(false);
 
         ObliterateBobber();
 
@@ -298,7 +284,12 @@ public class Fishing : MonoBehaviour
 
     private void SpawnBobber(Vector3 direction, float velocity)
     {
-        bobberInstance = Instantiate(_Bobber, _bobberSpawnPoint.position, _bobberSpawnPoint.rotation);
+        if (bobberInstance == null)
+            bobberInstance = Instantiate(_Bobber, _bobberSpawnPoint.position, _bobberSpawnPoint.rotation);
+        else
+            bobberInstance.SetActive(true);
+
+        bobberInstance.transform.SetPositionAndRotation(_bobberSpawnPoint.position, _bobberSpawnPoint.rotation);
 
         bobberInstance.GetComponent<Rigidbody>().velocity = direction * velocity;
 
@@ -329,7 +320,7 @@ public class Fishing : MonoBehaviour
         caughtFish = fish;
         //fish.GetComponent<FishControl>().Caught();
         print("caught!!");
-        _fishCaughtSlider.gameObject.SetActive(true);
+        UIManager.Instance.FishingSliderActive(true);
     }
 
     public void CamBoatSwitch(Camera boatCam)
@@ -338,8 +329,7 @@ public class Fishing : MonoBehaviour
         mainCamera.gameObject.SetActive(false);
         mainCamera = boatCam;
 
-        _fishingThrowSlider.value = 0f;
-        _fishingThrowSlider.gameObject.SetActive(false);
+        UIManager.Instance.ThrowSliderActive(false);
 
         inBoat = true;
     }
@@ -356,24 +346,6 @@ public class Fishing : MonoBehaviour
         throwCharge = 1f;
     }
 
-    void Bargame()
-    {
-        if (!barAtTop)
-        {
-            _fishCaughtSlider.value += 0.25f * Time.deltaTime;
-
-            if (_fishCaughtSlider.value >= 1)
-                barAtTop = true;
-        }
-        else
-        {
-            _fishCaughtSlider.value -= 0.25f * Time.deltaTime;
-
-            if (_fishCaughtSlider.value <= 0)
-                barAtTop = false;
-        }
-    }
-
     void Caught() 
     {
         //caughtFish.GetComponent<FishControl>().isAboutToDie = true;
@@ -388,10 +360,9 @@ public class Fishing : MonoBehaviour
 
         fc.FishToPlayer();
 
-        numCaught++;
-        catches.text = "CAUGHT FISH :" + numCaught;
-        _fishCaughtSlider.value = 0.5f;
-        _fishCaughtSlider.gameObject.SetActive(false);
+/*        numCaught++;
+        catches.text = "CAUGHT FISH :" + numCaught;*/
+        UIManager.Instance.FishingSliderActive(false);
 
         if (inBoat)
             InventoryManager.Instance.StoreOnBoat(fc);
@@ -402,8 +373,7 @@ public class Fishing : MonoBehaviour
     void Escape()
     {
         caughtFish.GetComponent<FishControl>().Escape(transform);
-        _fishCaughtSlider.value = 0.5f;
-        _fishCaughtSlider.gameObject.SetActive(false);
+        UIManager.Instance.FishingSliderActive(false);
     }
 
     private void OnDrawGizmos()
@@ -420,7 +390,7 @@ public class Fishing : MonoBehaviour
                 Gizmos.DrawWireSphere(mouseFxInstance.transform.position, 1f);
             }
 
-            if (bobberInstance != null)
+            if (bobberInstance != null && bobberInstance.activeSelf)
             {
                 Gizmos.color = Color.blue;
                 Gizmos.DrawWireSphere(bobberInstance.transform.position, 1f);

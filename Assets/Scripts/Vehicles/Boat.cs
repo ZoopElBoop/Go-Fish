@@ -66,9 +66,6 @@ public class Boat : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player") && !playerLeft)
-        {
-            playerLeft = true;
-            //EventManager.Instance.BoatExit();
-        }
+            playerLeft = true;       
     }
 }

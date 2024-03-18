@@ -45,8 +45,6 @@ public class FishSellShopManager : MonoBehaviour
 
         List<string> fishies = new();
 
-        print(playerStocks[1].fishName);
-
         for (int i = 0; i < playerStocks.Count; i++)
         {
             dropdown.options.Add(new TMP_Dropdown.OptionData(playerStocks[i].fishName));

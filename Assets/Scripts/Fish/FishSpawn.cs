@@ -150,14 +150,19 @@ public class FishSpawn : MonoBehaviour
             if (hitColliders[0] == null)    //So for some reason if the collider detects nothing it dosen't return a empty array but an array with an NULL proterty, WHY???????????        
                 break;
         }
-        GameObject tempFishHolder = Instantiate(fishToSpawn, spawnPos, Quaternion.identity);    //temp fix for now, obliterate later
+        GameObject tempFishHolder = ObjectPoolManager.Instance.SpawnObject(fishToSpawn, spawnPos, Quaternion.identity);
+
+        //GameObject tempFishHolder = Instantiate(fishToSpawn, spawnPos, Quaternion.identity);    //temp fix for now, obliterate later
                                                                                                 //fun story so theres a 1 in 100 chance the fish dosen't get the _playerPos & _destroyRange variables
-        GameManager.Instance.AddFishToBuffer(tempFishHolder);                                   //since im stupid and set fishscript to fishToSpawn, but cuz i want to set the fish to a list a temp variable is needed atm
+        //GameManager.Instance.AddFishToBuffer(tempFishHolder);                                   //since im stupid and set fishscript to fishToSpawn, but cuz i want to set the fish to a list a temp variable is needed atm
                                                                                                 //when i decide to be competent ima redo this bit :)
         var fishScript = tempFishHolder.GetComponent<FishControl>();
         fishScript._playerPos = transform;
         fishScript._destroyRange = _destroyRange * FishDataManager.Instance.GetDespawnMultiplier(index);
         fishScript._dataIndex = index;
+
+        GameManager.Instance.AddFishToBuffer(tempFishHolder);
+        //ObjectPoolManager.Instance.AddOBJ(tempFishHolder);
     }
 
     private bool InWater(Vector3 pos) 
@@ -175,8 +180,8 @@ public class FishSpawn : MonoBehaviour
     {
         var SpawnedFish = GameManager.Instance.GetFishBufferSize();
 
-        if (!activeTime && SpawnedFish < 10)     //Dodgy interval spawn, to be changed at some point
-            SpawnTypeOf();
+        if (!activeTime && SpawnedFish < 50)     //Dodgy interval spawn, to be changed at some point
+            StartCoroutine(CallSpawn());
 
         fishies.text = SpawnedFish + " Fish";    //TESTING, remove later
     }
@@ -184,7 +189,7 @@ public class FishSpawn : MonoBehaviour
     IEnumerator CallSpawn()
     {
         activeTime = true;
-        yield return new WaitForSeconds(Random.Range(0.25f, 1f));
+        yield return new WaitForSeconds(Random.Range(1f, 5f));
         activeTime = false;
         SpawnTypeOf();
     }

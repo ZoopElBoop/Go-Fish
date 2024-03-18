@@ -234,6 +234,7 @@ GameObject:
   - component: {fileID: 1181673847698802604}
   - component: {fileID: 6424786480925049702}
   - component: {fileID: 1167194963957598639}
+  - component: {fileID: 1316500816625746614}
   m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -266,7 +267,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -314,7 +315,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4622889958549259469}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1a25096f913d7c458b21217cae38621, type: 3}
   m_Name: 
@@ -336,7 +337,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4622889958549259469}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23cf562463bfdcd4187729b54289d62b, type: 3}
   m_Name: 
@@ -366,7 +367,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -387,6 +388,23 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1316500816625746614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4622889958549259469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9262551c6f9b85b419af637504ea480d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 896634009707140567}
+  Depth: 0
+  postProcessingVolume: {fileID: 0}
+  surfaceProfile: {fileID: 11400000, guid: d7e4c52be71b2ff4e9bd3507ea26dd72, type: 2}
+  underwaterProfile: {fileID: 11400000, guid: 1fe4730cff3bf2b4a82930d4a40dae5b, type: 2}
 --- !u!1 &8981901052761092954
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,11 +524,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a092570edc45414489c349ecc639aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRange: 8
-  _destroyRange: 20
-  _spawnedFish: []
+  _spawnRange: 14.7
+  _destroyRange: 80
   gizmosActive: 1
-  debugLog: 1
+  debugLog: 0
   fishies: {fileID: 0}
 --- !u!114 &2944523039950483636
 MonoBehaviour:
@@ -524,21 +541,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9345be36c75061b47a0c5c31355f0e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishingRod: {fileID: 3394642100146853828}
   _Bobber: {fileID: 8840925713100103486, guid: 8eb0ed0c933372c418abd0264fcc45c7, type: 3}
+  bobberInstance: {fileID: 0}
   _bobberSpawnPoint: {fileID: 3809250035136272316}
   _bobberSpawnRangeMax: 20
-  _bobberSpawnRangeMin: 5
+  _bobberSpawnRangeMin: 8
   groundMask:
     serializedVersion: 2
-    m_Bits: 17
+    m_Bits: 16
   _mouseFx: {fileID: 7470109055551435250, guid: 806afb88cb3e80e4ca4d5c4516a52cf7,
     type: 3}
-  _fishCaughtSlider: {fileID: 0}
-  _fishingThrowSlider: {fileID: 0}
   _LineRenderer: {fileID: 6983697106207006861}
-  catches: {fileID: 0}
-  _chargeUpMax: 15
-  _chargeUpMultiplier: 0.1
+  _chargeUpMax: 30
+  _chargeUpMultiplier: 0.2
+  throwCharge: 0
   gizmosActive: 1
   TestVelocityMultiplier: 1.5
   distanceBetween: 0
@@ -550,7 +567,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8981901052761092954}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

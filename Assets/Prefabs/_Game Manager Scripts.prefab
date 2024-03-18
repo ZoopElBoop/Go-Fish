@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 15786308626783109}
   - component: {fileID: 8571563457282190935}
   - component: {fileID: 2991716267802634616}
+  - component: {fileID: 3404046389337374641}
   - component: {fileID: 2569525689953128123}
   m_Layer: 0
   m_Name: _Game Manager Scripts
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85b7716bff50964d89a03a121bf021a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishCoin: 0
 --- !u!114 &8571563457282190935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +73,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569831bffbd1a9a46abe7534d7849920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3404046389337374641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119528874970478230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12415de0470d8c449139dac3b9353f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duplicateLimit: 2
 --- !u!114 &2569525689953128123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,5 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2679724e3e04a459b9681aae146f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishData:
+  fishDataInput:
   - {fileID: 11400000, guid: 8e48c361e0c0f254a85a7e371ec978eb, type: 2}
+  - {fileID: 11400000, guid: ae6a91ea249be0b4eaac2374d515f7dc, type: 2}

@@ -10,8 +10,19 @@ public class Wob : MonoBehaviour
 
     private void Awake()
     {
-        attractPoint.SetActive(false);
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnEnable() 
+    {
+        attractPoint.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        rb.velocity = Vector3.zero;
+        hasCaught = false;
+        followPoint = null;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,9 +41,9 @@ public class Wob : MonoBehaviour
 
             followPoint = fish.transform;
 
-            EventManager.Instance.FishFished(fish);
+            attractPoint.SetActive(false);
 
-            Destroy(attractPoint);
+            EventManager.Instance.FishFished(fish);
         }
         else
             Debug.LogWarning($"cannot catch {fish.name}");
@@ -40,7 +51,7 @@ public class Wob : MonoBehaviour
 
     private void Update()
     {
-        if (attractPoint != null && rb.velocity.magnitude < 1f)
+        if (!attractPoint.activeSelf && rb.velocity.magnitude < 1f)
             attractPoint.SetActive(true);
 
         if (hasCaught && followPoint != null)

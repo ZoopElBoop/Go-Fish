@@ -14,9 +14,9 @@ public class FishControl : MonoBehaviour
 
     [Header("Fish Data")]
 
-    [HideInInspector] public Transform _playerPos;
-    [HideInInspector] public float _destroyRange;
-    [HideInInspector] public int _dataIndex;
+    public Transform _playerPos;
+    public float _destroyRange;
+    public int _dataIndex;
 
     [SerializeField] private float HeightMax;
     [SerializeField] private float DepthMax;
@@ -57,19 +57,6 @@ public class FishControl : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
 
-        HP = FishDataManager.Instance.GetHealth(_dataIndex);
-        Speed = FishDataManager.Instance.GetSpeed(_dataIndex);
-        rotationSpeed = FishDataManager.Instance.GetRotationSpeed(_dataIndex);
-
-        HeightMax = FishDataManager.Instance.GetHeightLimit(_dataIndex);
-        DepthMax = FishDataManager.Instance.GetDepthLimit(_dataIndex);
-
-        canBeFished = FishDataManager.Instance.GetCanBeCaught(_dataIndex);
-
-
-
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
-
         /*       for (int i = 0; i < transform.childCount; i++)
         {
             Collider childCollider = transform.GetChild(i).GetComponent<MeshCollider>();
@@ -91,6 +78,20 @@ public class FishControl : MonoBehaviour
         collisionBox.SetActive(false);*/
     }
 
+    private void OnEnable()
+    {
+        HP = FishDataManager.Instance.GetHealth(_dataIndex);
+        Speed = FishDataManager.Instance.GetSpeed(_dataIndex);
+        rotationSpeed = FishDataManager.Instance.GetRotationSpeed(_dataIndex);
+
+        HeightMax = FishDataManager.Instance.GetHeightLimit(_dataIndex);
+        DepthMax = FishDataManager.Instance.GetDepthLimit(_dataIndex);
+
+        canBeFished = FishDataManager.Instance.GetCanBeCaught(_dataIndex);
+
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
+    }
+
     private void FixedUpdate()
     {
         rb.velocity = transform.forward * Speed;
@@ -109,11 +110,9 @@ public class FishControl : MonoBehaviour
 
         float distanceBetween = (_playerPos.position - transform.position).sqrMagnitude;    //this might be more efficent than Vector3.Distance since it doesn't do any square rooting
 
-        if (distanceBetween > _destroyRange * _destroyRange)                                //squared to make up for no square rooting in previous line
-        {
-            DIEFISHDIE();
-            print("Fish OBLITERATED: Despawned");
-        }
+        if (distanceBetween > _destroyRange * _destroyRange)                                //squared to make up for no square rooting in previous line        
+            DIEFISHDIE();         
+        
 
         /*        if (HP <= 0)
                 {
@@ -317,6 +316,7 @@ public class FishControl : MonoBehaviour
 
             print("-----------------");
         }
+
         return false;
     }
 
@@ -445,20 +445,15 @@ public class FishControl : MonoBehaviour
 
         RotateTo(focusPos.position, true);
 
-        print("fish be lookin " + focusPos.position);
-
         StartCoroutine(AttractReset());
     }
 
-    IEnumerator AttractReset() 
+    IEnumerator AttractReset()    
     {
         yield return new WaitForSeconds(1f);
 
-        if (attractPoint != null && (attractPoint.position - transform.position).sqrMagnitude > 25)
-        {
+        if (attractPoint != null && (attractPoint.position - transform.position).sqrMagnitude > 25)     
             Attract(attractPoint);
-            print("hité");
-        }
     }
 
     public void Flee(Transform focusPos)
@@ -497,6 +492,7 @@ public class FishControl : MonoBehaviour
         FTPscript.Player = _playerPos;
 
         rb.velocity = Vector3.zero;
+        canBeFished = false;
         enabled = false;
     }
 

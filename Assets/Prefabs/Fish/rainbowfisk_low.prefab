@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 67feaf1c0a96940419a5de8160792de4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.939901
+      value: -9.873201
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67feaf1c0a96940419a5de8160792de4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.21
+      value: -7.284399
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67feaf1c0a96940419a5de8160792de4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.86
+      value: -8.749622
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67feaf1c0a96940419a5de8160792de4,
         type: 3}
@@ -36,12 +36,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 67feaf1c0a96940419a5de8160792de4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67feaf1c0a96940419a5de8160792de4,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67feaf1c0a96940419a5de8160792de4,
         type: 3}
@@ -95,6 +95,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1589304678506028267}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67feaf1c0a96940419a5de8160792de4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7089491878755035336}
   m_SourcePrefab: {fileID: 100100000, guid: 67feaf1c0a96940419a5de8160792de4, type: 3}
 --- !u!1 &1858830571037122237 stripped
 GameObject:
@@ -163,9 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779dcb5786728ee47b35da8caea7d655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 0}
+  isAboutToDie: 0
   _playerPos: {fileID: 0}
-  _destroyRange: 0
+  _destroyRange: 21.6
   _dataIndex: 0
   HeightMax: 0
   DepthMax: 0
@@ -180,3 +184,16 @@ MonoBehaviour:
   newAngle: {x: 0, y: 0, z: 0}
   rayMinDistance: 10
   viewCollisionBox: 0
+--- !u!114 &7089491878755035336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858830571037122237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b3ec9782e7d4140952596c470f3ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
