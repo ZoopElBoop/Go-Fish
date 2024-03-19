@@ -87,16 +87,8 @@ public class Fishing : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             //Resets fishing if player de-equips rod while fishing
-            if (rodEquiped)
-            {
-                ObliterateBobber();
-                _LineRenderer.enabled = false;
-                UIManager.Instance.ThrowSliderActive(false);
-                isFishing = false;
-
-                if (caughtFish != null)
-                    Escape();
-            }
+            if (rodEquiped)            
+                ResetFishing();         
 
             rodEquiped = !rodEquiped;
             fishingRod.SetActive(rodEquiped);
@@ -114,6 +106,18 @@ public class Fishing : MonoBehaviour
     {
         if (inBoat)
             MouseMoveFx();
+    }
+
+    private void ResetFishing()
+    {
+        ObliterateBobber();
+
+        _LineRenderer.enabled = false;
+        UIManager.Instance.ThrowSliderActive(false);
+        isFishing = false;
+
+        if (caughtFish != null)
+            Escape();
     }
 
     private void FishingControl() 
@@ -411,7 +415,12 @@ public class Fishing : MonoBehaviour
             }
         }
     }
-    
+
+    private void OnDisable()
+    {
+        ResetFishing();
+    }
+
     private void OnDestroy()
     {
         EventManager.Instance.OnFishFished -= Fishking;

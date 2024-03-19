@@ -17,9 +17,9 @@ MonoBehaviour:
   _Speed: 1
   _rotationSpeed: 5
   _canBeCaught: 1
-  _spawnDepthStart: -1
-  _spawnDepthHigh: -5
-  _spawnDepthEnd: -10
+  _spawnDepthStart: -5
+  _spawnDepthHigh: -20
+  _spawnDepthEnd: -50
   _Rarity: 0.2
   _moveHeightLimit: -1.5
   _moveDepthLimit: -100

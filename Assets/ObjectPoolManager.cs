@@ -78,6 +78,8 @@ public class ObjectPoolManager : MonoBehaviour
 
     public void DespawnObject(GameObject toDespawn)
     {
+        print("DESPAWNING");
+
         if (toDespawn.activeSelf)
             toDespawn.SetActive(false);
 

@@ -4139,6 +4139,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8981901052761092954, guid: 177ad34de4090e94282797269a19e141,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4235,8 +4240,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8607574225210586979, guid: 8fc0a880576fca647a06cf0ee55c84cb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6068174931346015504}
   m_SourcePrefab: {fileID: 100100000, guid: 8fc0a880576fca647a06cf0ee55c84cb, type: 3}
+--- !u!1 &6068174931346015503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8607574225210586979, guid: 8fc0a880576fca647a06cf0ee55c84cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6068174931346015502}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6068174931346015504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6068174931346015503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad5c5e970d35e24db4163ea1b732c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Speed: 0
+  _playerPos: {fileID: 0}
+  _boatCam: {fileID: 0}
 --- !u!1001 &8103609788429086919
 PrefabInstance:
   m_ObjectHideFlags: 0

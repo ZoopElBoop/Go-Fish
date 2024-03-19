@@ -17,9 +17,9 @@ public class BuoyancyObject : MonoBehaviour
     [SerializeField] private float _airAngularDrag = 0.05f;
 
     [Header("Float Effects")]
-    [Range(1.0f, 100.0f)]
+    [Range(1.0f, 500.0f)]
     public float _floatingPower = 15f;
-    [SerializeField] private float _waterHeight = -100f;
+    [SerializeField] private float _waterHeight = 0;
 
     [SerializeField] Rigidbody rb;
 
@@ -53,7 +53,7 @@ public class BuoyancyObject : MonoBehaviour
 
         for (int i = 0; i < _floatingPoint.Count; i++)
         { 
-            float diff = _floatingPoint[i].position.y - _waterHeight;
+            float diff = Mathf.Clamp(_floatingPoint[i].position.y - _waterHeight, -1f, 1f);
 
             if (diff < 0)   //checks if flaoting point is below waterline
             {

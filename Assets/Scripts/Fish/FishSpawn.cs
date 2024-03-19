@@ -7,7 +7,7 @@ public class FishSpawn : MonoBehaviour
     [Header("Spawn & Despawn Range")]
     [Range(0f, 100f)]
     public float _spawnRange;
-    [Range(0f, 100f)]
+    [Range(0f, 150f)]
     public float _destroyRange;
 
     private bool activeTime = false;
@@ -15,10 +15,6 @@ public class FishSpawn : MonoBehaviour
     [Header("DEBUG")]
     [SerializeField] private bool gizmosActive;
     [SerializeField] private bool debugLog;
-
-    //REMOVE LATER
-    [Header("Spawned Fish Text (to be moved to seperate ui script)")]
-    [SerializeField] private TMP_Text fishies;
 
     private int LayerIgnoreRaycast;
     private LayerMask LayersToIgnore = -1;
@@ -129,7 +125,7 @@ public class FishSpawn : MonoBehaviour
         {
             spawnIteration += 1;
 
-            if (spawnIteration > 16)    //Used to escape loop if unable to spawn fish after enough checks, or computer explodes :)
+            if (spawnIteration > 17)    //Used to escape loop if unable to spawn fish after enough checks, or computer explodes :)
             {
                 Debug.LogWarning("Unable to find suitable spawn pos after " + (spawnIteration - 1) + " iterations: ABORTING SPAWN");
                 return;
@@ -137,7 +133,7 @@ public class FishSpawn : MonoBehaviour
 
             spawnPos = Random.onUnitSphere * _spawnRange + transform.position;
 
-            if (spawnPos.y > -2f)  //To be reworked for water surface & floor detection
+            if (spawnPos.y > -2f)  //Eh good enough
                 continue;
 
             if (!InWater(spawnPos))
@@ -179,11 +175,10 @@ public class FishSpawn : MonoBehaviour
     private void Update()
     {
         var SpawnedFish = GameManager.Instance.GetFishBufferSize();
+        print(SpawnedFish);
 
         if (!activeTime && SpawnedFish < 50)     //Dodgy interval spawn, to be changed at some point
             StartCoroutine(CallSpawn());
-
-        fishies.text = SpawnedFish + " Fish";    //TESTING, remove later
     }
 
     IEnumerator CallSpawn()

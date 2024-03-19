@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Water
   - Fish
+  - Player Boat Exit
+  - Spawner
   layers:
   - Default
   - TransparentFX

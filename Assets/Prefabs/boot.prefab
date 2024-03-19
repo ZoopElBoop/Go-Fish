@@ -318,17 +318,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 381.1646
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.82
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 335.3666
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
@@ -552,7 +552,8 @@ MonoBehaviour:
   _underwaterAngularDrag: 1
   _airDrag: 0
   _airAngularDrag: 0.05
-  _floatingPower: 50
-  _waterHeight: 0.75
+  _floatingPower: 500
+  _waterHeight: 0
+  rb: {fileID: 0}
   gizmosActive: 1
   gizmosSize: 1

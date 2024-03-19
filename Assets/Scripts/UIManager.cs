@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     [Header("Fish Caught")]
     [SerializeField] private TMP_Text catches;
 
+    [Header("Fish Active")]
+    [SerializeField] private TMP_Text active;
+
     private void Awake()
     {
         if (Instance == null)        
@@ -31,6 +34,8 @@ public class UIManager : MonoBehaviour
     {
         if (fishCaughtSlider.gameObject.activeSelf)
             FishingSlider();
+
+        active.text = $"{GameManager.Instance.GetFishBufferSize()} Fishes";
     }
 
 #region FishingSliderFuncs
