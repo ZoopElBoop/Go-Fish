@@ -418,6 +418,7 @@ public class Fishing : MonoBehaviour
 
     private void OnDisable()
     {
+        Debug.LogError("NEXT ERROR HAPPENS IF CANVAS IS TURNED OFF WHEN STOPING PLAY, IGNORE ERROR, MORE ANNOYING TO FIX");
         ResetFishing();
     }
 

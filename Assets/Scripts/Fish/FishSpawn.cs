@@ -175,7 +175,6 @@ public class FishSpawn : MonoBehaviour
     private void Update()
     {
         var SpawnedFish = GameManager.Instance.GetFishBufferSize();
-        print(SpawnedFish);
 
         if (!activeTime && SpawnedFish < 50)     //Dodgy interval spawn, to be changed at some point
             StartCoroutine(CallSpawn());
