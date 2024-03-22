@@ -17,8 +17,9 @@ public class DayAndNightCycle : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private float rotationSpeed;
-    [SerializeField][Range(0, 0.5f)] private float dayStart = 0.2f;
-    [SerializeField][Range(0.5f, 1)] private float dayEnd = 0.8f;
+    [SerializeField][Range(0, 0.45f)] private float nightStart = 0.2f;
+    [SerializeField][Range(0.55f, 1)] private float nightEnd = 0.8f;
+    [SerializeField][Range(0f, 0.1f)] private float dayToNightTransition = 0.05f;
 
     public float aaaaaaaa;
     private void Update()
@@ -40,21 +41,26 @@ public class DayAndNightCycle : MonoBehaviour
         directionalLight.color = directionalLightGradient.Evaluate(currentTime);
 
         skyboxMaterial.SetColor("_Tint", skyboxTintGradient.Evaluate(currentTime));
-        //waterMaterial.SetFloat("_Glossiness", currentTime);
-        //print(waterMaterial.Get("_Glossiness"));
 
         ChangeSeaGlossiness(currentTime);
     }
 
     private void ChangeSeaGlossiness(float time) 
     {
+        if (time < nightStart || time > nightEnd)
+            return;
+        
 
-        if (time >= dayStart && time < 0.5f)       
-            time = Mathf.InverseLerp(0f, dayStart, time);    
-        else if (time > 0.5f && time <= dayEnd)        
-            time = Mathf.InverseLerp(dayEnd, 1f, time);
+        if (time >= nightStart && time < 0.5f)
+        time = Mathf.InverseLerp(nightStart + dayToNightTransition, nightStart, time);
+        else if (time >= nightEnd - dayToNightTransition)
+        {
+            time = Mathf.InverseLerp(nightEnd - dayToNightTransition, nightEnd, time);
 
-        aaaaaaaa = time;
+            Debug.Break();
+        }
+
+            aaaaaaaa = time;
 
         waterMaterial.SetFloat("_Glossiness", time);
     }
