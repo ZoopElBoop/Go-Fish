@@ -77,9 +77,12 @@ public class Fishing : MonoBehaviour
 
         fishingRod.SetActive(false);
         _LineRenderer.enabled = false;
+    }
 
-        /*        Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;*/
+    private void OnEnable()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update() 
@@ -112,9 +115,9 @@ public class Fishing : MonoBehaviour
     {
         ObliterateBobber();
 
+        isFishing = false;
         _LineRenderer.enabled = false;
         UIManager.Instance.ThrowSliderActive(false);
-        isFishing = false;
 
         if (caughtFish != null)
             Escape();
@@ -418,8 +421,10 @@ public class Fishing : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.LogError("NEXT ERROR HAPPENS IF CANVAS IS TURNED OFF WHEN STOPING PLAY, IGNORE ERROR, MORE ANNOYING TO FIX");
         ResetFishing();
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void OnDestroy()

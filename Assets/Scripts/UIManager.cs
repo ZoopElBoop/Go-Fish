@@ -77,8 +77,12 @@ public class UIManager : MonoBehaviour
 
     public void ThrowSliderActive(bool active)
     {
-        fishingThrowSlider.value = 0f;
-        fishingThrowSlider.gameObject.SetActive(active);
+        if (fishingThrowSlider != null)
+        {
+            fishingThrowSlider.value = 0f;
+
+            fishingThrowSlider.gameObject.SetActive(active);
+        }
     }
 
     #endregion

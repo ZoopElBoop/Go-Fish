@@ -50,18 +50,9 @@ public class Sub : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.C))
                 SwitchCams();
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SetFishSpawner(Player.transform);
-
-                Player.SetActive(true);
-                Player.transform.SetPositionAndRotation(playerReturnPos.position, playerReturnPos.rotation);
-
-                isActive = false;
-                _subOuterCam.enabled = false;
-                _subInnerCam.enabled = false;
-            }
-
+            if (Input.GetKeyDown(KeyCode.Space))           
+                PlayerExit();
+            
             if (transform.eulerAngles.z >= 15f && transform.eulerAngles.z <= 350f)
             {
                 Quaternion rotationEnd = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0f);
@@ -69,6 +60,18 @@ public class Sub : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, 5 * Time.deltaTime);
             }
         }
+    }
+
+    private void PlayerExit() 
+    {
+        SetFishSpawner(Player.transform);
+
+        Player.SetActive(true);
+        Player.transform.SetPositionAndRotation(playerReturnPos.position, playerReturnPos.rotation);
+
+        isActive = false;
+        _subOuterCam.enabled = false;
+        _subInnerCam.enabled = false;
     }
 
     private void SwitchCams() 
@@ -87,7 +90,7 @@ public class Sub : MonoBehaviour
 
     private void SetFishSpawner(Transform setTo) 
     {
-        transform.position = setTo.position;
+        fishSpawner.transform.position = setTo.position;
         fishSpawner.transform.parent = setTo;
     }
 

@@ -9,7 +9,6 @@ public class DayAndNightCycle : MonoBehaviour
     [SerializeField] private Gradient ambientGradient;
     [SerializeField] private Gradient directionalLightGradient;
     [SerializeField] private Gradient skyboxTintGradient;
-    [SerializeField] private Gradient waterTintGradient;
 
     [Header("Enviromental")]
     [SerializeField] private Light directionalLight;
@@ -17,26 +16,21 @@ public class DayAndNightCycle : MonoBehaviour
     [SerializeField] private Material waterMaterial;
 
     [Header("Settings")]
-    [SerializeField] private float dayTimeDuration;
     [SerializeField] private float rotationSpeed;
+    [SerializeField][Range(0, 0.5f)] private float dayStart = 0.2f;
+    [SerializeField][Range(0.5f, 1)] private float dayEnd = 0.8f;
 
-    private float currentTime;
-
+    public float aaaaaaaa;
     private void Update()
     {
-        UpdateTime();
         UpdateDayAndNightCycle();
         RotateSkyBox();
     }
 
-    private void UpdateTime()
-    {
-        currentTime += Time.deltaTime / dayTimeDuration;
-        currentTime = Mathf.Repeat(currentTime, 1);
-    }
-
     private void UpdateDayAndNightCycle() 
     {
+        float currentTime = GameManager.Instance.GetGameTime();
+
         float sunPos = Mathf.Repeat(currentTime + 0.25f, 1f);
         directionalLight.transform.rotation = Quaternion.Euler(sunPos * 360f, 0f, 0f);
 
@@ -48,6 +42,21 @@ public class DayAndNightCycle : MonoBehaviour
         skyboxMaterial.SetColor("_Tint", skyboxTintGradient.Evaluate(currentTime));
         //waterMaterial.SetFloat("_Glossiness", currentTime);
         //print(waterMaterial.Get("_Glossiness"));
+
+        ChangeSeaGlossiness(currentTime);
+    }
+
+    private void ChangeSeaGlossiness(float time) 
+    {
+
+        if (time >= dayStart && time < 0.5f)       
+            time = Mathf.InverseLerp(0f, dayStart, time);    
+        else if (time > 0.5f && time <= dayEnd)        
+            time = Mathf.InverseLerp(dayEnd, 1f, time);
+
+        aaaaaaaa = time;
+
+        waterMaterial.SetFloat("_Glossiness", time);
     }
 
     private void RotateSkyBox() 
@@ -62,6 +71,6 @@ public class DayAndNightCycle : MonoBehaviour
     private void OnApplicationQuit()
     {
         skyboxMaterial.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f));
-
+        waterMaterial.SetFloat("_Glossiness", 1f);
     }
 }

@@ -141,11 +141,11 @@ public class FishControl : MonoBehaviour
         3. Rotation
             After the correct direction is found the angle of movement is converted to a quaternion (kill me) and the fish is lerped to the new rotation,
             If the fish front check is still detecting something the fish will continue roatating in this direction.
-
+        
         ISSUES:
 
             Fish cannot turn fast enough in tight corners.
-            If the collison box is detecting, a new rotation direction cannot be applied.
+            If the collision box is detecting, a new rotation direction cannot be applied.
         */
 
         Vector3[] Positions = {
