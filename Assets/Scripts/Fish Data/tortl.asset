@@ -25,5 +25,7 @@ MonoBehaviour:
   _moveDepthLimit: -100
   _collisionRange: 4
   _despawnRangeMulti: 1
-  _baseValue: 0.1
+  _baseValue: 5
   _valueChangeCoefficient: 0.1
+  _FishkImig: {fileID: 0}
+  _FishkDesc: 

@@ -5,9 +5,9 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
-    [SerializeField] private List<FishStoredData> fishStoredPlayer = new();
-    [SerializeField] private List<FishStoredData> fishStoredBoat = new();
-    [SerializeField] private List<FishStoredData> fishStoredSub = new();
+    [SerializeField] private List<FishStoredData> fishStoredOnPlayer = new();
+    [SerializeField] private List<FishStoredData> fishStoredOnBoat = new();
+    [SerializeField] private List<FishStoredData> fishStoredOnSub = new();
 
     private void Awake()
     {
@@ -26,19 +26,19 @@ public class InventoryManager : MonoBehaviour
     { 
         for (int i = 0; i < FishDataManager.Instance.GetFishDataSize(); i++)
         {
-            fishStoredPlayer.Add(new FishStoredData
+            fishStoredOnPlayer.Add(new FishStoredData
             {
                 fishName = FishDataManager.Instance.GetFishName(i),
                 count = 0
             });
 
-            fishStoredBoat.Add(new FishStoredData
+            fishStoredOnBoat.Add(new FishStoredData
             {
                 fishName = FishDataManager.Instance.GetFishName(i),
                 count = 0
             });
 
-            fishStoredSub.Add(new FishStoredData
+            fishStoredOnSub.Add(new FishStoredData
             {
                 fishName = FishDataManager.Instance.GetFishName(i),
                 count = 0
@@ -46,20 +46,21 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void StoreOnPlayer(FishControl fishScript) { fishStoredPlayer[fishScript._dataIndex].count++; }
-    public void StoreOnBoat(FishControl fishScript) { fishStoredBoat[fishScript._dataIndex].count++; }
-    public void StoreOnSub(FishControl fishScript) { fishStoredSub[fishScript._dataIndex].count++; }
+    public void StoreOnPlayer(FishControl fishScript) { fishStoredOnPlayer[fishScript._dataIndex].count++; }
+    public void StoreOnBoat(FishControl fishScript) { fishStoredOnBoat[fishScript._dataIndex].count++; }
+    public void StoreOnSub(FishControl fishScript) { fishStoredOnSub[fishScript._dataIndex].count++; }
 
-    public void RemoveFromPlayer(int index) { fishStoredPlayer[index].count--; }
-    public void RemoveFromBoat(int index) { fishStoredBoat[index].count--; }
-    public void RemoveFromSub(int index) { fishStoredSub[index].count--; }
+    public void RemoveFromPlayer(int index) { fishStoredOnPlayer[index].count--; }
+    public void RemoveFromBoat(int index) { fishStoredOnBoat[index].count--; }
+    public void RemoveFromSub(int index) { fishStoredOnSub[index].count--; }
 
-    public List<FishStoredData> GetFromPlayer() { return fishStoredPlayer; }
-    public List<FishStoredData> GetFromBoat() { return fishStoredBoat; }
-    public List<FishStoredData> GetFromSub() { return fishStoredSub; }
+    public List<FishStoredData> GetFromPlayer() { return fishStoredOnPlayer; }
+    public List<FishStoredData> GetFromBoat() { return fishStoredOnBoat; }
+    public List<FishStoredData> GetFromSub() { return fishStoredOnSub; }
 
 }
 
+[System.Serializable]
 public class FishStoredData
 {
     public string fishName;

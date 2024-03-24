@@ -55,8 +55,8 @@ public class PlayerMovement : MonoBehaviour
 	/// We use this to hide the mouse cursor.
 	void OnEnable()
 	{
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
+/*		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;*/
 	}
 	
 	/// This is where we move the Player object and Camera.

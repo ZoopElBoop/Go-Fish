@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8620708947771087014}
   - component: {fileID: 15786308626783109}
-  - component: {fileID: 8571563457282190935}
-  - component: {fileID: 2991716267802634616}
-  - component: {fileID: 3404046389337374641}
   - component: {fileID: 2569525689953128123}
+  - component: {fileID: 8571563457282190935}
+  - component: {fileID: 4537264399709127106}
+  - component: {fileID: 3404046389337374641}
+  - component: {fileID: 2991716267802634616}
   m_Layer: 0
   m_Name: _Game Manager Scripts
   m_TagString: Untagged
@@ -49,43 +50,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishCoin: 0
---- !u!114 &8571563457282190935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5119528874970478230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6b2823d67c2c844d89b29b3245316e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2991716267802634616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5119528874970478230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 569831bffbd1a9a46abe7534d7849920, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3404046389337374641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5119528874970478230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e12415de0470d8c449139dac3b9353f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duplicateLimit: 2
+  dayTimeCycle: 120
+  gameTime: 0
+  OverrideGameTime: 0
+  FreezeGameTime: 0
+  fpsLimit: 60
 --- !u!114 &2569525689953128123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,3 +70,184 @@ MonoBehaviour:
   fishDataInput:
   - {fileID: 11400000, guid: 8e48c361e0c0f254a85a7e371ec978eb, type: 2}
   - {fileID: 11400000, guid: ae6a91ea249be0b4eaac2374d515f7dc, type: 2}
+  - {fileID: 11400000, guid: 110f1a37f9306fa4f9712e453b9167b0, type: 2}
+  - {fileID: 11400000, guid: 25979e212e1face4980cbb35d13bf2e9, type: 2}
+--- !u!114 &8571563457282190935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119528874970478230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b2823d67c2c844d89b29b3245316e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishStoredOnPlayer: []
+  fishStoredOnBoat: []
+  fishStoredOnSub: []
+--- !u!114 &4537264399709127106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119528874970478230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f559a3c142c03a24cb9f926fc4137ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 0.38679248, g: 0.21346566, b: 0.21346566, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0.38823533, g: 0.21176472, b: 0.21176472, a: 0}
+    key5: {r: 1, g: 1, b: 1, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 13107
+    ctime1: 16384
+    ctime2: 19661
+    ctime3: 45875
+    ctime4: 49151
+    ctime5: 52428
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  ambientGradient:
+    serializedVersion: 2
+    key0: {r: 0, g: 0.33163157, b: 0.509434, a: 1}
+    key1: {r: 0.38679248, g: 0.21346566, b: 0.21346566, a: 1}
+    key2: {r: 0, g: 0.0533998, b: 0.33962262, a: 0}
+    key3: {r: 0, g: 0.054901965, b: 0.34117648, a: 0}
+    key4: {r: 0.38823533, g: 0.21176472, b: 0.21176472, a: 0}
+    key5: {r: 0, g: 0.33333334, b: 0.50980395, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 13107
+    ctime1: 16384
+    ctime2: 19661
+    ctime3: 45875
+    ctime4: 49151
+    ctime5: 52428
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  directionalLightGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.92408156, b: 0.6556604, a: 1}
+    key1: {r: 0.4433962, g: 0.2990833, b: 0.2990833, a: 1}
+    key2: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 0}
+    key3: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 0}
+    key4: {r: 0.4431373, g: 0.29803923, b: 0.29803923, a: 0}
+    key5: {r: 1, g: 0.92549026, b: 0.654902, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 13107
+    ctime1: 16384
+    ctime2: 19661
+    ctime3: 45875
+    ctime4: 49151
+    ctime5: 52428
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  skyboxTintGradient:
+    serializedVersion: 2
+    key0: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+    key1: {r: 0.3584906, g: 0.23843007, b: 0.23843007, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0.35686275, g: 0.2392157, b: 0.2392157, a: 0}
+    key5: {r: 0.48235297, g: 0.48235297, b: 0.48235297, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 13107
+    ctime1: 16384
+    ctime2: 19661
+    ctime3: 45875
+    ctime4: 49151
+    ctime5: 52428
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  directionalLight: {fileID: 0}
+  skyboxMaterial: {fileID: 2100000, guid: 586a55032bffc564daefe62fccfd79b5, type: 2}
+  waterMaterial: {fileID: 2100000, guid: 16ca5feb16ef2d744852096378401523, type: 2}
+  rotationSpeed: 1
+  nightStart: 0.2
+  nightEnd: 0.8
+  dayToNightTransition: 0.1
+--- !u!114 &3404046389337374641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119528874970478230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12415de0470d8c449139dac3b9353f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duplicateLimit: 2
+--- !u!114 &2991716267802634616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119528874970478230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569831bffbd1a9a46abe7534d7849920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -20,6 +20,9 @@ public class Sub : MonoBehaviour
     [SerializeField] private GameObject fishSpawner;
     private GameObject Player;
 
+    private Vector3 startingPos;
+    private Quaternion startingRot;
+
     private Rigidbody rb;
     private BuoyancyObject bo;
 
@@ -31,6 +34,9 @@ public class Sub : MonoBehaviour
         bo = GetComponent<BuoyancyObject>();
 
         floatBase = bo._floatingPower;
+
+        startingPos = transform.position;
+        startingRot = transform.rotation;
     }
 
     void Update()
@@ -72,6 +78,9 @@ public class Sub : MonoBehaviour
         isActive = false;
         _subOuterCam.enabled = false;
         _subInnerCam.enabled = false;
+
+        rb.velocity = Vector3.zero;
+        transform.SetPositionAndRotation(startingPos, startingRot);
     }
 
     private void SwitchCams() 

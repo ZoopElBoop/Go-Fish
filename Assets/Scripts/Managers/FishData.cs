@@ -35,8 +35,12 @@ public class FishData : ScriptableObject
     [Range(0.5f, 1.5f)] public float _despawnRangeMulti = 1;
 
     [Header("Base Value & Range To Price Changes")]
-    [Min(0.1f)] public float _baseValue = 0.1f;
+    [Min(1f)] public int _baseValue = 1;
     [Min(0.1f)] public float _valueChangeCoefficient = 0.1f;
+
+    [Header("Fish Book")]
+    public Sprite _FishkImig;
+    [Multiline] public string _FishkDesc;
 
     private void OnValidate()
     {
@@ -70,6 +74,7 @@ public class FishData : ScriptableObject
             Debug.LogError($"Depth Limit Above Height Limit On {name}, pls fix");
         }
     }
+
     private void StopPlay()
     {
     #if UNITY_EDITOR

@@ -141,7 +141,9 @@ public class FishSpawn : MonoBehaviour
 
             Collider[] hitColliders = new Collider[1];  //literally the most useless array, but since OverlapSphere only takes an array here it stays
 
-            Physics.OverlapSphereNonAlloc(spawnPos, FishDataManager.Instance.GetCollisionRange(index), hitColliders);
+            Physics.OverlapSphereNonAlloc(spawnPos, FishDataManager.Instance.GetCollisionRange(index), hitColliders, LayersToIgnore);
+
+            print(hitColliders[0]);
 
             if (hitColliders[0] == null)    //So for some reason if the collider detects nothing it dosen't return a empty array but an array with an NULL proterty, WHY???????????        
                 break;

@@ -18,28 +18,23 @@ public class FishDataManager : MonoBehaviour
         }
         else
             Destroy(this);
+
         fishData = fishDataInput;
     }
-    private void OnValidate()
+/*
+    public int GetFishDataIndex(string fishName)
     {
-/*        //checks to ensure no duplicates found
-        for (int i = 0; i < fishData.Length - 1; i++)
-        {
-            //print(fishData[i]);
-
-            if (fishData[i] == fishData[i + 1])
-            {
-                Debug.LogError($"Duplicate {fishData[i].name} found, pls fix");
-            }
-        }*/
-        
-    }
+        for (int i = 0; i < fishData.Length; i++)
+            if (fishName == fishData[i].name)
+                return i;
+        return -1;
+    }*/
 
     public int GetFishDataSize() { return fishData.Length; }
 
     public string GetFishName(int index) { return fishData[index].name; }
-
     public GameObject GetFish(int index) { return fishData[index]._Fishk; }
+
 
     public int GetHealth(int index) { return fishData[index]._Health; }
     public float GetSpeed(int index) { return fishData[index]._Speed; }
@@ -50,7 +45,6 @@ public class FishDataManager : MonoBehaviour
     public float GetSpawnHigh(int index) { return fishData[index]._spawnDepthHigh; }
     public float GetSpawnEnd(int index) { return fishData[index]._spawnDepthEnd; }
 
-
     public float GetHeightLimit(int index) { return fishData[index]._moveHeightLimit; }
     public float GetDepthLimit(int index) { return fishData[index]._moveDepthLimit;}
     public float GetCollisionRange(int index) { return fishData[index]._collisionRange; }
@@ -59,4 +53,7 @@ public class FishDataManager : MonoBehaviour
     public float GetRarity(int index) { return fishData[index]._Rarity; }
     public float GetValue(int index) { return fishData[index]._baseValue; }
     public float GetValueCoefficient(int index) { return fishData[index]._valueChangeCoefficient; }
+
+    public Sprite GetFishImage(int index) { return fishData[index]._FishkImig; }
+    public string GetFishDescription(int index) { return fishData[index]._FishkDesc; }
 }

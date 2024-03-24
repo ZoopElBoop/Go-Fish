@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Fishing : MonoBehaviour
 {
@@ -11,8 +8,7 @@ public class Fishing : MonoBehaviour
 
     [Header("Bobber Settings")]
     [SerializeField] private GameObject _Bobber;
-    [SerializeField] private GameObject bobberInstance;
-
+    private GameObject bobberInstance;
     public Transform _bobberSpawnPoint;
 
     [Range(10.0f, 30.0f)]
@@ -30,18 +26,6 @@ public class Fishing : MonoBehaviour
     [Header("Fishing Line")]
     [SerializeField] private LineRenderer _LineRenderer;
 
-    //Cache of caught fish
-    private GameObject caughtFish;
-
-    //Cameras for switching between boat/1st person for racasts, to be changed
-    private Camera mainCamera;
-    private Camera playerCamera;
-
-    //Bool states
-    private bool inBoat;
-    private bool isFishing;
-    private bool rodEquiped = false;
-
     [Header("Charge Up Velocity Limit & Minimum")]
     [Range(1.0f, 50.0f)]
     [SerializeField] private float _chargeUpMax = 15f;
@@ -54,9 +38,23 @@ public class Fishing : MonoBehaviour
     private bool spawnFail;
     private Vector3 throwPos;
 
+    //Cache of caught fish
+    private GameObject caughtFish;
+
+    //Cameras for switching between boat/1st person for racasts, to be changed
+    private Camera mainCamera;
+    private Camera playerCamera;
+
+    //Boat Rigidbody for adding to bobber velocity when spawning
+    [HideInInspector] public Rigidbody boatRB;
+
+    //Bool states
+    private bool inBoat;
+    private bool isFishing;
+    private bool rodEquiped = false;
+
     [Header("TESTING (WILL BE REMOVED)")]
     [SerializeField] private float TestVelocityMultiplier; //remove once velocity range is fixed
-
 
     private void Start() 
     {
@@ -107,7 +105,7 @@ public class Fishing : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (inBoat)
+        if (inBoat && rodEquiped)
             MouseMoveFx();
     }
 
@@ -121,6 +119,9 @@ public class Fishing : MonoBehaviour
 
         if (caughtFish != null)
             Escape();
+
+        if (mouseFxInstance != null)
+            mouseFxInstance.SetActive(false);
     }
 
     private void FishingControl() 
@@ -140,9 +141,9 @@ public class Fishing : MonoBehaviour
                 UIManager.Instance.ThrowSlider(_chargeUpMax, throwCharge);
             }
 
-            else if (Input.GetMouseButtonUp(0) && throwCharge > 1f && !inBoat)
+            else if (Input.GetMouseButtonUp(0) && throwCharge > 1f && !inBoat)  //throws bobber when player not in boat
                 LobBobber();
-            else if (Input.GetMouseButtonDown(0) && inBoat)
+            else if (Input.GetMouseButtonDown(0) && inBoat)     //throws bobber when player in boat
                 LobBobber();
         }
         //Used for once player has caught fish
@@ -185,7 +186,6 @@ public class Fishing : MonoBehaviour
             _LineRenderer.enabled = false;
     }
 
-    public float distanceBetween = 0f;
     private void MouseMoveFx()
     {
         //gets position of mouse in relation to world space
@@ -193,22 +193,24 @@ public class Fishing : MonoBehaviour
 
         if (success)
         {
-            distanceBetween = (_bobberSpawnPoint.position - position).sqrMagnitude;
+            float distanceBetween = (_bobberSpawnPoint.position - position).sqrMagnitude;
 
             //Disables target reticle if outside range limits
             if (distanceBetween > (_bobberSpawnRangeMax  * _bobberSpawnRangeMax) || distanceBetween < (_bobberSpawnRangeMin * _bobberSpawnRangeMin))
             {
+                Debug.LogWarning("Mouse not in range");
                 mouseFxInstance.SetActive(false);
                 RotatePlayerToMouse(position);
                 return;
             }
 
             //Enables target reticle if inside range limits & currently not fishing
-            if (!isFishing && rodEquiped)
+            if (!isFishing)
             {
                 mouseFxInstance.SetActive(true);
                 mouseFxInstance.transform.position = position;
-            }else
+            }
+            else
                 mouseFxInstance.SetActive(false);
 
             RotatePlayerToMouse(position);
@@ -258,9 +260,9 @@ public class Fishing : MonoBehaviour
             if (success)
             {
                 //checks if mouse position is within limits, if so spawns bobber
-                float distanceBetween = Vector3.Distance(_bobberSpawnPoint.position, position);
+                float distanceBetween = (_bobberSpawnPoint.position - position).sqrMagnitude;
 
-                if (distanceBetween > _bobberSpawnRangeMax || distanceBetween < _bobberSpawnRangeMin)
+                if (distanceBetween > (_bobberSpawnRangeMax * _bobberSpawnRangeMax) || distanceBetween < (_bobberSpawnRangeMin * _bobberSpawnRangeMin))
                 {
                     Debug.LogWarning("Position out of range to spawn bobber: ABORTING SPAWN");
                     spawnFail = true;   //For Gizmo
@@ -298,7 +300,10 @@ public class Fishing : MonoBehaviour
 
         bobberInstance.transform.SetPositionAndRotation(_bobberSpawnPoint.position, _bobberSpawnPoint.rotation);
 
-        bobberInstance.GetComponent<Rigidbody>().velocity = direction * velocity;
+        if (inBoat)
+            bobberInstance.GetComponent<Rigidbody>().velocity = direction * velocity + boatRB.velocity;
+        else
+            bobberInstance.GetComponent<Rigidbody>().velocity = direction * velocity;
 
         if (gizmosActive)
             Debug.DrawRay(bobberInstance.transform.position, direction * velocity, Color.green, 2.0f);

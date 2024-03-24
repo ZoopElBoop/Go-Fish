@@ -46,7 +46,11 @@ public class Wob : MonoBehaviour
             EventManager.Instance.FishFished(fish);
         }
         else
+        {
             Debug.LogWarning($"cannot catch {fish.name}");
+
+            //Add destroy wobber event for fishing script 
+        }
     }
 
     private void Update()

@@ -2,24 +2,30 @@ using UnityEngine;
 
 public class Boat : MonoBehaviour
 {
-    public float _Speed;
-    public Camera _boatCam;
-    public Transform _playerBoatPos;
+    private Rigidbody rb;
+    private CharacterController cc;
+    private PlayerMovement pm;
+    private Fishing fs;
 
+    public float _Speed;
+    [SerializeField] private Camera _boatCam;
+    [SerializeField] private Transform _playerBoatPos;
+    private Vector3 startingPos;
+    private Quaternion startingRot;
 
     private bool isActive = false;
     private bool playerLeft = true;
+
     private GameObject Player;
     private Transform playerReturnPos;
-    private Rigidbody rb;
-
-    private CharacterController cc;
-    private PlayerMovement pm;
 
     private void Start()
     {
         playerReturnPos = GameObject.FindGameObjectWithTag("Player Boat Exit").GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+
+        startingPos = transform.position;
+        startingRot = transform.rotation;
     }
 
     void Update()
@@ -36,6 +42,9 @@ public class Boat : MonoBehaviour
                 Player.transform.parent = null;
 
                 Player.transform.SetPositionAndRotation(playerReturnPos.position, playerReturnPos.rotation);
+
+                rb.velocity = Vector3.zero;
+                transform.SetPositionAndRotation(startingPos, startingRot);
 
                 cc.enabled = true;
                 pm.enabled = true;
@@ -56,9 +65,12 @@ public class Boat : MonoBehaviour
 
             cc = Player.GetComponent<CharacterController>();
             pm = Player.GetComponent<PlayerMovement>();
+            fs = Player.GetComponent<Fishing>();
 
             cc.enabled = false;
             pm.enabled = false;
+
+            fs.boatRB = rb;
 
             Player.transform.SetPositionAndRotation(_playerBoatPos.position, _playerBoatPos.rotation);
 

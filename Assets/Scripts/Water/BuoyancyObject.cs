@@ -40,11 +40,11 @@ public class BuoyancyObject : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+/*    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Water"))
             _waterHeight = other.gameObject.transform.position.y;
-    }
+    }*/
 
     // Update is called once per frame
     void FixedUpdate()

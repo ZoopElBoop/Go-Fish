@@ -28,8 +28,8 @@ public class ObjectPoolManager : MonoBehaviour
         /*
         This is honestly one of the worst ideas i have ever had
 
-        So basicily to compare if two fish are the same i can't just do findInPool == ObjectPool[i] (thanks unity) so i have decide to do something horrifically jank,
-        I'm comparing the names of the objects but since the findInPool object isn't in thr scene its missing the "(Clone)" suffix whereas the in-scene object has it,
+        So basically to compare if two fish are the same i can't just do findInPool == ObjectPool[i] (thanks unity) so i have decided to do something horrifically jank,
+        I'm comparing the names of the objects but since the findInPool object isn't in the scene its missing the "(Clone)" suffix whereas the in-scene object has it,
         So this line just adds that for comparision
 
         Ik this is a horrible way of doing this, but hey it works (for now) :))))))))

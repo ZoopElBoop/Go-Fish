@@ -43,11 +43,10 @@ public class FishSellShopManager : MonoBehaviour
         boatStocks = InventoryManager.Instance.GetFromPlayer();
         subStocks = InventoryManager.Instance.GetFromPlayer();
 
-        List<string> fishies = new();
-
         for (int i = 0; i < playerStocks.Count; i++)
         {
             dropdown.options.Add(new TMP_Dropdown.OptionData(playerStocks[i].fishName));
+           // print(playerStocks[i].fishName);
         }
 
         SelectToSell();
@@ -60,6 +59,8 @@ public class FishSellShopManager : MonoBehaviour
 
     public void SellFish()
     {
+        print("buton ");
+
         if (playerStocks[dropdown.value].count > 0)       
             InventoryManager.Instance.RemoveFromPlayer(dropdown.value);
         else
