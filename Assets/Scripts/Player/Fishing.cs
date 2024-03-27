@@ -67,8 +67,8 @@ public class Fishing : MonoBehaviour
     {
         //Events Init
         EventManager.Instance.OnFishCaught += Fishking;
-        EventManager.Instance.OnBoatEnter -= SwitchToBoatCamera;
-        EventManager.Instance.OnBoatExit -= SwitchToPlayerCamera;
+        EventManager.Instance.OnBoatEnter += SwitchToBoatCamera;
+        EventManager.Instance.OnBoatExit += SwitchToPlayerCamera;
         EventManager.Instance.OnDestroyWobber += ObliterateBobber;
 
         //Sets camera up for raycast (not necessary, change at some point)
@@ -205,6 +205,8 @@ public class Fishing : MonoBehaviour
     {
         //gets position of mouse in relation to world space
         var (success, position) = GetMousePosition();
+
+        print(success);
 
         if (success)
         {
@@ -364,17 +366,16 @@ public class Fishing : MonoBehaviour
             return;
 
         isFishing = true;
-        print("caught!!");
         UIManager.Instance.FishingSliderActive(true);
     }
 
     public void SwitchToBoatCamera(Camera boatCam)
     {
+        print("bobt");
         mainCamera.gameObject.SetActive(false);
         mainCamera = boatCam;
 
         UIManager.Instance.ThrowSliderActive(false);
-
         inBoat = true;
     }
 
@@ -385,6 +386,8 @@ public class Fishing : MonoBehaviour
         mouseFxInstance.SetActive(false);
 
         inBoat = false;
+
+        print("playr");
 
         throwCharge = 1f;
     }

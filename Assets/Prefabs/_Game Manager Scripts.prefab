@@ -50,10 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishCoin: 0
-  dayTimeCycle: 120
-  gameTime: 0
-  OverrideGameTime: 0
-  FreezeGameTime: 0
   fpsLimit: 60
 --- !u!114 &2569525689953128123
 MonoBehaviour:
@@ -99,6 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f559a3c142c03a24cb9f926fc4137ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dayTimeCycle: 300
+  gameTime: 0.214
+  overrideGameTimeReset: 1
+  _freezeGameTime: 0
   fogGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -223,6 +223,8 @@ MonoBehaviour:
   skyboxMaterial: {fileID: 2100000, guid: 586a55032bffc564daefe62fccfd79b5, type: 2}
   waterMaterial: {fileID: 2100000, guid: 16ca5feb16ef2d744852096378401523, type: 2}
   rotationSpeed: 1
+  minimumWaterGlossiness: 0
+  maximumWaterGlossiness: 0.574
   nightStart: 0.2
   nightEnd: 0.8
   dayToNightTransition: 0.1

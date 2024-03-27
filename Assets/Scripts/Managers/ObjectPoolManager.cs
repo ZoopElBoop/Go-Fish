@@ -10,7 +10,7 @@ public class ObjectPoolManager : MonoBehaviour
 
     private List<GameObject> ObjectPool = new();
 
-    [SerializeField] [Min(1)] private int duplicateLimit;
+    [SerializeField][Min(1)] private int duplicateLimit;
 
     private void Awake()
     {

@@ -38,9 +38,9 @@ public class FishData : ScriptableObject
     [Min(1f)] public int _baseValue = 1;
     [Min(0.1f)] public float _valueChangeCoefficient = 0.1f;
 
-    [Header("Fish Book")]
-    public Sprite _FishkImig;
-    [Multiline] public string _FishkDesc;
+    [Header("Fish Information")]
+    public Sprite _FishkImage;
+    [Multiline] public string _FishkDescription;
 
     private void OnValidate()
     {
@@ -77,11 +77,9 @@ public class FishData : ScriptableObject
 
     private void StopPlay()
     {
-    #if UNITY_EDITOR
         if (EditorApplication.isPlaying)
         {
             UnityEditor.EditorApplication.isPlaying = false;
         }
-    #endif
     }
 }

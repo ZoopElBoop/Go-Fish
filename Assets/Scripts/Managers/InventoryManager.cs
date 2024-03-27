@@ -23,7 +23,11 @@ public class InventoryManager : MonoBehaviour
     }
 
     private void Init()
-    { 
+    {
+        fishStoredOnPlayer.Clear();
+        fishStoredOnBoat.Clear();
+        fishStoredOnSub.Clear();
+
         for (int i = 0; i < FishDataManager.Instance.GetFishDataSize(); i++)
         {
             fishStoredOnPlayer.Add(new FishStoredData

@@ -54,6 +54,6 @@ public class FishDataManager : MonoBehaviour
     public float GetValue(int index) { return fishData[index]._baseValue; }
     public float GetValueCoefficient(int index) { return fishData[index]._valueChangeCoefficient; }
 
-    public Sprite GetFishImage(int index) { return fishData[index]._FishkImig; }
-    public string GetFishDescription(int index) { return fishData[index]._FishkDesc; }
+    public Sprite GetFishImage(int index) { return fishData[index]._FishkImage; }
+    public string GetFishDescription(int index) { return fishData[index]._FishkDescription; }
 }

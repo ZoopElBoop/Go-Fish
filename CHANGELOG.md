@@ -3,15 +3,16 @@ GO FISH V0.5
 ============
 
 Major Changes
-- Added sub harpoon firing
 - 
+
 
 Minor Changes
-- Replaced old sub model with new one
 - Merged FishToPlayer into FishControl Script
+- 
 
 Bug Fixes
-- 
+- Fish Spawning nolonger spawns deep water fish from spawing at shallow waters
+- Reworked probability system to properly handle fish that can't be spawned
 
 Known Issues
 - 

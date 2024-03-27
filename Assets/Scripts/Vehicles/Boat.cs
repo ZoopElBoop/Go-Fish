@@ -3,9 +3,6 @@ using UnityEngine;
 public class Boat : MonoBehaviour
 {
     private Rigidbody rb;
-    private CharacterController cc;
-    private PlayerMovement pm;
-    private Fishing fs;
 
     public float _Speed;
     [SerializeField] private Camera _boatCam;
@@ -22,7 +19,7 @@ public class Boat : MonoBehaviour
 
     private void Start()
     {
-        playerReturnPos = GameObject.FindGameObjectWithTag("Player Boat Exit").GetComponent<Transform>();
+        playerReturnPos = GameObject.FindWithTag("Player Boat Exit").GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
 
         startingPos = transform.position;
@@ -50,8 +47,8 @@ public class Boat : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 transform.SetPositionAndRotation(startingPos, startingRot);
 
-                cc.enabled = true;
-                pm.enabled = true;
+                PlayerScriptManager.Instance.ShutDown("Controller", true);
+                PlayerScriptManager.Instance.ShutDown("Movement", true);
 
                 isActive = false;
                 _boatCam.enabled = false;
@@ -65,14 +62,12 @@ public class Boat : MonoBehaviour
     {
         if (other.CompareTag("Player") && playerLeft)
         {
-            Player = other.gameObject;        
+            Player = other.gameObject;
 
-            cc = Player.GetComponent<CharacterController>();
-            pm = Player.GetComponent<PlayerMovement>();
-            fs = Player.GetComponent<Fishing>();
+            PlayerScriptManager.Instance.ShutDown("Controller", false);
+            PlayerScriptManager.Instance.ShutDown("Movement", false);
 
-            cc.enabled = false;
-            pm.enabled = false;
+            Fishing fs = PlayerScriptManager.Instance.GetScript("Fishing");
 
             fs.boatRB = rb;
 

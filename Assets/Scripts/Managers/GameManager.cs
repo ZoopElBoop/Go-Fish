@@ -1,10 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Variables
+
     public static GameManager Instance;
 
     private List<GameObject> activeFishBuffer = new();          //cannot be seen in inspector as race condition occurs between adding & removing items due to uning inspector overhead 
@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
 
     [Header("FPS Cap")]                                                          
     [SerializeField] [Min(1)] private int fpsLimit;
+
+    #endregion
+
+    #region Start Variables
 
     private void Awake()
     {
@@ -26,6 +30,10 @@ public class GameManager : MonoBehaviour
 
         Application.targetFrameRate = fpsLimit;
     }
+
+    #endregion
+
+    #region Fish Buffer
 
     public void AddFishToBuffer(GameObject fishToAdd) 
     {
@@ -45,6 +53,8 @@ public class GameManager : MonoBehaviour
 
     public int GetFishBufferSize() { return activeFishBuffer.Count; }
 
+    #endregion
+
     public FishControl GetFishConrolScript(GameObject fish)
     {
         if (fish.transform.root.TryGetComponent<FishControl>(out var fc))
@@ -53,8 +63,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError($"{fish.transform.root.name} missing fish script!!!");
             Debug.Break();
-        }
-       
+        }      
         return null;
     }
 }

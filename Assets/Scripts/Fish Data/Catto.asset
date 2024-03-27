@@ -27,5 +27,5 @@ MonoBehaviour:
   _despawnRangeMulti: 1
   _baseValue: 100
   _valueChangeCoefficient: 0.1
-  _FishkImig: {fileID: 0}
-  _FishkDesc: 
+  _FishkImage: {fileID: 0}
+  _FishkDescription: 

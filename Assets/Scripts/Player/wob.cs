@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Wob : MonoBehaviour
 {
-    public GameObject attractPoint;
-    public Transform followPoint;
+    [SerializeField] private GameObject attractPoint;
+    private Transform followPoint;
 
     private Rigidbody rb;
     private bool hasCaught = false;
 
-    private void Awake()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
@@ -66,8 +66,6 @@ public class Wob : MonoBehaviour
         if (hasCaught && followPoint != null)
         {
             var velocity = followPoint.position - transform.position;
-            //var dir = velocity.normalized;
-            //print(dir);
 
             rb.AddForce(2000 * Time.deltaTime * velocity);
         }

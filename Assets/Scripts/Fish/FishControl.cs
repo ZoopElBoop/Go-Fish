@@ -53,8 +53,9 @@ public class FishControl : MonoBehaviour
     public bool viewCollisionBox;
 
     //Fish To Player Variables
+    public Vector3 startingScale;
     private Vector3 startingPoint;
-    private float pointInTravel = 1;
+    private float pointInTravel = 1f;
 
     #endregion
 
@@ -62,9 +63,11 @@ public class FishControl : MonoBehaviour
 
     void Awake()
     {
+
         viewCollisionBox = false;
 
         rb = GetComponent<Rigidbody>();
+        startingScale = transform.localScale;
 
         /*       for (int i = 0; i < transform.childCount; i++)
         {
@@ -82,15 +85,17 @@ public class FishControl : MonoBehaviour
 
         LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "water" layer
 
-/*        collisionBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        collisionBox.layer = LayerIgnoreRaycast;
-        collisionBox.SetActive(false);*/
+        /*        collisionBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                collisionBox.layer = LayerIgnoreRaycast;
+                collisionBox.SetActive(false);*/
     }
 
     private void OnEnable()
     {
         isAboutToDie = false;
         isTurning = false;
+
+        transform.localScale = startingScale;
 
         HP = FishDataManager.Instance.GetHealth(_dataIndex);
         Speed = FishDataManager.Instance.GetSpeed(_dataIndex);
@@ -102,6 +107,8 @@ public class FishControl : MonoBehaviour
         canBeFished = FishDataManager.Instance.GetCanBeCaught(_dataIndex);
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
+
+        ActivateFishToPlayer();
     }
 
     #endregion
@@ -510,6 +517,9 @@ public class FishControl : MonoBehaviour
     public void ActivateFishToPlayer()
     {
         rb.velocity = Vector3.zero;
+        startingPoint = transform.position;
+        print("ded");
+
         canBeFished = false;
         isAboutToDie = true;
     }

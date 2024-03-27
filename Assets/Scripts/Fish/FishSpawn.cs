@@ -26,12 +26,13 @@ public class FishSpawn : MonoBehaviour
     [SerializeField] private bool gizmosActive;
     [SerializeField] private bool debugLog;
 
+    //Layer mask for ray checks
     private int LayerIgnoreRaycast;
     private LayerMask LayersToIgnore = -1;
 
     #endregion
 
-    #region Start Functions
+    #region Start Function
 
     private void Start()
     {
@@ -107,8 +108,8 @@ public class FishSpawn : MonoBehaviour
 
             if (debugLog)
             {
-                print("IND: " + index);
-                print("RND VAL NEW: " + randVal);
+                print($"INDEX: {index}");
+                print($"RND VAL NEW: {randVal}");
             }
 
             index++;
@@ -118,16 +119,16 @@ public class FishSpawn : MonoBehaviour
 
         if (index < 0)
         {
-            Debug.LogError($"INDEX ({index}), FAILED SPAWN PROBABILITY CALC ");
+            Debug.LogError($"INDEX ({index}), FAILED SPAWN PROBABILITY CALC");
             Debug.Break();
             index++;
         }
 
         if (debugLog)
         {
-            print("IND FOUND: " + index);
-            print("SPAWNING " + FishDataManager.Instance.GetFishName(index));
-            print("////////////////////////////////////////////////////////////////////////");
+            print($"INDEX FOUND: {index}");
+            print($"SPAWNING {FishDataManager.Instance.GetFishName(index)}");
+            print($"////////////////////////////////////////////////////////////////////////");
         }
 
         Spawn(fishProbability[index].Index);
@@ -149,6 +150,7 @@ public class FishSpawn : MonoBehaviour
 
         GameObject fishToSpawn = FishDataManager.Instance.GetFish(index);
         Vector3 spawnPos;
+
         int spawnIteration = 0;     
 
         while (true)
@@ -160,39 +162,31 @@ public class FishSpawn : MonoBehaviour
                 Debug.LogWarning($"Unable to find suitable spawn position after {maxSpawnCheckIterations} iterations: ABORTING SPAWN");
                 return;
             }
-            print(spawnIteration);
 
             spawnPos = Random.onUnitSphere * _spawnRange + transform.position;
+
             spawnPos.y = GetNewYPos(index);      
 
-            if (!InWater(spawnPos))     //Checks if position is in water
-            {
-                Debug.LogWarning($"not in water");
-                continue;
-            }   
+            if (!InWater(spawnPos))     //Checks if position is in water            
+                continue;           
 
             Collider[] hitColliders = new Collider[1];  //literally the most useless array, but since OverlapSphere only takes an array here it stays
 
             Physics.OverlapSphereNonAlloc(spawnPos, FishDataManager.Instance.GetCollisionRange(index), hitColliders, LayersToIgnore);
 
-            print(hitColliders[0]);
-
             if (hitColliders[0] == null)    //So for some reason if the collider detects nothing it dosen't return a empty array but an array with an NULL proterty, WHY???????????        
                 break;
         }
+
         GameObject tempFishHolder = ObjectPoolManager.Instance.SpawnObject(fishToSpawn, spawnPos, Quaternion.identity);
 
-        //GameObject tempFishHolder = Instantiate(fishToSpawn, spawnPos, Quaternion.identity);    //temp fix for now, obliterate later
-                                                                                                //fun story so theres a 1 in 100 chance the fish dosen't get the _playerPos & _destroyRange variables
-        //GameManager.Instance.AddFishToBuffer(tempFishHolder);                                   //since im stupid and set fishscript to fishToSpawn, but cuz i want to set the fish to a list a temp variable is needed atm
-                                                                                                //when i decide to be competent ima redo this bit :)
-        var fishScript = tempFishHolder.GetComponent<FishControl>();
+        var fishScript = GameManager.Instance.GetFishConrolScript(tempFishHolder);
+
         fishScript._playerPos = transform;
         fishScript._destroyRange = _destroyRange * FishDataManager.Instance.GetDespawnMultiplier(index);
         fishScript._dataIndex = index;
 
         GameManager.Instance.AddFishToBuffer(tempFishHolder);
-        Debug.Break();
     }
 
     private float GetNewYPos(int index)
@@ -202,12 +196,11 @@ public class FishSpawn : MonoBehaviour
         float spawnStart = FishDataManager.Instance.GetSpawnStart(index);
 
         if (spawnEnd < (-_spawnRange + transform.position.y))
-            yPosEnd = -_spawnRange;
+            yPosEnd = -_spawnRange + transform.position.y;
         else
             yPosEnd = spawnEnd;
 
         float yPos = Random.Range(yPosEnd, spawnStart);
-        print($" y = {yPos} ({yPosEnd}, {spawnStart}) spawn pos ({-_spawnRange + transform.position.y})");
 
         return yPos;
     }
@@ -218,14 +211,9 @@ public class FishSpawn : MonoBehaviour
 
         RaycastHit[] colliderFound = new RaycastHit[1];
 
-        int hits = Physics.RaycastNonAlloc(ray, colliderFound, 350f, LayersToIgnore, QueryTriggerInteraction.Ignore);
+        int hits = Physics.RaycastNonAlloc(ray, colliderFound, 500f, LayersToIgnore, QueryTriggerInteraction.Ignore);
 
-        if (hits < 1)
-        {
-            Debug.DrawRay(pos, 100 * -Vector3.up, Color.red, 10f);
-        }
-
-        return (hits > 0);
+        return hits > 0;
     }
 
     #endregion
