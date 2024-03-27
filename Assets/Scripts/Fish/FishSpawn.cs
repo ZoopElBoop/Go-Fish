@@ -1,16 +1,26 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class FishSpawn : MonoBehaviour
 {
+    #region Variables
+
     [Header("Spawn & Despawn Range")]
     [Range(0f, 100f)]
-    public float _spawnRange;
+    [SerializeField] private float _spawnRange;
     [Range(0f, 150f)]
-    public float _destroyRange;
+    [SerializeField] private float _destroyRange;
 
-    private bool activeTime = false;
+    [Header("Spawn Cooldown (In Seconds)")]
+    [Min(0.1f)][SerializeField] private float spawnCoolDown;
+    private bool canTrySpawn = true;
+
+    [Header("Spawn Limit")]
+    [Min(1)][SerializeField] private int maxFishActive;
+
+    [Header("Number Of Spawn Checks Before Giving Up")]
+    [Range(1, 64)]
+    [SerializeField] private int maxSpawnCheckIterations;
 
     [Header("DEBUG")]
     [SerializeField] private bool gizmosActive;
@@ -19,10 +29,12 @@ public class FishSpawn : MonoBehaviour
     private int LayerIgnoreRaycast;
     private LayerMask LayersToIgnore = -1;
 
+    #endregion
+
+    #region Start Functions
+
     private void Start()
     {
-        SpawnTypeOf();
-
         LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
 
         LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "ignore raycast" layer
@@ -32,30 +44,36 @@ public class FishSpawn : MonoBehaviour
         LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "water" layer
     }
 
+    #endregion
+
+    #region Probability Find
+
     private void SpawnTypeOf() 
     {
-        float[,] fishProbability = new float[FishDataManager.Instance.GetFishDataSize(), 2];      //Contains index to fishdata array & empty probability factor
+        FishProbability[] fishProbability = new FishProbability[FishDataManager.Instance.GetFishDataSize()];      //Contains index to fishdata array & empty probability factor
         float totalProbabilityValue = 0f;
 
-        for (int i = 0; i < FishDataManager.Instance.GetFishDataSize(); i++)
+        for (int i = 0; i < fishProbability.Length; i++)
         {
             float spawnStart = FishDataManager.Instance.GetSpawnStart(i);
-            float spawnEnd = FishDataManager.Instance.GetSpawnEnd(i);
-            float playerYPos = transform.position.y;
-
-            if (playerYPos - _spawnRange > spawnStart || playerYPos + _spawnRange < spawnEnd)
-                continue;
-
             float spawnHigh = FishDataManager.Instance.GetSpawnHigh(i);
-            float distanceToHigh;
+            float spawnEnd = FishDataManager.Instance.GetSpawnEnd(i);
 
-            if (playerYPos > spawnHigh)     //why try to do all the math stuff when unity has an inbuilt func for that, not reading docs meant i wasted like 5 hours on this, lmao
-                distanceToHigh = Mathf.InverseLerp(spawnStart + _spawnRange, spawnHigh, playerYPos) * FishDataManager.Instance.GetRarity(i);
-            else
-                distanceToHigh = Mathf.InverseLerp(spawnEnd - _spawnRange, spawnHigh, playerYPos) * FishDataManager.Instance.GetRarity(i);
+            float playerYPos = transform.position.y;
+            float distanceToHigh = 0f;
 
-            fishProbability[i, 0] = i;
-            fishProbability[i, 1] = distanceToHigh;
+            if (playerYPos - _spawnRange < spawnStart || playerYPos + _spawnRange > spawnEnd)   //checks if spawn range within spawn min & max depth of fish, if so calculates distance ratio from high point
+            { 
+                if (playerYPos > spawnHigh)     //why try to do all the math stuff when unity has an inbuilt func for that, not reading docs meant i wasted like 5 hours on this, lmao
+                    distanceToHigh = Mathf.InverseLerp(spawnStart + _spawnRange, spawnHigh, playerYPos) * FishDataManager.Instance.GetRarity(i);
+                else
+                    distanceToHigh = Mathf.InverseLerp(spawnEnd - _spawnRange, spawnHigh, playerYPos) * FishDataManager.Instance.GetRarity(i);
+            }
+
+            fishProbability[i] = new FishProbability{
+                Index = i, 
+                Probability = distanceToHigh
+            };
 
             totalProbabilityValue += distanceToHigh;
         }
@@ -73,10 +91,10 @@ public class FishSpawn : MonoBehaviour
             print("RND VAL: " + randVal);
 
             print("/---/");
-            for (int i = 0; i < fishProbability.GetLength(0); i++)
+            for (int i = 0; i < fishProbability.Length; i++)
             {
                 print(FishDataManager.Instance.GetFishName(i));
-                print(fishProbability[i, 1]);
+                print(fishProbability[i].Probability);
             }
             print("/---/");
         }
@@ -85,7 +103,7 @@ public class FishSpawn : MonoBehaviour
 
         while (randVal > 0.0f)
         {
-            randVal -= fishProbability[index, 1];
+            randVal -= fishProbability[index].Probability;
 
             if (debugLog)
             {
@@ -100,7 +118,7 @@ public class FishSpawn : MonoBehaviour
 
         if (index < 0)
         {
-            Debug.LogError("UH OH");
+            Debug.LogError($"INDEX ({index}), FAILED SPAWN PROBABILITY CALC ");
             Debug.Break();
             index++;
         }
@@ -112,11 +130,23 @@ public class FishSpawn : MonoBehaviour
             print("////////////////////////////////////////////////////////////////////////");
         }
 
-        _Spawn((int)fishProbability[index, 0]);
+        Spawn(fishProbability[index].Index);
     }
 
-    public void _Spawn(int index)
+    #endregion
+
+    #region Spawn
+
+    public void Spawn(int index)
     {
+        //Fish Spawn Checks
+        
+        // 1. Sets y position between limits of fish spawn (includes limits to spawn range so fish aren't spawned at their limit if spawn range can't reach)
+        // 2. Is the position in water (fires ray to see if it hits sea floor)
+        // 3. Is the position empty
+
+        //If all these checks pass the fish is spawned (limited to 16 iterations to avoid infinite loop)
+
         GameObject fishToSpawn = FishDataManager.Instance.GetFish(index);
         Vector3 spawnPos;
         int spawnIteration = 0;     
@@ -125,19 +155,21 @@ public class FishSpawn : MonoBehaviour
         {
             spawnIteration += 1;
 
-            if (spawnIteration > 17)    //Used to escape loop if unable to spawn fish after enough checks, or computer explodes :)
+            if (spawnIteration == maxSpawnCheckIterations + 1)    //Used to escape loop if unable to spawn fish after enough checks, or computer explodes :)
             {
-                Debug.LogWarning("Unable to find suitable spawn pos after " + (spawnIteration - 1) + " iterations: ABORTING SPAWN");
+                Debug.LogWarning($"Unable to find suitable spawn position after {maxSpawnCheckIterations} iterations: ABORTING SPAWN");
                 return;
             }
+            print(spawnIteration);
 
             spawnPos = Random.onUnitSphere * _spawnRange + transform.position;
+            spawnPos.y = GetNewYPos(index);      
 
-            if (spawnPos.y > -2f)  //Eh good enough
+            if (!InWater(spawnPos))     //Checks if position is in water
+            {
+                Debug.LogWarning($"not in water");
                 continue;
-
-            if (!InWater(spawnPos))
-                continue;
+            }   
 
             Collider[] hitColliders = new Collider[1];  //literally the most useless array, but since OverlapSphere only takes an array here it stays
 
@@ -160,35 +192,65 @@ public class FishSpawn : MonoBehaviour
         fishScript._dataIndex = index;
 
         GameManager.Instance.AddFishToBuffer(tempFishHolder);
-        //ObjectPoolManager.Instance.AddOBJ(tempFishHolder);
+        Debug.Break();
+    }
+
+    private float GetNewYPos(int index)
+    {
+        float yPosEnd;
+        float spawnEnd = FishDataManager.Instance.GetSpawnEnd(index);
+        float spawnStart = FishDataManager.Instance.GetSpawnStart(index);
+
+        if (spawnEnd < (-_spawnRange + transform.position.y))
+            yPosEnd = -_spawnRange;
+        else
+            yPosEnd = spawnEnd;
+
+        float yPos = Random.Range(yPosEnd, spawnStart);
+        print($" y = {yPos} ({yPosEnd}, {spawnStart}) spawn pos ({-_spawnRange + transform.position.y})");
+
+        return yPos;
     }
 
     private bool InWater(Vector3 pos) 
     {
-        Ray ray = new(pos, (-Vector3.up + pos) - pos);
+        Ray ray = new(pos, -Vector3.up);
 
         RaycastHit[] colliderFound = new RaycastHit[1];
 
         int hits = Physics.RaycastNonAlloc(ray, colliderFound, 350f, LayersToIgnore, QueryTriggerInteraction.Ignore);
 
-        return hits > 0;
+        if (hits < 1)
+        {
+            Debug.DrawRay(pos, 100 * -Vector3.up, Color.red, 10f);
+        }
+
+        return (hits > 0);
     }
+
+    #endregion
+
+    #region Spawn Call
 
     private void Update()
     {
         var SpawnedFish = GameManager.Instance.GetFishBufferSize();
 
-        if (!activeTime && SpawnedFish < 50)     //Dodgy interval spawn, to be changed at some point
+        if (canTrySpawn && SpawnedFish < maxFishActive)     
             StartCoroutine(CallSpawn());
     }
 
     IEnumerator CallSpawn()
     {
-        activeTime = true;
-        yield return new WaitForSeconds(Random.Range(1f, 5f));
-        activeTime = false;
+        canTrySpawn = false;
+        yield return new WaitForSeconds(spawnCoolDown);
+        canTrySpawn = true;
         SpawnTypeOf();
     }
+
+    #endregion
+
+    #region Gizmos
 
     private void OnDrawGizmos() 
     {
@@ -206,4 +268,13 @@ public class FishSpawn : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, _destroyRange);
         }
     }
+
+    #endregion
+
+}
+
+public class FishProbability
+{
+    public int Index = 0;
+    public float Probability = 0f;
 }

@@ -438,7 +438,7 @@ MonoBehaviour:
   _airDrag: 0
   _airAngularDrag: 0.05
   _floatingPower: 65
-  _waterHeight: 0
+  _waterHeight: 0.5
   rb: {fileID: 0}
   gizmosActive: 0
   gizmosSize: 1

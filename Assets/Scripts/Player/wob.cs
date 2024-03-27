@@ -33,7 +33,7 @@ public class Wob : MonoBehaviour
 
     private void FishCatch(GameObject fish)
     {
-        FishControl fc = fish.GetComponent<FishControl>();
+        var fc = GameManager.Instance.GetFishConrolScript(fish);
 
         if (fc.canBeFished)
         {
@@ -43,13 +43,18 @@ public class Wob : MonoBehaviour
 
             attractPoint.SetActive(false);
 
-            EventManager.Instance.FishFished(fish);
+            EventManager.Instance.FishCaught(fish);
+        }
+        else if (fc.isAboutToDie)
+        {
+            //Edge case for incase wobber tries to catch a fish that has been caught
+            return;
         }
         else
         {
             Debug.LogWarning($"cannot catch {fish.name}");
 
-            //Add destroy wobber event for fishing script 
+            EventManager.Instance.DestroyWobber();
         }
     }
 

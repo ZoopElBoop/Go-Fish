@@ -3,12 +3,15 @@ using UnityEngine;
 
 public class Fishing : MonoBehaviour
 {
+    #region Variables
+
     [Header("Rod Settings")]
     [SerializeField] private GameObject fishingRod;
 
     [Header("Bobber Settings")]
     [SerializeField] private GameObject _Bobber;
     private GameObject bobberInstance;
+    private Rigidbody bobberInstanceRb;
     public Transform _bobberSpawnPoint;
 
     [Range(10.0f, 30.0f)]
@@ -39,7 +42,7 @@ public class Fishing : MonoBehaviour
     private Vector3 throwPos;
 
     //Cache of caught fish
-    private GameObject caughtFish;
+    private FishControl caughtFishScript;
 
     //Cameras for switching between boat/1st person for racasts, to be changed
     private Camera mainCamera;
@@ -56,12 +59,17 @@ public class Fishing : MonoBehaviour
     [Header("TESTING (WILL BE REMOVED)")]
     [SerializeField] private float TestVelocityMultiplier; //remove once velocity range is fixed
 
+    #endregion
+
+    #region Start Functions
+
     private void Start() 
     {
         //Events Init
-        EventManager.Instance.OnFishFished += Fishking;
-        EventManager.Instance.OnBoatEnter += CamBoatSwitch;
-        EventManager.Instance.OnBoatExit += CamPlayerSwitch;
+        EventManager.Instance.OnFishCaught += Fishking;
+        EventManager.Instance.OnBoatEnter -= SwitchToBoatCamera;
+        EventManager.Instance.OnBoatExit -= SwitchToPlayerCamera;
+        EventManager.Instance.OnDestroyWobber += ObliterateBobber;
 
         //Sets camera up for raycast (not necessary, change at some point)
         mainCamera = Camera.main;
@@ -82,6 +90,25 @@ public class Fishing : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+
+    private void ResetFishing()
+    {
+        ObliterateBobber();
+
+        isFishing = false;
+        _LineRenderer.enabled = false;
+        UIManager.Instance.ThrowSliderActive(false);
+
+        if (caughtFishScript != null)
+            Escape();
+
+        if (mouseFxInstance != null)
+            mouseFxInstance.SetActive(false);
+    }
+
+    #endregion
+
+    #region Update Functions
 
     private void Update() 
     {
@@ -109,20 +136,9 @@ public class Fishing : MonoBehaviour
             MouseMoveFx();
     }
 
-    private void ResetFishing()
-    {
-        ObliterateBobber();
+    #endregion
 
-        isFishing = false;
-        _LineRenderer.enabled = false;
-        UIManager.Instance.ThrowSliderActive(false);
-
-        if (caughtFish != null)
-            Escape();
-
-        if (mouseFxInstance != null)
-            mouseFxInstance.SetActive(false);
-    }
+    #region Fishing Control
 
     private void FishingControl() 
     {
@@ -165,26 +181,25 @@ public class Fishing : MonoBehaviour
         }
     }
 
-    private void BobberLine() 
+    IEnumerator FishingCooldown()
     {
-        //Checks if bobber exists, if so enables line to it & checks if it is too far from player
-        if (bobberInstance != null && bobberInstance.activeSelf)
-        {
-            if (IsBobberTooFar())
-            {
-                ObliterateBobber();
-
-                if (caughtFish != null)
-                    Escape();
-            }
-
-            _LineRenderer.enabled = true;
-            _LineRenderer.SetPosition(0, _bobberSpawnPoint.position);
-            _LineRenderer.SetPosition(1, bobberInstance.transform.position);
-        }
-        else
-            _LineRenderer.enabled = false;
+        yield return new WaitForSeconds(0.25f);
+        isFishing = false;
     }
+
+    private (bool success, Vector3 position) GetMousePosition()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask))
+            return (success: true, position: hitInfo.point);
+        else
+            return (success: false, position: Vector3.zero);
+    }
+
+    #endregion
+
+    #region Boat Fishing
 
     private void MouseMoveFx()
     {
@@ -198,7 +213,7 @@ public class Fishing : MonoBehaviour
             //Disables target reticle if outside range limits
             if (distanceBetween > (_bobberSpawnRangeMax  * _bobberSpawnRangeMax) || distanceBetween < (_bobberSpawnRangeMin * _bobberSpawnRangeMin))
             {
-                Debug.LogWarning("Mouse not in range");
+                Debug.LogWarning($"Mouse ({distanceBetween}) not in range");
                 mouseFxInstance.SetActive(false);
                 RotatePlayerToMouse(position);
                 return;
@@ -219,12 +234,6 @@ public class Fishing : MonoBehaviour
             mouseFxInstance.SetActive(false);       
     }
 
-    IEnumerator FishingCooldown()
-    {
-        yield return new WaitForSeconds(0.1f);
-        isFishing = false;
-    }
-
     private void RotatePlayerToMouse(Vector3 pos)
     {
         //Sets players rotation to bobber
@@ -236,6 +245,37 @@ public class Fishing : MonoBehaviour
         transform.LookAt(pos, Vector3.forward);
 
         transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
+    }
+
+    #endregion
+
+    #region Bobber Functions
+
+    private void BobberLine()
+    {
+        //Checks if bobber exists, if so enables line to it & checks if it is too far from player
+        if (bobberInstance != null && bobberInstance.activeSelf)
+        {
+            if (IsBobberTooFar())
+            {
+                ObliterateBobber();
+
+                if (caughtFishScript != null)
+                    Escape();
+            }
+
+            _LineRenderer.enabled = true;
+            _LineRenderer.SetPosition(0, _bobberSpawnPoint.position);
+            _LineRenderer.SetPosition(1, bobberInstance.transform.position);
+        }
+        else
+            _LineRenderer.enabled = false;
+    }
+    private bool IsBobberTooFar()
+    {
+        float distanceBetween = (_bobberSpawnPoint.position - bobberInstance.transform.position).sqrMagnitude;
+
+        return distanceBetween > 80 * 80;
     }
 
     private void ObliterateBobber() 
@@ -264,7 +304,7 @@ public class Fishing : MonoBehaviour
 
                 if (distanceBetween > (_bobberSpawnRangeMax * _bobberSpawnRangeMax) || distanceBetween < (_bobberSpawnRangeMin * _bobberSpawnRangeMin))
                 {
-                    Debug.LogWarning("Position out of range to spawn bobber: ABORTING SPAWN");
+                    Debug.LogWarning($"Position ({distanceBetween}) out of range to spawn bobber: ABORTING SPAWN");
                     spawnFail = true;   //For Gizmo
                     return;
                 }
@@ -294,50 +334,42 @@ public class Fishing : MonoBehaviour
     private void SpawnBobber(Vector3 direction, float velocity)
     {
         if (bobberInstance == null)
+        {
             bobberInstance = Instantiate(_Bobber, _bobberSpawnPoint.position, _bobberSpawnPoint.rotation);
+            bobberInstanceRb = bobberInstance.GetComponent<Rigidbody>();
+        }
         else
             bobberInstance.SetActive(true);
 
         bobberInstance.transform.SetPositionAndRotation(_bobberSpawnPoint.position, _bobberSpawnPoint.rotation);
 
         if (inBoat)
-            bobberInstance.GetComponent<Rigidbody>().velocity = direction * velocity + boatRB.velocity;
+            bobberInstanceRb.velocity = direction * velocity + boatRB.velocity;
         else
-            bobberInstance.GetComponent<Rigidbody>().velocity = direction * velocity;
+            bobberInstanceRb.velocity = direction * velocity;
 
         if (gizmosActive)
             Debug.DrawRay(bobberInstance.transform.position, direction * velocity, Color.green, 2.0f);
     }
 
-    private bool IsBobberTooFar()
-    {
-        float distanceBetween = (_bobberSpawnPoint.position - bobberInstance.transform.position).sqrMagnitude;
+    #endregion
 
-        return distanceBetween > 40 * 40;
-    }
-
-    private (bool success, Vector3 position) GetMousePosition()
-    {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask))              
-            return (success: true, position: hitInfo.point);      
-        else
-            return (success: false, position: Vector3.zero);
-    }
+    #region Fishing Events
 
     public void Fishking(GameObject fish)
     {
+        caughtFishScript = GameManager.Instance.GetFishConrolScript(fish);
+
+        if (caughtFishScript == null)
+            return;
+
         isFishing = true;
-        caughtFish = fish;
-        //fish.GetComponent<FishControl>().Caught();
         print("caught!!");
         UIManager.Instance.FishingSliderActive(true);
     }
 
-    public void CamBoatSwitch(Camera boatCam)
+    public void SwitchToBoatCamera(Camera boatCam)
     {
-        //TBRD
         mainCamera.gameObject.SetActive(false);
         mainCamera = boatCam;
 
@@ -346,9 +378,8 @@ public class Fishing : MonoBehaviour
         inBoat = true;
     }
 
-    public void CamPlayerSwitch()
+    public void SwitchToPlayerCamera()
     {
-        //TBRD
         mainCamera = playerCamera;
         mainCamera.gameObject.SetActive(true);
         mouseFxInstance.SetActive(false);
@@ -358,35 +389,27 @@ public class Fishing : MonoBehaviour
         throwCharge = 1f;
     }
 
-    void Caught() 
+    void Caught()
     {
-        //caughtFish.GetComponent<FishControl>().isAboutToDie = true;
-        //EventManager.Instance.FishCaught(caughtFish);
-        var fc = caughtFish.GetComponent<FishControl>();
+        caughtFishScript.ActivateFishToPlayer();
 
-        if (fc == null)
-        {
-            Debug.LogError("uh oh");
-            Debug.Break();
-        }
-
-        fc.FishToPlayer();
-
-/*        numCaught++;
-        catches.text = "CAUGHT FISH :" + numCaught;*/
         UIManager.Instance.FishingSliderActive(false);
 
         if (inBoat)
-            InventoryManager.Instance.StoreOnBoat(fc);
+            InventoryManager.Instance.StoreOnBoat(caughtFishScript);
         else
-            InventoryManager.Instance.StoreOnPlayer(fc);
+            InventoryManager.Instance.StoreOnPlayer(caughtFishScript);
     }
 
     void Escape()
     {
-        caughtFish.GetComponent<FishControl>().Escape(transform);
+        caughtFishScript.Escape(transform);
         UIManager.Instance.FishingSliderActive(false);
     }
+
+    #endregion
+
+    #region Gizmos
 
     private void OnDrawGizmos()
     {
@@ -424,6 +447,10 @@ public class Fishing : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region End Functions
+
     private void OnDisable()
     {
         ResetFishing();
@@ -434,10 +461,13 @@ public class Fishing : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventManager.Instance.OnFishFished -= Fishking;
-        EventManager.Instance.OnBoatEnter -= CamBoatSwitch;
-        EventManager.Instance.OnBoatExit -= CamPlayerSwitch;
+        EventManager.Instance.OnFishCaught -= Fishking;
+        EventManager.Instance.OnBoatEnter -= SwitchToBoatCamera;
+        EventManager.Instance.OnBoatExit -= SwitchToPlayerCamera;
+        EventManager.Instance.OnDestroyWobber -= ObliterateBobber;
     }
+
+    #endregion
 
     /*
     public LineRenderer lineRenderer;

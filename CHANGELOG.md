@@ -1,4 +1,26 @@
+============
+GO FISH V0.5
+============
+
+Major Changes
+- Added sub harpoon firing
+- 
+
+Minor Changes
+- Replaced old sub model with new one
+- Merged FishToPlayer into FishControl Script
+
+Bug Fixes
+- 
+
+Known Issues
+- 
+
+
+
+============
 GO FISH V0.4
+============
 
 Major Changes
 - Added map layout

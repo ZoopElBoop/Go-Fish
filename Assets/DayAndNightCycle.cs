@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class DayAndNightCycle : MonoBehaviour
 {
     [Header("In-Game Time (In Seconds)")]
@@ -47,6 +48,9 @@ public class DayAndNightCycle : MonoBehaviour
 
     private void UpdateGameTime() 
     {
+        if (!Application.isPlaying)
+            return;
+
         if (!_freezeGameTime)
         {
             gameTime += Time.deltaTime / dayTimeCycle;

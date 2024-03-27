@@ -44,4 +44,17 @@ public class GameManager : MonoBehaviour
     public List<GameObject> GetFishBuffer() { return activeFishBuffer; }
 
     public int GetFishBufferSize() { return activeFishBuffer.Count; }
+
+    public FishControl GetFishConrolScript(GameObject fish)
+    {
+        if (fish.transform.root.TryGetComponent<FishControl>(out var fc))
+            return fc;
+        else
+        {
+            Debug.LogError($"{fish.transform.root.name} missing fish script!!!");
+            Debug.Break();
+        }
+       
+        return null;
+    }
 }

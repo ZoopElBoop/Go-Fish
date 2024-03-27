@@ -21,9 +21,12 @@ public class ObjectPoolManager : MonoBehaviour
         }
         else
             Destroy(this);
+
+        //Events Init
+        EventManager.Instance.OnFishDisable += DespawnObject;
     }
 
-    public GameObject CheckPoolForAnyDuplicates(GameObject findInPool)
+    private GameObject CheckPoolForAnyDuplicates(GameObject findInPool)
     {
         /*
         This is honestly one of the worst ideas i have ever had
@@ -43,7 +46,7 @@ public class ObjectPoolManager : MonoBehaviour
         return null;
     }
 
-    public int CheckPoolForNumberOfDuplicates(GameObject findInPool)
+    private int CheckPoolForNumberOfDuplicates(GameObject findInPool)
     {
         int duplicates = 0;
 
@@ -89,5 +92,10 @@ public class ObjectPoolManager : MonoBehaviour
             Destroy(toDespawn);      
         else       
             ObjectPool.Add(toDespawn);       
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnFishDisable -= DespawnObject;
     }
 }

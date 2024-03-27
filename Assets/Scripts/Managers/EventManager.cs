@@ -16,51 +16,45 @@ public class EventManager : MonoBehaviour
             Destroy(this);      
     }
 
+
     //When fish is caught by the wobber
-    public event Action<GameObject> OnFishFished; 
-    public void FishFished(GameObject Catch) 
-    {
-        OnFishFished?.Invoke(Catch);
-    }
-
-    //When player wins the fishing mini-game
+    // Wob --> Fishing 
     public event Action<GameObject> OnFishCaught;
-    public void FishCaught(GameObject caughtFish)
+    public void FishCaught(GameObject Catch)
     {
-        caughtFish.GetComponent<FishControl>().FishToPlayer();
-
-        OnFishCaught?.Invoke(caughtFish);
-    }
-
-
-    //When fish despwans
-    public event Action<GameObject> OnFishDespawn;
-    public void FishDespawn(GameObject fishToKill)
-    {
-        OnFishDespawn?.Invoke(fishToKill);
-
-        GameManager.Instance.RemoveFishFromBuffer(fishToKill);
+        OnFishCaught?.Invoke(Catch);
     }
 
 
     //When fish is destroyed
+    // FishControl --> ObjectPoolManager
     public event Action<GameObject> OnFishDisable;
     public void FishDisable(GameObject fishToKill)
     {
         OnFishDisable?.Invoke(fishToKill);
+    }
 
-        GameManager.Instance.RemoveFishFromBuffer(fishToKill);
+
+    //When wobber is too far from player
+    // Wobb --> Fishing
+    public event Action OnDestroyWobber;
+    public void DestroyWobber()
+    {
+        OnDestroyWobber?.Invoke();
     }
 
 
     //When player enters boat
+    // Boat --> Fishing
     public event Action<Camera> OnBoatEnter;
     public void BoatEnter(Camera boatCam)
     {
         OnBoatEnter?.Invoke(boatCam);
     }
 
+
     //when player exits boat
+    // Boat --> Fishing
     public event Action OnBoatExit;
     public void BoatExit()
     {

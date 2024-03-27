@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(FishToPlayer))]
-
 public class FishControl : MonoBehaviour
 {
+    #region Variables
+
     private Rigidbody rb;
+
     public bool isAboutToDie = false;
 
     private Transform attractPoint;
@@ -51,7 +52,15 @@ public class FishControl : MonoBehaviour
     [Header("DEBUG")]
     public bool viewCollisionBox;
 
-    void Start()
+    //Fish To Player Variables
+    private Vector3 startingPoint;
+    private float pointInTravel = 1;
+
+    #endregion
+
+    #region Start Functions
+
+    void Awake()
     {
         viewCollisionBox = false;
 
@@ -80,6 +89,9 @@ public class FishControl : MonoBehaviour
 
     private void OnEnable()
     {
+        isAboutToDie = false;
+        isTurning = false;
+
         HP = FishDataManager.Instance.GetHealth(_dataIndex);
         Speed = FishDataManager.Instance.GetSpeed(_dataIndex);
         rotationSpeed = FishDataManager.Instance.GetRotationSpeed(_dataIndex);
@@ -92,35 +104,49 @@ public class FishControl : MonoBehaviour
         transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
     }
 
+    #endregion
+
+    #region Update Functions
+
     private void FixedUpdate()
     {
-        rb.velocity = transform.forward * Speed;
+        if (!isAboutToDie)
+        {
+            rb.velocity = transform.forward * Speed;
 
-        ChangeDirection();
+            ChangeDirection();
 
-        CollisionDetect();
+            //CollisionDetect();
+        }
     }
 
     private void Update()
     {
-        if (transform.position.y > HeightMax || transform.position.y < DepthMax)
-        {
-            transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
-        }
-
         float distanceBetween = (_playerPos.position - transform.position).sqrMagnitude;    //this might be more efficent than Vector3.Distance since it doesn't do any square rooting
 
-        if (distanceBetween > _destroyRange * _destroyRange)                                //squared to make up for no square rooting in previous line        
-            DIEFISHDIE();         
-        
+        if (!isAboutToDie)
+        {
+            if (transform.position.y > HeightMax || transform.position.y < DepthMax)
+                transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
 
-        /*        if (HP <= 0)
-                {
-                    DIEFISHDIE();
-                    print("Fish OBLITERATED: Killed");
-                }
-                */
+            if (distanceBetween > _destroyRange * _destroyRange)                                //squared to make up for no square rooting in previous line        
+                DIEFISHDIE();
+
+
+    /*        if (HP <= 0)
+            {
+                DIEFISHDIE();
+                print("Fish OBLITERATED: Killed");
+            }
+*/
+        }
+        else
+            FishToPlayer(distanceBetween);
     }
+
+    #endregion
+
+    #region Collision Detection Checks
 
     private void CollisionDetect()
     {
@@ -288,7 +314,6 @@ public class FishControl : MonoBehaviour
         return arr;
     }
 
-
     private bool CanMoveToPosition(Vector3 endPosition)
     {
         Vector3 targetDir = endPosition - transform.position;
@@ -352,6 +377,9 @@ public class FishControl : MonoBehaviour
             collisionBox.SetActive(false);
     }*/
 
+    #endregion
+
+    #region Rotation Functions
     private void SetRotation()
     {
         switch (moveDirection + 1)
@@ -429,14 +457,15 @@ public class FishControl : MonoBehaviour
         isTurning = true;
     }
 
+    #endregion
+
+    #region Fish States
     void DIEFISHDIE()
     {
         if (collisionBox != null)
             Destroy(collisionBox);      //TBC
 
-        EventManager.Instance.FishDespawn(gameObject);
-
-        //Debug.Break();
+        EventManager.Instance.FishDisable(gameObject);
     }
 
     public void Attract(Transform focusPos)
@@ -459,18 +488,8 @@ public class FishControl : MonoBehaviour
     public void Flee(Transform focusPos)
     {
         RotateTo(new Vector3(transform.position.x - focusPos.position.x, transform.position.y - focusPos.position.y, 0f), false);
-        //ChangeDirection(30f, 60f);
 
         print("fish be runnin");
-    }
-
-    public void Caught()
-    {
-        //Logic for when fishing rod catches fish
-
-        print("i be catght");
-
-        rb.velocity = Vector3.zero;
     }
 
     public void Escape(Transform focusPos)
@@ -484,17 +503,42 @@ public class FishControl : MonoBehaviour
         Flee(focusPos);
     }
 
-    public void FishToPlayer() 
+    #endregion
+
+    #region Fish To Player
+
+    public void ActivateFishToPlayer()
     {
-        var FTPscript = gameObject.GetComponent<FishToPlayer>();
-
-        FTPscript.enabled = true;
-        FTPscript.Player = _playerPos;
-
         rb.velocity = Vector3.zero;
         canBeFished = false;
-        enabled = false;
+        isAboutToDie = true;
     }
+
+    private void FishToPlayer(float distanceBetween) 
+    {
+        if (pointInTravel > 0.25)
+            pointInTravel = Mathf.Clamp01(Vector3InverseLerp(_playerPos.position, startingPoint, transform.position));
+
+        if (distanceBetween > 2)
+        {
+            transform.Rotate(0f, 5f, 0f, Space.Self);
+            transform.localScale = new Vector3(pointInTravel, pointInTravel, pointInTravel);
+            transform.position = Vector3.Slerp(transform.position, _playerPos.position, Time.deltaTime);
+        }
+        else
+            EventManager.Instance.FishDisable(gameObject);
+    }
+
+    private float Vector3InverseLerp(Vector3 a, Vector3 b, Vector3 value)
+    {
+        Vector3 AB = b - a;
+        Vector3 AV = value - a;
+        return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
+    }
+
+    #endregion
+
+    #region Gizmo
 
     private void OnDrawGizmosSelected()
     {
@@ -505,8 +549,9 @@ public class FishControl : MonoBehaviour
             Gizmos.DrawWireCube(Vector3.forward * colliderRange, colliderSize / 1.05f);
         }
     }
-}
 
+    #endregion
+}
 
 /*
     Fishstreet Boys - I want to fish.

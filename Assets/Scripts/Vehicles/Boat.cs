@@ -15,6 +15,7 @@ public class Boat : MonoBehaviour
 
     private bool isActive = false;
     private bool playerLeft = true;
+    public bool onWater = false;
 
     private GameObject Player;
     private Transform playerReturnPos;
@@ -32,10 +33,13 @@ public class Boat : MonoBehaviour
     {
         if (isActive)
         {
-            if (Input.GetAxis("Vertical") != 0.0f)
-                rb.AddForce(_Speed * 10000f * Input.GetAxis("Vertical") * Time.deltaTime * transform.forward, ForceMode.Force);
+            if (onWater)
+            {
+                if (Input.GetAxis("Vertical") != 0.0f)
+                    rb.AddForce(_Speed * 10000f * Input.GetAxis("Vertical") * Time.deltaTime * transform.forward, ForceMode.Force);
 
-            transform.Rotate(0f, Input.GetAxis("Rotate"), 0f, Space.Self);
+                transform.Rotate(0f, Input.GetAxis("Rotate"), 0f, Space.Self);
+            }
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -83,11 +87,17 @@ public class Boat : MonoBehaviour
 
             playerLeft = false;
         }
+
+        if (other.CompareTag("Water"))
+            onWater = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player") && !playerLeft)
             playerLeft = true;       
+
+        if (other.CompareTag("Water"))
+            onWater = false;
     }
 }

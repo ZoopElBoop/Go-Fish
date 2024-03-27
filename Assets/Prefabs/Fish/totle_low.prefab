@@ -132,10 +132,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1352564240478575286}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ffc3b0dbed1ed9349bea557cc189740b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6014384027292795095}
     - targetCorrespondingSourceObject: {fileID: 8123140325829994652, guid: ffc3b0dbed1ed9349bea557cc189740b,
         type: 3}
       insertIndex: -1
@@ -263,16 +259,3 @@ MonoBehaviour:
   newAngle: {x: 0, y: 0, z: 0}
   rayMinDistance: 0
   viewCollisionBox: 0
---- !u!114 &6014384027292795095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5354247507827787981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b3ec9782e7d4140952596c470f3ef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
