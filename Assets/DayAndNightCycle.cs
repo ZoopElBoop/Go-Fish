@@ -60,9 +60,7 @@ public class DayAndNightCycle : MonoBehaviour
 
     private void UpdateDayAndNightCycle()
     {
-        float currentTime = 0f;
-
-        currentTime = gameTime;
+        float currentTime = gameTime;
 
         float sunPos = Mathf.Repeat(currentTime + 0.25f, 1f);
         directionalLight.transform.rotation = Quaternion.Euler(sunPos * 360f, 0f, 0f);
