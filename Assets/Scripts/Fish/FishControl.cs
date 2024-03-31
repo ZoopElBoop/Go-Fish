@@ -107,8 +107,6 @@ public class FishControl : MonoBehaviour
         canBeFished = FishDataManager.Instance.GetCanBeCaught(_dataIndex);
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
-
-        ActivateFishToPlayer();
     }
 
     #endregion

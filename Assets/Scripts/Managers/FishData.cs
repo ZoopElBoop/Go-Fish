@@ -77,9 +77,11 @@ public class FishData : ScriptableObject
 
     private void StopPlay()
     {
+#if UNITY_EDITOR
         if (EditorApplication.isPlaying)
         {
             UnityEditor.EditorApplication.isPlaying = false;
         }
+#endif
     }
 }

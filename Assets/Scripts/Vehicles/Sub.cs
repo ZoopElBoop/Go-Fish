@@ -10,14 +10,19 @@ public class Sub : MonoBehaviour
     private float floatBase;
 
     private bool isActive = false;
-    private bool playerLeft = true;
 
     [Header("Sub Cameras")]
     public Camera _subOuterCam;
     public Camera _subInnerCam;
 
+    [Header("Harpoon Spawning")]
+    public GameObject Harpoon;
+    public Transform _harpoonSpawn;
+    public int _harpoonSpawnLimit;
+    public int _harpoonSpawnCount;
+
     private Transform playerReturnPos;
-    [SerializeField] private GameObject fishSpawner;
+    private GameObject fishSpawner;
     private GameObject Player;
 
     private Vector3 startingPos;
@@ -58,6 +63,9 @@ public class Sub : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))           
                 PlayerExit();
+
+            if (Input.GetMouseButtonDown(0) && _harpoonSpawnCount < _harpoonSpawnLimit)
+                HarpoonFire();
             
             if (transform.eulerAngles.z >= 15f && transform.eulerAngles.z <= 350f)
             {
@@ -72,8 +80,8 @@ public class Sub : MonoBehaviour
     {
         SetFishSpawner(Player.transform);
 
-        Player.SetActive(true);
         Player.transform.SetPositionAndRotation(playerReturnPos.position, playerReturnPos.rotation);
+        Player.SetActive(true);
 
         isActive = false;
         _subOuterCam.enabled = false;
@@ -103,9 +111,17 @@ public class Sub : MonoBehaviour
         fishSpawner.transform.parent = setTo;
     }
 
+    private void HarpoonFire()
+    {
+        _harpoonSpawnCount++;
+        Instantiate(Harpoon, _harpoonSpawn.position, _harpoonSpawn.rotation);
+        rb.velocity = transform.forward * -3f;
+
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && playerLeft)
+        if (other.CompareTag("Player"))
         {
             Player = other.gameObject;
 
@@ -115,14 +131,6 @@ public class Sub : MonoBehaviour
 
             isActive = true;
             _subOuterCam.enabled = true;
-
-            playerLeft = false;
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player") && !playerLeft)
-            playerLeft = true;
     }
 }

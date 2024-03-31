@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class BuoyancyObject : MonoBehaviour
 {
+    private Rigidbody rb;
+
     [Header("Floating Points")]
     [SerializeField] private List<Transform> _floatingPoint = new();
     private int floatingPointsUnderwater;
@@ -20,8 +22,6 @@ public class BuoyancyObject : MonoBehaviour
     [Range(1.0f, 500.0f)]
     public float _floatingPower = 15f;
     [SerializeField] private float _waterHeight = 0;
-
-    [SerializeField] Rigidbody rb;
 
     private bool isUnderwater;
 

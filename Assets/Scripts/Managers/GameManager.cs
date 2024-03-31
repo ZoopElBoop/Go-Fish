@@ -3,20 +3,27 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    #region Variables
+    #region Private Variables (Only for GameManager)
 
     public static GameManager Instance;
 
     private List<GameObject> activeFishBuffer = new();          //cannot be seen in inspector as race condition occurs between adding & removing items due to uning inspector overhead 
-                                                                //basically no look at list in engine :(
-    public float fishCoin;
 
     [Header("FPS Cap")]                                                          
     [SerializeField] [Min(1)] private int fpsLimit;
 
     #endregion
 
-    #region Start Variables
+    #region Public Variables (For all scripts)
+
+    [Header("Game Variables")]
+
+    public float fishCoin;
+    public Camera mainCam;
+
+    #endregion
+
+    #region Start Function
 
     private void Awake()
     {
@@ -28,7 +35,10 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this);
 
+
         Application.targetFrameRate = fpsLimit;
+
+        mainCam = Camera.main; 
     }
 
     #endregion
@@ -66,4 +76,9 @@ public class GameManager : MonoBehaviour
         }      
         return null;
     }
+
+
+    public void SwitchMainCamera(Camera newMain) { mainCam = newMain; }
+
+    public Camera GetMainCamera() { return mainCam; }
 }
