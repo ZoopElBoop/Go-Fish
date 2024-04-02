@@ -1,4 +1,20 @@
 ============
+GO FISH V0.6
+============
+Major Changes
+- 
+
+Minor Changes
+- Player light now adjusts to time of day
+
+Bug Fixes
+- Fixed sub not colliding with objects
+- Partially fixed objects still being lit in darkness (requires more work)
+
+Known Issues
+- 
+
+============
 GO FISH V0.5
 ============
 Major Changes

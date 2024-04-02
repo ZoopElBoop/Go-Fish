@@ -7,11 +7,17 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class DayAndNightCycle : MonoBehaviour
 {
+    public static DayAndNightCycle Instance;
+
     [Header("In-Game Time (In Seconds)")]
-    [SerializeField][Min(1)] private float dayTimeCycle;
-    [Range(0.0f, 1.0f)] public float gameTime;
+    [SerializeField][Min(1)] private float dayTimeCycle; 
+    [Space]
+    [SerializeField][Range(0.0f, 1.0f)] private float gameTime;
+    [SerializeField][Range(0.0f, 1.0f)] private float transitionTime;
+    [SerializeField][Min(0)] private int numOfDays;
+    [Space]
     [SerializeField] private bool overrideGameTimeReset = false;
-    public bool _freezeGameTime = false;
+    [SerializeField] private bool freezeGameTime = false;
 
     [Header("Gradients")]
     [SerializeField] private Gradient fogGradient;
@@ -29,34 +35,51 @@ public class DayAndNightCycle : MonoBehaviour
     [SerializeField][Range(0, 0.25f)] private float minimumWaterGlossiness;
     [SerializeField][Range(0.25f, 1)] private float maximumWaterGlossiness;
     [Space]
-    [SerializeField][Range(0, 0.45f)] private float nightStart = 0.2f;
-    [SerializeField][Range(0.55f, 1)] private float nightEnd = 0.8f;
-    [SerializeField][Range(0f, 0.1f)] private float dayToNightTransition = 0.05f;
+    [SerializeField][Range(0, 0.3f)] private float nightStart = 0.2f;
+    [SerializeField][Range(0.7f, 1)] private float nightEnd = 0.8f;
+    [SerializeField][Range(0f, 0.2f)] private float dayToNightTransition = 0.1f;
 
-    private void Start()
+    private void Awake()
     {
-        if (!overrideGameTimeReset)
-            gameTime = 0f;
-    }
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+            return;
+#endif
 
+        Instance = this;
+
+        if (!overrideGameTimeReset)
+        {
+            numOfDays = 0;
+            gameTime = 0f;
+        }
+    }
+    
     private void Update()
     {
         UpdateGameTime();
+        transitionTime = CalculateTransitionTime(gameTime);
+
         UpdateDayAndNightCycle();
         RotateSkyBox();
     }
 
     private void UpdateGameTime() 
     {
-
 #if UNITY_EDITOR
         if (!Application.isPlaying)
             return;
 #endif
-        if (!_freezeGameTime)
+
+        if (!freezeGameTime)
         {
             gameTime += Time.deltaTime / dayTimeCycle;
-            gameTime = Mathf.Repeat(gameTime, 1);
+
+            if (gameTime >= 1f)
+            {
+                numOfDays++;
+                gameTime = 0f;
+            }
         }
     }
 
@@ -74,32 +97,23 @@ public class DayAndNightCycle : MonoBehaviour
 
         skyboxMaterial.SetColor("_Tint", skyboxTintGradient.Evaluate(currentTime));
 
-        ChangeSeaGlossiness(currentTime);
+        ChangeSeaGlossiness();
     }
 
-    private void ChangeSeaGlossiness(float time) 
+    private void ChangeSeaGlossiness() 
     {
-        if (time < nightStart || time > nightEnd)
-            return;
-        else if (time > nightStart + dayToNightTransition && time < nightEnd - dayToNightTransition)
-            return;
+        float glossiness = GetTimeToNight(minimumWaterGlossiness, maximumWaterGlossiness);
 
-        if (time >= nightStart && time < nightStart + dayToNightTransition)
-        {
-            time = Mathf.InverseLerp(nightStart + dayToNightTransition, nightStart, time);
-            time = Mathf.Lerp(minimumWaterGlossiness, maximumWaterGlossiness, time);
-        }
-        else if (time >= nightEnd - dayToNightTransition)
-        {
-            time = Mathf.InverseLerp(nightEnd - dayToNightTransition, nightEnd, time);
-            time = Mathf.Lerp(minimumWaterGlossiness, maximumWaterGlossiness, time);
-        }
-
-        waterMaterial.SetFloat("_Glossiness", time);
+        waterMaterial.SetFloat("_Glossiness", glossiness);
     }
 
     private void RotateSkyBox() 
     {
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+            return;
+#endif
+
         float currentRotation = skyboxMaterial.GetFloat("_Rotation");
         float newRotation = currentRotation + rotationSpeed * Time.deltaTime;
 
@@ -107,9 +121,56 @@ public class DayAndNightCycle : MonoBehaviour
         skyboxMaterial.SetFloat("_Rotation", newRotation);
     }
 
+    #region Cycle Transition Time Functions
+
+    //Calculates how far through transition to night from day
+    // 1 = day
+    // 0 = night
+    private float CalculateTransitionTime(float time)
+    {
+        if (time < nightStart || time > nightEnd)   //returns as still in day
+            return 1f;
+        else if (time > nightStart + dayToNightTransition && time < nightEnd - dayToNightTransition)    //returns as in night
+            return 0f;
+
+        //gets value between 0-1 of how far it is into day/night transition
+        if (time <= nightStart + dayToNightTransition)  //transitioning to night
+            time = Mathf.InverseLerp(nightStart + dayToNightTransition, nightStart, time);
+        else                                            //transitioning to day
+            time = Mathf.InverseLerp(nightEnd - dayToNightTransition, nightEnd, time);
+
+        return time;
+    }
+
+    //Lerps betweem min & max depending on how far through transition
+    //max = day
+    //min = night
+    private float DayToNightChange(float min, float max)
+    {
+        return Mathf.Lerp(min, max, transitionTime);
+    }
+
+    //Lerps betweem min & max depending on how far through transition & inverts value
+    //min = day
+    //max = night
+    private float InverseDayToNightChange(float min, float max)
+    {
+        return max - DayToNightChange(min, max);
+    }
+
+    public float GetTimeToNight(float minValue, float maxValue) { return DayToNightChange(minValue, maxValue); }
+    public float GetTimeToDay(float minValue, float maxValue) { return InverseDayToNightChange(minValue, maxValue); }
+
+    #endregion
+
+    public float GetTime() { return gameTime; }
+    public int GetDay() { return numOfDays; }
+    public void FreezeTime(bool status) { freezeGameTime = status; }
+
     private void OnApplicationQuit()
     {
         skyboxMaterial.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f));
+        skyboxMaterial.SetFloat("_Rotation", 0f);
         waterMaterial.SetFloat("_Glossiness", maximumWaterGlossiness);
     }
 }

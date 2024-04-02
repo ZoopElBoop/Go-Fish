@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     private List<GameObject> activeFishBuffer = new();          //cannot be seen in inspector as race condition occurs between adding & removing items due to uning inspector overhead 
 
+    //public DayAndNightCycle timeCycle;
+
     [Header("FPS Cap")]                                                          
     [SerializeField] [Min(1)] private int fpsLimit;
 
@@ -38,7 +40,9 @@ public class GameManager : MonoBehaviour
 
         Application.targetFrameRate = fpsLimit;
 
-        mainCam = Camera.main; 
+        mainCam = Camera.main;
+
+        //timeCycle = GetComponent<DayAndNightCycle>();
     }
 
     #endregion

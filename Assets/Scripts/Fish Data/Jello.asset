@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Fishk: {fileID: 7683416736483790789, guid: cb87856b3b01a4249b3f6f02cc93fc70, type: 3}
   _Health: 1
-  _Speed: 1
+  _Speed: 3
   _rotationSpeed: 5
   _canBeCaught: 1
   _spawnDepthStart: -1
@@ -27,5 +27,5 @@ MonoBehaviour:
   _despawnRangeMulti: 1
   _baseValue: 2
   _valueChangeCoefficient: 0.1
-  _FishkImig: {fileID: 0}
-  _FishkDesc: 
+  _FishkImage: {fileID: 0}
+  _FishkDescription: 
