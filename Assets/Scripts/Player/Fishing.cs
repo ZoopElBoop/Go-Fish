@@ -18,6 +18,8 @@ public class Fishing : MonoBehaviour
     [SerializeField] private float _bobberSpawnRangeMax = 3f;
     [Range(0.1f, 10.0f)]
     [SerializeField] private float _bobberSpawnRangeMin = 12f;
+    [Range(20f, 250.0f)]
+    [SerializeField] private float _bobberMaxDistanceFromPlayer = 80f;
 
     [Header("Bobber Raycast Mask Detection")]
     [SerializeField] private LayerMask groundMask;
@@ -277,7 +279,7 @@ public class Fishing : MonoBehaviour
     {
         float distanceBetween = (_bobberSpawnPoint.position - bobberInstance.transform.position).sqrMagnitude;
 
-        return distanceBetween > 80 * 80;
+        return distanceBetween > _bobberMaxDistanceFromPlayer * _bobberMaxDistanceFromPlayer;
     }
 
     private void ObliterateBobber() 
@@ -360,7 +362,7 @@ public class Fishing : MonoBehaviour
 
     public void Fishking(GameObject fish)
     {
-        caughtFishScript = GameManager.Instance.GetFishConrolScript(fish);
+        caughtFishScript = GameManager.Instance.GetFishControlScript(fish);
 
         if (caughtFishScript == null)
             return;
@@ -402,12 +404,16 @@ public class Fishing : MonoBehaviour
             InventoryManager.Instance.StoreOnBoat(caughtFishScript);
         else
             InventoryManager.Instance.StoreOnPlayer(caughtFishScript);
+
+        caughtFishScript = null;
     }
 
     void Escape()
     {
         caughtFishScript.Escape(transform);
         UIManager.Instance.FishingSliderActive(false);
+
+        caughtFishScript = null;
     }
 
     #endregion

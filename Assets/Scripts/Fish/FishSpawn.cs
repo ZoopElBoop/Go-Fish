@@ -178,15 +178,11 @@ public class FishSpawn : MonoBehaviour
                 break;
         }
 
-        GameObject tempFishHolder = ObjectPoolManager.Instance.SpawnObject(fishToSpawn, spawnPos, Quaternion.identity);
-
-        var fishScript = GameManager.Instance.GetFishConrolScript(tempFishHolder);
+        FishControl fishScript = GameManager.Instance.SpawnFishAndGetScript(fishToSpawn, spawnPos, Quaternion.identity);
 
         fishScript._playerPos = transform;
         fishScript._destroyRange = _destroyRange * FishDataManager.Instance.GetDespawnMultiplier(index);
         fishScript._dataIndex = index;
-
-        GameManager.Instance.AddFishToBuffer(tempFishHolder);
     }
 
     private float GetNewYPos(int index)

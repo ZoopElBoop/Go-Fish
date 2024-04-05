@@ -470,7 +470,7 @@ public class FishControl : MonoBehaviour
         if (collisionBox != null)
             Destroy(collisionBox);      //TBC
 
-        EventManager.Instance.FishDisable(gameObject);
+        GameManager.Instance.DestroyFish(gameObject);
     }
 
     public void Attract(Transform focusPos)
@@ -494,14 +494,14 @@ public class FishControl : MonoBehaviour
     {
         RotateTo(new Vector3(transform.position.x - focusPos.position.x, transform.position.y - focusPos.position.y, 0f), false);
 
-        print("fish be runnin");
+        print($"fish be runnin {gameObject.name}");
     }
 
     public void Escape(Transform focusPos)
     {
         //Logic for when fish escapes from caught event
 
-        print("ran awaaaaaaaaaaaaaaaaa");
+        print($"ran awaaaaaaaaaaaaaaaaa {gameObject.name}");
 
         rb.velocity = Vector3.zero;
 
@@ -514,6 +514,7 @@ public class FishControl : MonoBehaviour
 
     public void ActivateFishToPlayer()
     {
+        attractPoint = null;
         rb.velocity = Vector3.zero;
         startingPoint = transform.position;
         print("ded");
@@ -534,7 +535,7 @@ public class FishControl : MonoBehaviour
             transform.position = Vector3.Slerp(transform.position, _playerPos.position, Time.deltaTime);
         }
         else
-            EventManager.Instance.FishDisable(gameObject);
+            GameManager.Instance.DestroyFish(gameObject);
     }
 
     private float Vector3InverseLerp(Vector3 a, Vector3 b, Vector3 value)

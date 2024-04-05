@@ -9,8 +9,8 @@ public class BuoyancyObject : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Floating Points")]
-    [SerializeField] private List<Transform> _floatingPoint = new();
-    private int floatingPointsUnderwater;
+    public List<Transform> _floatingPoint = new();
+    [HideInInspector] public int floatingPointsUnderwater;
 
     [Header("Drag Coefficients")]
     [SerializeField] private float _underwaterDrag = 3f;
@@ -40,13 +40,13 @@ public class BuoyancyObject : MonoBehaviour
         }
     }
 
-/*    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Water"))
-            _waterHeight = other.gameObject.transform.position.y;
-    }*/
+    /*    private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Water"))
+                _waterHeight = other.gameObject.transform.position.y;
+        }*/
 
-    // Update is called once per frame
+
     void FixedUpdate()
     {
         floatingPointsUnderwater = 0;
@@ -55,9 +55,10 @@ public class BuoyancyObject : MonoBehaviour
         { 
             float diff = Mathf.Clamp(_floatingPoint[i].position.y - _waterHeight, -1f, 1f);
 
-            if (diff < 0)   //checks if flaoting point is below waterline
+            if (diff < 0)   //checks if floating point is below waterline
             {
                 rb.AddForceAtPosition(Vector3.up * _floatingPower * Mathf.Abs(diff), _floatingPoint[i].transform.position, ForceMode.Force);
+
                 floatingPointsUnderwater++;
 
                 if (!isUnderwater)

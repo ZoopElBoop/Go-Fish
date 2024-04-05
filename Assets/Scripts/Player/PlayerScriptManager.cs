@@ -40,7 +40,7 @@ public class PlayerScriptManager : MonoBehaviour
         {
             case "Controller":
                 characterController.enabled = status;
-                    break;
+                break;
             case "Movement":
                 playerMovement.enabled = status;
                 break;

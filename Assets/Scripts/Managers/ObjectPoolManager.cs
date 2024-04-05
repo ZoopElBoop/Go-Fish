@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager Instance;
 
-    private List<GameObject> ObjectPool = new();
+    private List<GameObject> FishPool = new();
+    private List<GameObject> HarpoonPool = new();
 
     [SerializeField][Min(1)] private int duplicateLimit;
 
@@ -21,12 +23,30 @@ public class ObjectPoolManager : MonoBehaviour
         }
         else
             Destroy(this);
-
-        //Events Init
-        EventManager.Instance.OnFishDisable += DespawnObject;
     }
 
-    private GameObject CheckPoolForAnyDuplicates(GameObject findInPool)
+    private List<GameObject> GetPool(string Type)
+    {
+        switch (Type)
+        {
+            case "Fish":
+                return FishPool;
+
+            case "Harpoon":
+                return HarpoonPool;
+
+            default:
+                Debug.LogError($"Pool {Type} not found to give!!!");
+                break;
+        }
+
+        Debug.Break();
+        return null;
+    }
+
+    #region Duplicate Checks
+
+    private GameObject CheckPoolForAnyDuplicates(List<GameObject> pool, GameObject findInPool)
     {
         /*
         This is honestly one of the worst ideas i have ever had
@@ -39,34 +59,40 @@ public class ObjectPoolManager : MonoBehaviour
          */
         string conpareTo = findInPool.name + "(Clone)";
 
-        for (int i = 0; i < ObjectPool.Count; i++)       
-            if (conpareTo == ObjectPool[i].name)
-                return ObjectPool[i];
+        for (int i = 0; i < pool.Count; i++)       
+            if (conpareTo == pool[i].name)
+                return pool[i];
         
         return null;
     }
 
-    private int CheckPoolForNumberOfDuplicates(GameObject findInPool)
+    private int CheckPoolForNumberOfDuplicates(List<GameObject> pool, GameObject findInPool)
     {
         int duplicates = 0;
 
-        for (int i = 0; i < ObjectPool.Count; i++)        
-            if (findInPool.name == ObjectPool[i].name)
+        for (int i = 0; i < pool.Count; i++)        
+            if (findInPool.name == pool[i].name)
                 duplicates++;
         
         return duplicates;
     }
 
-    public GameObject SpawnObject(GameObject toSpawn, Vector3 position, Quaternion rotation)
+    #endregion
+
+    #region Spawn
+
+    public GameObject SpawnObject(string Type, GameObject toSpawn, Vector3 position, Quaternion rotation)
     {
-        GameObject pooledObject = CheckPoolForAnyDuplicates(toSpawn);
+        List<GameObject> pool = GetPool(Type);
+
+        GameObject pooledObject = CheckPoolForAnyDuplicates(pool, toSpawn);
 
         if (pooledObject != null)
         {
             pooledObject.transform.SetPositionAndRotation(position, rotation);
             pooledObject.SetActive(true);
 
-            ObjectPool.Remove(pooledObject);
+            pool.Remove(pooledObject);
 
             print("pooled");
             return pooledObject;
@@ -76,26 +102,29 @@ public class ObjectPoolManager : MonoBehaviour
             toSpawn = Instantiate(toSpawn, position, rotation);
             print("spawned");
             return toSpawn;
-        }    
+        }
     }
 
-    public void DespawnObject(GameObject toDespawn)
+    #endregion
+
+    #region Despawn
+
+    public void DespawnObject(string Type, GameObject toDespawn)
     {
+        List<GameObject> pool = GetPool(Type);
+
         print("DESPAWNING");
 
         if (toDespawn.activeSelf)
             toDespawn.SetActive(false);
 
-        int numOfDuplicates = CheckPoolForNumberOfDuplicates(toDespawn);
+        int numOfDuplicates = CheckPoolForNumberOfDuplicates(pool, toDespawn);
 
-        if (numOfDuplicates >= duplicateLimit)        
-            Destroy(toDespawn);      
-        else       
-            ObjectPool.Add(toDespawn);       
+        if (numOfDuplicates >= duplicateLimit)
+            Destroy(toDespawn);
+        else
+            pool.Add(toDespawn);
     }
 
-    private void OnDestroy()
-    {
-        EventManager.Instance.OnFishDisable -= DespawnObject;
-    }
+    #endregion
 }

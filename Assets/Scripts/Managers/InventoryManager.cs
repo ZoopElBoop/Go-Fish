@@ -62,6 +62,22 @@ public class InventoryManager : MonoBehaviour
     public List<FishStoredData> GetFromBoat() { return fishStoredOnBoat; }
     public List<FishStoredData> GetFromSub() { return fishStoredOnSub; }
 
+    public List<FishStoredData> TotalStored() 
+    {
+        List<FishStoredData> totalFishStored = new();
+
+        for (int i = 0; i < FishDataManager.Instance.GetFishDataSize(); i++)
+        {
+            int totalFish = fishStoredOnPlayer[i].count + fishStoredOnBoat[i].count + fishStoredOnSub[i].count;
+
+            totalFishStored.Add(new FishStoredData
+            {
+                fishName = fishStoredOnPlayer[i].fishName,
+                count = totalFish
+            });
+        }
+        return totalFishStored;
+    }
 }
 
 [System.Serializable]

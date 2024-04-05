@@ -49,8 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85b7716bff50964d89a03a121bf021a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishCoin: 0
   fpsLimit: 60
+  fishCoin: 0
+  mainCam: {fileID: 0}
 --- !u!114 &2569525689953128123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,9 +66,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishDataInput:
   - {fileID: 11400000, guid: 8e48c361e0c0f254a85a7e371ec978eb, type: 2}
+  - {fileID: 11400000, guid: 25979e212e1face4980cbb35d13bf2e9, type: 2}
   - {fileID: 11400000, guid: ae6a91ea249be0b4eaac2374d515f7dc, type: 2}
   - {fileID: 11400000, guid: 110f1a37f9306fa4f9712e453b9167b0, type: 2}
-  - {fileID: 11400000, guid: 25979e212e1face4980cbb35d13bf2e9, type: 2}
 --- !u!114 &8571563457282190935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,10 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f559a3c142c03a24cb9f926fc4137ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayTimeCycle: 300
-  gameTime: 0.214
-  overrideGameTimeReset: 1
-  _freezeGameTime: 0
+  dayTimeCycle: 30
+  overrideGameTimeReset: 0
+  freezeGameTime: 0
+  gameTime: 0.267
+  transitionTime: 0.3300002
+  numOfDays: 0
   fogGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -224,7 +227,7 @@ MonoBehaviour:
   waterMaterial: {fileID: 2100000, guid: 16ca5feb16ef2d744852096378401523, type: 2}
   rotationSpeed: 1
   minimumWaterGlossiness: 0
-  maximumWaterGlossiness: 0.574
+  maximumWaterGlossiness: 0.5
   nightStart: 0.2
   nightEnd: 0.8
   dayToNightTransition: 0.1
@@ -240,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12415de0470d8c449139dac3b9353f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duplicateLimit: 2
+  duplicateLimit: 5
 --- !u!114 &2991716267802634616
 MonoBehaviour:
   m_ObjectHideFlags: 0

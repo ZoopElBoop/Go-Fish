@@ -16,6 +16,7 @@ public class EventManager : MonoBehaviour
             Destroy(this);      
     }
 
+    #region Fishing
 
     //When fish is caught by the wobber
     // Wob --> Fishing 
@@ -23,15 +24,6 @@ public class EventManager : MonoBehaviour
     public void FishCaught(GameObject Catch)
     {
         OnFishCaught?.Invoke(Catch);
-    }
-
-
-    //When fish is destroyed
-    // FishControl --> ObjectPoolManager
-    public event Action<GameObject> OnFishDisable;
-    public void FishDisable(GameObject fishToKill)
-    {
-        OnFishDisable?.Invoke(fishToKill);
     }
 
 
@@ -43,6 +35,9 @@ public class EventManager : MonoBehaviour
         OnDestroyWobber?.Invoke();
     }
 
+    #endregion
+
+    #region Boat Camera Switch
 
     //When player enters boat
     // Boat --> Fishing
@@ -60,4 +55,6 @@ public class EventManager : MonoBehaviour
     {
         OnBoatExit?.Invoke();
     }
+
+    #endregion
 }

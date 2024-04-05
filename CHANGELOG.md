@@ -10,6 +10,8 @@ Minor Changes
 Bug Fixes
 - Fixed sub not colliding with objects
 - Partially fixed objects still being lit in darkness (requires more work)
+- Stopped boat & sub from going sub-orbital
+- UI popups now face player
 
 Known Issues
 - 

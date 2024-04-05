@@ -33,7 +33,7 @@ public class Wob : MonoBehaviour
 
     private void FishCatch(GameObject fish)
     {
-        var fc = GameManager.Instance.GetFishConrolScript(fish);
+        var fc = GameManager.Instance.GetFishControlScript(fish);
 
         if (fc.canBeFished)
         {

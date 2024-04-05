@@ -424,11 +424,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6539612057575677218}
+      addedObject: {fileID: 3234651118123382836}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3234651118123382836}
+      addedObject: {fileID: 6539612057575677218}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 865fe04d0e5d6884bbccdd07b4a160e6,
         type: 3}
       insertIndex: -1
@@ -489,21 +489,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.052739844, y: 0.08304488, z: 0.12339024}
   m_Center: {x: 0, y: 0.03533411, z: 0.015002327}
---- !u!114 &6539612057575677218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5678855144965555884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0192571e933572945b56e4fbe186d354, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Speed: 5
-  _playerPos: {fileID: 2657618429283141010}
-  _boatCam: {fileID: 4284379987178296372}
 --- !u!54 &3234651118123382836
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -531,6 +516,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6539612057575677218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5678855144965555884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0192571e933572945b56e4fbe186d354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Speed: 5
+  _boatCam: {fileID: 4284379987178296372}
+  _playerBoatPos: {fileID: 0}
+  onWater: 0
 --- !u!114 &8193947364529700068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,6 +555,5 @@ MonoBehaviour:
   _airAngularDrag: 0.05
   _floatingPower: 500
   _waterHeight: 0
-  rb: {fileID: 0}
   gizmosActive: 1
   gizmosSize: 1

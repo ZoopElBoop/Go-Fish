@@ -10,14 +10,13 @@ public class DayAndNightCycle : MonoBehaviour
     public static DayAndNightCycle Instance;
 
     [Header("In-Game Time (In Seconds)")]
-    [SerializeField][Min(1)] private float dayTimeCycle; 
+    [SerializeField][Min(1)] private float dayTimeCycle = 60f; 
+    [SerializeField] private bool overrideGameTimeReset = false;
+    [SerializeField] private bool freezeGameTime = false;
     [Space]
     [SerializeField][Range(0.0f, 1.0f)] private float gameTime;
     [SerializeField][Range(0.0f, 1.0f)] private float transitionTime;
-    [SerializeField][Min(0)] private int numOfDays;
-    [Space]
-    [SerializeField] private bool overrideGameTimeReset = false;
-    [SerializeField] private bool freezeGameTime = false;
+    [SerializeField][Min(0)] private int numOfDays = 0;
 
     [Header("Gradients")]
     [SerializeField] private Gradient fogGradient;
@@ -85,17 +84,15 @@ public class DayAndNightCycle : MonoBehaviour
 
     private void UpdateDayAndNightCycle()
     {
-        float currentTime = gameTime;
-
-        float sunPos = Mathf.Repeat(currentTime + 0.25f, 1f);
+        float sunPos = Mathf.Repeat(gameTime + 0.25f, 1f);
         directionalLight.transform.rotation = Quaternion.Euler(sunPos * 360f, 0f, 0f);
 
-        RenderSettings.fogColor = fogGradient.Evaluate(currentTime);
-        RenderSettings.ambientLight = ambientGradient.Evaluate(currentTime);
+        RenderSettings.fogColor = fogGradient.Evaluate(gameTime);
+        RenderSettings.ambientLight = ambientGradient.Evaluate(gameTime);
 
-        directionalLight.color = directionalLightGradient.Evaluate(currentTime);
+        directionalLight.color = directionalLightGradient.Evaluate(gameTime);
 
-        skyboxMaterial.SetColor("_Tint", skyboxTintGradient.Evaluate(currentTime));
+        skyboxMaterial.SetColor("_Tint", skyboxTintGradient.Evaluate(gameTime));
 
         ChangeSeaGlossiness();
     }
@@ -145,7 +142,7 @@ public class DayAndNightCycle : MonoBehaviour
     //Lerps betweem min & max depending on how far through transition
     //max = day
     //min = night
-    private float DayToNightChange(float min, float max)
+    public float GetTimeToNight(float min, float max)
     {
         return Mathf.Lerp(min, max, transitionTime);
     }
@@ -153,13 +150,10 @@ public class DayAndNightCycle : MonoBehaviour
     //Lerps betweem min & max depending on how far through transition & inverts value
     //min = day
     //max = night
-    private float InverseDayToNightChange(float min, float max)
+    public float GetTimeToDay(float min, float max)
     {
-        return max - DayToNightChange(min, max);
+        return max - GetTimeToNight(min, max);
     }
-
-    public float GetTimeToNight(float minValue, float maxValue) { return DayToNightChange(minValue, maxValue); }
-    public float GetTimeToDay(float minValue, float maxValue) { return InverseDayToNightChange(minValue, maxValue); }
 
     #endregion
 

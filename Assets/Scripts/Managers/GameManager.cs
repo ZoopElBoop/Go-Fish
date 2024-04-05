@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,27 +50,26 @@ public class GameManager : MonoBehaviour
 
     #region Fish Buffer
 
-    public void AddFishToBuffer(GameObject fishToAdd) 
+    private void AddFishToBuffer(GameObject fishToAdd) 
     {
         activeFishBuffer.Add(fishToAdd);
     }
 
-    public void RemoveFishFromBuffer(GameObject fishToRemove) 
+    private void RemoveFishFromBuffer(GameObject fishToRemove) 
     {
         fishToRemove.SetActive(false);
 
         activeFishBuffer.RemoveAll(s => s.activeSelf == false);
 
-        ObjectPoolManager.Instance.DespawnObject(fishToRemove);
+        ObjectPoolManager.Instance.DespawnObject("Fish", fishToRemove);
     }
 
     public List<GameObject> GetFishBuffer() { return activeFishBuffer; }
-
-    public int GetFishBufferSize() { return activeFishBuffer.Count; }
+    public int GetFishBufferSize() => activeFishBuffer.Count;
 
     #endregion
 
-    public FishControl GetFishConrolScript(GameObject fish)
+    public FishControl GetFishControlScript(GameObject fish)
     {
         if (fish.transform.root.TryGetComponent<FishControl>(out var fc))
             return fc;
@@ -83,6 +83,38 @@ public class GameManager : MonoBehaviour
 
 
     public void SwitchMainCamera(Camera newMain) { mainCam = newMain; }
-
     public Camera GetMainCamera() { return mainCam; }
+
+
+    #region Spawn & Despawn Functions
+
+    public FishControl SpawnFishAndGetScript(GameObject toSpawn, Vector3 position, Quaternion rotation)
+    {
+        GameObject fish = ObjectPoolManager.Instance.SpawnObject("Fish", toSpawn, position, rotation); 
+        AddFishToBuffer(fish);
+        return GetFishControlScript(fish);
+    }
+/*
+    public GameObject SpawnFish(GameObject toSpawn, Vector3 position, Quaternion rotation)
+    {
+        return ObjectPoolManager.Instance.SpawnObject("Fish", toSpawn, position, rotation);
+    }*/
+
+    public GameObject SpawnHarpoon(GameObject toSpawn, Vector3 position, Quaternion rotation)
+    {
+        return ObjectPoolManager.Instance.SpawnObject("Harpoon", toSpawn, position, rotation);
+    }
+
+    public void DestroyFish(GameObject fishToKill)
+    {
+        ObjectPoolManager.Instance.DespawnObject("Fish", fishToKill);
+        RemoveFishFromBuffer(fishToKill);
+    }
+
+    public void DestroyHarpoon(GameObject harpoonToKill)
+    {
+        ObjectPoolManager.Instance.DespawnObject("Harpoon", harpoonToKill);
+    }
+
+    #endregion
 }

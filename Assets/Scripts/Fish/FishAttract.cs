@@ -6,7 +6,7 @@ public class FishAttract : MonoBehaviour
     {
         if (other.gameObject.transform.root.CompareTag("Fish"))
         {
-            var fc = GameManager.Instance.GetFishConrolScript(other.gameObject);
+            var fc = GameManager.Instance.GetFishControlScript(other.gameObject);
 
             if (fc == null)
                 return;

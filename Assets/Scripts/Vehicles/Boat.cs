@@ -3,6 +3,7 @@ using UnityEngine;
 public class Boat : MonoBehaviour
 {
     private Rigidbody rb;
+    private BuoyancyObject bo;
 
     public float _Speed;
     [SerializeField] private Camera _boatCam;
@@ -21,41 +22,75 @@ public class Boat : MonoBehaviour
     {
         playerReturnPos = GameObject.FindWithTag("Player Boat Exit").GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+        bo = GetComponent<BuoyancyObject>();
 
         startingPos = transform.position;
         startingRot = transform.rotation;
     }
 
-    void Update()
+    private void Update()
     {
         if (isActive)
         {
-            if (onWater)
+            if (Input.GetKeyDown(KeyCode.Space))           
+                ExitBoat();
+
+            transform.Rotate(0f, Input.GetAxis("Rotate"), 0f, Space.Self);
+
+            
+        }
+        FlipBoat();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isActive && Input.GetAxis("Vertical") != 0.0f)
+            rb.AddForce(GetMoveForce(), ForceMode.Force);
+    }
+
+    private Vector3 GetMoveForce() 
+    {
+        Vector3 moveForce = (_Speed * 1000f * Input.GetAxis("Vertical") * Time.fixedDeltaTime * transform.forward);
+
+        moveForce *= PointsOnWater();
+
+        return moveForce;
+    }
+
+    private float PointsOnWater()
+    {
+        return bo.floatingPointsUnderwater / bo._floatingPoint.Count;
+    }
+
+    private void FlipBoat()
+    {
+        if (PointsOnWater() == 1f)  //boat only flips itself back if fully in water
+        {
+            if (transform.eulerAngles.z >= 45f && transform.eulerAngles.z <= 315f)
             {
-                if (Input.GetAxis("Vertical") != 0.0f)
-                    rb.AddForce(_Speed * 10000f * Input.GetAxis("Vertical") * Time.deltaTime * transform.forward, ForceMode.Force);
+                Quaternion rotationEnd = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0f);
 
-                transform.Rotate(0f, Input.GetAxis("Rotate"), 0f, Space.Self);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Player.transform.parent = null;
-
-                Player.transform.SetPositionAndRotation(playerReturnPos.position, playerReturnPos.rotation);
-
-                rb.velocity = Vector3.zero;
-                transform.SetPositionAndRotation(startingPos, startingRot);
-
-                PlayerScriptManager.Instance.ShutDown("Controller", true);
-                PlayerScriptManager.Instance.ShutDown("Movement", true);
-
-                isActive = false;
-                _boatCam.enabled = false;
-
-                EventManager.Instance.BoatExit();
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, Time.deltaTime);
             }
         }
+    }
+
+    private void ExitBoat()
+    {
+        Player.transform.parent = null;
+
+        Player.transform.SetPositionAndRotation(playerReturnPos.position, playerReturnPos.rotation);
+
+        rb.velocity = Vector3.zero;
+        transform.SetPositionAndRotation(startingPos, startingRot);
+
+        PlayerScriptManager.Instance.ShutDown("Controller", true);
+        PlayerScriptManager.Instance.ShutDown("Movement", true);
+
+        isActive = false;
+        _boatCam.enabled = false;
+
+        EventManager.Instance.BoatExit();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -91,8 +126,5 @@ public class Boat : MonoBehaviour
     {
         if (other.CompareTag("Player") && !playerLeft)
             playerLeft = true;       
-
-        if (other.CompareTag("Water"))
-            onWater = false;
     }
 }

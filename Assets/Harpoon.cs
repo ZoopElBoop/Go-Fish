@@ -20,12 +20,12 @@ public class Harpoon : MonoBehaviour
 
         rb.isKinematic = true;
 
-        StartCoroutine(killSelf());
+        StartCoroutine(KillSelf());
     }
 
-    IEnumerator killSelf()
+    IEnumerator KillSelf()
     {
-        yield return new WaitForSeconds(20f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.DestroyHarpoon(gameObject);
     }
 }
