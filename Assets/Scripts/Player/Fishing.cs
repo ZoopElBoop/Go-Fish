@@ -89,8 +89,7 @@ public class Fishing : MonoBehaviour
 
     private void OnEnable()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        ///a
     }
 
     private void ResetFishing()
@@ -405,6 +404,8 @@ public class Fishing : MonoBehaviour
         else
             InventoryManager.Instance.StoreOnPlayer(caughtFishScript);
 
+        EventManager.Instance.FishCaught();
+
         caughtFishScript = null;
     }
 
@@ -463,9 +464,6 @@ public class Fishing : MonoBehaviour
     private void OnDisable()
     {
         ResetFishing();
-
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 
     private void OnDestroy()

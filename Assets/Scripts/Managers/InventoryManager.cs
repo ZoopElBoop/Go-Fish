@@ -78,6 +78,16 @@ public class InventoryManager : MonoBehaviour
         }
         return totalFishStored;
     }
+
+    public void RemoveAll()
+    {
+        for (int i = 0; i < FishDataManager.Instance.GetFishDataSize(); i++)
+        {
+            fishStoredOnPlayer[i].count = 0;
+            fishStoredOnBoat[i].count = 0;
+            fishStoredOnSub[i].count = 0;
+        }
+    }
 }
 
 [System.Serializable]

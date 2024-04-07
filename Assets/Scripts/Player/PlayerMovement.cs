@@ -52,13 +52,6 @@ public class PlayerMovement : MonoBehaviour
 
 	// public AK.Wwise.RTPC rtpc = null;
 
-	/// We use this to hide the mouse cursor.
-	void OnEnable()
-	{
-/*		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;*/
-	}
-	
 	/// This is where we move the Player object and Camera.
 	public void Update()
 	{

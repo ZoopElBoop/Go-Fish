@@ -5,7 +5,8 @@ using UnityEngine;
 public class UIPopup : MonoBehaviour
 {
     public GameObject PopupCanvas;
-    public Camera cam;
+    public bool followPlayer;
+    private Camera cam;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class UIPopup : MonoBehaviour
 
     private void Update()
     {
-        if (cam != null && PopupCanvas.activeSelf)
+        if (followPlayer && cam != null && PopupCanvas.activeSelf)
             PopupCanvas.transform.rotation = Quaternion.LookRotation(PopupCanvas.transform.position - cam.transform.position);
     }
 

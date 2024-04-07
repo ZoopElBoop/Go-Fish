@@ -178,7 +178,7 @@ public class FishSpawn : MonoBehaviour
                 break;
         }
 
-        FishControl fishScript = GameManager.Instance.SpawnFishAndGetScript(fishToSpawn, spawnPos, Quaternion.identity);
+        FishControl fishScript = GameManager.Instance.SpawnFish(fishToSpawn, spawnPos, Quaternion.identity, true);
 
         fishScript._playerPos = transform;
         fishScript._destroyRange = _destroyRange * FishDataManager.Instance.GetDespawnMultiplier(index);

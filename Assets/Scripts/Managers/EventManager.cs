@@ -35,6 +35,15 @@ public class EventManager : MonoBehaviour
         OnDestroyWobber?.Invoke();
     }
 
+
+    //When a fish is caught
+    //fishing --> Fish Shop
+    public event Action OnfishCaught;
+    public void FishCaught()
+    {
+        OnfishCaught?.Invoke();
+    }
+
     #endregion
 
     #region Boat Camera Switch

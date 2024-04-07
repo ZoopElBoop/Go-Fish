@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
 
         mainCam = Camera.main;
 
+        SetPlayerMouse(false);
+
         //timeCycle = GetComponent<DayAndNightCycle>();
     }
 
@@ -57,15 +59,11 @@ public class GameManager : MonoBehaviour
 
     private void RemoveFishFromBuffer(GameObject fishToRemove) 
     {
-        fishToRemove.SetActive(false);
-
         activeFishBuffer.RemoveAll(s => s.activeSelf == false);
-
-        ObjectPoolManager.Instance.DespawnObject("Fish", fishToRemove);
     }
 
     public List<GameObject> GetFishBuffer() { return activeFishBuffer; }
-    public int GetFishBufferSize() => activeFishBuffer.Count;
+    public int GetFishBufferSize() { return activeFishBuffer.Count; }
 
     #endregion
 
@@ -81,28 +79,30 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
+    public void SetPlayerMouse(bool status) 
+    {
+        Cursor.visible = true;
+
+        if (!status)
+            Cursor.lockState = CursorLockMode.Locked;
+        else
+            Cursor.lockState = CursorLockMode.None;
+    }
 
     public void SwitchMainCamera(Camera newMain) { mainCam = newMain; }
     public Camera GetMainCamera() { return mainCam; }
 
-
     #region Spawn & Despawn Functions
 
-    public FishControl SpawnFishAndGetScript(GameObject toSpawn, Vector3 position, Quaternion rotation)
+    public dynamic SpawnFish(GameObject toSpawn, Vector3 position, Quaternion rotation, bool returnScript)
     {
-        GameObject fish = ObjectPoolManager.Instance.SpawnObject("Fish", toSpawn, position, rotation); 
+        GameObject fish = ObjectPoolManager.Instance.SpawnObject("Fish", toSpawn, position, rotation);
         AddFishToBuffer(fish);
-        return GetFishControlScript(fish);
-    }
-/*
-    public GameObject SpawnFish(GameObject toSpawn, Vector3 position, Quaternion rotation)
-    {
-        return ObjectPoolManager.Instance.SpawnObject("Fish", toSpawn, position, rotation);
-    }*/
 
-    public GameObject SpawnHarpoon(GameObject toSpawn, Vector3 position, Quaternion rotation)
-    {
-        return ObjectPoolManager.Instance.SpawnObject("Harpoon", toSpawn, position, rotation);
+        if (returnScript)
+            return GetFishControlScript(fish);
+        else
+            return fish;
     }
 
     public void DestroyFish(GameObject fishToKill)
@@ -111,6 +111,11 @@ public class GameManager : MonoBehaviour
         RemoveFishFromBuffer(fishToKill);
     }
 
+    public GameObject SpawnHarpoon(GameObject toSpawn, Vector3 position, Quaternion rotation)
+    {
+        return ObjectPoolManager.Instance.SpawnObject("Harpoon", toSpawn, position, rotation);
+    }
+    
     public void DestroyHarpoon(GameObject harpoonToKill)
     {
         ObjectPoolManager.Instance.DespawnObject("Harpoon", harpoonToKill);

@@ -5,79 +5,73 @@ using TMPro;
 
 public class FishSellShopManager : MonoBehaviour
 {
-    List<FishStoredData> playerStocks = new();
-    List<FishStoredData> boatStocks = new();
-    List<FishStoredData> subStocks = new();
+    public List<FishStoredData> fishStocks = new();
 
-    public TMP_Dropdown dropdown;
-    public TMP_Text text;
+    public TMP_Text fishStockText;
     public TMP_Text fishCoinText;
-    public GameObject shopUi;
+    public GameObject sellButton;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            if (shopUi.activeSelf)
-            {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-
-                shopUi.SetActive(false);
-            }
-            else
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-
-                shopUi.SetActive(true);
-            }
-        }
-    }
+    bool canSell = true;
 
     void Start()
     {
-        shopUi.SetActive(false);
+        UpdateFishShopText();
 
-        playerStocks = InventoryManager.Instance.GetFromPlayer();
-        boatStocks = InventoryManager.Instance.GetFromPlayer();
-        subStocks = InventoryManager.Instance.GetFromPlayer();
-
-        for (int i = 0; i < playerStocks.Count; i++)
-        {
-            dropdown.options.Add(new TMP_Dropdown.OptionData(playerStocks[i].fishName));
-           // print(playerStocks[i].fishName);
-        }
-
-        SelectToSell();
+        EventManager.Instance.OnfishCaught += UpdateFishShopText;
     }
 
-    public void SelectToSell()
+    private void Update()
     {
-        text.text = $"{playerStocks[dropdown.value].count} Of {playerStocks[dropdown.value].fishName}";
+        if (!sellButton.activeSelf && canSell)
+        {
+            canSell = false;
+
+            print("aaa");
+            StartCoroutine(resetButton());
+            SellFish();
+        }
     }
 
     public void SellFish()
     {
-        print("buton ");
+        for (int i = 0; i < fishStocks.Count; i++)
+        {
+            if (fishStocks[i].count > 0)
+                GameManager.Instance.fishCoin += FishDataManager.Instance.GetValue(i) * fishStocks[i].count;
+        }
 
-        if (playerStocks[dropdown.value].count > 0)       
-            InventoryManager.Instance.RemoveFromPlayer(dropdown.value);
-        else
-            return;
-
-        GameManager.Instance.fishCoin += FishDataManager.Instance.GetValue(dropdown.value);
-
-        UpdateStocks();
-        SelectToSell();
-
-        fishCoinText.text = $"FISHCOIN {GameManager.Instance.fishCoin}";
+        InventoryManager.Instance.RemoveAll();
+        
+        UpdateFishShopText();
     }
 
-    private void UpdateStocks() 
+    IEnumerator resetButton()
     {
-        playerStocks = InventoryManager.Instance.GetFromPlayer();
-        boatStocks = InventoryManager.Instance.GetFromPlayer();
-        subStocks = InventoryManager.Instance.GetFromPlayer();
+        yield return new WaitForSeconds(0.15f);
+        sellButton.SetActive(true);
+        canSell = true;
+    }
+
+    private void UpdateFishShopText() 
+    {
+        print("RESET");
+
+        fishStocks = InventoryManager.Instance.TotalStored();
+
+        string fishStockedString = "Fish:\n";
+
+        for (int i = 0; i < fishStocks.Count; i++)
+        {
+            fishStockedString += $"{fishStocks[i].count} {fishStocks[i].fishName}\n";
+        }
+
+        fishStockText.text = fishStockedString;
+
+        fishCoinText.text = $"{GameManager.Instance.fishCoin}\nFish Coin";
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnfishCaught -= UpdateFishShopText;
     }
 }

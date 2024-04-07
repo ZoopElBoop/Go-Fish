@@ -2,19 +2,23 @@
 GO FISH V0.6
 ============
 Major Changes
-- 
+- Fish Shop Rework
 
 Minor Changes
 - Player light now adjusts to time of day
+- Sub & boat should flip over if upside down
 
 Bug Fixes
 - Fixed sub not colliding with objects
 - Partially fixed objects still being lit in darkness (requires more work)
 - Stopped boat & sub from going sub-orbital
 - UI popups now face player
+- Minor performance fixes
 
 Known Issues
-- 
+- Harpoon no work
+- Bobber physics very jumpy
+- Some fish can't be fished (this is a feature but doesn't look good atm) 
 
 ============
 GO FISH V0.5
