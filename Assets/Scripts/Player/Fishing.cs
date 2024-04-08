@@ -477,7 +477,7 @@ public class Fishing : MonoBehaviour
     #endregion
 
     /*
-    public LineRenderer lineRenderer;
+    public LineRenderer lineRenderer;   
     public int lPoints = 100;
     public float timePoints = 0.01f;
     public float sped;
