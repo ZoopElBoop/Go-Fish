@@ -5,12 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class RopeChain : MonoBehaviour
 {
+    private LineRenderer Line;
+
     [Header("End Of Line")]
-    public LineRenderer Line;
     public Transform EndPoint;
 
     [Header("Line Settings")]
-    [Min(2)] public int numberOfPoints = 5;
+    [Min(2)] public int numberOfPoints = 17;
     public float Drop = 1f;
 
     private float distanceBetween;
@@ -21,24 +22,43 @@ public class RopeChain : MonoBehaviour
 
     [Space]
     public GameObject lineObjectPrefab;
-    private List<GameObject> lineObjects = new();
-
-    public Vector3 Offset;
+    [SerializeField] private List<GameObject> lineObjects = new();  //needs to be serialised as to save data between playing exiting,
+                                                                    //hidden as to not throw the ObjectDisposedException as unity in this version is abit bugged 
     [Range (1, 100)] public int numberOfObjects = 1;
+    public Vector3 positionOffset;
+
+    [Header("Objects Rotation Settings")]
+    public Vector3 rotationOffset;
+    [Space]
+    public bool randomObjectRotation = false;
+    public bool reRoll = false;
+    public RandomRotationAxis randomRotationAxis;
 
     [Header("Advanced Settings")]
     public bool DoNotRespawn = false;
     public bool IgnoreNullObjects = false;
-    public bool viewGizmos;
+    public bool ControlRotationFromPivot = false;
+    public bool viewGizmos = false;
 
-    private void Awake()
+    [System.Flags]
+    public enum RandomRotationAxis
     {
+        None = 0,
+        x = 1,
+        y = 2,
+        z = 4   //DO NOT CHANGE TO 3, SINCE ITS BASED ON BINARY NOTATION 3 WILL EQUAL x & y !!!!
+    }
+
+    private void Start()
+    {
+        Line = GetComponent<LineRenderer>();
+
 #if UNITY_EDITOR
-        if (Application.isPlaying)       
-            enabled = false;      
+        if (!Application.isPlaying)
+            return;
 #endif
 
-            Line = GetComponent<LineRenderer>();
+        enabled = false;
     }
 
     private void Update() 
@@ -93,27 +113,27 @@ public class RopeChain : MonoBehaviour
 
     private void PutObjectsOnLine() 
     {
-        for (int i = lineObjects.Count; i < numberOfObjects; i++)
-            lineObjects.Add(Instantiate(lineObjectPrefab, transform));
-
         if (!DoNotRespawn)
-            SpawnObjects();
+            for (int i = lineObjects.Count; i < numberOfObjects; i++)
+                lineObjects.Add(Instantiate(lineObjectPrefab, transform));
 
         if (lineObjects.Count > numberOfObjects)
             ClearAnyObjects(numberOfObjects);
 
         float distanceBetween = (float) 1 / (numberOfObjects + 1);
 
-        if (!IgnoreNullObjects)
-            lineObjects.RemoveAll(s => s.Equals(null));
-
-        for (int i = 1; i < lineObjects.Count + 1; i++)
+        for (int i = 0; i < lineObjects.Count; i++)
         {
-            if (lineObjects[i - 1] == null)
+            if (lineObjects[i] == null)     //for if ingorenull is enabled
                 continue;
 
-            lineObjects[i - 1].transform.position = FindPointOnLine(distanceBetween * i);
+            lineObjects[i].transform.SetPositionAndRotation(
+                FindPointOnLine(distanceBetween * (i + 1)), 
+                SetRotation(i));
         }
+
+        if (randomObjectRotation)
+            reRoll = true;
     }
 
     private Vector3 FindPointOnLine(float pointOnLine)
@@ -141,13 +161,28 @@ public class RopeChain : MonoBehaviour
             point.z
             );
 
-        return point + Offset;
+        return point + positionOffset;
     }
 
-    private void SpawnObjects() 
-    { 
-        for (int i = lineObjects.Count; i < numberOfObjects; i++)
-            lineObjects.Add(Instantiate(lineObjectPrefab, transform));
+    private Quaternion SetRotation(int index) 
+    {
+        if (ControlRotationFromPivot)
+            return transform.rotation;
+
+        Vector3 newAngle = lineObjects[index].transform.eulerAngles;
+
+        if (randomObjectRotation && !reRoll)
+        {
+            float x = randomRotationAxis.HasFlag(RandomRotationAxis.x) ? Random.Range(-180f, 180f) : 0;
+            float y = randomRotationAxis.HasFlag(RandomRotationAxis.y) ? Random.Range(-180f, 180f) : 0;
+            float z = randomRotationAxis.HasFlag(RandomRotationAxis.z) ? Random.Range(-180f, 180f) : 0;
+
+            newAngle = new Vector3(x, y, z);
+        }
+        else if (!randomObjectRotation)      
+            newAngle = rotationOffset;
+
+        return Quaternion.Euler(newAngle);
     }
 
     private void ClearAnyObjects(int from)
@@ -155,8 +190,9 @@ public class RopeChain : MonoBehaviour
         if (lineObjects != null)
             for (int i = from; i < lineObjects.Count; i++)
                 DestroyImmediate(lineObjects[i]);
-            
-        lineObjects.RemoveAll(s => s.Equals(null));
+
+        if (!IgnoreNullObjects || !ObjectsOnLine)
+            lineObjects.RemoveAll(s => s.Equals(null));
     }
 
     //return point where vector lies on ignoring y axcis
@@ -178,15 +214,14 @@ public class RopeChain : MonoBehaviour
             Gizmos.color = Color.yellow;
 
             for (int i = 0; i < numberOfPoints; i++)
-            {
                 Gizmos.DrawWireSphere(Line.GetPosition(i), 0.25f);
-            }
 
             Gizmos.color = Color.red;
 
             for (int i = 0; i < lineObjects.Count; i++)
             {
-                Gizmos.DrawWireSphere(lineObjects[i].transform.position, 0.75f);
+                if (lineObjects[i] != null)
+                    Gizmos.DrawWireSphere(lineObjects[i].transform.position, 1f);
             }
         }
     }

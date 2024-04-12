@@ -8,6 +8,7 @@ public class PlayerScriptManager : MonoBehaviour
     private PlayerMovement playerMovement;
     private Fishing fishing;
     private FishSpawn fishSpawn;
+    private InteractControl interactControl;
 
     private void Awake()
     {
@@ -27,6 +28,11 @@ public class PlayerScriptManager : MonoBehaviour
             fishing = f;
         else
             Debug.LogError($"missing fishing script!!!");
+
+        if (TryGetComponent<InteractControl>(out var ic))
+            interactControl = ic;
+        else
+            Debug.LogError($"missing interact control script!!!");
 
         if (GameObject.FindWithTag("Spawner").TryGetComponent<FishSpawn>(out var fs))
             fishSpawn = fs;
@@ -50,6 +56,9 @@ public class PlayerScriptManager : MonoBehaviour
             case "Spawner":
                 fishSpawn.enabled = status;
                 break;
+            case "Interact":
+                interactControl.enabled = status;
+                break;
             default:
                 Debug.LogError($"Script/Component {script} not found to shutdown!!!");
                 break;
@@ -68,6 +77,8 @@ public class PlayerScriptManager : MonoBehaviour
                 return fishing;
             case "Spawner":
                 return fishSpawn;
+            case "Interact":
+                return interactControl;
             default:
                 Debug.LogError($"Script/Component {script} not found to give!!!");
                 break;      

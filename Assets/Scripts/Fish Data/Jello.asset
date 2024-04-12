@@ -17,12 +17,12 @@ MonoBehaviour:
   _Speed: 3
   _rotationSpeed: 5
   _canBeCaught: 1
-  _spawnDepthStart: -1
-  _spawnDepthHigh: -5
-  _spawnDepthEnd: -10
+  _spawnDepthStart: -15
+  _spawnDepthHigh: -36.7
+  _spawnDepthEnd: -50
   _Rarity: 0.224
-  _moveHeightLimit: -1.5
-  _moveDepthLimit: -10
+  _moveHeightLimit: -8.8
+  _moveDepthLimit: -61
   _collisionRange: 3
   _despawnRangeMulti: 1
   _baseValue: 2

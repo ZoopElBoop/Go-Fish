@@ -68,7 +68,7 @@ public class Fishing : MonoBehaviour
     private void Start() 
     {
         //Events Init
-        EventManager.Instance.OnFishCaught += Fishking;
+        EventManager.Instance.OnFishCaughtByBobber += Fishking;
         EventManager.Instance.OnBoatEnter += SwitchToBoatCamera;
         EventManager.Instance.OnBoatExit += SwitchToPlayerCamera;
         EventManager.Instance.OnDestroyWobber += ObliterateBobber;
@@ -206,8 +206,6 @@ public class Fishing : MonoBehaviour
     {
         //gets position of mouse in relation to world space
         var (success, position) = GetMousePosition();
-
-        print(success);
 
         if (success)
         {
@@ -468,7 +466,7 @@ public class Fishing : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventManager.Instance.OnFishCaught -= Fishking;
+        EventManager.Instance.OnFishCaughtByBobber -= Fishking;
         EventManager.Instance.OnBoatEnter -= SwitchToBoatCamera;
         EventManager.Instance.OnBoatExit -= SwitchToPlayerCamera;
         EventManager.Instance.OnDestroyWobber -= ObliterateBobber;

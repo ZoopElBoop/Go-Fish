@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Fish Caught")]
     [SerializeField] private TMP_Text catches;
+    private int caught;
 
     [Header("Fish Active")]
     [SerializeField] private TMP_Text active;
@@ -36,6 +37,8 @@ public class UIManager : MonoBehaviour
             FishingSlider();
 
         active.text = $"{GameManager.Instance.GetFishBufferSize()} Fishes";
+
+        catches.text = $"CAUGHT FISH: {InventoryManager.Instance.TotalStored()}";
     }
 
 #region FishingSliderFuncs

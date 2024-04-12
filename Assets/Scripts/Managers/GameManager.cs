@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
 
     private List<GameObject> activeFishBuffer = new();          //cannot be seen in inspector as race condition occurs between adding & removing items due to uning inspector overhead 
 
-    //public DayAndNightCycle timeCycle;
-
     [Header("FPS Cap")]                                                          
     [SerializeField] [Min(1)] private int fpsLimit;
 
@@ -22,7 +20,6 @@ public class GameManager : MonoBehaviour
     [Header("Game Variables")]
 
     public float fishCoin;
-    public Camera mainCam;
 
     #endregion
 
@@ -41,9 +38,8 @@ public class GameManager : MonoBehaviour
 
         Application.targetFrameRate = fpsLimit;
 
-        mainCam = Camera.main;
 
-        SetPlayerMouse(false);
+        ShowPlayerMouse(false);
 
         //timeCycle = GetComponent<DayAndNightCycle>();
     }
@@ -79,18 +75,15 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    public void SetPlayerMouse(bool status) 
+    public void ShowPlayerMouse(bool status) 
     {
-        Cursor.visible = true;
+        Cursor.visible = status;
 
         if (!status)
             Cursor.lockState = CursorLockMode.Locked;
         else
             Cursor.lockState = CursorLockMode.None;
     }
-
-    public void SwitchMainCamera(Camera newMain) { mainCam = newMain; }
-    public Camera GetMainCamera() { return mainCam; }
 
     #region Spawn & Despawn Functions
 

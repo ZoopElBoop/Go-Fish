@@ -20,10 +20,10 @@ public class EventManager : MonoBehaviour
 
     //When fish is caught by the wobber
     // Wob --> Fishing 
-    public event Action<GameObject> OnFishCaught;
+    public event Action<GameObject> OnFishCaughtByBobber;
     public void FishCaught(GameObject Catch)
     {
-        OnFishCaught?.Invoke(Catch);
+        OnFishCaughtByBobber?.Invoke(Catch);
     }
 
 
@@ -38,10 +38,11 @@ public class EventManager : MonoBehaviour
 
     //When a fish is caught
     //fishing --> Fish Shop
-    public event Action OnfishCaught;
+    //fishing --> UI Manager
+    public event Action OnFishCaught;
     public void FishCaught()
     {
-        OnfishCaught?.Invoke();
+        OnFishCaught?.Invoke();
     }
 
     #endregion

@@ -86,6 +86,9 @@ public class Boat : MonoBehaviour
 
         PlayerScriptManager.Instance.ShutDown("Controller", true);
         PlayerScriptManager.Instance.ShutDown("Movement", true);
+        PlayerScriptManager.Instance.ShutDown("Interact", true);
+
+        GameManager.Instance.ShowPlayerMouse(false);
 
         isActive = false;
         _boatCam.enabled = false;
@@ -101,6 +104,9 @@ public class Boat : MonoBehaviour
 
             PlayerScriptManager.Instance.ShutDown("Controller", false);
             PlayerScriptManager.Instance.ShutDown("Movement", false);
+            PlayerScriptManager.Instance.ShutDown("Interact", false);
+
+            GameManager.Instance.ShowPlayerMouse(true);
 
             Fishing fs = PlayerScriptManager.Instance.GetScript("Fishing");
 

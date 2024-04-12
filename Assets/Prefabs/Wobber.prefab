@@ -171,7 +171,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.8962264, g: 0.4523407, b: 0.4523407, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -446,6 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _floatingPoint:
   - {fileID: 5011577689433505909}
+  floatingPointsUnderwater: 0
   _underwaterDrag: 3
   _underwaterAngularDrag: 1
   _airDrag: 0

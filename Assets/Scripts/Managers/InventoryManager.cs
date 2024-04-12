@@ -62,7 +62,7 @@ public class InventoryManager : MonoBehaviour
     public List<FishStoredData> GetFromBoat() { return fishStoredOnBoat; }
     public List<FishStoredData> GetFromSub() { return fishStoredOnSub; }
 
-    public List<FishStoredData> TotalStored() 
+    public List<FishStoredData> TotalStoredByType() 
     {
         List<FishStoredData> totalFishStored = new();
 
@@ -77,6 +77,23 @@ public class InventoryManager : MonoBehaviour
             });
         }
         return totalFishStored;
+    }
+
+    public int TotalStored()
+    {
+        int totalFish = 0;
+
+        for (int i = 0; i < FishDataManager.Instance.GetFishDataSize(); i++)     
+            totalFish += fishStoredOnPlayer[i].count + fishStoredOnBoat[i].count + fishStoredOnSub[i].count;
+
+        return totalFish;
+    }
+
+    public void RemoveByType(int index)
+    {
+        fishStoredOnPlayer[index].count = 0;
+        fishStoredOnBoat[index].count = 0;
+        fishStoredOnSub[index].count = 0;
     }
 
     public void RemoveAll()

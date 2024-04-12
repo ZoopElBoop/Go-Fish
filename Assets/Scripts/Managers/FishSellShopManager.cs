@@ -1,77 +1,111 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class FishSellShopManager : MonoBehaviour
 {
     public List<FishStoredData> fishStocks = new();
+    public SelectionInterface[] shopUiObject;
 
-    public TMP_Text fishStockText;
+    public TMP_Text fishToSellText;
+    public TMP_Text fishToSellPrice;
+
     public TMP_Text fishCoinText;
-    public GameObject sellButton;
 
-    bool canSell = true;
+    public int selectedID = 0;
+
+    public DoorControl confirmGameObject;
 
     void Start()
     {
+        print(shopUiObject[0].Name);
+        print(shopUiObject[0].Count);
+        print(shopUiObject[0].Image);
+
+
+        FishShopTextInit();
+
         UpdateFishShopText();
 
-        EventManager.Instance.OnfishCaught += UpdateFishShopText;
+        EventManager.Instance.OnFishCaught += UpdateFishShopText;
     }
 
-    private void Update()
+    private void FishShopTextInit() 
     {
-        if (!sellButton.activeSelf && canSell)
+        for (int i = 0; i < shopUiObject.Length; i++)
         {
-            canSell = false;
+            if (shopUiObject[i].Name == null)           
+                Debug.LogError($"{shopUiObject[i].name} missing fish name text!!!");
+            
+            if (shopUiObject[i].Count == null)        
+                Debug.LogError($"{shopUiObject[i].name} missing fish count text!!!");
+            
+            if (shopUiObject[i].Image == null)
+                Debug.LogError($"{shopUiObject[i].name} missing fish image!!!");
 
-            print("aaa");
-            StartCoroutine(resetButton());
-            SellFish();
-        }
-    }
-
-    public void SellFish()
-    {
-        for (int i = 0; i < fishStocks.Count; i++)
-        {
-            if (fishStocks[i].count > 0)
-                GameManager.Instance.fishCoin += FishDataManager.Instance.GetValue(i) * fishStocks[i].count;
+            shopUiObject[i].ID = i;
         }
 
-        InventoryManager.Instance.RemoveAll();
-        
-        UpdateFishShopText();
+        if (shopUiObject.Length < FishDataManager.Instance.GetFishDataSize())
+        {
+            Debug.LogWarning("Not Enough Ui elements for all fish!!!");
+        }
     }
-
-    IEnumerator resetButton()
-    {
-        yield return new WaitForSeconds(0.15f);
-        sellButton.SetActive(true);
-        canSell = true;
-    }
-
-    private void UpdateFishShopText() 
+    private void UpdateFishShopText()
     {
         print("RESET");
 
-        fishStocks = InventoryManager.Instance.TotalStored();
+        fishStocks = InventoryManager.Instance.TotalStoredByType();
 
-        string fishStockedString = "Fish:\n";
-
-        for (int i = 0; i < fishStocks.Count; i++)
+        for (int i = 0; i < FishDataManager.Instance.GetFishDataSize(); i++)
         {
-            fishStockedString += $"{fishStocks[i].count} {fishStocks[i].fishName}\n";
+            shopUiObject[i].Name.text = fishStocks[i].fishName;
+            shopUiObject[i].Count.text = $"{fishStocks[i].count}x";
+            shopUiObject[i].Image.sprite = FishDataManager.Instance.GetFishImage(i);
         }
-
-        fishStockText.text = fishStockedString;
 
         fishCoinText.text = $"{GameManager.Instance.fishCoin}\nFish Coin";
     }
 
+    public void SelectFish(SelectionInterface selected)
+    {
+        selectedID = selected.ID;
+
+        fishToSellText.text = $"Trade {fishStocks[selectedID].count} X\n" +
+                              $"{fishStocks[selectedID].fishName}\n For:";
+
+        fishToSellPrice.text = (FishDataManager.Instance.GetValue(selectedID) * fishStocks[selectedID].count).ToString();
+
+        foreach (var UI in shopUiObject)
+            UI.interact.CanInteract(false);
+
+        confirmGameObject.MoveDoor();
+    }
+
+    public void ConfirmToSell()
+    {
+        GameManager.Instance.fishCoin += FishDataManager.Instance.GetValue(selectedID) * fishStocks[selectedID].count;
+
+        foreach (var UI in shopUiObject)
+            UI.interact.CanInteract(true);
+
+        InventoryManager.Instance.RemoveByType(selectedID);
+
+        confirmGameObject.MoveDoor();
+        UpdateFishShopText();
+    }
+
+    public void RejectToSell()
+    {
+        foreach (var UI in shopUiObject)
+            UI.interact.CanInteract(true);
+
+        confirmGameObject.MoveDoor();
+    }
+
     private void OnDestroy()
     {
-        EventManager.Instance.OnfishCaught -= UpdateFishShopText;
+        EventManager.Instance.OnFishCaught -= UpdateFishShopText;
     }
 }
