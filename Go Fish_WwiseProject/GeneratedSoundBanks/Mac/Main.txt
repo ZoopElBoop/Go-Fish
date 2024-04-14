@@ -1,0 +1,9 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2385628198	Footsteps			\Default Work Unit\Footsteps	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	95651886	Sand (step 2)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 2)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\SandSteps\Sand (step 2)		93808
+	255376140	Sand (step 4)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\SandSteps\Sand (step 4)		107748
+	824573470	Sand (step 1)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\SandSteps\Sand (step 1)		90716
+	926304011	Sand (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\SandSteps\Sand (step 3)		103012
+

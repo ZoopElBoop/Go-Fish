@@ -22,6 +22,38 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{1FEA38EC-61EE-E887-6D32-B0B8BB0180ED}">
+			<ShortName>Main</ShortName>
+			<Path>Main.bnk</Path>
+			<Media>
+				<File Id="95651886" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Sand (step 2).wav</ShortName>
+					<CachePath>SFX/Sand (step 2)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="255376140" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Sand (step 4).wav</ShortName>
+					<CachePath>SFX/Sand (step 4)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="824573470" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Sand (step 1).wav</ShortName>
+					<CachePath>SFX/Sand (step 1)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="926304011" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Sand (step 3).wav</ShortName>
+					<CachePath>SFX/Sand (step 3)_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2385628198" Name="Footsteps" DurationType="OneShot" DurationMin="0.42048565" DurationMax="0.6293504">
+					<MediaRefs>
+						<MediaRef Id="95651886"/>
+						<MediaRef Id="255376140"/>
+						<MediaRef Id="824573470"/>
+						<MediaRef Id="926304011"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
 	</SoundBanks>
-	<FileHash>{65ACD701-C344-9E7E-4B1A-A247DBAA44A3}</FileHash>
+	<FileHash>{A4D88FA1-B4AE-4B5B-3EF2-D17AE6686107}</FileHash>
 </SoundBanksInfo>
