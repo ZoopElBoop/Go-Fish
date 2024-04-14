@@ -69,13 +69,11 @@ public class FishControl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         startingScale = transform.localScale;
 
-        /*       for (int i = 0; i < transform.childCount; i++)
-        {
-            Collider childCollider = transform.GetChild(i).GetComponent<MeshCollider>();
-
-            if (childCollider != false)
-                meshies.Add(childCollider);
-        }*/
+        /*        for (int i = 0; i < transform.childCount; i++)
+                {
+                    if (transform.GetChild(i).TryGetComponent<MeshCollider>(out var col))
+                        meshies.Add(col);
+                }*/
 
         LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
 

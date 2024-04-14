@@ -9,6 +9,7 @@ public class InteractControl : MonoBehaviour
     [Header("Interact Settings")]
     [SerializeField][Range(1, 10)] private int interactRange;
     [SerializeField] private GameObject objectHit;
+    [SerializeField] private GameObject objectHitLastFrame;
 
     private LayerMask interactMask;
     private LayerMask IgnoreinteractMask = -1;
@@ -23,7 +24,9 @@ public class InteractControl : MonoBehaviour
 
     void FixedUpdate()
 	{
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        objectHitLastFrame = objectHit;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit[] hit = new RaycastHit[1];
 
@@ -35,17 +38,33 @@ public class InteractControl : MonoBehaviour
 
 			if (collisionHits == 0)
 			{
-				objectHit = hit[0].transform.gameObject;
+                objectHit = hit[0].transform.gameObject;
 				hitActive = true;
+
+				OnRayExit();
 				return;
 			}
         }
 
         objectHit = null;
-		hitActive = false;	
-	}
+		hitActive = false;
 
-	private void Update()
+        OnRayExit();
+    }
+
+	void OnRayExit()
+	{
+		if (objectHitLastFrame == null)
+			return;
+
+		if (objectHitLastFrame != objectHit)
+		{
+            if (objectHitLastFrame.TryGetComponent<Interactable>(out var interactable))
+                interactable.OnExit();
+        }
+    }
+
+    private void Update()
 	{
 		if (Input.GetMouseButtonDown(0) && objectHit != null)
 		{

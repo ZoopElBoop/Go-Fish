@@ -94,13 +94,11 @@ public class ObjectPoolManager : MonoBehaviour
 
             pool.Remove(pooledObject);
 
-            print("pooled");
             return pooledObject;
         }
         else
         {
             toSpawn = Instantiate(toSpawn, position, rotation);
-            print("spawned");
             return toSpawn;
         }
     }
@@ -112,8 +110,6 @@ public class ObjectPoolManager : MonoBehaviour
     public void DespawnObject(string Type, GameObject toDespawn)
     {
         List<GameObject> pool = GetPool(Type);
-
-        print("DESPAWNING");
 
         if (toDespawn.activeSelf)
             toDespawn.SetActive(false);

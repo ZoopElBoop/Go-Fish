@@ -19,7 +19,7 @@ public class Fishing : MonoBehaviour
     [Range(0.1f, 10.0f)]
     [SerializeField] private float _bobberSpawnRangeMin = 12f;
     [Range(20f, 250.0f)]
-    [SerializeField] private float _bobberMaxDistanceFromPlayer = 80f;
+    public float _bobberMaxDistanceFromPlayer = 80f;
 
     [Header("Bobber Raycast Mask Detection")]
     [SerializeField] private LayerMask groundMask;

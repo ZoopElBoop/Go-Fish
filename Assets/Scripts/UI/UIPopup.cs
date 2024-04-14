@@ -12,7 +12,7 @@ public class UIPopup : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        PopupCanvas.SetActive(false);
+        //PopupCanvas.SetActive(false);
     }
 
     private void Update()
@@ -23,6 +23,7 @@ public class UIPopup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print(other.tag);
         if (other.CompareTag("Player"))
             PopupCanvas.SetActive(true);
     }

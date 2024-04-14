@@ -1,4 +1,25 @@
 ============
+GO FISH V0.7
+============
+Major Changes
+- Fish Shop Rework (again)
+- Fish Upgrade Shop
+
+Minor Changes
+- Added some nice enviromental effects
+- Added textures to player & NPC's
+
+Bug Fixes
+- Player should nolonger be able to interact through walls
+- Adjudted fish spawn depths
+
+Known Issues
+- Harpoon STILL no work
+- Bobber physics still messy
+- Some Fish like to dance in water for some reason
+- Idk meny things hasn't been tested so idk if it work right
+
+============
 GO FISH V0.6
 ============
 Major Changes
