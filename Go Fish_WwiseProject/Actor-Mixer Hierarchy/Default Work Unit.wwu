@@ -3,48 +3,54 @@
 	<AudioObjects>
 		<WorkUnit Name="Default Work Unit" ID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}" PersistMode="Standalone">
 			<ChildrenList>
-				<RandomSequenceContainer Name="SandSteps" ID="{995D8B4F-3AF7-4626-90AA-83DC02EAFA70}" ShortID="286929699">
-					<PropertyList>
-						<Property Name="Pitch" Type="int32">
-							<ModifierList>
-								<ModifierInfo>
-									<Modifier Name="" ID="{EF646B8E-B92D-49B5-9D1D-8702C66AD88C}">
-										<PropertyList>
-											<Property Name="Enabled" Type="bool" Value="True"/>
-											<Property Name="Max" Type="Real64" Value="200"/>
-											<Property Name="Min" Type="Real64" Value="-200"/>
-										</PropertyList>
-									</Modifier>
-								</ModifierInfo>
-							</ModifierList>
-						</Property>
-						<Property Name="Volume" Type="Real64">
-							<ValueList>
-								<Value>-4</Value>
-							</ValueList>
-							<ModifierList>
-								<ModifierInfo>
-									<Modifier Name="" ID="{620899AF-B2D8-4958-AA42-A4B18893EAF7}">
-										<PropertyList>
-											<Property Name="Enabled" Type="bool" Value="True"/>
-											<Property Name="Max" Type="Real64" Value="3"/>
-											<Property Name="Min" Type="Real64" Value="-3"/>
-										</PropertyList>
-									</Modifier>
-								</ModifierInfo>
-							</ModifierList>
-						</Property>
-					</PropertyList>
+				<SwitchContainer Name="Footsteps" ID="{7B0C428E-B9C5-41D3-953F-CAF92CDC5523}" ShortID="398329948">
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
 						</Reference>
+						<Reference Name="DefaultSwitchOrState">
+							<ObjectRef Name="Sand" ID="{8A48E1F7-C034-468C-A17B-559F6D4A3805}" WorkUnitID="{EAD85618-1C7F-439D-A6A7-6CBF1E5DE71D}"/>
+						</Reference>
 						<Reference Name="OutputBus">
 							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
 						</Reference>
+						<Reference Name="SwitchGroupOrStateGroup">
+							<ObjectRef Name="Footstep_surface" ID="{2D2803D7-3306-4B7B-A38D-DE9D28B24D9B}" WorkUnitID="{EAD85618-1C7F-439D-A6A7-6CBF1E5DE71D}"/>
+						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<Sound Name="Sand (step 1)" ID="{8AB25E97-E891-4C76-B35F-AFDBD12329C1}" ShortID="467408233">
+						<RandomSequenceContainer Name="SandSteps" ID="{995D8B4F-3AF7-4626-90AA-83DC02EAFA70}" ShortID="286929699">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{EF646B8E-B92D-49B5-9D1D-8702C66AD88C}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="200"/>
+													<Property Name="Min" Type="Real64" Value="-200"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-4</Value>
+									</ValueList>
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{620899AF-B2D8-4958-AA42-A4B18893EAF7}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="3"/>
+													<Property Name="Min" Type="Real64" Value="-3"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
@@ -54,19 +60,128 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="Sand (step 1)" ID="{A2A71544-C301-4E36-ACC4-4D7859C2E029}">
-									<Language>SFX</Language>
-									<AudioFile>Sand (step 1).wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="824573470"/>
-									</MediaIDList>
-								</AudioFileSource>
+								<Sound Name="Sand (step 1)" ID="{8AB25E97-E891-4C76-B35F-AFDBD12329C1}" ShortID="467408233">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Sand (step 1)" ID="{A2A71544-C301-4E36-ACC4-4D7859C2E029}">
+											<Language>SFX</Language>
+											<AudioFile>Sand (step 1).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="824573470"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Sand (step 1)" ID="{A2A71544-C301-4E36-ACC4-4D7859C2E029}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Sand (step 2)" ID="{D307E2D6-68B0-407F-8E00-741AEF54B22D}" ShortID="444446745">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Sand (step 2)" ID="{A607A11C-4ECF-488D-88A4-9A6107A324BA}">
+											<Language>SFX</Language>
+											<AudioFile>Sand (step 2).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="95651886"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Sand (step 2)" ID="{A607A11C-4ECF-488D-88A4-9A6107A324BA}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Sand (step 3)" ID="{3850C19D-76B8-4F60-9192-EDD09611C191}" ShortID="120640823">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Sand (step 3)" ID="{C0BE15E5-1352-4E77-BBBD-4DDE6FDC0D0E}">
+											<Language>SFX</Language>
+											<AudioFile>Sand (step 3).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="926304011"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Sand (step 3)" ID="{C0BE15E5-1352-4E77-BBBD-4DDE6FDC0D0E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Sand (step 4)" ID="{0F5C5AB2-62F9-47E4-A880-E89BB08E14A3}" ShortID="718948880">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Sand (step 4)" ID="{809C392C-B86B-4BCF-A94F-D9BEEE656D41}">
+											<Language>SFX</Language>
+											<AudioFile>Sand (step 4).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="255376140"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Sand (step 4)" ID="{809C392C-B86B-4BCF-A94F-D9BEEE656D41}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="Sand (step 1)" ID="{A2A71544-C301-4E36-ACC4-4D7859C2E029}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
-						<Sound Name="Sand (step 2)" ID="{D307E2D6-68B0-407F-8E00-741AEF54B22D}" ShortID="444446745">
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="WoodSteps" ID="{2566B1D3-12F1-4382-93AD-BDD1604A6835}" ShortID="374154198">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{C96E307A-E977-41B5-89FF-C9C195DBB8D4}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="200"/>
+													<Property Name="Min" Type="Real64" Value="-200"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{9E8E1B66-126F-44DE-A791-2F926558A3A3}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="3"/>
+													<Property Name="Min" Type="Real64" Value="-3"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
@@ -76,19 +191,125 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="Sand (step 2)" ID="{A607A11C-4ECF-488D-88A4-9A6107A324BA}">
-									<Language>SFX</Language>
-									<AudioFile>Sand (step 2).wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="95651886"/>
-									</MediaIDList>
-								</AudioFileSource>
+								<Sound Name="Wood(steps5)" ID="{0ADDCCE0-26B8-4A59-B1B4-8C7F997CC0EA}" ShortID="909174369">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Wood(steps5)" ID="{E39CD350-7879-4D85-BF53-9F30B7A945F8}">
+											<Language>SFX</Language>
+											<AudioFile>Wood(steps5).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="800354274"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Wood(steps5)" ID="{E39CD350-7879-4D85-BF53-9F30B7A945F8}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Wood(steps6)" ID="{172E6CF7-47FC-4D99-812C-4E4FB55D6271}" ShortID="487119893">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Wood(steps6)" ID="{5BA4D7C2-1315-4636-BFDC-D8706A0F1975}">
+											<Language>SFX</Language>
+											<AudioFile>Wood(steps6).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="48311897"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Wood(steps6)" ID="{5BA4D7C2-1315-4636-BFDC-D8706A0F1975}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Wood(steps7)" ID="{888F53FA-6222-4687-BEF0-A15F5C9AB25D}" ShortID="584137336">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Wood(steps7)" ID="{AE4DB210-1450-4C35-B012-1DF4F4626200}">
+											<Language>SFX</Language>
+											<AudioFile>Wood(steps7).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="669549996"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Wood(steps7)" ID="{AE4DB210-1450-4C35-B012-1DF4F4626200}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Wood(steps8)" ID="{37B138AC-4D22-46AD-8EEE-D3844B5C3C63}" ShortID="481427142">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Wood(steps8)" ID="{6149A990-D9AD-4972-9E95-AE5ECABB588F}">
+											<Language>SFX</Language>
+											<AudioFile>Wood(steps8).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="88144719"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Wood(steps8)" ID="{6149A990-D9AD-4972-9E95-AE5ECABB588F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="Sand (step 2)" ID="{A607A11C-4ECF-488D-88A4-9A6107A324BA}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
-						<Sound Name="Sand (step 3)" ID="{3850C19D-76B8-4F60-9192-EDD09611C191}" ShortID="120640823">
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="GravelSteps" ID="{7EEEE79E-DD78-41FE-B85D-D18A1491819A}" ShortID="1922872">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{F696B49B-D564-461F-A83E-AC4797775833}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="200"/>
+													<Property Name="Min" Type="Real64" Value="-200"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{5CE82550-252A-41C3-8665-5AB7A9D163BE}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="3"/>
+													<Property Name="Min" Type="Real64" Value="-3"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
@@ -98,42 +319,131 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="Sand (step 3)" ID="{C0BE15E5-1352-4E77-BBBD-4DDE6FDC0D0E}">
-									<Language>SFX</Language>
-									<AudioFile>Sand (step 3).wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="926304011"/>
-									</MediaIDList>
-								</AudioFileSource>
+								<Sound Name="Gravel (step 1)" ID="{E9E8FA74-8744-4826-A366-8686E21DB642}" ShortID="85411871">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Gravel (step 1)" ID="{5104E392-7BF9-41AC-9D31-DDD27DC2EB29}">
+											<Language>SFX</Language>
+											<AudioFile>Gravel (step 1).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="384206844"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Gravel (step 1)" ID="{5104E392-7BF9-41AC-9D31-DDD27DC2EB29}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Gravel (step 2)" ID="{EEE9DD12-7596-47D1-B039-1537D965D2D0}" ShortID="764373225">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Gravel (step 2)" ID="{372A5DE0-0E81-4372-A9E4-6E83CF95D5F5}">
+											<Language>SFX</Language>
+											<AudioFile>Gravel (step 2).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="962478843"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Gravel (step 2)" ID="{372A5DE0-0E81-4372-A9E4-6E83CF95D5F5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Gravel (step 3)" ID="{78F1FF3B-85DC-4590-8421-8E5A6BF0B930}" ShortID="776891166">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Gravel (step 3)" ID="{E1FBC7D1-CEC2-4081-AEE9-B4C757076B2A}">
+											<Language>SFX</Language>
+											<AudioFile>Gravel (step 3).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="864731088"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Gravel (step 3)" ID="{E1FBC7D1-CEC2-4081-AEE9-B4C757076B2A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Gravel (step 4)" ID="{D1ED9E37-5376-4A51-AC22-8A308944794D}" ShortID="1054350168">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Gravel (step 4)" ID="{99D015F5-5A84-46CB-9EA6-E2AFB89D45D9}">
+											<Language>SFX</Language>
+											<AudioFile>Gravel (step 4).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="875518388"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Gravel (step 4)" ID="{99D015F5-5A84-46CB-9EA6-E2AFB89D45D9}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="Sand (step 3)" ID="{C0BE15E5-1352-4E77-BBBD-4DDE6FDC0D0E}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
-						<Sound Name="Sand (step 4)" ID="{0F5C5AB2-62F9-47E4-A880-E89BB08E14A3}" ShortID="718948880">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="Sand (step 4)" ID="{809C392C-B86B-4BCF-A94F-D9BEEE656D41}">
-									<Language>SFX</Language>
-									<AudioFile>Sand (step 4).wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="255376140"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="Sand (step 4)" ID="{809C392C-B86B-4BCF-A94F-D9BEEE656D41}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
+						</RandomSequenceContainer>
 					</ChildrenList>
-				</RandomSequenceContainer>
+					<GroupingInfo>
+						<GroupingBehaviorList>
+							<GroupingBehavior>
+								<ItemRef Name="SandSteps" ID="{995D8B4F-3AF7-4626-90AA-83DC02EAFA70}"/>
+							</GroupingBehavior>
+							<GroupingBehavior>
+								<ItemRef Name="GravelSteps" ID="{7EEEE79E-DD78-41FE-B85D-D18A1491819A}"/>
+							</GroupingBehavior>
+							<GroupingBehavior>
+								<ItemRef Name="WoodSteps" ID="{2566B1D3-12F1-4382-93AD-BDD1604A6835}"/>
+							</GroupingBehavior>
+						</GroupingBehaviorList>
+						<GroupingList>
+							<Grouping>
+								<SwitchRef Name="Gravel" ID="{380E8030-9E04-49CF-8CF2-B21C2E27A36E}"/>
+								<ItemList>
+									<ItemRef Name="GravelSteps" ID="{7EEEE79E-DD78-41FE-B85D-D18A1491819A}"/>
+								</ItemList>
+							</Grouping>
+							<Grouping>
+								<SwitchRef Name="Wood" ID="{D9C4C3CB-29EB-4BB4-9BCF-DD2A92339DB7}"/>
+								<ItemList>
+									<ItemRef Name="WoodSteps" ID="{2566B1D3-12F1-4382-93AD-BDD1604A6835}"/>
+								</ItemList>
+							</Grouping>
+							<Grouping>
+								<SwitchRef Name="Sand" ID="{8A48E1F7-C034-468C-A17B-559F6D4A3805}"/>
+								<ItemList>
+									<ItemRef Name="SandSteps" ID="{995D8B4F-3AF7-4626-90AA-83DC02EAFA70}"/>
+								</ItemList>
+							</Grouping>
+						</GroupingList>
+					</GroupingInfo>
+				</SwitchContainer>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 11c91fd6cb1f564886677d0aca3fbb2c
     GuidInternal: 
-    m_lastTime: -8584884752059123027
+    m_lastTime: -8584882205410608692
     List:
     - name: Footsteps
       guid: 4cdf616f3ab27044b986ddc49c8a7269
@@ -112,7 +112,7 @@ MonoBehaviour:
       Path: Events\Default Work Unit\Footsteps
       maxAttenuation: 0
       maxDuration: 0.6293504
-      minDuration: 0.42048565
+      minDuration: 0.29828402
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -153,8 +153,74 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
     GuidInternal: 
-    m_lastTime: -8584898792635440224
-    List: []
+    m_lastTime: -8584882076332672175
+    List:
+    - name: Footstep_surface
+      guid: d703282d06337b4ba38dde9d28b24d9b
+      id: 1833605183
+      PathAndIcons:
+      - ElementName: Switches
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
+      - ElementName: Footstep_surface
+        ObjectType: 11
+        guid: d703282d06337b4ba38dde9d28b24d9b
+      Path: Switches\Default Work Unit\Footstep_surface
+      values:
+      - name: Gravel
+        guid: 30800e38049ecf498cf2b21c2e27a36e
+        id: 2185786256
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
+        - ElementName: Footstep_surface
+          ObjectType: 11
+          guid: d703282d06337b4ba38dde9d28b24d9b
+        - ElementName: Gravel
+          ObjectType: 10
+          guid: 30800e38049ecf498cf2b21c2e27a36e
+      - name: Sand
+        guid: f7e1488a34c08c46a17b559f6d4a3805
+        id: 803837735
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
+        - ElementName: Footstep_surface
+          ObjectType: 11
+          guid: d703282d06337b4ba38dde9d28b24d9b
+        - ElementName: Sand
+          ObjectType: 10
+          guid: f7e1488a34c08c46a17b559f6d4a3805
+      - name: Wood
+        guid: cbc3c4d9eb29b44b9bcfdd2a92339db7
+        id: 2058049674
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
+        - ElementName: Footstep_surface
+          ObjectType: 11
+          guid: d703282d06337b4ba38dde9d28b24d9b
+        - ElementName: Wood
+          ObjectType: 10
+          guid: cbc3c4d9eb29b44b9bcfdd2a92339db7
+      ValueGuids: []
+      ValueIcons: []
+      valuesInternal: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
     PathAndIcons:

@@ -1,9 +1,25 @@
 Event	ID	Name			Wwise Object Path	Notes
 	2385628198	Footsteps			\Default Work Unit\Footsteps	
 
+Switch Group	ID	Name			Wwise Object Path	Notes
+	1833605183	Footstep_surface			\Default Work Unit\Footstep_surface	
+
+Switch	ID	Name	Switch Group			Notes
+	803837735	Sand	Footstep_surface			
+	2058049674	Wood	Footstep_surface			
+	2185786256	Gravel	Footstep_surface			
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	95651886	Sand (step 2)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 2)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\SandSteps\Sand (step 2)		93808
-	255376140	Sand (step 4)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\SandSteps\Sand (step 4)		107748
-	824573470	Sand (step 1)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\SandSteps\Sand (step 1)		90716
-	926304011	Sand (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\SandSteps\Sand (step 3)		103012
+	48311897	Wood(steps6)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Wood(steps6)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\WoodSteps\Wood(steps6)		107480
+	88144719	Wood(steps8)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Wood(steps8)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\WoodSteps\Wood(steps8)		76548
+	95651886	Sand (step 2)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 2)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 2)		93808
+	255376140	Sand (step 4)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 4)		107748
+	384206844	Gravel (step 1)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Gravel (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 1)		96096
+	669549996	Wood(steps7)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Wood(steps7)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\WoodSteps\Wood(steps7)		81764
+	800354274	Wood(steps5)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Wood(steps5)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\WoodSteps\Wood(steps5)		93500
+	824573470	Sand (step 1)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 1)		90716
+	864731088	Gravel (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Gravel (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 3)		64380
+	875518388	Gravel (step 4)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Gravel (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 4)		92856
+	926304011	Sand (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 3)		103012
+	962478843	Gravel (step 2)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Gravel (step 2)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 2)		70960
 
