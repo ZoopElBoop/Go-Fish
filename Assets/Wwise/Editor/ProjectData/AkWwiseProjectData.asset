@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: f6e1ebbfdd8303499ec3140a8a2eb19f
     GuidInternal: 
-    m_lastTime: -8584884752058964841
+    m_lastTime: -8584881245137114856
     List:
     - name: Main
       guid: f659b7fd05b4db41b550785d575e4dbe
@@ -94,8 +94,25 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 11c91fd6cb1f564886677d0aca3fbb2c
     GuidInternal: 
-    m_lastTime: -8584882205410608692
+    m_lastTime: -8584881245137019433
     List:
+    - name: Fish_collected
+      guid: 29545889412e124c821fcfe9c8dfb179
+      id: 2360843467
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Fish_collected
+        ObjectType: 3
+        guid: 29545889412e124c821fcfe9c8dfb179
+      Path: Events\Default Work Unit\Fish_collected
+      maxAttenuation: 0
+      maxDuration: 0.4295603
+      minDuration: 0.4295603
     - name: Footsteps
       guid: 4cdf616f3ab27044b986ddc49c8a7269
       id: 2385628198
@@ -113,6 +130,40 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.6293504
       minDuration: 0.29828402
+    - name: Rod_swish
+      guid: 4fa065187af27c45b6d8f01719e25664
+      id: 3320937167
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Rod_swish
+        ObjectType: 3
+        guid: 4fa065187af27c45b6d8f01719e25664
+      Path: Events\Default Work Unit\Rod_swish
+      maxAttenuation: 0
+      maxDuration: 0.5
+      minDuration: 0.5
+    - name: Sub_door
+      guid: 540c3cc6ecfb1c47b5fafb9ce716d328
+      id: 2282381988
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Sub_door
+        ObjectType: 3
+        guid: 540c3cc6ecfb1c47b5fafb9ce716d328
+      Path: Events\Default Work Unit\Sub_door
+      maxAttenuation: 0
+      maxDuration: 0.5508958
+      minDuration: 0.5508958
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:

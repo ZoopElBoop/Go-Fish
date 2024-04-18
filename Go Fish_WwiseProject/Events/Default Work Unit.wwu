@@ -14,6 +14,39 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Sub_door" ID="{C63C0C54-FBEC-471C-B5FA-FB9CE716D328}">
+					<ChildrenList>
+						<Action Name="" ID="{7FADC76B-33FB-4F24-98E9-67805860B70B}" ShortID="87156636">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Sub door" ID="{2F74567E-DD48-4492-B9A2-586FEEE05257}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Rod_swish" ID="{1865A04F-F27A-457C-B6D8-F01719E25664}">
+					<ChildrenList>
+						<Action Name="" ID="{A20AA887-C6F0-44C1-AA5A-6702F532BACB}" ShortID="104796215">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rod swish" ID="{D07A3C1A-D5A2-4BEE-8657-50D80158E5A7}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Fish_collected" ID="{89585429-2E41-4C12-821F-CFE9C8DFB179}">
+					<ChildrenList>
+						<Action Name="" ID="{B66446A6-741E-4FAF-8064-4D930110C748}" ShortID="963896113">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Fish collected" ID="{8FBA0B86-E2A5-4273-A3EE-483A77FF3754}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

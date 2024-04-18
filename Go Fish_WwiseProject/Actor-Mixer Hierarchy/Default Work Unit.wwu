@@ -444,6 +444,80 @@
 						</GroupingList>
 					</GroupingInfo>
 				</SwitchContainer>
+				<Sound Name="Sub door" ID="{2F74567E-DD48-4492-B9A2-586FEEE05257}" ShortID="753848573">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Sub door" ID="{14B785EE-E47A-4221-8816-A1C093B5E81A}">
+							<PropertyList>
+								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+							</PropertyList>
+							<Language>SFX</Language>
+							<AudioFile>Sub door.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="1011808839"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Sub door" ID="{14B785EE-E47A-4221-8816-A1C093B5E81A}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="rod swish" ID="{D07A3C1A-D5A2-4BEE-8657-50D80158E5A7}" ShortID="988209526">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="rod swish" ID="{A4EEEE29-9DF0-46B0-8CC8-CF7EABCC91CB}">
+							<Language>SFX</Language>
+							<AudioFile>rod swish.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="173829974"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="rod swish" ID="{A4EEEE29-9DF0-46B0-8CC8-CF7EABCC91CB}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="Fish collected" ID="{8FBA0B86-E2A5-4273-A3EE-483A77FF3754}" ShortID="219663556">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Fish collected" ID="{50236B4B-93DB-4BC8-BC77-4B4485905828}">
+							<PropertyList>
+								<Property Name="FadeInDuration" Type="Real64" Value="0.0248253703813887"/>
+								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+								<Property Name="TrimEnd" Type="Real64" Value="0.429560302255013"/>
+							</PropertyList>
+							<Language>SFX</Language>
+							<AudioFile>Fish collected.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="104815867"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Fish collected" ID="{50236B4B-93DB-4BC8-BC77-4B4485905828}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

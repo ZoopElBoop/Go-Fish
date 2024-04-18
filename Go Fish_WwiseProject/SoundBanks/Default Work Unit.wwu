@@ -6,6 +6,9 @@
 				<SoundBank Name="Main" ID="{FDB759F6-B405-41DB-B550-785D575E4DBE}">
 					<ObjectInclusionList>
 						<ObjectRef Name="Footsteps" ID="{6F61DF4C-B23A-4470-B986-DDC49C8A7269}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Rod_swish" ID="{1865A04F-F27A-457C-B6D8-F01719E25664}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Sub_door" ID="{C63C0C54-FBEC-471C-B5FA-FB9CE716D328}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Fish_collected" ID="{89585429-2E41-4C12-821F-CFE9C8DFB179}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
