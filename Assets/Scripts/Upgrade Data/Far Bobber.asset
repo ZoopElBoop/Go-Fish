@@ -17,8 +17,8 @@ MonoBehaviour:
   slotsTaken: 1
   image: {fileID: 0}
   description: 
-  rodThrowAddon: 0
-  bobberRangeAddon: 50
+  rodThrowAddon: 30
+  bobberRangeAddon: 0
   speedMulti: 0
   stealthMulti: 0
   addonType: 

@@ -21,7 +21,8 @@ public class BuoyancyObject : MonoBehaviour
     [Header("Float Effects")]
     [Range(1.0f, 500.0f)]
     public float _floatingPower = 15f;
-    [SerializeField] private float _waterHeight = 0;
+    [SerializeField] private float waterHeightAddon = 0f;
+    [SerializeField] private Transform waterPos;
 
     private bool isUnderwater;
 
@@ -33,6 +34,8 @@ public class BuoyancyObject : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        waterPos = GameObject.FindWithTag("Water").transform;
 
         if (!_floatingPoint.Any())
         {
@@ -52,12 +55,14 @@ public class BuoyancyObject : MonoBehaviour
         floatingPointsUnderwater = 0;
 
         for (int i = 0; i < _floatingPoint.Count; i++)
-        { 
-            float diff = Mathf.Clamp(_floatingPoint[i].position.y - _waterHeight, -1f, 1f);
+        {
+            float waterHeight = waterPos.position.y + 10.5f + waterHeightAddon;
+
+            float diff = Mathf.Clamp(_floatingPoint[i].position.y - waterHeight, -1f, 1f);
 
             if (diff < 0)   //checks if floating point is below waterline
             {
-                rb.AddForceAtPosition(Vector3.up * _floatingPower * Mathf.Abs(diff), _floatingPoint[i].transform.position, ForceMode.Force);
+                rb.AddForceAtPosition(_floatingPower * Mathf.Abs(diff) * Vector3.up, _floatingPoint[i].transform.position, ForceMode.Force);
 
                 floatingPointsUnderwater++;
 

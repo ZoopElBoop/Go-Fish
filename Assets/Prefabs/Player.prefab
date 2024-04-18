@@ -760,9 +760,9 @@ GameObject:
   - component: {fileID: 5115906610334661900}
   - component: {fileID: 4143585994484616971}
   - component: {fileID: 2091572622323463430}
+  - component: {fileID: 6983697106207006861}
   - component: {fileID: 6482664059898737407}
   - component: {fileID: 2944523039950483636}
-  - component: {fileID: 6983697106207006861}
   - component: {fileID: 4288137571712162265}
   - component: {fileID: 4548653372721659600}
   m_Layer: 2
@@ -842,53 +842,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6482664059898737407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8981901052761092954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61c11a6a69ab77f4cb0aee7cc8a44aa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 7211991238530038129}
-  moveSpeed: 10
-  jumpForce: 10
-  gravity: 32
-  inAirMin: 0
---- !u!114 &2944523039950483636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8981901052761092954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9345be36c75061b47a0c5c31355f0e9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishingRod: {fileID: 3394642100146853828}
-  _Bobber: {fileID: 8840925713100103486, guid: 8eb0ed0c933372c418abd0264fcc45c7, type: 3}
-  _bobberSpawnPoint: {fileID: 3809250035136272316}
-  _bobberSpawnRangeMax: 20
-  _bobberSpawnRangeMin: 8
-  _bobberMaxDistanceFromPlayer: 80
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 16
-  _mouseFx: {fileID: 7470109055551435250, guid: 806afb88cb3e80e4ca4d5c4516a52cf7,
-    type: 3}
-  _LineRenderer: {fileID: 6983697106207006861}
-  _chargeUpMax: 30
-  _chargeUpMultiplier: 0.2
-  throwCharge: 0
-  gizmosActive: 0
-  boatRB: {fileID: 0}
-  TestVelocityMultiplier: 1.5
 --- !u!120 &6983697106207006861
 LineRenderer:
   serializedVersion: 2
@@ -993,6 +946,53 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &6482664059898737407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8981901052761092954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c11a6a69ab77f4cb0aee7cc8a44aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 7211991238530038129}
+  moveSpeed: 10
+  jumpForce: 10
+  gravity: 32
+  inAirMin: 0
+--- !u!114 &2944523039950483636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8981901052761092954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9345be36c75061b47a0c5c31355f0e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishingRod: {fileID: 3394642100146853828}
+  _Bobber: {fileID: 8840925713100103486, guid: 8eb0ed0c933372c418abd0264fcc45c7, type: 3}
+  _bobberSpawnPoint: {fileID: 3809250035136272316}
+  _bobberSpawnRangeMax: 20
+  _bobberSpawnRangeMin: 8
+  _bobberMaxDistanceFromPlayer: 80
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 16
+  _mouseFx: {fileID: 7470109055551435250, guid: 806afb88cb3e80e4ca4d5c4516a52cf7,
+    type: 3}
+  _LineRenderer: {fileID: 6983697106207006861}
+  _chargeUpMax: 30
+  _chargeUpMultiplier: 0.2
+  throwCharge: 0
+  gizmosActive: 0
+  boatRB: {fileID: 0}
+  TestVelocityMultiplier: 1.5
 --- !u!114 &4288137571712162265
 MonoBehaviour:
   m_ObjectHideFlags: 0
