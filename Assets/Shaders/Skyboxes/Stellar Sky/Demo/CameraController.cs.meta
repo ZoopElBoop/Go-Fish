@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 439aaf1c49ca90c47a4230fbb2674c47
+timeCreated: 1504521815
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99558
+  packageName: Stellar Sky
+  packageVersion: 1.0
+  assetPath: Assets/Stellar Sky/Demo/CameraController.cs
+  uploadId: 199633

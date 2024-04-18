@@ -22,7 +22,7 @@ public class DayAndNightCycle : MonoBehaviour
     [SerializeField] private Gradient fogGradient;
     [SerializeField] private Gradient ambientGradient;
     [SerializeField] private Gradient directionalLightGradient;
-    [SerializeField] private Gradient skyboxTintGradient;
+    //[SerializeField] private Gradient skyboxTintGradient;
 
     [Header("Enviromental")]
     [SerializeField] private Light directionalLight;
@@ -92,8 +92,8 @@ public class DayAndNightCycle : MonoBehaviour
 
         directionalLight.color = directionalLightGradient.Evaluate(gameTime);
 
-        skyboxMaterial.SetColor("_Tint", skyboxTintGradient.Evaluate(gameTime));
-
+        //skyboxMaterial.SetColor("_Tint", skyboxTintGradient.Evaluate(gameTime));
+        skyboxMaterial.SetFloat("_CubemapTransition", 1 - transitionTime);
         ChangeSeaGlossiness();
     }
 
@@ -163,7 +163,7 @@ public class DayAndNightCycle : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        skyboxMaterial.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f));
+        //skyboxMaterial.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f));
         skyboxMaterial.SetFloat("_Rotation", 0f);
         waterMaterial.SetFloat("_Glossiness", maximumWaterGlossiness);
     }

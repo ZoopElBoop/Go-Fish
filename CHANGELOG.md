@@ -1,10 +1,38 @@
 ============
 GO FISH V0.7
 ============
+Major Changes
+- 
+
+Minor Changes
+- 
+
+Bug Fixes
+- Player can now see their own shadow
+- Flaoting Objects now follow water tides
+
+Known Issues
+- 
+
+============
+GO FISH V0.7b
+============
+
+Minor Changes
+- Player now has to press E to enter boat
+
+Bug Fixes
+- Fixed UI not popping up correctly
+- Fixed UI not scaling to screen resolution
+- Can no longer view player model in 1st person 
+
+============
+GO FISH V0.7
+============
 
 Major Changes
 - Fish Shop Rework (again)
-- Fish Upgrade Shop
+- Upgrade Shop
 
 Minor Changes
 - Added some nice environmental effects
@@ -22,6 +50,7 @@ Known Issues
 ============
 GO FISH V0.6
 ============
+
 Major Changes
 - Fish Shop Rework
 
@@ -44,6 +73,7 @@ Known Issues
 ============
 GO FISH V0.5
 ============
+
 Major Changes
 - Added Caves
 - Added basic harpoon firing
@@ -91,5 +121,3 @@ Known Issues
 - Player can fall through water
 - Submarine slightly rotates in Z-axis for some reason
 - Fish Ai be a mess
-
-

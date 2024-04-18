@@ -8,12 +8,12 @@ public class Boat : MonoBehaviour
     public float _Speed;
     [SerializeField] private Camera _boatCam;
     [SerializeField] private Transform _playerBoatPos;
+    [SerializeField] private GameObject _boatCanvas;
     private Vector3 startingPos;
     private Quaternion startingRot;
 
     private bool isActive = false;
-    private bool playerLeft = true;
-    public bool onWater = false;
+    private bool playerNear = true;
 
     private GameObject Player;
     private Transform playerReturnPos;
@@ -21,6 +21,7 @@ public class Boat : MonoBehaviour
     private void Start()
     {
         playerReturnPos = GameObject.FindWithTag("Player Boat Exit").GetComponent<Transform>();
+        Player = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody>();
         bo = GetComponent<BuoyancyObject>();
 
@@ -32,12 +33,15 @@ public class Boat : MonoBehaviour
     {
         if (isActive)
         {
-            if (Input.GetKeyDown(KeyCode.Space))           
+            if (Input.GetKeyDown(KeyCode.E))
                 ExitBoat();
 
-            transform.Rotate(0f, Input.GetAxis("Rotate"), 0f, Space.Self);
+            transform.Rotate(0f, Input.GetAxis("Horizontal"), 0f, Space.Self);
 
-            
+
+        }else if (playerNear && Input.GetKeyDown(KeyCode.E))
+        {
+            EnterBoat();
         }
         FlipBoat();
     }
@@ -70,67 +74,70 @@ public class Boat : MonoBehaviour
             {
                 Quaternion rotationEnd = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0f);
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, Time.deltaTime * 1);
             }
         }
     }
 
+    private void EnterBoat() 
+    {
+        SwitchStates(false);
+
+        Fishing fs = PlayerScriptManager.Instance.GetScript("Fishing");
+
+        fs.boatRB = rb;
+
+        Player.transform.SetPositionAndRotation(_playerBoatPos.position, _playerBoatPos.rotation);
+
+        Player.transform.parent = transform;
+
+        EventManager.Instance.BoatEnter(_boatCam);
+    }
+
     private void ExitBoat()
     {
+        SwitchStates(true);
+
         Player.transform.parent = null;
+
+        print(Player.transform.position);
+        print(playerReturnPos.transform.position);
+
 
         Player.transform.SetPositionAndRotation(playerReturnPos.position, playerReturnPos.rotation);
 
         rb.velocity = Vector3.zero;
         transform.SetPositionAndRotation(startingPos, startingRot);
 
-        PlayerScriptManager.Instance.ShutDown("Controller", true);
-        PlayerScriptManager.Instance.ShutDown("Movement", true);
-        PlayerScriptManager.Instance.ShutDown("Interact", true);
-
-        GameManager.Instance.ShowPlayerMouse(false);
-
-        isActive = false;
-        _boatCam.enabled = false;
-
         EventManager.Instance.BoatExit();
+    }
+
+    private void SwitchStates(bool status)
+    {
+        PlayerScriptManager.Instance.ShutDown("Controller", status);
+        PlayerScriptManager.Instance.ShutDown("Movement", status);
+        PlayerScriptManager.Instance.ShutDown("Interact", status);
+
+        GameManager.Instance.ShowPlayerMouse(!status);
+
+        isActive = !status;
+        _boatCam.enabled = !status;
+
+        _boatCanvas.SetActive(status);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && playerLeft)
+        if (other.CompareTag("Player") && !playerNear)
         {
-            Player = other.gameObject;
-
-            PlayerScriptManager.Instance.ShutDown("Controller", false);
-            PlayerScriptManager.Instance.ShutDown("Movement", false);
-            PlayerScriptManager.Instance.ShutDown("Interact", false);
-
-            GameManager.Instance.ShowPlayerMouse(true);
-
-            Fishing fs = PlayerScriptManager.Instance.GetScript("Fishing");
-
-            fs.boatRB = rb;
-
-            Player.transform.SetPositionAndRotation(_playerBoatPos.position, _playerBoatPos.rotation);
-
-            Player.transform.parent = transform;
-
-            isActive = true;
-            _boatCam.enabled = true;
-
-            EventManager.Instance.BoatEnter(_boatCam);
-
-            playerLeft = false;
+            playerNear = true;
+            print(other.gameObject);
         }
-
-        if (other.CompareTag("Water"))
-            onWater = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && !playerLeft)
-            playerLeft = true;       
+        if (other.CompareTag("Player") && playerNear)
+            playerNear = false;       
     }
 }

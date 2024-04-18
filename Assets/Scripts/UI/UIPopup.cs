@@ -1,36 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIPopup : MonoBehaviour
 {
-    public GameObject PopupCanvas;
     public bool followPlayer;
+    public TMP_Text PopupUI;
     private Camera cam;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         cam = Camera.main;
-        //PopupCanvas.SetActive(false);
+
+        PopupUI.enabled = false;
     }
 
     private void Update()
     {
-        if (followPlayer && cam != null && PopupCanvas.activeSelf)
-            PopupCanvas.transform.rotation = Quaternion.LookRotation(PopupCanvas.transform.position - cam.transform.position);
+        if (followPlayer && cam != null)
+            PopupUI.transform.rotation = Quaternion.LookRotation(PopupUI.transform.position - cam.transform.position);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.tag);
         if (other.CompareTag("Player"))
-            PopupCanvas.SetActive(true);
+            PopupUI.enabled = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
-            PopupCanvas.SetActive(false);
+            PopupUI.enabled = false;
     }
 }
