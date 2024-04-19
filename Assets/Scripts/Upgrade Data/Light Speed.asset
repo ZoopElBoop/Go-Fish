@@ -19,7 +19,7 @@ MonoBehaviour:
   description: 
   rodThrowAddon: 0
   bobberRangeAddon: 0
-  speedMulti: 20
+  speedMulti: 100
   stealthMulti: 0
   addonType: 
   harpoon: {fileID: 0}

@@ -51,7 +51,7 @@ public class UpgradeData : ScriptableObject
     //I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS 
     private void OnValidate()
     {
-        if (previousType != upgradeType.ToString())
+        if (previousType != upgradeType.ToString() && !Application.isPlaying)
         {
             previousType = upgradeType.ToString();
 
