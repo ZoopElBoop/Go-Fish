@@ -31,7 +31,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{AE412A6E-DDBA-728F-DB5E-84FD50CD481E}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{03C3CC46-EC5A-A75B-9704-1D52B1EF62E2}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -43,13 +43,17 @@
 					<ShortName>Wood(steps8).wav</ShortName>
 					<CachePath>SFX/Wood(steps8)_818F3B66.wem</CachePath>
 				</File>
+				<File Id="89073160" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>coin sound (pitched up).wav</ShortName>
+					<CachePath>SFX/coin sound (pitched up)_818F3B66.wem</CachePath>
+				</File>
 				<File Id="95651886" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Sand (step 2).wav</ShortName>
 					<CachePath>SFX/Sand (step 2)_818F3B66.wem</CachePath>
 				</File>
 				<File Id="104815867" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Fish collected.wav</ShortName>
-					<CachePath>SFX/Fish collected_8EC0A87E.wem</CachePath>
+					<CachePath>SFX/Fish collected_DE9327CF.wem</CachePath>
 				</File>
 				<File Id="173829974" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>rod swish.wav</ShortName>
@@ -66,6 +70,10 @@
 				<File Id="669549996" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Wood(steps7).wav</ShortName>
 					<CachePath>SFX/Wood(steps7)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="738939123" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Cash register.wav</ShortName>
+					<CachePath>SFX/Cash register_E9F7CDF8.wem</CachePath>
 				</File>
 				<File Id="800354274" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Wood(steps5).wav</ShortName>
@@ -97,6 +105,11 @@
 				</File>
 			</Media>
 			<Events>
+				<Event Id="1625736018" Name="buy_upgrade" DurationType="OneShot" DurationMin="1.6262966" DurationMax="1.6262966">
+					<MediaRefs>
+						<MediaRef Id="738939123"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="2360843467" Name="Fish_collected" DurationType="OneShot" DurationMin="0.4295603" DurationMax="0.4295603">
 					<MediaRefs>
 						<MediaRef Id="104815867"/>
@@ -138,6 +151,11 @@
 						<MediaRef Id="173829974"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="2301772642" Name="Sell_fish" DurationType="OneShot" DurationMin="0.7605417" DurationMax="0.7605417">
+					<MediaRefs>
+						<MediaRef Id="89073160"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="2282381988" Name="Sub_door" DurationType="OneShot" DurationMin="0.5508958" DurationMax="0.5508958">
 					<MediaRefs>
 						<MediaRef Id="1011808839"/>
@@ -155,5 +173,5 @@
 			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{F874E9AA-39EB-9270-68C2-810F66287763}</FileHash>
+	<FileHash>{3FAF159D-7412-1704-5F5F-CE7755CD5F86}</FileHash>
 </SoundBanksInfo>

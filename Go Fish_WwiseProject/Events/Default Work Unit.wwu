@@ -47,6 +47,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Sell_fish" ID="{7ABEB9DE-BAA4-48B0-BCEF-FD8733FA7A5A}">
+					<ChildrenList>
+						<Action Name="" ID="{86C5FEEB-1CB5-4CD5-B63E-DBB2E399FB16}" ShortID="35416271">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="coin sound (pitched up)" ID="{0EF6E92D-F67B-486A-90E9-1DBCEE591BBC}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="buy_upgrade" ID="{1AA09A70-823D-4B59-AC4A-1CA37596BD0E}">
+					<ChildrenList>
+						<Action Name="" ID="{74140524-D953-427A-9058-9AD25CF6E53E}" ShortID="864253408">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Cash register" ID="{A6606958-A509-4B08-8904-3A0EC11AB190}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

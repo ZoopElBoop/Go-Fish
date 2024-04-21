@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: f6e1ebbfdd8303499ec3140a8a2eb19f
     GuidInternal: 
-    m_lastTime: -8584881238047713214
+    m_lastTime: -8584878655814000675
     List:
     - name: Main
       guid: f659b7fd05b4db41b550785d575e4dbe
@@ -94,8 +94,25 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 11c91fd6cb1f564886677d0aca3fbb2c
     GuidInternal: 
-    m_lastTime: -8584881238048611376
+    m_lastTime: -8584878655813915489
     List:
+    - name: buy_upgrade
+      guid: 709aa01a3d82594bac4a1ca37596bd0e
+      id: 1625736018
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: buy_upgrade
+        ObjectType: 3
+        guid: 709aa01a3d82594bac4a1ca37596bd0e
+      Path: Events\Default Work Unit\buy_upgrade
+      maxAttenuation: 0
+      maxDuration: 1.6262966
+      minDuration: 1.6262966
     - name: Fish_collected
       guid: 29545889412e124c821fcfe9c8dfb179
       id: 2360843467
@@ -147,6 +164,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.5
       minDuration: 0.5
+    - name: Sell_fish
+      guid: deb9be7aa4bab048bceffd8733fa7a5a
+      id: 2301772642
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Sell_fish
+        ObjectType: 3
+        guid: deb9be7aa4bab048bceffd8733fa7a5a
+      Path: Events\Default Work Unit\Sell_fish
+      maxAttenuation: 0
+      maxDuration: 0.7605417
+      minDuration: 0.7605417
     - name: Sub_door
       guid: 540c3cc6ecfb1c47b5fafb9ce716d328
       id: 2282381988

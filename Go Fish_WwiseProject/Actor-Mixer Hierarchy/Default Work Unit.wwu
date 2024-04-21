@@ -518,6 +518,55 @@
 						<ActiveSource Name="Fish collected" ID="{50236B4B-93DB-4BC8-BC77-4B4485905828}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
+				<Sound Name="coin sound (pitched up)" ID="{0EF6E92D-F67B-486A-90E9-1DBCEE591BBC}" ShortID="817249387">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="coin sound (pitched up)" ID="{02953221-5CD8-42F2-8A3D-39DEFC3C7BB2}">
+							<Language>SFX</Language>
+							<AudioFile>coin sound (pitched up).wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="89073160"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="coin sound (pitched up)" ID="{02953221-5CD8-42F2-8A3D-39DEFC3C7BB2}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="Cash register" ID="{A6606958-A509-4B08-8904-3A0EC11AB190}" ShortID="190611753">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Cash register" ID="{1493B032-88CF-4801-BFBE-0E771DDED150}">
+							<PropertyList>
+								<Property Name="FadeOutDuration" Type="Real64" Value="0.0941117346938776"/>
+								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+								<Property Name="TrimEnd" Type="Real64" Value="1.62629668367347"/>
+							</PropertyList>
+							<Language>SFX</Language>
+							<AudioFile>Cash register.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="738939123"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Cash register" ID="{1493B032-88CF-4801-BFBE-0E771DDED150}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>
