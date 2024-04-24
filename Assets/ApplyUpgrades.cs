@@ -15,15 +15,23 @@ public class ApplyUpgrades : MonoBehaviour
         switch (upgrade.upgradeType)
         {
             case UpgradeData.UpgradeTo.Player:
+                fis._chargeUpMax += upgrade.rodThrowAddon;
                 fis._bobberMaxDistanceFromPlayer += upgrade.bobberRangeAddon;
                 break;
+
             case UpgradeData.UpgradeTo.Boat:
                 boatScript._Speed *= upgrade.speedMulti;
+                boatScript.stealthMultiplier *= upgrade.stealthMulti;
                 break;
+
             case UpgradeData.UpgradeTo.Sub:
+                //TBD
                 break;
+
             case UpgradeData.UpgradeTo.Harpoon:
+                //TBD
                 break;
+
             default:
                 break;
         }
@@ -34,15 +42,23 @@ public class ApplyUpgrades : MonoBehaviour
         switch (upgrade.upgradeType)
         {
             case UpgradeData.UpgradeTo.Player:
+                fis._chargeUpMax -= upgrade.rodThrowAddon;
                 fis._bobberMaxDistanceFromPlayer -= upgrade.bobberRangeAddon;
                 break;
+
             case UpgradeData.UpgradeTo.Boat:
-                boatScript._Speed = 30;
+                boatScript._Speed *= upgrade.speedMulti;
+                boatScript.stealthMultiplier *= upgrade.stealthMulti;
                 break;
+
             case UpgradeData.UpgradeTo.Sub:
+                //TBD
                 break;
+
             case UpgradeData.UpgradeTo.Harpoon:
+                //TBD
                 break;
+
             default:
                 break;
         }

@@ -52,14 +52,13 @@ public class UpgradeShopManager : MonoBehaviour
 
         for (int i = 0; i < upgradeStates.Length; i++)  
             upgradeStates[i] = UpgradeState.none;
-        
 
         UpgradeShopTextInit();
 
         UpdateUpgradeShopText();
     }
 
-    #region shop ui 
+    #region Shop Ui 
 
     private void UpgradeShopTextInit()
     {
@@ -169,15 +168,12 @@ public class UpgradeShopManager : MonoBehaviour
             case UpgradeData.UpgradeTo.Player:
                 playerSlots += upgradeTypes[i].slotsTaken * a;
                 break;
-
             case UpgradeData.UpgradeTo.Boat:
                 BoatSlots += upgradeTypes[i].slotsTaken * a;
                 break;
-
             case UpgradeData.UpgradeTo.Sub:
                 SubSlots += upgradeTypes[i].slotsTaken * a;
                 break;
-
             case UpgradeData.UpgradeTo.Harpoon:
                 break;
         }
@@ -252,7 +248,7 @@ public class UpgradeShopManager : MonoBehaviour
 
     #endregion
 
-    #region shop events
+    #region Shop Events
 
     private void ConfirmToSell()
     {
@@ -270,8 +266,6 @@ public class UpgradeShopManager : MonoBehaviour
         upgradeStates[selectedID] = UpgradeState.equiped;
 
         UpgradeToSlot(selectedID, true);
-
-
 
         upgrades.Add(upgradeTypes[selectedID]);
     }

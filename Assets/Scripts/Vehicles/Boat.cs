@@ -18,6 +18,8 @@ public class Boat : MonoBehaviour
     private GameObject Player;
     private Transform playerReturnPos;
 
+    public float stealthMultiplier;
+
     private void Start()
     {
         playerReturnPos = GameObject.FindWithTag("Player Boat Exit").GetComponent<Transform>();

@@ -33,7 +33,7 @@ public class Fishing : MonoBehaviour
 
     [Header("Charge Up Velocity Limit & Minimum")]
     [Range(1.0f, 50.0f)]
-    [SerializeField] private float _chargeUpMax = 15f;
+    public float _chargeUpMax = 15f;
     [Range(0.01f, 0.3f)]
     [SerializeField] private float _chargeUpMultiplier = 0.1f;
     public float throwCharge;
@@ -87,24 +87,25 @@ public class Fishing : MonoBehaviour
         _LineRenderer.enabled = false;
     }
 
-    private void OnEnable()
+    public void FishingStatus(bool status)
     {
-        ///a
-    }
+        if (rodEquiped)
+        {
+            ObliterateBobber();
 
-    private void ResetFishing()
-    {
-        ObliterateBobber();
+            isFishing = false;
+            _LineRenderer.enabled = false;
+            UIManager.Instance.ThrowSliderActive(false);
 
-        isFishing = false;
-        _LineRenderer.enabled = false;
-        UIManager.Instance.ThrowSliderActive(false);
+            if (caughtFishScript != null)
+                Escape();
 
-        if (caughtFishScript != null)
-            Escape();
+            if (mouseFxInstance != null)
+                mouseFxInstance.SetActive(false);
+        }
 
-        if (mouseFxInstance != null)
-            mouseFxInstance.SetActive(false);
+        rodEquiped = status;
+        fishingRod.SetActive(status);
     }
 
     #endregion
@@ -113,16 +114,6 @@ public class Fishing : MonoBehaviour
 
     private void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            //Resets fishing if player de-equips rod while fishing
-            if (rodEquiped)            
-                ResetFishing();         
-
-            rodEquiped = !rodEquiped;
-            fishingRod.SetActive(rodEquiped);
-        }
-
         if (rodEquiped)
         {
             FishingControl();
@@ -370,7 +361,6 @@ public class Fishing : MonoBehaviour
 
     public void SwitchToBoatCamera(Camera boatCam)
     {
-        print("bobt");
         mainCamera.gameObject.SetActive(false);
         mainCamera = boatCam;
 
@@ -385,8 +375,6 @@ public class Fishing : MonoBehaviour
         mouseFxInstance.SetActive(false);
 
         inBoat = false;
-
-        print("playr");
 
         throwCharge = 1f;
     }
@@ -461,7 +449,7 @@ public class Fishing : MonoBehaviour
 
     private void OnDisable()
     {
-        ResetFishing();
+        FishingStatus(false);
     }
 
     private void OnDestroy()
