@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: f6e1ebbfdd8303499ec3140a8a2eb19f
     GuidInternal: 
-    m_lastTime: -8584878655814000675
+    m_lastTime: -8584876140838641902
     List:
     - name: Main
       guid: f659b7fd05b4db41b550785d575e4dbe
@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 11c91fd6cb1f564886677d0aca3fbb2c
     GuidInternal: 
-    m_lastTime: -8584878655813915489
+    m_lastTime: -8584876140838718095
     List:
     - name: buy_upgrade
       guid: 709aa01a3d82594bac4a1ca37596bd0e
@@ -145,8 +145,25 @@ MonoBehaviour:
         guid: 4cdf616f3ab27044b986ddc49c8a7269
       Path: Events\Default Work Unit\Footsteps
       maxAttenuation: 0
-      maxDuration: 0.6293504
+      maxDuration: 1.0132558
       minDuration: 0.29828402
+    - name: Jump
+      guid: ea5a9301a7253a4e8d26cae2a8612901
+      id: 3833651337
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Jump
+        ObjectType: 3
+        guid: ea5a9301a7253a4e8d26cae2a8612901
+      Path: Events\Default Work Unit\Jump
+      maxAttenuation: 0
+      maxDuration: 0.4915625
+      minDuration: 0.4915625
     - name: Rod_swish
       guid: 4fa065187af27c45b6d8f01719e25664
       id: 3320937167
@@ -238,7 +255,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
     GuidInternal: 
-    m_lastTime: -8584881238047692047
+    m_lastTime: -8584876085105061369
     List:
     - name: Footstep_surface
       guid: d703282d06337b4ba38dde9d28b24d9b
@@ -255,6 +272,22 @@ MonoBehaviour:
         guid: d703282d06337b4ba38dde9d28b24d9b
       Path: Switches\Default Work Unit\Footstep_surface
       values:
+      - name: Grass
+        guid: bde56945860ce4418b730c4eef05f6e7
+        id: 4248645337
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
+        - ElementName: Footstep_surface
+          ObjectType: 11
+          guid: d703282d06337b4ba38dde9d28b24d9b
+        - ElementName: Grass
+          ObjectType: 10
+          guid: bde56945860ce4418b730c4eef05f6e7
       - name: Gravel
         guid: 30800e38049ecf498cf2b21c2e27a36e
         id: 2185786256
