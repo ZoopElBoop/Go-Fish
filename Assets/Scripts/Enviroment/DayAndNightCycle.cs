@@ -30,7 +30,7 @@ public class DayAndNightCycle : MonoBehaviour
     [SerializeField] private Material waterMaterial;
 
     [Header("Settings")]
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float skyboxRotationSpeed = 1f;
     [SerializeField][Range(0, 0.25f)] private float minimumWaterGlossiness;
     [SerializeField][Range(0.25f, 1)] private float maximumWaterGlossiness;
     [Space]
@@ -112,7 +112,7 @@ public class DayAndNightCycle : MonoBehaviour
 #endif
 
         float currentRotation = skyboxMaterial.GetFloat("_Rotation");
-        float newRotation = currentRotation + rotationSpeed * Time.deltaTime;
+        float newRotation = currentRotation + skyboxRotationSpeed * Time.deltaTime;
 
         newRotation = Mathf.Repeat(newRotation, 360f);
         skyboxMaterial.SetFloat("_Rotation", newRotation);

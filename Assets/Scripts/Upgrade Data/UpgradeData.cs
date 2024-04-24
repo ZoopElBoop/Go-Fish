@@ -19,13 +19,13 @@ public class UpgradeData : ScriptableObject
 
     [Min(1)]public int cost;
     [Range (1,2)]public int slotsTaken = 1;
+
     public Sprite image;
     [Multiline] public string description;
 
     #region Upgrade Variables
 
     [Header("Player")]
-
     public int rodThrowAddon;
     public int bobberRangeAddon;
 
@@ -41,17 +41,20 @@ public class UpgradeData : ScriptableObject
     public float harpoonDamageMulti;
     public float harpoonSpeedMulti;
 
+    #endregion
 
     private string previousType;
-
-    #endregion
 
     //I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS 
     //I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS 
     //I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS I HATE THIS 
+
+    //Ok its not as bad now but i still hate this
     private void OnValidate()
     {
-        if (previousType != upgradeType.ToString() && !Application.isPlaying)
+        previousType ??= upgradeType.ToString();    //checks if previous type is null, to prevent values changing on editor startup                           
+
+        if (previousType != upgradeType.ToString())
         {
             previousType = upgradeType.ToString();
 
@@ -70,9 +73,15 @@ public class UpgradeData : ScriptableObject
             harpoon = null;
             harpoonDamageMulti = 0f;
             harpoonSpeedMulti = 0f;
+
+            //Removes slots value if harpoon upgrade type
+            if (previousType == "Harpoon")
+                slotsTaken = 0;
         }
     }
 }
+
+#region Hide values in edior
 
 #if UNITY_EDITOR
 
@@ -117,7 +126,6 @@ class ValueVisible : Editor
 
         DrawPropertiesExcluding(serializedObject, ignoreValues.ToArray());
         serializedObject.ApplyModifiedProperties();
-
     }
 
     private void HidePlayerData() 
@@ -140,7 +148,6 @@ class ValueVisible : Editor
         ignoreValues.Add(nameof(UpgradeData.harpoonDamageMulti));
         ignoreValues.Add(nameof(UpgradeData.harpoonSpeedMulti));
     }
-
     private void HideBaseData() 
     {
         ignoreValues.Add(nameof(UpgradeData.slotsTaken));
@@ -148,3 +155,5 @@ class ValueVisible : Editor
 }
 
 #endif
+
+#endregion
