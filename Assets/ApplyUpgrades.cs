@@ -20,8 +20,8 @@ public class ApplyUpgrades : MonoBehaviour
                 break;
 
             case UpgradeData.UpgradeTo.Boat:
-                boatScript._Speed *= upgrade.speedMulti;
-                boatScript.stealthMultiplier *= upgrade.stealthMulti;
+                boatScript._Speed += upgrade.speedAddon;
+                boatScript.stealthMultiplier -= upgrade.stealthMulti;
                 break;
 
             case UpgradeData.UpgradeTo.Sub:
@@ -47,8 +47,8 @@ public class ApplyUpgrades : MonoBehaviour
                 break;
 
             case UpgradeData.UpgradeTo.Boat:
-                boatScript._Speed *= upgrade.speedMulti;
-                boatScript.stealthMultiplier *= upgrade.stealthMulti;
+                boatScript._Speed -= upgrade.speedAddon;
+                boatScript.stealthMultiplier += upgrade.stealthMulti;
                 break;
 
             case UpgradeData.UpgradeTo.Sub:

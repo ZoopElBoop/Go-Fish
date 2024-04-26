@@ -56,7 +56,7 @@ public class Fishing : MonoBehaviour
     //Bool states
     private bool inBoat;
     private bool isFishing;
-    private bool rodEquiped = false;
+    private bool rodEquiped = true;
 
     [Header("TESTING (WILL BE REMOVED)")]
     [SerializeField] private float TestVelocityMultiplier; //remove once velocity range is fixed
@@ -72,6 +72,7 @@ public class Fishing : MonoBehaviour
         EventManager.Instance.OnBoatEnter += SwitchToBoatCamera;
         EventManager.Instance.OnBoatExit += SwitchToPlayerCamera;
         EventManager.Instance.OnDestroyWobber += ObliterateBobber;
+        EventManager.Instance.CanFish += FishingStatus;
 
         //Sets camera up for raycast (not necessary, change at some point)
         mainCamera = Camera.main;
@@ -83,13 +84,12 @@ public class Fishing : MonoBehaviour
 
         mouseFxInstance.transform.parent = transform;
 
-        fishingRod.SetActive(false);
         _LineRenderer.enabled = false;
     }
 
     public void FishingStatus(bool status)
     {
-        if (rodEquiped)
+        if (rodEquiped && status == false)
         {
             ObliterateBobber();
 
@@ -106,6 +106,11 @@ public class Fishing : MonoBehaviour
 
         rodEquiped = status;
         fishingRod.SetActive(status);
+    }
+
+    private void Awake()
+    {
+        FishingStatus(true);
     }
 
     #endregion
@@ -148,7 +153,6 @@ public class Fishing : MonoBehaviour
                 UIManager.Instance.ThrowSliderActive(true);
                 UIManager.Instance.ThrowSlider(_chargeUpMax, throwCharge);
             }
-
             else if (Input.GetMouseButtonUp(0) && throwCharge > 1f && !inBoat)  //throws bobber when player not in boat
                 LobBobber();
             else if (Input.GetMouseButtonDown(0) && inBoat)     //throws bobber when player in boat
@@ -171,6 +175,8 @@ public class Fishing : MonoBehaviour
                 StartCoroutine(FishingCooldown());
             }
         }
+
+        //connisourman was here hehe (michael jackson voice) <3
     }
 
     IEnumerator FishingCooldown()
@@ -458,6 +464,7 @@ public class Fishing : MonoBehaviour
         EventManager.Instance.OnBoatEnter -= SwitchToBoatCamera;
         EventManager.Instance.OnBoatExit -= SwitchToPlayerCamera;
         EventManager.Instance.OnDestroyWobber -= ObliterateBobber;
+        EventManager.Instance.CanFish -= FishingStatus;
     }
 
     #endregion

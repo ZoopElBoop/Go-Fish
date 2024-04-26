@@ -45,6 +45,15 @@ public class EventManager : MonoBehaviour
         OnFishCaught?.Invoke();
     }
 
+
+    //If the player can fish
+    //Gamemanager --> Fishing
+    public event Action<bool>CanFish;
+    public void SetFishingStatus(bool status)
+    {
+        CanFish?.Invoke(status);
+    }
+
     #endregion
 
     #region Boat Camera Switch

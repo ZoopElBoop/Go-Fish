@@ -85,6 +85,11 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
     }
 
+    public void CanFish(bool status)
+    {
+        EventManager.Instance.SetFishingStatus(status);
+    }
+
     #region Spawn & Despawn Functions
 
     public dynamic SpawnFish(GameObject toSpawn, Vector3 position, Quaternion rotation, bool returnScript)

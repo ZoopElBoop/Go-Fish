@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b2e2fbaf63ca243ad89a97d9cecec0, type: 3}
   m_Name: Far Bobber
   m_EditorClassIdentifier: 
-  upgradeType: 0
+  upgradeType: 3
   cost: 10
-  slotsTaken: 1
+  slotsTaken: 0
   image: {fileID: 0}
   description: 
-  rodThrowAddon: 30
+  rodThrowAddon: 0
   bobberRangeAddon: 0
-  speedMulti: 0
+  speedAddon: 0
   stealthMulti: 0
   addonType: 
   harpoon: {fileID: 0}
-  harpoonDamageMulti: 0
-  harpoonSpeedMulti: 0
+  harpoonDamage: 1
+  harpoonSpeed: 57

@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Upgrade Data Block", menuName = "ScriptableObjects/Upgrade Data Object")]
 public class UpgradeData : ScriptableObject
 {
-    [Header("This is the most jank and stupid way of doing this but i am very tired sorry :(")]
+    [Space]
+
     public UpgradeTo upgradeType;
     public enum UpgradeTo
     {
@@ -26,20 +27,20 @@ public class UpgradeData : ScriptableObject
     #region Upgrade Variables
 
     [Header("Player")]
-    public int rodThrowAddon;
-    public int bobberRangeAddon;
+    [Range(0, 100)] public int rodThrowAddon;
+    [Range(0, 100)] public int bobberRangeAddon;
 
     [Header("Boat")]
-    public float speedMulti;
-    public float stealthMulti;
+    [Range(0, 100)] public int speedAddon;
+    [Range(0f, 1f)] public float stealthMulti;
 
     [Header("Sub")]
     public string addonType;
 
     [Header("Harpoon")]
     public GameObject harpoon;
-    public float harpoonDamageMulti;
-    public float harpoonSpeedMulti;
+    [Range(1, 100)] public int harpoonDamage;
+    [Range(1, 100)] public int harpoonSpeed;
 
     #endregion
 
@@ -63,7 +64,7 @@ public class UpgradeData : ScriptableObject
             bobberRangeAddon = 0;
 
             //boat reset
-            speedMulti = 0f;
+            speedAddon = 0;
             stealthMulti = 0f;
 
             //sub reset
@@ -71,12 +72,14 @@ public class UpgradeData : ScriptableObject
 
             //harpoon reset
             harpoon = null;
-            harpoonDamageMulti = 0f;
-            harpoonSpeedMulti = 0f;
+            harpoonDamage = 1;
+            harpoonSpeed = 1;
 
             //Removes slots value if harpoon upgrade type
             if (previousType == "Harpoon")
                 slotsTaken = 0;
+            else
+                slotsTaken = 1;
         }
     }
 }
@@ -135,7 +138,7 @@ class ValueVisible : Editor
     }
     private void HideBoatData()
     {
-        ignoreValues.Add(nameof(UpgradeData.speedMulti));
+        ignoreValues.Add(nameof(UpgradeData.speedAddon));
         ignoreValues.Add(nameof(UpgradeData.stealthMulti));
     }
     private void HideSubData()
@@ -145,8 +148,8 @@ class ValueVisible : Editor
     private void HideHarpoonData()
     {
         ignoreValues.Add(nameof(UpgradeData.harpoon));
-        ignoreValues.Add(nameof(UpgradeData.harpoonDamageMulti));
-        ignoreValues.Add(nameof(UpgradeData.harpoonSpeedMulti));
+        ignoreValues.Add(nameof(UpgradeData.harpoonDamage));
+        ignoreValues.Add(nameof(UpgradeData.harpoonSpeed));
     }
     private void HideBaseData() 
     {
