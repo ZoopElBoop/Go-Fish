@@ -20,6 +20,8 @@ public class Intro : MonoBehaviour
     private Material skyboxMat;
     private float baseExposure;
 
+    private MoveLock bounds;
+
     #endregion
 
     [Header("Time Setting")]
@@ -32,7 +34,6 @@ public class Intro : MonoBehaviour
 
     [Header("Intro Objects")]
 
-    public GameObject bounds;
     public GameObject introLetter;
 
 
@@ -41,7 +42,8 @@ public class Intro : MonoBehaviour
         EnviromentalValuesInit();
 
         introLetter.SetActive(false);
-        bounds.SetActive(true);
+
+        bounds = GetComponent<MoveLock>();
 
         enabled = false;
     }
@@ -67,7 +69,6 @@ public class Intro : MonoBehaviour
         skyboxMat = RenderSettings.skybox;
         baseExposure = skyboxMat.GetFloat("_Exposure");
         skyboxMat.SetFloat("_Exposure", 0f);
-
     }
 
     private void Update()
@@ -126,7 +127,7 @@ public class Intro : MonoBehaviour
 
     private void RemoveBounds() 
     {
-        bounds.SetActive(false);
+        bounds.enabled = false;
     }
 
     private void OnApplicationQuit()
