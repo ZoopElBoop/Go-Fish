@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Variables")]
 
-    public float fishCoin;
+    public int fishCoin;
+    public bool InVessel { get; private set; } 
 
     #endregion
 
@@ -63,6 +64,8 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    #region Fish Control Script & Player Mouse Control
+
     public FishControl GetFishControlScript(GameObject fish)
     {
         if (fish.transform.root.TryGetComponent<FishControl>(out var fc))
@@ -85,10 +88,15 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
     }
 
-    public void CanFish(bool status)
-    {
-        EventManager.Instance.SetFishingStatus(status);
-    }
+    #endregion
+
+    #region Vessel Status
+
+    public void CanFish(bool status) => EventManager.Instance.SetFishingStatus(status);
+
+    public void SetVesselStatus(bool status) => InVessel = status;
+
+    #endregion
 
     #region Spawn & Despawn Functions
 

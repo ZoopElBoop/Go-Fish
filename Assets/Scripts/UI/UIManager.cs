@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
         catches.text = $"CAUGHT FISH: {InventoryManager.Instance.TotalStored()}";
     }
 
-#region FishingSliderFuncs
+    #region FishingSliderFuncs
 
     private void FishingSlider() 
     {
@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-#region ThrowSliderFuncs
+    #region Throw Slider Funcs
 
     public void ThrowSlider(float maxRange, float throwCharge)
     {

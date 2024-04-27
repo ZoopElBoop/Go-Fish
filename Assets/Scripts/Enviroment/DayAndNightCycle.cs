@@ -52,6 +52,9 @@ public class DayAndNightCycle : MonoBehaviour
             numOfDays = 0;
             gameTime = 0f;
         }
+
+        //used for intro
+        enabled = false;
     }
     
     private void Update()
@@ -160,6 +163,11 @@ public class DayAndNightCycle : MonoBehaviour
     public float GetTime() { return gameTime; }
     public int GetDay() { return numOfDays; }
     public void FreezeTime(bool status) { freezeGameTime = status; }
+
+    public Color GetColourOfGradient() 
+    {
+        return ambientGradient.Evaluate(gameTime);
+    }
 
     private void OnApplicationQuit()
     {

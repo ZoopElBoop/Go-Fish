@@ -36,7 +36,7 @@ public class Fishing : MonoBehaviour
     public float _chargeUpMax = 15f;
     [Range(0.01f, 0.3f)]
     [SerializeField] private float _chargeUpMultiplier = 0.1f;
-    public float throwCharge;
+    public float throwCharge = 1f;
 
     [Header("Gizmos")]
     [SerializeField] private bool gizmosActive = true;
@@ -153,7 +153,7 @@ public class Fishing : MonoBehaviour
                 UIManager.Instance.ThrowSliderActive(true);
                 UIManager.Instance.ThrowSlider(_chargeUpMax, throwCharge);
             }
-            else if (Input.GetMouseButtonUp(0) && throwCharge > 1f && !inBoat)  //throws bobber when player not in boat
+            else if (Input.GetMouseButtonUp(0) && !inBoat)  //throws bobber when player not in boat
                 LobBobber();
             else if (Input.GetMouseButtonDown(0) && inBoat)     //throws bobber when player in boat
                 LobBobber();
@@ -211,7 +211,6 @@ public class Fishing : MonoBehaviour
             //Disables target reticle if outside range limits
             if (distanceBetween > (_bobberSpawnRangeMax  * _bobberSpawnRangeMax) || distanceBetween < (_bobberSpawnRangeMin * _bobberSpawnRangeMin))
             {
-                Debug.LogWarning($"Mouse ({distanceBetween}) not in range");
                 mouseFxInstance.SetActive(false);
                 RotatePlayerToMouse(position);
                 return;
@@ -258,6 +257,8 @@ public class Fishing : MonoBehaviour
             {
                 ObliterateBobber();
 
+                isFishing = false;
+
                 if (caughtFishScript != null)
                     Escape();
             }
@@ -269,6 +270,7 @@ public class Fishing : MonoBehaviour
         else
             _LineRenderer.enabled = false;
     }
+
     private bool IsBobberTooFar()
     {
         float distanceBetween = (_bobberSpawnPoint.position - bobberInstance.transform.position).sqrMagnitude;

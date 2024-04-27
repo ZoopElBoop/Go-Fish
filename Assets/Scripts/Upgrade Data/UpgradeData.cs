@@ -91,7 +91,7 @@ public class UpgradeData : ScriptableObject
 [CustomEditor(typeof(UpgradeData))]
 class ValueVisible : Editor
 {
-    List<string> ignoreValues = new();
+    private List<string> ignoreValues = new();
 
     public override void OnInspectorGUI()
     {

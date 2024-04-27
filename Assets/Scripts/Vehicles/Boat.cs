@@ -12,8 +12,8 @@ public class Boat : MonoBehaviour
     private Vector3 startingPos;
     private Quaternion startingRot;
 
-    private bool isActive = false;
-    private bool playerNear = true;
+    private bool isActive;
+    private bool playerNear;
 
     private GameObject Player;
     private Transform playerReturnPos;
@@ -41,10 +41,11 @@ public class Boat : MonoBehaviour
             transform.Rotate(0f, Input.GetAxis("Horizontal"), 0f, Space.Self);
 
 
-        }else if (playerNear && Input.GetKeyDown(KeyCode.E))
+        }else if (playerNear && Input.GetKeyDown(KeyCode.E) && !GameManager.Instance.InVessel)
         {
             EnterBoat();
         }
+
         FlipBoat();
     }
 
@@ -74,6 +75,8 @@ public class Boat : MonoBehaviour
         {
             if (transform.eulerAngles.z >= 45f && transform.eulerAngles.z <= 315f)
             {
+                print("Flipo");
+
                 Quaternion rotationEnd = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0f);
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, Time.deltaTime * 1);
@@ -83,14 +86,9 @@ public class Boat : MonoBehaviour
 
     private void EnterBoat() 
     {
-        SwitchStates(false);
-
-        Fishing fs = PlayerScriptManager.Instance.GetScript("Fishing");
-
-        fs.boatRB = rb;
+        SwitchToBoat(true);
 
         Player.transform.SetPositionAndRotation(_playerBoatPos.position, _playerBoatPos.rotation);
-
         Player.transform.parent = transform;
 
         EventManager.Instance.BoatEnter(_boatCam);
@@ -98,34 +96,30 @@ public class Boat : MonoBehaviour
 
     private void ExitBoat()
     {
-        SwitchStates(true);
+        SwitchToBoat(false);
+
+        //transform.SetPositionAndRotation(startingPos, startingRot);
+        rb.velocity = Vector3.zero;
 
         Player.transform.parent = null;
-
-        print(Player.transform.position);
-        print(playerReturnPos.transform.position);
-
-
         Player.transform.SetPositionAndRotation(playerReturnPos.position, playerReturnPos.rotation);
-
-        rb.velocity = Vector3.zero;
-        transform.SetPositionAndRotation(startingPos, startingRot);
 
         EventManager.Instance.BoatExit();
     }
 
-    private void SwitchStates(bool status)
+    private void SwitchToBoat(bool status)
     {
-        PlayerScriptManager.Instance.ShutDown("Controller", status);
-        PlayerScriptManager.Instance.ShutDown("Movement", status);
-        PlayerScriptManager.Instance.ShutDown("Interact", status);
+        GameManager.Instance.ShowPlayerMouse(status);
+        GameManager.Instance.SetVesselStatus(status);
 
-        GameManager.Instance.ShowPlayerMouse(!status);
+        PlayerScriptManager.Instance.ShutDown("Controller", !status);
+        PlayerScriptManager.Instance.ShutDown("Movement", !status);
+        PlayerScriptManager.Instance.ShutDown("Interact", !status);
 
-        isActive = !status;
-        _boatCam.enabled = !status;
+        isActive = status;
 
-        _boatCanvas.SetActive(status);
+        _boatCam.enabled = status;
+        _boatCanvas.SetActive(!status);
     }
 
     private void OnTriggerEnter(Collider other)

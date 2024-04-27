@@ -1,18 +1,45 @@
 ============
-GO FISH V0.7
+GO FISH V0.9
 ============
 Major Changes
 - 
 
 Minor Changes
-- 
+- Player nolonger equips rod, automatically unequiped when near shop & when going in water
+
 
 Bug Fixes
-- Player can now see their own shadow
-- Flaoting Objects now follow water tides
+- Fixed fishing not working if bobber despawns after going to far 
+- Fixed Shadow issues on rod & boat
+- Partially fixed boat physics issues
+- Reenabled fish colliding with stuff (lmao i forgot i turned this off)
+- Fishing throw ui nolonger stays on for first time
 
 Known Issues
 - 
+
+
+============
+GO FISH V0.8
+============
+idk
+
+============
+GO FISH V0.7c
+============
+
+Major Changes
+- New map layout
+- New day/night cycle
+
+Minor Changes
+- Boat now rotates with a & d
+- Player camera now inline with model head
+
+Bug Fixes
+- Fixed boat going underwater in high tide
+- Fixed upgrades not applying upgrades
+
 
 ============
 GO FISH V0.7b

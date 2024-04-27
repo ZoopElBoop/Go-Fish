@@ -79,8 +79,6 @@ public class UpgradeShopManager : MonoBehaviour
 
     private void UpdateUpgradeShopText()
     {
-        print("RESET");
-
         if (isBuying)
         {
             for (int i = 0; i < upgradeTypes.Count; i++)
@@ -113,12 +111,8 @@ public class UpgradeShopManager : MonoBehaviour
         {
             for (int i = 0; i < upgradeTypes.Count; i++)
             {
-                print(" s  " + upgradeStates[i]);
                 if (upgradeStates[i].HasFlag(UpgradeState.none) && GameManager.Instance.fishCoin >= upgradeTypes[i].cost)
-                {
                     shopUiObject[i].IsActive(true);
-                    print(upgradeStates[i].HasFlag(UpgradeState.none));
-                }
                 else
                     shopUiObject[i].IsActive(false);
             }
@@ -253,6 +247,7 @@ public class UpgradeShopManager : MonoBehaviour
     private void ConfirmToSell()
     {
         GameManager.Instance.fishCoin -= upgradeTypes[selectedID].cost;
+
         upgradeStates[selectedID] = UpgradeState.bought;
 
         print("bought");

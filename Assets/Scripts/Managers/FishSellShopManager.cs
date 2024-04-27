@@ -93,7 +93,7 @@ public class FishSellShopManager : MonoBehaviour
 
     public void ConfirmToSell()
     {
-        GameManager.Instance.fishCoin += FishDataManager.Instance.GetValue(selectedID) * fishStocks[selectedID].count;
+        GameManager.Instance.fishCoin += (int) FishDataManager.Instance.GetValue(selectedID) * fishStocks[selectedID].count;
 
         InventoryManager.Instance.RemoveByType(selectedID);
 
