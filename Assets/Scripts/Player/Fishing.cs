@@ -389,8 +389,6 @@ public class Fishing : MonoBehaviour
 
     void Caught()
     {
-        caughtFishScript.ActivateFishToPlayer();
-
         UIManager.Instance.FishingSliderActive(false);
 
         if (inBoat)
@@ -398,7 +396,7 @@ public class Fishing : MonoBehaviour
         else
             InventoryManager.Instance.StoreOnPlayer(caughtFishScript);
 
-        EventManager.Instance.FishCaught();
+        caughtFishScript.ActivateFishToPlayer();
 
         caughtFishScript = null;
     }

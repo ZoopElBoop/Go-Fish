@@ -2,22 +2,24 @@
 GO FISH V0.9
 ============
 Major Changes
-- 
+- Added Intro Sequence
+- Reworked Sub
 
 Minor Changes
-- Player nolonger equips rod, automatically unequiped when near shop & when going in water
-
+- Player no longer equips rod, automatically unequipped when near shop & when going in water
 
 Bug Fixes
 - Fixed fishing not working if bobber despawns after going to far 
 - Fixed Shadow issues on rod & boat
 - Partially fixed boat physics issues
 - Reenabled fish colliding with stuff (lmao i forgot i turned this off)
-- Fishing throw ui nolonger stays on for first time
 
 Known Issues
-- 
-
+- Fishing throw ui sometimes stays on for first time
+- Wobber physics still messy
+- Boat doesn't let player exit properly
+- Some fish like spinning about 
+- Harpoons still abit messy
 
 ============
 GO FISH V0.8

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,10 +17,15 @@ public class UIManager : MonoBehaviour
 
     [Header("Fish Caught")]
     [SerializeField] private TMP_Text catches;
-    private int caught;
 
     [Header("Fish Active")]
     [SerializeField] private TMP_Text active;
+
+    [Header("Intro UI")]
+    [SerializeField] private Image letter;
+    [SerializeField] private TMP_Text presentsText;
+    [SerializeField] private TMP_Text titleText;
+
 
     private void Awake()
     {
@@ -29,6 +33,10 @@ public class UIManager : MonoBehaviour
             Instance = this;       
         else
             Destroy(this);
+
+        letter.enabled = false;
+        presentsText.enabled = false;
+        titleText.enabled = false;
     }
 
     private void Update()
@@ -86,6 +94,37 @@ public class UIManager : MonoBehaviour
 
             fishingThrowSlider.gameObject.SetActive(active);
         }
+    }
+
+    #endregion
+
+
+    #region Intro UI
+
+    public void LetterStatus(bool status)
+    {
+        letter.enabled = status;
+    }
+
+    public void StartIntroText(float transitionTime, float titleTime) 
+    {
+        StartCoroutine(UITransition(transitionTime, titleTime));
+    }
+
+    IEnumerator UITransition(float transitionTime, float titleTime)
+    {
+        presentsText.enabled = true;
+        yield return new WaitForSeconds(transitionTime);
+        presentsText.enabled = false;
+
+        titleText.enabled = true;
+        yield return new WaitForSeconds(titleTime);
+        titleText.enabled = false;
+
+        //i dont like this since its being shut off in the intro script but hey it worky
+        //why i made the intro script the object that gets enabled/disabled idk, very stupid idea
+        PlayerScriptManager.Instance.ShutDown("Interact", true);
+
     }
 
     #endregion

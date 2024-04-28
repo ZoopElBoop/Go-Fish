@@ -8,6 +8,7 @@ TagManager:
   - Fish
   - Player Boat Exit
   - Spawner
+  - Sub
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - UI
   - Interact
   - HideFromPlayerCamera
-  - 
+  - Volume
   - 
   - 
   - 

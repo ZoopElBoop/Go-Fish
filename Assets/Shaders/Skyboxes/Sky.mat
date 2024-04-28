@@ -111,7 +111,7 @@ Material:
     - _EnableRotation: 1
     - _EnvironmentReflections: 1
     - _Exposure: 1
-    - _FogFill: 0.455
+    - _FogFill: 0.4
     - _FogHeight: 0.153
     - _FogIntensity: 1
     - _FogMessage: 0

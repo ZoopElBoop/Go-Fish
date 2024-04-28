@@ -119,7 +119,7 @@ public class FishControl : MonoBehaviour
 
             ChangeDirection();
 
-            //CollisionDetect();
+            CollisionDetect();
         }
     }
 
@@ -136,12 +136,14 @@ public class FishControl : MonoBehaviour
                 DIEFISHDIE();
 
 
-    /*        if (HP <= 0)
+            if (HP <= 0)
             {
-                DIEFISHDIE();
+                InventoryManager.Instance.StoreOnSub(this);
+
+                ActivateFishToPlayer();
                 print("Fish OBLITERATED: Killed");
             }
-*/
+
         }
         else
             FishToPlayer(distanceBetween);
@@ -512,6 +514,8 @@ public class FishControl : MonoBehaviour
 
     public void ActivateFishToPlayer()
     {
+        EventManager.Instance.FishCaught();
+
         attractPoint = null;
         rb.velocity = Vector3.zero;
         startingPoint = transform.position;

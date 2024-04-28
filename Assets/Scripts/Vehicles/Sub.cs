@@ -1,16 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
-using UnityEngine.ProBuilder.Shapes;
 
 public class Sub : MonoBehaviour
 {
+    public GameObject subCanvas;
+
     [Header("Sub Move & Rotate Multipliers")]
     public float _Speed = 1f;
-    public float _RotationSpeed = 1f;
     private float floatBase;
 
+    private bool playerNear;
     private bool isActive = false;
 
     [Header("Sub Cameras")]
@@ -20,8 +19,7 @@ public class Sub : MonoBehaviour
     [Header("Harpoon Spawning")]
     public GameObject Harpoon;
     public Transform _harpoonSpawn;
-    public int _harpoonSpawnLimit;
-    public int _harpoonSpawnCount;
+    private bool canFire = true;
 
     private Transform playerReturnPos;
     private GameObject fishSpawner;
@@ -36,7 +34,9 @@ public class Sub : MonoBehaviour
     private void Start()
     {
         playerReturnPos = GameObject.FindGameObjectWithTag("Player Boat Exit").GetComponent<Transform>();
-        fishSpawner = GameObject.FindGameObjectWithTag("Spawner");
+        fishSpawner = GameObject.FindWithTag("Spawner");
+        Player = GameObject.FindWithTag("Player");
+
         rb = GetComponent<Rigidbody>();
         bo = GetComponent<BuoyancyObject>();
 
@@ -54,14 +54,15 @@ public class Sub : MonoBehaviour
 
             SwitchCams();
 
-            PlayerExit();
+            ExitSub();
 
             HarpoonFire();
-            
-            transform.Rotate(0f, Input.GetAxis("Rotate") / 2 * _RotationSpeed, 0f, Space.Self);
-        }
 
-        FlipSub();
+            transform.Rotate(0f, Input.GetAxis("Horizontal"), 0f, Space.Self);
+
+        }
+        else if (playerNear && Input.GetKeyDown(KeyCode.E) && !GameManager.Instance.InVessel)
+            EnterSub();
     }
 
     private void FixedUpdate()
@@ -74,14 +75,9 @@ public class Sub : MonoBehaviour
     {
         Vector3 moveForce = (_Speed * 1000f * Input.GetAxis("Vertical") * Time.fixedDeltaTime * transform.forward);
 
-        moveForce *= PointsOnWater();
+        moveForce *= bo.floatingPointsUnderwater / bo._floatingPoint.Count;
 
         return moveForce;
-    }
-
-    private float PointsOnWater()
-    {
-        return bo.floatingPointsUnderwater / bo._floatingPoint.Count;
     }
 
     private void LiftOrDescend()
@@ -90,12 +86,35 @@ public class Sub : MonoBehaviour
             bo._floatingPower += 0.1f;
         else if ((Input.GetAxis("Lift") < 0.0f && bo._floatingPower > 0))
             bo._floatingPower -= 0.1f;
+
+        if (Input.GetKeyDown(KeyCode.H))
+            bo._floatingPower = 9.81f;
     }
 
-    private void PlayerExit()
+    private void EnterSub() 
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        subCanvas.SetActive(false);
+
+        GameManager.Instance.SetVesselStatus(true);
+        PlayerScriptManager.Instance.ShutDown("Interact", false);
+
+        SetFishSpawner(transform);
+
+        Player.SetActive(false);
+
+        isActive = true;
+        _subOuterCam.enabled = true;
+    }
+
+    private void ExitSub()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
         {
+            subCanvas.SetActive(true);
+
+            GameManager.Instance.SetVesselStatus(false);
+            PlayerScriptManager.Instance.ShutDown("Interact", true);
+
             SetFishSpawner(Player.transform);
 
             Player.transform.SetPositionAndRotation(playerReturnPos.position, playerReturnPos.rotation);
@@ -126,44 +145,30 @@ public class Sub : MonoBehaviour
 
     private void HarpoonFire()
     {
-        if (Input.GetMouseButtonDown(0) && _harpoonSpawnCount < _harpoonSpawnLimit)
+        if (Input.GetMouseButtonDown(0) && canFire)
         {
-            _harpoonSpawnCount++;
+            StartCoroutine(FireCooldown());
             GameManager.Instance.SpawnHarpoon(Harpoon, _harpoonSpawn.position, _harpoonSpawn.rotation);
             rb.velocity = transform.forward * -3f;
         }
     }
 
-    private void FlipSub()
+    IEnumerator FireCooldown() 
     {
-//        print($"{PointsOnWater()} {transform.eulerAngles.z}");
-
-        if (PointsOnWater() == 1f)  //sub only flips itself back if fully in water
-        {
-            if (transform.eulerAngles.z >= 45f && transform.eulerAngles.z <= 180f)
-                rb.AddTorque(-transform.forward * 300f);
-            else if (transform.eulerAngles.z <= 315f && transform.eulerAngles.z >= 180f)
-                rb.AddTorque(transform.forward * 300f);
-
-            /*Quaternion rotationEnd = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0f);
-
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, Time.deltaTime);*/
-
-        }
+        canFire = false;
+        yield return new WaitForSeconds(3f);
+        canFire = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Player = other.gameObject;
+        if (other.CompareTag("Player") && !playerNear)
+            playerNear = true;
+    }
 
-            SetFishSpawner(transform);
-
-            Player.SetActive(false);
-
-            isActive = true;
-            _subOuterCam.enabled = true;
-        }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && playerNear)
+            playerNear = false;
     }
 }

@@ -37,8 +37,7 @@ public class EventManager : MonoBehaviour
 
 
     //When a fish is caught
-    //fishing --> Fish Shop
-    //fishing --> UI Manager
+    //Fish Control --> Fish Shop
     public event Action OnFishCaught;
     public void FishCaught()
     {

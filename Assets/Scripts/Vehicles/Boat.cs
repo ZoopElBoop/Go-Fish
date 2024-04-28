@@ -40,11 +40,8 @@ public class Boat : MonoBehaviour
 
             transform.Rotate(0f, Input.GetAxis("Horizontal"), 0f, Space.Self);
 
-
         }else if (playerNear && Input.GetKeyDown(KeyCode.E) && !GameManager.Instance.InVessel)
-        {
             EnterBoat();
-        }
 
         FlipBoat();
     }
@@ -125,10 +122,7 @@ public class Boat : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !playerNear)
-        {
             playerNear = true;
-            print(other.gameObject);
-        }
     }
 
     private void OnTriggerExit(Collider other)

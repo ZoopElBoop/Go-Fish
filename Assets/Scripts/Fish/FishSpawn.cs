@@ -28,7 +28,7 @@ public class FishSpawn : MonoBehaviour
 
     //Layer mask for ray checks
     private int LayerIgnoreRaycast;
-    private LayerMask LayersToIgnore = -1;
+    public LayerMask LayersToIgnore = -1;
 
     #endregion
 
@@ -43,6 +43,10 @@ public class FishSpawn : MonoBehaviour
         LayerIgnoreRaycast = LayerMask.NameToLayer("Water");
 
         LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "water" layer
+
+        LayerIgnoreRaycast = LayerMask.NameToLayer("Volume");
+
+        LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "volume" layer
     }
 
     #endregion
