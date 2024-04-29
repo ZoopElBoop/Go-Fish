@@ -15,9 +15,9 @@ public class FishControl : MonoBehaviour
 
     [Header("Fish Data")]
 
-    public Transform _playerPos;
     public float _destroyRange;
     public int _dataIndex;
+    private Transform spawnPosition;
 
     [SerializeField] private float HeightMax;
     [SerializeField] private float DepthMax;
@@ -63,6 +63,8 @@ public class FishControl : MonoBehaviour
 
     void Awake()
     {
+
+        spawnPosition = GameObject.FindWithTag("Spawner").transform;
 
         viewCollisionBox = false;
 
@@ -125,7 +127,7 @@ public class FishControl : MonoBehaviour
 
     private void Update()
     {
-        float distanceBetween = (_playerPos.position - transform.position).sqrMagnitude;    //this might be more efficent than Vector3.Distance since it doesn't do any square rooting
+        float distanceBetween = (spawnPosition.position - transform.position).sqrMagnitude;    //this might be more efficent than Vector3.Distance since it doesn't do any square rooting
 
         if (!isAboutToDie)
         {
@@ -528,13 +530,13 @@ public class FishControl : MonoBehaviour
     private void FishToPlayer(float distanceBetween) 
     {
         if (pointInTravel > 0.25)
-            pointInTravel = Mathf.Clamp01(Vector3InverseLerp(_playerPos.position, startingPoint, transform.position));
+            pointInTravel = Mathf.Clamp01(Vector3InverseLerp(spawnPosition.position, startingPoint, transform.position));
 
         if (distanceBetween > 2)
         {
             transform.Rotate(0f, 5f, 0f, Space.Self);
             transform.localScale = new Vector3(pointInTravel, pointInTravel, pointInTravel);
-            transform.position = Vector3.Slerp(transform.position, _playerPos.position, Time.deltaTime);
+            transform.position = Vector3.Slerp(transform.position, spawnPosition.position, Time.deltaTime);
         }
         else
             GameManager.Instance.DestroyFish(gameObject);

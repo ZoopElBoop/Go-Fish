@@ -6,32 +6,28 @@ public class InteractControl : MonoBehaviour
     [SerializeField] private Texture2D crosshairSprite;
     [SerializeField] private Texture2D activeCrosshairSprite;
 
-    [Header("Interact Settings")]
+    [Header("Interact Setting")]
     [SerializeField][Range(1, 10)] private int interactRange;
-    [SerializeField] private GameObject objectHit;
-    [SerializeField] private GameObject objectHitLastFrame;
+
+	private GameObject objectHit;
+    private GameObject objectHitLastFrame;
 
     private LayerMask interactMask;
     private LayerMask IgnoreinteractMask = -1;
     private bool hitActive;
 
-	public Camera a;
-
 	private void Start()
 	{
-		a = Camera.main;
 		int ignoreLayer = LayerMask.NameToLayer("Interact");
         IgnoreinteractMask &= ~(1 << ignoreLayer);   //sets layer to ignore "Interact" layer
         interactMask |= (1 << ignoreLayer);			 //sets layer to only "Interact" layer
     }
 
-
-
 	void FixedUpdate()
 	{
         objectHitLastFrame = objectHit;
 
-        Ray ray = a.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit[] hit = new RaycastHit[1];
 
@@ -106,7 +102,7 @@ public class InteractControl : MonoBehaviour
 			else
 			Gizmos.color = Color.green;
 
-			Ray ray = a.ScreenPointToRay(Input.mousePosition);
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 			Gizmos.DrawRay(transform.position, ray.direction * interactRange);
 		}

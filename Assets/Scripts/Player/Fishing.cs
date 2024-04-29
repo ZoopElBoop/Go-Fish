@@ -28,15 +28,12 @@ public class Fishing : MonoBehaviour
     [SerializeField] private GameObject _mouseFx;
     private GameObject mouseFxInstance;
 
-    [Header("Fishing Line")]
-    [SerializeField] private LineRenderer _LineRenderer;
-
-    [Header("Charge Up Velocity Limit & Minimum")]
+    [Header("Charge Up Velocity")]
     [Range(1.0f, 50.0f)]
     public float _chargeUpMax = 15f;
     [Range(0.01f, 0.3f)]
     [SerializeField] private float _chargeUpMultiplier = 0.1f;
-    public float throwCharge = 1f;
+    private float throwCharge = 1f;
 
     [Header("Gizmos")]
     [SerializeField] private bool gizmosActive = true;
@@ -52,6 +49,9 @@ public class Fishing : MonoBehaviour
 
     //Boat Rigidbody for adding to bobber velocity when spawning
     [HideInInspector] public Rigidbody boatRB;
+
+    //Fishing line from rod to wobber
+    [SerializeField] private LineRenderer fishLine;
 
     //Bool states
     private bool inBoat;
@@ -84,7 +84,9 @@ public class Fishing : MonoBehaviour
 
         mouseFxInstance.transform.parent = transform;
 
-        _LineRenderer.enabled = false;
+        fishLine = GetComponent<LineRenderer>();
+
+        fishLine.enabled = false;
     }
 
     public void FishingStatus(bool status)
@@ -94,7 +96,7 @@ public class Fishing : MonoBehaviour
             ObliterateBobber();
 
             isFishing = false;
-            _LineRenderer.enabled = false;
+            fishLine.enabled = false;
             UIManager.Instance.ThrowSliderActive(false);
 
             if (caughtFishScript != null)
@@ -263,12 +265,12 @@ public class Fishing : MonoBehaviour
                     Escape();
             }
 
-            _LineRenderer.enabled = true;
-            _LineRenderer.SetPosition(0, _bobberSpawnPoint.position);
-            _LineRenderer.SetPosition(1, bobberInstance.transform.position);
+            fishLine.enabled = true;
+            fishLine.SetPosition(0, _bobberSpawnPoint.position);
+            fishLine.SetPosition(1, bobberInstance.transform.position);
         }
         else
-            _LineRenderer.enabled = false;
+            fishLine.enabled = false;
     }
 
     private bool IsBobberTooFar()
