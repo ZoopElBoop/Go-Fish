@@ -111,8 +111,8 @@ MonoBehaviour:
         guid: 709aa01a3d82594bac4a1ca37596bd0e
       Path: Events\Default Work Unit\buy_upgrade
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.6262966
+      minDuration: 1.6262966
     - name: Fish_collected
       guid: 29545889412e124c821fcfe9c8dfb179
       id: 2360843467
@@ -128,8 +128,8 @@ MonoBehaviour:
         guid: 29545889412e124c821fcfe9c8dfb179
       Path: Events\Default Work Unit\Fish_collected
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.4295603
+      minDuration: 0.4295603
     - name: Footsteps
       guid: 4cdf616f3ab27044b986ddc49c8a7269
       id: 2385628198
@@ -145,8 +145,8 @@ MonoBehaviour:
         guid: 4cdf616f3ab27044b986ddc49c8a7269
       Path: Events\Default Work Unit\Footsteps
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.0132558
+      minDuration: 0.29828402
     - name: Jump
       guid: ea5a9301a7253a4e8d26cae2a8612901
       id: 3833651337
@@ -162,8 +162,8 @@ MonoBehaviour:
         guid: ea5a9301a7253a4e8d26cae2a8612901
       Path: Events\Default Work Unit\Jump
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.4915625
+      minDuration: 0.4915625
     - name: Rod_swish
       guid: 4fa065187af27c45b6d8f01719e25664
       id: 3320937167
@@ -179,8 +179,8 @@ MonoBehaviour:
         guid: 4fa065187af27c45b6d8f01719e25664
       Path: Events\Default Work Unit\Rod_swish
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.5
+      minDuration: 0.5
     - name: Sell_fish
       guid: deb9be7aa4bab048bceffd8733fa7a5a
       id: 2301772642
@@ -196,8 +196,8 @@ MonoBehaviour:
         guid: deb9be7aa4bab048bceffd8733fa7a5a
       Path: Events\Default Work Unit\Sell_fish
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.7605417
+      minDuration: 0.7605417
     - name: Sub_door
       guid: 540c3cc6ecfb1c47b5fafb9ce716d328
       id: 2282381988
@@ -213,8 +213,8 @@ MonoBehaviour:
         guid: 540c3cc6ecfb1c47b5fafb9ce716d328
       Path: Events\Default Work Unit\Sub_door
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.5508958
+      minDuration: 0.5508958
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
