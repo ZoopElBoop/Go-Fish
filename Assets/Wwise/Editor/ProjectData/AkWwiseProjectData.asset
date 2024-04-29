@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: ddd4766adc5b4b4bbabf6d06267ff12b
     GuidInternal: 
-    m_lastTime: -8584898792635413457
+    m_lastTime: -8584872127446233836
     List: []
   AuxBusWwu:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
@@ -38,7 +38,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: f6ac572f5d4f0446b4f3dcdc6f884b9c
     GuidInternal: 
-    m_lastTime: -8584898792635616039
+    m_lastTime: -8584872127451858818
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: f6e1ebbfdd8303499ec3140a8a2eb19f
     GuidInternal: 
-    m_lastTime: -8584874853516876738
+    m_lastTime: -8584872127446546338
     List:
     - name: Main
       guid: f659b7fd05b4db41b550785d575e4dbe
@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 11c91fd6cb1f564886677d0aca3fbb2c
     GuidInternal: 
-    m_lastTime: -8584874853517368669
+    m_lastTime: -8584872127461702505
     List:
     - name: buy_upgrade
       guid: 709aa01a3d82594bac4a1ca37596bd0e
@@ -111,8 +111,8 @@ MonoBehaviour:
         guid: 709aa01a3d82594bac4a1ca37596bd0e
       Path: Events\Default Work Unit\buy_upgrade
       maxAttenuation: 0
-      maxDuration: 1.6262966
-      minDuration: 1.6262966
+      maxDuration: -1
+      minDuration: -1
     - name: Fish_collected
       guid: 29545889412e124c821fcfe9c8dfb179
       id: 2360843467
@@ -128,8 +128,8 @@ MonoBehaviour:
         guid: 29545889412e124c821fcfe9c8dfb179
       Path: Events\Default Work Unit\Fish_collected
       maxAttenuation: 0
-      maxDuration: 0.4295603
-      minDuration: 0.4295603
+      maxDuration: -1
+      minDuration: -1
     - name: Footsteps
       guid: 4cdf616f3ab27044b986ddc49c8a7269
       id: 2385628198
@@ -145,8 +145,8 @@ MonoBehaviour:
         guid: 4cdf616f3ab27044b986ddc49c8a7269
       Path: Events\Default Work Unit\Footsteps
       maxAttenuation: 0
-      maxDuration: 1.0132558
-      minDuration: 0.29828402
+      maxDuration: -1
+      minDuration: -1
     - name: Jump
       guid: ea5a9301a7253a4e8d26cae2a8612901
       id: 3833651337
@@ -162,8 +162,8 @@ MonoBehaviour:
         guid: ea5a9301a7253a4e8d26cae2a8612901
       Path: Events\Default Work Unit\Jump
       maxAttenuation: 0
-      maxDuration: 0.4915625
-      minDuration: 0.4915625
+      maxDuration: -1
+      minDuration: -1
     - name: Rod_swish
       guid: 4fa065187af27c45b6d8f01719e25664
       id: 3320937167
@@ -179,8 +179,8 @@ MonoBehaviour:
         guid: 4fa065187af27c45b6d8f01719e25664
       Path: Events\Default Work Unit\Rod_swish
       maxAttenuation: 0
-      maxDuration: 0.5
-      minDuration: 0.5
+      maxDuration: -1
+      minDuration: -1
     - name: Sell_fish
       guid: deb9be7aa4bab048bceffd8733fa7a5a
       id: 2301772642
@@ -196,8 +196,8 @@ MonoBehaviour:
         guid: deb9be7aa4bab048bceffd8733fa7a5a
       Path: Events\Default Work Unit\Sell_fish
       maxAttenuation: 0
-      maxDuration: 0.7605417
-      minDuration: 0.7605417
+      maxDuration: -1
+      minDuration: -1
     - name: Sub_door
       guid: 540c3cc6ecfb1c47b5fafb9ce716d328
       id: 2282381988
@@ -213,8 +213,8 @@ MonoBehaviour:
         guid: 540c3cc6ecfb1c47b5fafb9ce716d328
       Path: Events\Default Work Unit\Sub_door
       maxAttenuation: 0
-      maxDuration: 0.5508958
-      minDuration: 0.5508958
+      maxDuration: -1
+      minDuration: -1
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -227,7 +227,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: dbabb3fe84aa9949b4a40af992765cd1
     GuidInternal: 
-    m_lastTime: -8584898792635813581
+    m_lastTime: -8584872127461546252
     List: []
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
@@ -241,7 +241,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: f15de79639be544081ab4b854d7dc2f7
     GuidInternal: 
-    m_lastTime: -8584898792635450089
+    m_lastTime: -8584872127446390052
     List: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
@@ -255,7 +255,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
     GuidInternal: 
-    m_lastTime: -8584874853516866738
+    m_lastTime: -8584872127446390052
     List:
     - name: Footstep_surface
       guid: d703282d06337b4ba38dde9d28b24d9b
@@ -351,7 +351,7 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: 0461e03dbbd48b4e8f69fb5bbd163964
     GuidInternal: 
-    m_lastTime: -8584898792635428176
+    m_lastTime: -8584872127446233836
     List: []
   ExpandedFileSystemItemIds: 
   ExpandedWaapiItemIds: 050000000600000007000000
