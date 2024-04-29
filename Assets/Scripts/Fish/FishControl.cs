@@ -36,7 +36,6 @@ public class FishControl : MonoBehaviour
     private bool canCheckCollisions = true;
     public Vector3 colliderSize;
     public float colliderRange;
-    private GameObject collisionBox;
     private int moveDirection;
 
     private int LayerIgnoreRaycast;
@@ -56,6 +55,9 @@ public class FishControl : MonoBehaviour
     public Vector3 startingScale;
     private Vector3 startingPoint;
     private float pointInTravel = 1f;
+
+    [Header("Harpoons Attached")]
+    public List<GameObject> harpoonsAttached = new();
 
     #endregion
 
@@ -137,13 +139,11 @@ public class FishControl : MonoBehaviour
             if (distanceBetween > _destroyRange * _destroyRange)                                //squared to make up for no square rooting in previous line        
                 DIEFISHDIE();
 
-
             if (HP <= 0)
             {
                 InventoryManager.Instance.StoreOnSub(this);
 
                 ActivateFishToPlayer();
-                print("Fish OBLITERATED: Killed");
             }
 
         }
@@ -196,13 +196,10 @@ public class FishControl : MonoBehaviour
             canCheckCollisions = true;
             return;
         }
-        else
+        else if (!canCheckCollisions)
         {
-            if (!canCheckCollisions)
-            {
-                SetRotation();
-                return; 
-            }
+            SetRotation();
+            return; 
         }
 
         float[] rayDistance = new float[4];
@@ -220,7 +217,6 @@ public class FishControl : MonoBehaviour
 
             if (rayDistance[i] == -1 || rayDistance[i] >= rayMinDistance)
             {
-
                 if (true)//CanMoveToPos(rayPoint[i]))
                 {
                     posClearIndex.Add(i);
@@ -231,7 +227,7 @@ public class FishControl : MonoBehaviour
 
         canCheckCollisions = false;
 
-        if (!posClearIndex.Any())
+        if (!posClearIndex.Any())   //rotates fish 180 if no suitable directions found
         {
             RotateTo(new Vector3(transform.position.x - Positions[0].x, transform.position.y - Positions[0].y, 0f), false);
             return;
@@ -264,8 +260,6 @@ public class FishControl : MonoBehaviour
 
         SetRotation();
 
-        //SetCollisionBox(rayPoint[randPick], rayDistance[randPick]);
-
         print("picked " + randPick);
     }
 
@@ -286,8 +280,6 @@ public class FishControl : MonoBehaviour
 
         int hits = Physics.RaycastNonAlloc(ray, colliderFound, 30f, LayersToIgnore, QueryTriggerInteraction.Ignore);
 
-        //Debug.DrawRay(transform.position, dir * 2, Color.red, Mathf.Infinity);
-
         if (hits < 1)
         {
             return (-1, Vector3.zero);                                              //Ray hit nothing
@@ -304,7 +296,7 @@ public class FishControl : MonoBehaviour
         return (colliderFound[0].distance, colliderFound[0].point);                 //Ray hit 1 item
     }
 
-    private RaycastHit[] RaycastArraySort(RaycastHit[] arr)
+    private RaycastHit[] RaycastArraySort(RaycastHit[] arr)      //sorts array by distance
     {
         for (int i = 1; i < arr.Length; i++)
         {
@@ -364,25 +356,6 @@ public class FishControl : MonoBehaviour
             print(meshies[0].gameObject.layer);
         }*/
 
-    /*    private void SetCollisionBox(Vector3 pos, float distance) 
-    {
-        if (viewCollisionBox)
-        {
-            collisionBox.SetActive(true);
-
-            collisionBox.transform.position = (pos + transform.position) / 2;
-
-            Vector3 targetDir = pos - transform.position;
-
-            Quaternion angle = Quaternion.LookRotation(targetDir, transform.up);
-
-            collisionBox.transform.rotation = angle;
-
-            collisionBox.transform.localScale = new Vector3(colliderSize.x, colliderSize.y, distance);
-        }
-        else
-            collisionBox.SetActive(false);
-    }*/
 
     #endregion
 
@@ -469,9 +442,6 @@ public class FishControl : MonoBehaviour
     #region Fish States
     void DIEFISHDIE()
     {
-        if (collisionBox != null)
-            Destroy(collisionBox);      //TBC
-
         GameManager.Instance.DestroyFish(gameObject);
     }
 
@@ -521,7 +491,6 @@ public class FishControl : MonoBehaviour
         attractPoint = null;
         rb.velocity = Vector3.zero;
         startingPoint = transform.position;
-        print("ded");
 
         canBeFished = false;
         isAboutToDie = true;
@@ -547,6 +516,17 @@ public class FishControl : MonoBehaviour
         Vector3 AB = b - a;
         Vector3 AV = value - a;
         return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
+    }
+
+    private void OnDisable()
+    {
+        if (harpoonsAttached != null)
+        {
+            foreach (var harpoon in harpoonsAttached)
+                GameManager.Instance.DestroyHarpoon(harpoon);
+
+            harpoonsAttached.Clear();
+        }
     }
 
     #endregion

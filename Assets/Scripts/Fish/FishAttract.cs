@@ -8,7 +8,7 @@ public class FishAttract : MonoBehaviour
         {
             var fc = GameManager.Instance.GetFishControlScript(other.gameObject);
 
-            if (fc == null)
+            if (fc == null || !fc.canBeFished)
                 return;
 
             fc.Attract(transform);

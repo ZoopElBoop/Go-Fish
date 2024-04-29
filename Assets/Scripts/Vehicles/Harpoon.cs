@@ -9,7 +9,6 @@ public class Harpoon : MonoBehaviour
 
     public int Damage = 1;
 
-    // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -49,13 +48,13 @@ public class Harpoon : MonoBehaviour
         {
             FishControl fs = GameManager.Instance.GetFishControlScript(other.gameObject);
 
+            fs.harpoonsAttached.Add(gameObject);
+
             fs.HP -= Damage;
 
             rb.isKinematic = true;
 
             transform.parent = other.gameObject.transform;
-
-            StartCoroutine(KillSelf());
         }
     }
 

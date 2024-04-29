@@ -24,7 +24,7 @@ public class MoveLock : MonoBehaviour
 
         float distanceFrom = Mathf.InverseLerp(endLimit * endLimit, startLimit * startLimit, distanceBetween);
 
-        playerMove.moveSpeed = Mathf.Lerp(0f, playerBaseSpeed, distanceFrom);
+        playerMove.moveSpeed = Mathf.Lerp(1f, playerBaseSpeed, distanceFrom);
     }
 
     private void OnDisable()
