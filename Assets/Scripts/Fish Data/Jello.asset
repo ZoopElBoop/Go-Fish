@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfed5eab5039a546a85aa6bcf63148f, type: 3}
   m_Name: Jello
   m_EditorClassIdentifier: 
-  _Fishk: {fileID: 7683416736483790789, guid: cb87856b3b01a4249b3f6f02cc93fc70, type: 3}
+  _Fishk: {fileID: 6885119008761653246, guid: 1dcec23ec15722641a7f2c897b678529, type: 3}
   _Health: 1
   _Speed: 3
   _rotationSpeed: 5
-  _canBeCaught: 1
+  _canBeCaught: 0
   _spawnDepthStart: -15
   _spawnDepthHigh: -36.7
   _spawnDepthEnd: -50

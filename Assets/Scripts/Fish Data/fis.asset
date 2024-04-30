@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfed5eab5039a546a85aa6bcf63148f, type: 3}
   m_Name: fis
   m_EditorClassIdentifier: 
-  _Fishk: {fileID: 1858830571037122237, guid: e35ad415e4956e940b5dbdf951f78d19, type: 3}
+  _Fishk: {fileID: 2352496131642363724, guid: 52a0d1d56cc3198439231d760abd071d, type: 3}
   _Health: 1
   _Speed: 3
   _rotationSpeed: 5

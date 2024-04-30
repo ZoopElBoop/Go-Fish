@@ -2,7 +2,9 @@
 GO FISH V0.9c (release candidate 1)
 ============
 Major Changes
-- 
+- Added 5 New fish
+- Fish Animations
+- Underwater rework (WIP)
 
 Minor Changes
 -

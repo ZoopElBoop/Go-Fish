@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfed5eab5039a546a85aa6bcf63148f, type: 3}
   m_Name: tortl
   m_EditorClassIdentifier: 
-  _Fishk: {fileID: 5354247507827787981, guid: e55c5977890c73645be283737a94118b, type: 3}
+  _Fishk: {fileID: 8129733651323330963, guid: 2c6df60e5ea497846b4a802114370f6a, type: 3}
   _Health: 1
   _Speed: 1
   _rotationSpeed: 5
@@ -27,5 +27,5 @@ MonoBehaviour:
   _despawnRangeMulti: 1
   _baseValue: 5
   _valueChangeCoefficient: 0.1
-  _FishkImig: {fileID: 0}
-  _FishkDesc: 
+  _FishkImage: {fileID: 0}
+  _FishkDescription: 

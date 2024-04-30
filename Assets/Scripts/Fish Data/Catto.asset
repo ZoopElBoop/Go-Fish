@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfed5eab5039a546a85aa6bcf63148f, type: 3}
   m_Name: Catto
   m_EditorClassIdentifier: 
-  _Fishk: {fileID: 8585649664234380318, guid: 9b86686b8a8e554438fe489e03cabf1c, type: 3}
+  _Fishk: {fileID: 9188315937064314779, guid: 93c8a48100e09844bab959953e3dc05a, type: 3}
   _Health: 1
   _Speed: 1
   _rotationSpeed: 5
-  _canBeCaught: 1
-  _spawnDepthStart: -50
+  _canBeCaught: 0
+  _spawnDepthStart: -49
   _spawnDepthHigh: -80
   _spawnDepthEnd: -100
   _Rarity: 0.2

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bfed5eab5039a546a85aa6bcf63148f, type: 3}
+  m_Name: Dragon
+  m_EditorClassIdentifier: 
+  _Fishk: {fileID: 5418633814692005567, guid: a70292a7df9f9574aa8e760461a536f3, type: 3}
+  _Health: 1
+  _Speed: 1
+  _rotationSpeed: 1
+  _canBeCaught: 0
+  _spawnDepthStart: -90
+  _spawnDepthHigh: -95
+  _spawnDepthEnd: -100
+  _Rarity: 0.1
+  _moveHeightLimit: -50
+  _moveDepthLimit: -100
+  _collisionRange: 10
+  _despawnRangeMulti: 1
+  _baseValue: 1
+  _valueChangeCoefficient: 0.1
+  _FishkImage: {fileID: 0}
+  _FishkDescription: 
