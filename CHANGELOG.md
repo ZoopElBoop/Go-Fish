@@ -1,5 +1,17 @@
 ============
-GO FISH V0.9
+GO FISH V0.9c (release candidate 1)
+============
+Major Changes
+- 
+
+Minor Changes
+-
+
+Bug Fixes
+- 
+
+============
+GO FISH V0.9b
 ============
 Major Changes
 - New final overland map layout

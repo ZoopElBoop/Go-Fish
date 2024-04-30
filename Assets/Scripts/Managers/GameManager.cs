@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public int fishCoin;
     public bool InVessel { get; private set; } 
 
+    public bool cutSceneOverride { get; private set; }
+
     #endregion
 
     #region Start Function
@@ -128,4 +130,6 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
+    public void InScene(bool status) => cutSceneOverride = status;
 }

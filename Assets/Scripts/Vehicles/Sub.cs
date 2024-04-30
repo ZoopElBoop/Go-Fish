@@ -35,7 +35,7 @@ public class Sub : MonoBehaviour
     {
         playerReturnPos = GameObject.FindGameObjectWithTag("Player Boat Exit").GetComponent<Transform>();
         fishSpawner = GameObject.FindWithTag("Spawner");
-        Player = GameObject.FindWithTag("Player");
+        Player = GameObject.FindWithTag("Player").transform.root.gameObject;
 
         rb = GetComponent<Rigidbody>();
         bo = GetComponent<BuoyancyObject>();

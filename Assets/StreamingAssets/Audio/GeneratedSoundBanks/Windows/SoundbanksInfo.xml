@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
+	<RootPaths>
+		<ProjectRoot>../..</ProjectRoot>
+		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
+		<SoundBanksRoot>.</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>.</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{B6CBD692-12EC-CDBA-0932-48F63C40C91F}">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<Plugins>
+				<AudioDevices>
+					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
+					<Plugin Id="3859886410" Name="System" LibName="System" LibId="11403271"/>
+				</AudioDevices>
+			</Plugins>
+			<Busses>
+				<Bus Id="3803692087" Name="Master Audio Bus"/>
+			</Busses>
+			<SwitchGroups>
+				<SwitchGroup Id="1833605183" Name="Footstep_surface">
+					<Switches>
+						<Switch Id="803837735" Name="Sand"/>
+						<Switch Id="2058049674" Name="Wood"/>
+						<Switch Id="2185786256" Name="Gravel"/>
+						<Switch Id="4248645337" Name="Grass"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{90F529A6-BAE2-D8FE-E31D-A44D97E4D8F0}">
+			<ShortName>Main</ShortName>
+			<Path>Main.bnk</Path>
+			<Media>
+				<File Id="48311897" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Wood(steps6).wav</ShortName>
+					<CachePath>SFX/Wood(steps6)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="88144719" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Wood(steps8).wav</ShortName>
+					<CachePath>SFX/Wood(steps8)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="89073160" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>coin sound (pitched up).wav</ShortName>
+					<CachePath>SFX/coin sound (pitched up)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="95651886" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Sand (step 2).wav</ShortName>
+					<CachePath>SFX/Sand (step 2)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="104815867" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Fish collected.wav</ShortName>
+					<CachePath>SFX/Fish collected_DE9327CF.wem</CachePath>
+				</File>
+				<File Id="173829974" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rod swish.wav</ShortName>
+					<CachePath>SFX/rod swish_818F3B66.wem</CachePath>
+				</File>
+				<File Id="255376140" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Sand (step 4).wav</ShortName>
+					<CachePath>SFX/Sand (step 4)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="384206844" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Gravel (step 1).wav</ShortName>
+					<CachePath>SFX/Gravel (step 1)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="598946530" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Grass (step 1).wav</ShortName>
+					<CachePath>SFX/Grass (step 1)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="669549996" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Wood(steps7).wav</ShortName>
+					<CachePath>SFX/Wood(steps7)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="696540545" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Grass (step 2).wav</ShortName>
+					<CachePath>SFX/Grass (step 2)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="707998641" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Grass (step 4).wav</ShortName>
+					<CachePath>SFX/Grass (step 4)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="738939123" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Cash register.wav</ShortName>
+					<CachePath>SFX/Cash register_F13BB2B0.wem</CachePath>
+				</File>
+				<File Id="800354274" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Wood(steps5).wav</ShortName>
+					<CachePath>SFX/Wood(steps5)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="824573470" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Sand (step 1).wav</ShortName>
+					<CachePath>SFX/Sand (step 1)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="834857939" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Grass (step 3).wav</ShortName>
+					<CachePath>SFX/Grass (step 3)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="864731088" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Gravel (step 3).wav</ShortName>
+					<CachePath>SFX/Gravel (step 3)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="875518388" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Gravel (step 4).wav</ShortName>
+					<CachePath>SFX/Gravel (step 4)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="912205608" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>jump sound 2.wav</ShortName>
+					<CachePath>SFX/jump sound 2_818F3B66.wem</CachePath>
+				</File>
+				<File Id="926304011" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Sand (step 3).wav</ShortName>
+					<CachePath>SFX/Sand (step 3)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="962478843" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Gravel (step 2).wav</ShortName>
+					<CachePath>SFX/Gravel (step 2)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="1011808839" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Sub door.wav</ShortName>
+					<CachePath>SFX/Sub door_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="1625736018" Name="buy_upgrade" DurationType="OneShot" DurationMin="1.6262966" DurationMax="1.6262966">
+					<MediaRefs>
+						<MediaRef Id="738939123"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2360843467" Name="Fish_collected" DurationType="OneShot" DurationMin="0.4295603" DurationMax="0.4295603">
+					<MediaRefs>
+						<MediaRef Id="104815867"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2385628198" Name="Footsteps" DurationType="OneShot" DurationMin="0.29828402" DurationMax="1.0132558">
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="1833605183" Id="2185786256"/>
+							<MediaRefs>
+								<MediaRef Id="384206844"/>
+								<MediaRef Id="864731088"/>
+								<MediaRef Id="875518388"/>
+								<MediaRef Id="962478843"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="1833605183" Id="4248645337"/>
+							<MediaRefs>
+								<MediaRef Id="598946530"/>
+								<MediaRef Id="696540545"/>
+								<MediaRef Id="707998641"/>
+								<MediaRef Id="834857939"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="1833605183" Id="2058049674"/>
+							<MediaRefs>
+								<MediaRef Id="48311897"/>
+								<MediaRef Id="88144719"/>
+								<MediaRef Id="669549996"/>
+								<MediaRef Id="800354274"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="1833605183" Id="803837735" Default="true"/>
+							<MediaRefs>
+								<MediaRef Id="95651886"/>
+								<MediaRef Id="255376140"/>
+								<MediaRef Id="824573470"/>
+								<MediaRef Id="926304011"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="3833651337" Name="Jump" DurationType="OneShot" DurationMin="0.4915625" DurationMax="0.4915625">
+					<MediaRefs>
+						<MediaRef Id="912205608"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3320937167" Name="Rod_swish" DurationType="OneShot" DurationMin="0.5" DurationMax="0.5">
+					<MediaRefs>
+						<MediaRef Id="173829974"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2301772642" Name="Sell_fish" DurationType="OneShot" DurationMin="0.7605417" DurationMax="0.7605417">
+					<MediaRefs>
+						<MediaRef Id="89073160"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2282381988" Name="Sub_door" DurationType="OneShot" DurationMin="0.5508958" DurationMax="0.5508958">
+					<MediaRefs>
+						<MediaRef Id="1011808839"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+			<SwitchGroups>
+				<SwitchGroup Id="1833605183" Name="Footstep_surface">
+					<Switches>
+						<Switch Id="803837735" Name="Sand"/>
+						<Switch Id="2058049674" Name="Wood"/>
+						<Switch Id="2185786256" Name="Gravel"/>
+						<Switch Id="4248645337" Name="Grass"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{15FD0AC9-8078-E97D-544F-650506E239D1}</FileHash>
+</SoundBanksInfo>

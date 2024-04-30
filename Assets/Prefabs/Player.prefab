@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7869025739131603003}
   - component: {fileID: 1983969986655060301}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fish Spawner
   m_TagString: Spawner
   m_Icon: {fileID: 0}
@@ -51,6 +51,9 @@ MonoBehaviour:
   maxSpawnCheckIterations: 16
   gizmosActive: 0
   debugLog: 0
+  LayersToIgnore:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1852038148812022917
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +65,7 @@ GameObject:
   - component: {fileID: 6073627142141413654}
   - component: {fileID: 7306410054840112957}
   - component: {fileID: 5474408773760579238}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: playertools_LOW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +115,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: -876546973899608171, guid: 862337b0b3fc4f44e90195fef75510f0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3809250035136272316}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Bobber Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +179,7 @@ GameObject:
   - component: {fileID: 8877596810407000942}
   - component: {fileID: 4155020050108055742}
   - component: {fileID: 5692491932454429114}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +217,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3394642100146853828}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -261,7 +264,7 @@ GameObject:
   - component: {fileID: 4060112610643614033}
   - component: {fileID: 2192930677179650319}
   - component: {fileID: 6454326540999823456}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: playerbody_LOW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +314,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: -876546973899608171, guid: 862337b0b3fc4f44e90195fef75510f0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -342,7 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4329795878158434142}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: player_LOW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +384,7 @@ GameObject:
   - component: {fileID: 1181673847698802604}
   - component: {fileID: 6424786480925049702}
   - component: {fileID: 1167194963957598639}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -397,7 +400,7 @@ Transform:
   m_GameObject: {fileID: 4622889958549259469}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.08900011}
+  m_LocalPosition: {x: 0, y: 0.454, z: -0.068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -442,7 +445,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 383
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -510,7 +513,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
@@ -545,7 +548,7 @@ GameObject:
   - component: {fileID: 2735100017970620182}
   - component: {fileID: 6870453621884927257}
   - component: {fileID: 7751725880236519475}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: playercape_LOW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +598,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: -876546973899608171, guid: 862337b0b3fc4f44e90195fef75510f0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -629,7 +632,7 @@ GameObject:
   - component: {fileID: 6978480120705798604}
   - component: {fileID: 6554519149749773184}
   - component: {fileID: 6181941570809337451}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Area Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -645,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 7872454129182463595}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.9279995, z: 0}
+  m_LocalPosition: {x: 0, y: 0.078, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -700,7 +703,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 503
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -765,7 +768,7 @@ GameObject:
   - component: {fileID: 2944523039950483636}
   - component: {fileID: 4288137571712162265}
   - component: {fileID: 4548653372721659600}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -980,18 +983,17 @@ MonoBehaviour:
   _bobberSpawnPoint: {fileID: 3809250035136272316}
   _bobberSpawnRangeMax: 20
   _bobberSpawnRangeMin: 8
-  _bobberMaxDistanceFromPlayer: 80
+  _bobberMaxDistanceFromPlayer: 30
   groundMask:
     serializedVersion: 2
     m_Bits: 16
   _mouseFx: {fileID: 7470109055551435250, guid: 806afb88cb3e80e4ca4d5c4516a52cf7,
     type: 3}
-  _LineRenderer: {fileID: 6983697106207006861}
   _chargeUpMax: 30
   _chargeUpMultiplier: 0.2
-  throwCharge: 0
   gizmosActive: 0
   boatRB: {fileID: 0}
+  fishLine: {fileID: 0}
   TestVelocityMultiplier: 1.5
 --- !u!114 &4288137571712162265
 MonoBehaviour:
@@ -1009,8 +1011,6 @@ MonoBehaviour:
   activeCrosshairSprite: {fileID: 2800000, guid: 3dd03c514521bbf4a97409bda050118f,
     type: 3}
   interactRange: 7
-  objectHit: {fileID: 0}
-  objectHitLastFrame: {fileID: 0}
 --- !u!114 &4548653372721659600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,7 +1034,7 @@ GameObject:
   - component: {fileID: 521015606699033140}
   - component: {fileID: 9132705730954490877}
   - component: {fileID: 4706019200849755986}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: playerhair_LOW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1084,7 +1084,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: -876546973899608171, guid: 862337b0b3fc4f44e90195fef75510f0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

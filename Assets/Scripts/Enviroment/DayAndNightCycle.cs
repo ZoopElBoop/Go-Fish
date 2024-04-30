@@ -38,6 +38,11 @@ public class DayAndNightCycle : MonoBehaviour
     [SerializeField][Range(0.7f, 1)] private float nightEnd = 0.8f;
     [SerializeField][Range(0f, 0.2f)] private float dayToNightTransition = 0.1f;
 
+    [Space]
+    public bool OverrideFogColour;
+    public bool viewUnderWaterFog;
+    public Gradient underwaterFog;
+
     private void Awake()
     {
 #if UNITY_EDITOR
@@ -92,7 +97,7 @@ public class DayAndNightCycle : MonoBehaviour
         float sunPos = Mathf.Repeat(gameTime + 0.25f, 1f);
         directionalLight.transform.rotation = Quaternion.Euler(sunPos * 360f, 0f, 0f);
 
-        RenderSettings.fogColor = fogGradient.Evaluate(gameTime);
+        ChangeFog();
         RenderSettings.ambientLight = ambientGradient.Evaluate(gameTime);
 
         directionalLight.color = directionalLightGradient.Evaluate(gameTime);
@@ -100,6 +105,16 @@ public class DayAndNightCycle : MonoBehaviour
         //skyboxMaterial.SetColor("_Tint", skyboxTintGradient.Evaluate(gameTime));
         skyboxMaterial.SetFloat("_CubemapTransition", 1 - transitionTime);
         ChangeSeaGlossiness();
+
+#if UNITY_EDITOR
+        UnderwaterFogInEditor();
+#endif
+    }
+
+    private void ChangeFog() 
+    {
+        if (!OverrideFogColour)
+            RenderSettings.fogColor = fogGradient.Evaluate(gameTime);
     }
 
     private void ChangeSeaGlossiness() 
@@ -172,4 +187,21 @@ public class DayAndNightCycle : MonoBehaviour
         skyboxMaterial.SetFloat("_Rotation", 0f);
         waterMaterial.SetFloat("_Glossiness", maximumWaterGlossiness);
     }
+
+
+#if UNITY_EDITOR
+    private void UnderwaterFogInEditor() 
+    {
+        if (Camera.current == null)
+            return;
+
+        if (Camera.current.transform.position.y < 0f)
+        {
+            float farDown = Mathf.InverseLerp(0f, -100f, Camera.current.transform.position.y);
+
+            RenderSettings.fogColor = underwaterFog.Evaluate(farDown);
+        }
+    }
+#endif
+
 }

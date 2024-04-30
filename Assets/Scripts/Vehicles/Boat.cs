@@ -23,7 +23,7 @@ public class Boat : MonoBehaviour
     private void Start()
     {
         playerReturnPos = GameObject.FindWithTag("Player Boat Exit").GetComponent<Transform>();
-        Player = GameObject.FindWithTag("Player");
+        Player = GameObject.FindWithTag("Player").transform.root.gameObject;
         rb = GetComponent<Rigidbody>();
         bo = GetComponent<BuoyancyObject>();
 

@@ -38,6 +38,8 @@ public class Intro : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.InScene(true);
+
         EnviromentalValuesInit();
 
         bounds = GetComponent<MoveLock>();
@@ -83,6 +85,8 @@ public class Intro : MonoBehaviour
 
             if (transitionTime >= 1f)
             {
+                GameManager.Instance.InScene(false);
+
                 timeCycle.enabled = true;
 
                 lightsOn = true;

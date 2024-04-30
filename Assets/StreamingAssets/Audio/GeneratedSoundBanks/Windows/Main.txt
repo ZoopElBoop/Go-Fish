@@ -1,0 +1,42 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1625736018	buy_upgrade			\Default Work Unit\buy_upgrade	
+	2282381988	Sub_door			\Default Work Unit\Sub_door	
+	2301772642	Sell_fish			\Default Work Unit\Sell_fish	
+	2360843467	Fish_collected			\Default Work Unit\Fish_collected	
+	2385628198	Footsteps			\Default Work Unit\Footsteps	
+	3320937167	Rod_swish			\Default Work Unit\Rod_swish	
+	3833651337	Jump			\Default Work Unit\Jump	
+
+Switch Group	ID	Name			Wwise Object Path	Notes
+	1833605183	Footstep_surface			\Default Work Unit\Footstep_surface	
+
+Switch	ID	Name	Switch Group			Notes
+	803837735	Sand	Footstep_surface			
+	2058049674	Wood	Footstep_surface			
+	2185786256	Gravel	Footstep_surface			
+	4248645337	Grass	Footstep_surface			
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	48311897	Wood(steps6)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Wood(steps6)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\WoodSteps\Wood(steps6)		107480
+	88144719	Wood(steps8)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Wood(steps8)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\WoodSteps\Wood(steps8)		76548
+	89073160	coin sound (pitched up)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\coin sound (pitched up)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\coin sound (pitched up)		146120
+	95651886	Sand (step 2)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Sand (step 2)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 2)		93808
+	104815867	Fish collected	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Fish collected_DE9327CF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Fish collected		37984
+	173829974	rod swish	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\rod swish_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rod swish		96096
+	255376140	Sand (step 4)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Sand (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 4)		107748
+	384206844	Gravel (step 1)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Gravel (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 1)		96096
+	598946530	Grass (step 1)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Grass (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GrassSteps\Grass (step 1)		173416
+	669549996	Wood(steps7)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Wood(steps7)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\WoodSteps\Wood(steps7)		81764
+	696540545	Grass (step 2)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Grass (step 2)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GrassSteps\Grass (step 2)		158604
+	707998641	Grass (step 4)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Grass (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GrassSteps\Grass (step 4)		158604
+	738939123	Cash register	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Cash register_F13BB2B0.wem		\Actor-Mixer Hierarchy\Default Work Unit\Cash register		286976
+	800354274	Wood(steps5)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Wood(steps5)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\WoodSteps\Wood(steps5)		93500
+	824573470	Sand (step 1)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Sand (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 1)		90716
+	834857939	Grass (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Grass (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GrassSteps\Grass (step 3)		158604
+	864731088	Gravel (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Gravel (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 3)		64380
+	875518388	Gravel (step 4)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Gravel (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 4)		92856
+	912205608	jump sound 2	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\jump sound 2_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\jump sound 2		94476
+	926304011	Sand (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Sand (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 3)		103012
+	962478843	Gravel (step 2)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Gravel (step 2)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 2)		70960
+	1011808839	Sub door	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Sub door_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sub door		105868
+

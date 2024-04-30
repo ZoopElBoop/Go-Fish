@@ -23,6 +23,11 @@ public class InteractControl : MonoBehaviour
         interactMask |= (1 << ignoreLayer);			 //sets layer to only "Interact" layer
     }
 
+	private void OnEnable()
+	{
+		GameManager.Instance.ShowPlayerMouse(false);
+	}
+
 	void FixedUpdate()
 	{
         objectHitLastFrame = objectHit;
