@@ -2,6 +2,15 @@
 GO FISH V0.9
 ============
 Major Changes
+- New final overland map layout
+
+Bug Fixes
+- Fixed harpoons not despawning after killing fish
+
+============
+GO FISH V0.9
+============
+Major Changes
 - Added Intro Sequence
 - Reworked Sub
 
