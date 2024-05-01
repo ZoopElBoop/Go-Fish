@@ -50,9 +50,9 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void StoreOnPlayer(FishControl fishScript) { fishStoredOnPlayer[fishScript._dataIndex].count++; }
-    public void StoreOnBoat(FishControl fishScript) { fishStoredOnBoat[fishScript._dataIndex].count++; }
-    public void StoreOnSub(FishControl fishScript) { fishStoredOnSub[fishScript._dataIndex].count++; }
+    public void StoreOnPlayer(FishControl fishScript) { fishStoredOnPlayer[FishDataManager.Instance.GetFishDataIndex(fishScript.Data.name)].count++; }
+    public void StoreOnBoat(FishControl fishScript) { fishStoredOnBoat[FishDataManager.Instance.GetFishDataIndex(fishScript.Data.name)].count++; }
+    public void StoreOnSub(FishControl fishScript) { fishStoredOnSub[FishDataManager.Instance.GetFishDataIndex(fishScript.Data.name)].count++; }
 
     public void RemoveFromPlayer(int index) { fishStoredOnPlayer[index].count--; }
     public void RemoveFromBoat(int index) { fishStoredOnBoat[index].count--; }

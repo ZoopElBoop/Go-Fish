@@ -38,13 +38,9 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this);
 
-
         Application.targetFrameRate = fpsLimit;
 
-
         ShowPlayerMouse(false);
-
-        //timeCycle = GetComponent<DayAndNightCycle>();
     }
 
     #endregion

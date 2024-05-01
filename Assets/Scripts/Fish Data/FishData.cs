@@ -44,6 +44,7 @@ public class FishData : ScriptableObject
 
     private void OnValidate()
     {
+
         //ik this is horrific amount of ifs but this be for checking i am not stupid
 
         if (_Fishk == null)
@@ -51,6 +52,8 @@ public class FishData : ScriptableObject
             StopPlay();
             Debug.LogError($"Missing Fish Prefab On {name}, pls fix");
         }
+        else
+            SetDataToFish();
 
         if (_spawnDepthStart <= _spawnDepthEnd)
         {
@@ -83,5 +86,25 @@ public class FishData : ScriptableObject
             UnityEditor.EditorApplication.isPlaying = false;
         }
 #endif
+    }
+
+    private void SetDataToFish() 
+    {
+        FishControl fishScript = null;
+
+        if (_Fishk.TryGetComponent<FishControl>(out var fs))
+            fishScript = fs;
+        else
+            Debug.LogError($"missing fish control script on {_Fishk.name} !!!");
+
+        if (fishScript.Data == this)
+            return;
+
+        if (fishScript.Data != null)
+            Debug.Log($"Overwriting fish data on {_Fishk.name}");
+        else
+            Debug.Log($"Set fish data to {_Fishk.name}");
+
+        fishScript.Data = this;
     }
 }

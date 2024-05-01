@@ -7,6 +7,8 @@ public class FishControl : MonoBehaviour
 {
     #region Variables
 
+    public FishData Data;
+
     private Rigidbody rb;
 
     public bool isAboutToDie = false;
@@ -16,7 +18,6 @@ public class FishControl : MonoBehaviour
     [Header("Fish Data")]
 
     public float _destroyRange;
-    public int _dataIndex;
     private Transform spawnPosition;
 
     [SerializeField] private float HeightMax;
@@ -97,16 +98,16 @@ public class FishControl : MonoBehaviour
         isAboutToDie = false;
         isTurning = false;
 
+        HP = Data._Health;
+        Speed = Data._Speed;
+        rotationSpeed = Data._rotationSpeed;
+
+        HeightMax = Data._moveHeightLimit;
+        DepthMax = Data._moveDepthLimit;
+
+        canBeFished = Data._canBeCaught;
+
         transform.localScale = startingScale;
-
-        HP = FishDataManager.Instance.GetHealth(_dataIndex);
-        Speed = FishDataManager.Instance.GetSpeed(_dataIndex);
-        rotationSpeed = FishDataManager.Instance.GetRotationSpeed(_dataIndex);
-
-        HeightMax = FishDataManager.Instance.GetHeightLimit(_dataIndex);
-        DepthMax = FishDataManager.Instance.GetDepthLimit(_dataIndex);
-
-        canBeFished = FishDataManager.Instance.GetCanBeCaught(_dataIndex);
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
     }
@@ -123,7 +124,7 @@ public class FishControl : MonoBehaviour
 
             ChangeDirection();
 
-            CollisionDetect();
+            //CollisionDetect();
         }
     }
 
@@ -155,7 +156,7 @@ public class FishControl : MonoBehaviour
 
     #region Collision Detection Checks
 
-    private void CollisionDetect()
+    private void aCollisionDetect()
     {
         /*
         Collision detect has 3 seperate systems that operate depending on the fishes position

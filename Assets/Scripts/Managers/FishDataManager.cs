@@ -21,14 +21,14 @@ public class FishDataManager : MonoBehaviour
 
         fishData = fishDataInput;
     }
-/*
+
     public int GetFishDataIndex(string fishName)
     {
         for (int i = 0; i < fishData.Length; i++)
             if (fishName == fishData[i].name)
                 return i;
         return -1;
-    }*/
+    }
 
     public int GetFishDataSize() { return fishData.Length; }
 

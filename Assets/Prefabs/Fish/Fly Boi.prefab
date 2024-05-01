@@ -402,7 +402,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6077888214588135452, guid: 0dc93382566654f45837fdf71de63f31, type: 3}
+  - {fileID: -876546973899608171, guid: 6955c2270821dc94ebee928eaa3b853f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 3896934895332834752}
   m_Layer: 0
   m_Name: Fly Boi
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -752,9 +752,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779dcb5786728ee47b35da8caea7d655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 7dc89120507aabe498fc8b13259daefe, type: 2}
   isAboutToDie: 0
   _destroyRange: 0
-  _dataIndex: 0
   HeightMax: 0
   DepthMax: 0
   HP: 0

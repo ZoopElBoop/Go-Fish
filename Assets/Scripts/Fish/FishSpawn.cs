@@ -182,10 +182,9 @@ public class FishSpawn : MonoBehaviour
                 break;
         }
 
-        FishControl fishScript = GameManager.Instance.SpawnFish(fishToSpawn, spawnPos, Quaternion.identity, true);
+        FishControl temp = GameManager.Instance.SpawnFish(fishToSpawn, spawnPos, Quaternion.identity, true);
 
-        fishScript._destroyRange = _destroyRange * FishDataManager.Instance.GetDespawnMultiplier(index);
-        fishScript._dataIndex = index;
+        temp._destroyRange = _destroyRange;
     }
 
     private float GetNewYPos(int index)

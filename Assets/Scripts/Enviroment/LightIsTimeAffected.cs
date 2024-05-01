@@ -5,9 +5,9 @@ public class LightIsTimeAffected : MonoBehaviour
     public bool Invert;
 
     private Light objectLight;
-    private float lightIntensity;
+    [HideInInspector]public float lightIntensity;
 
-    private void Start()
+    private void Awake()
     {
         if (TryGetComponent<Light>(out var light))
         {

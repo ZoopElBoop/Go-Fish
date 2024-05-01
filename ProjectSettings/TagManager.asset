@@ -9,6 +9,7 @@ TagManager:
   - Player Boat Exit
   - Spawner
   - Sub
+  - Boat
   layers:
   - Default
   - TransparentFX

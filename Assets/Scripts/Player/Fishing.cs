@@ -87,6 +87,8 @@ public class Fishing : MonoBehaviour
         fishLine = GetComponent<LineRenderer>();
 
         fishLine.enabled = false;
+
+        boatRB = GameObject.FindWithTag("Boat").GetComponent<Rigidbody>();
     }
 
     public void FishingStatus(bool status)

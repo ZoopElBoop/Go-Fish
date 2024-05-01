@@ -1182,7 +1182,7 @@ GameObject:
   - component: {fileID: 2095096366968218350}
   m_Layer: 0
   m_Name: Cat Shark
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1245,9 +1245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779dcb5786728ee47b35da8caea7d655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 25979e212e1face4980cbb35d13bf2e9, type: 2}
   isAboutToDie: 0
   _destroyRange: 0
-  _dataIndex: 0
   HeightMax: 0
   DepthMax: 0
   HP: 0

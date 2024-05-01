@@ -5,22 +5,28 @@ using UnityEngine.Rendering.Universal;
 public class WaterFog : MonoBehaviour
 {
     public Gradient fogGradient;
-    public float fogDepth;
+    public float fogAtBottomDistance;
+    public float fogAtStartDistance;
+    [Range (-1f, -150f)] public float fogTransition = -100f;
 
     private Transform playerPos;
 
-    private readonly float startingfogEndDistance = 300f;
+    private readonly float startingFogEndDistance = 300f;
 
-    private Volume underwaterVolume;
     private Bloom underwaterBloom;
+    public float underwaterBloomBaseValue;
+    [Range(-1f, -5f)] public float bloomTransition = -2f;
 
     void Start()
     {
+        Volume underwaterVolume;
+
         playerPos = GameObject.FindWithTag("Spawner").transform;
         underwaterVolume = gameObject.GetComponent<Volume>();
 
         if (underwaterVolume.profile.TryGet(out Bloom temp)) { underwaterBloom = temp; }
 
+        underwaterBloomBaseValue = underwaterBloom.threshold.value;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,20 +43,26 @@ public class WaterFog : MonoBehaviour
 
     void Update()
     {
-        if (playerPos.position.y >= 0f && !GameManager.Instance.cutSceneOverride)
+        if (playerPos.position.y >= 0f)
         {
-            RenderSettings.fogEndDistance = startingfogEndDistance;
+            if (!GameManager.Instance.cutSceneOverride)
+                RenderSettings.fogEndDistance = startingFogEndDistance;
+
             return;
         }
 
-        float farDown = Mathf.InverseLerp(0f, -100f, playerPos.position.y);
+        print("effecting");
+
+        float farDown = Mathf.InverseLerp(0f, fogTransition, playerPos.position.y);
 
         RenderSettings.fogColor = fogGradient.Evaluate(farDown);
+
+        float fogDepth = Mathf.Lerp(fogAtStartDistance, fogAtBottomDistance, farDown);
         RenderSettings.fogEndDistance = fogDepth;
 
-        float farDown2 = Mathf.InverseLerp(0f, -2f, playerPos.position.y);
-        float bloomTransition = Mathf.Lerp(2f, 0.5f, farDown2);
+        float farDown2 = Mathf.InverseLerp(0f, bloomTransition, playerPos.position.y);
+        float bloomDepth = Mathf.Lerp(2f, underwaterBloomBaseValue, farDown2);
 
-        underwaterBloom.threshold.Override(bloomTransition);
+        underwaterBloom.threshold.Override(bloomDepth);
     }
 }

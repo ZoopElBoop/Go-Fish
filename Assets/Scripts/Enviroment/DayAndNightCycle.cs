@@ -192,7 +192,7 @@ public class DayAndNightCycle : MonoBehaviour
 #if UNITY_EDITOR
     private void UnderwaterFogInEditor() 
     {
-        if (Camera.current == null)
+        if (Application.isPlaying || !viewUnderWaterFog || Camera.current == null)
             return;
 
         if (Camera.current.transform.position.y < 0f)

@@ -25,7 +25,7 @@ public class InteractControl : MonoBehaviour
 
 	private void OnEnable()
 	{
-		GameManager.Instance.ShowPlayerMouse(false);
+        GameManager.Instance.ShowPlayerMouse(false);
 	}
 
 	void FixedUpdate()
