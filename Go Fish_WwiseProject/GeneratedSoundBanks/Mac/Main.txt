@@ -1,4 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
+	11360165	reel_in			\Default Work Unit\reel_in	
+	1432588725	select			\Default Work Unit\select	
 	1625736018	buy_upgrade			\Default Work Unit\buy_upgrade	
 	2282381988	Sub_door			\Default Work Unit\Sub_door	
 	2301772642	Sell_fish			\Default Work Unit\Sell_fish	
@@ -35,8 +37,10 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	834857939	Grass (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Grass (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GrassSteps\Grass (step 3)		158604
 	864731088	Gravel (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Gravel (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 3)		64380
 	875518388	Gravel (step 4)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Gravel (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 4)		92856
+	899828247	Select	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Select_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Select		56392
 	912205608	jump sound 2	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\jump sound 2_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\jump sound 2		94476
 	926304011	Sand (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 3)		103012
 	962478843	Gravel (step 2)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Gravel (step 2)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 2)		70960
 	1011808839	Sub door	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sub door_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sub door		105868
+	1029914345	reeling in	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\reeling in_FBC78EF0.wem		\Actor-Mixer Hierarchy\Default Work Unit\reeling in		3072096
 

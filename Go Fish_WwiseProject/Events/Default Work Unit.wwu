@@ -80,6 +80,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="select" ID="{4707DB8E-6B81-4212-AE3F-5795EC99E53A}">
+					<ChildrenList>
+						<Action Name="" ID="{AE546D15-09CA-49CE-850F-D4321D65D4BD}" ShortID="284321139">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Select" ID="{54725249-B566-4448-A695-964A5B90F798}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="reel_in" ID="{A103D669-9954-4940-A265-52AD77C8CCE1}">
+					<ChildrenList>
+						<Action Name="" ID="{398A5B6A-C561-4E5B-9348-CBD87B4E81A8}" ShortID="760180998">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="reeling in" ID="{B6924797-4884-4111-8F32-5435E54A4DE0}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

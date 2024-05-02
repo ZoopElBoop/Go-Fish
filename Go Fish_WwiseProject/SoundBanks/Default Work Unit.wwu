@@ -5,10 +5,12 @@
 			<ChildrenList>
 				<SoundBank Name="Main" ID="{FDB759F6-B405-41DB-B550-785D575E4DBE}">
 					<ObjectInclusionList>
+						<ObjectRef Name="select" ID="{4707DB8E-6B81-4212-AE3F-5795EC99E53A}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Footsteps" ID="{6F61DF4C-B23A-4470-B986-DDC49C8A7269}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Rod_swish" ID="{1865A04F-F27A-457C-B6D8-F01719E25664}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Sub_door" ID="{C63C0C54-FBEC-471C-B5FA-FB9CE716D328}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Sell_fish" ID="{7ABEB9DE-BAA4-48B0-BCEF-FD8733FA7A5A}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="reel_in" ID="{A103D669-9954-4940-A265-52AD77C8CCE1}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="buy_upgrade" ID="{1AA09A70-823D-4B59-AC4A-1CA37596BD0E}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Fish_collected" ID="{89585429-2E41-4C12-821F-CFE9C8DFB179}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Jump" ID="{01935AEA-25A7-4E3A-8D26-CAE2A8612901}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>

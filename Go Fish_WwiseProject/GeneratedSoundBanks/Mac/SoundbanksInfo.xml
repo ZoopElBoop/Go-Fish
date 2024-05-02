@@ -32,7 +32,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{90F529A6-BAE2-D8FE-E31D-A44D97E4D8F0}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{AA49AA39-EE69-7D23-A967-481202DCAC2F}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -108,6 +108,10 @@
 					<ShortName>Gravel (step 4).wav</ShortName>
 					<CachePath>SFX/Gravel (step 4)_818F3B66.wem</CachePath>
 				</File>
+				<File Id="899828247" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Select.wav</ShortName>
+					<CachePath>SFX/Select_818F3B66.wem</CachePath>
+				</File>
 				<File Id="912205608" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>jump sound 2.wav</ShortName>
 					<CachePath>SFX/jump sound 2_818F3B66.wem</CachePath>
@@ -123,6 +127,10 @@
 				<File Id="1011808839" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Sub door.wav</ShortName>
 					<CachePath>SFX/Sub door_818F3B66.wem</CachePath>
+				</File>
+				<File Id="1029914345" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>reeling in.wav</ShortName>
+					<CachePath>SFX/reeling in_FBC78EF0.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
@@ -181,9 +189,19 @@
 						<MediaRef Id="912205608"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="11360165" Name="reel_in" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="1029914345"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="3320937167" Name="Rod_swish" DurationType="OneShot" DurationMin="0.5" DurationMax="0.5">
 					<MediaRefs>
 						<MediaRef Id="173829974"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1432588725" Name="select" DurationType="OneShot" DurationMin="0.26121894" DurationMax="0.26121894">
+					<MediaRefs>
+						<MediaRef Id="899828247"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="2301772642" Name="Sell_fish" DurationType="OneShot" DurationMin="0.7605417" DurationMax="0.7605417">
@@ -209,5 +227,5 @@
 			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{1B6C2203-FE04-8DAE-9550-C52A8201EF6F}</FileHash>
+	<FileHash>{5C69E4EB-C29E-6833-C0C5-C60322C2244B}</FileHash>
 </SoundBanksInfo>
