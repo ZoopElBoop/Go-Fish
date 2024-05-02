@@ -1205,6 +1205,7 @@ GameObject:
   - component: {fileID: 1206258455107684465}
   - component: {fileID: 8567164373306295819}
   - component: {fileID: 2947185750038943358}
+  - component: {fileID: 5034939152695372715}
   m_Layer: 0
   m_Name: Zebra Fick
   m_TagString: Fish
@@ -1278,13 +1279,6 @@ MonoBehaviour:
   Speed: 0
   rotationSpeed: 0
   canBeFished: 0
-  colliderSize: {x: 2, y: 2.87, z: 3}
-  colliderRange: 0
-  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
-  initialAngle: {x: 0, y: 0, z: 0}
-  newAngle: {x: 0, y: 0, z: 0}
-  rayMinDistance: 0
-  viewCollisionBox: 1
   startingScale: {x: 0, y: 0, z: 0}
   harpoonsAttached: []
 --- !u!95 &8567164373306295819
@@ -1330,6 +1324,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5034939152695372715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8389010961553526902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f23c7a4a21e3954e8146fed485e32b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderSize: {x: 3, y: 3, z: 3}
+  colliderRange: 2
+  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
+  initialAngle: {x: 0, y: 0, z: 0}
+  newAngle: {x: 0, y: 0, z: 0}
+  rayMinDistance: 0
+  maxHeight: 0
+  maxDepth: 0
+  viewCollisionBox: 1
 --- !u!1 &8418107199829185828
 GameObject:
   m_ObjectHideFlags: 0

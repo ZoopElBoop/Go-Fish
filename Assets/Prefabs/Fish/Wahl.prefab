@@ -844,6 +844,7 @@ GameObject:
   - component: {fileID: 7944599503414497698}
   - component: {fileID: 330741509127552896}
   - component: {fileID: 2105067774222858489}
+  - component: {fileID: 8348276423743628024}
   m_Layer: 0
   m_Name: Wahl
   m_TagString: Fish
@@ -917,13 +918,6 @@ MonoBehaviour:
   Speed: 0
   rotationSpeed: 0
   canBeFished: 0
-  colliderSize: {x: 19.44, y: 38.49, z: 100}
-  colliderRange: 0
-  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
-  initialAngle: {x: 0, y: 0, z: 0}
-  newAngle: {x: 0, y: 0, z: 0}
-  rayMinDistance: 0
-  viewCollisionBox: 1
   startingScale: {x: 0, y: 0, z: 0}
   harpoonsAttached: []
 --- !u!65 &330741509127552896
@@ -969,6 +963,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8348276423743628024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7862833991781421711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f23c7a4a21e3954e8146fed485e32b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderSize: {x: 19, y: 38, z: 100}
+  colliderRange: 75
+  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
+  initialAngle: {x: 0, y: 0, z: 0}
+  newAngle: {x: 0, y: 0, z: 0}
+  rayMinDistance: 0
+  maxHeight: 0
+  maxDepth: 0
+  viewCollisionBox: 1
 --- !u!1 &8267057218105751381
 GameObject:
   m_ObjectHideFlags: 0

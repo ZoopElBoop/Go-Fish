@@ -688,6 +688,7 @@ GameObject:
   - component: {fileID: 7757307230370043471}
   - component: {fileID: 1403392424093225284}
   - component: {fileID: 3896934895332834752}
+  - component: {fileID: 7661811725160368115}
   m_Layer: 0
   m_Name: Fly Boi
   m_TagString: Fish
@@ -761,13 +762,6 @@ MonoBehaviour:
   Speed: 0
   rotationSpeed: 0
   canBeFished: 0
-  colliderSize: {x: 10.9, y: 7.3, z: 50}
-  colliderRange: 0
-  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
-  initialAngle: {x: 0, y: 0, z: 0}
-  newAngle: {x: 0, y: 0, z: 0}
-  rayMinDistance: 0
-  viewCollisionBox: 1
   startingScale: {x: 0, y: 0, z: 0}
   harpoonsAttached: []
 --- !u!95 &1403392424093225284
@@ -813,6 +807,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 9, z: 27.45}
   m_Center: {x: 0, y: 10, z: 0}
+--- !u!114 &7661811725160368115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4988895805988814032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f23c7a4a21e3954e8146fed485e32b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderSize: {x: 11.26, y: 14.7, z: 22.2}
+  colliderRange: 26.59
+  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
+  initialAngle: {x: 0, y: 0, z: 0}
+  newAngle: {x: 0, y: 0, z: 0}
+  rayMinDistance: 0
+  maxHeight: 0
+  maxDepth: 0
+  viewCollisionBox: 1
 --- !u!1 &5170526904590324665
 GameObject:
   m_ObjectHideFlags: 0
