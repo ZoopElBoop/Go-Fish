@@ -562,6 +562,7 @@ GameObject:
   - component: {fileID: 2877551198754900649}
   - component: {fileID: 7081107933951301435}
   - component: {fileID: 6053541951097427007}
+  - component: {fileID: 8840035293457996766}
   m_Layer: 0
   m_Name: KEVIN
   m_TagString: Fish
@@ -634,13 +635,6 @@ MonoBehaviour:
   Speed: 0
   rotationSpeed: 0
   canBeFished: 0
-  colliderSize: {x: 2, y: 3.5, z: 6.4}
-  colliderRange: 0
-  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
-  initialAngle: {x: 0, y: 0, z: 0}
-  newAngle: {x: 0, y: 0, z: 0}
-  rayMinDistance: 0
-  viewCollisionBox: 1
   startingScale: {x: 0, y: 0, z: 0}
   harpoonsAttached: []
 --- !u!65 &7081107933951301435
@@ -662,8 +656,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 2, y: 3.5, z: 6.5}
+  m_Size: {x: 2.67, y: 1.8, z: 5.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &6053541951097427007
 Animator:
   serializedVersion: 7
@@ -686,6 +680,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8840035293457996766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6885119008761653246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f23c7a4a21e3954e8146fed485e32b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderSize: {x: 3.06, y: 1.91, z: 1.74}
+  colliderRange: 5
+  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
+  initialAngle: {x: 0, y: 0, z: 0}
+  newAngle: {x: 0, y: 0, z: 0}
+  rayMinDistance: 0
+  maxHeight: 0
+  maxDepth: 0
+  viewCollisionBox: 1
 --- !u!1 &7589260230436531332
 GameObject:
   m_ObjectHideFlags: 0

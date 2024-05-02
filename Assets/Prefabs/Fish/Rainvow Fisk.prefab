@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 5162535617461658349}
   - component: {fileID: 4327130950309090403}
   - component: {fileID: 4186517255908146983}
+  - component: {fileID: 3782146992448641579}
   m_Layer: 0
   m_Name: Rainvow Fisk
   m_TagString: Fish
@@ -215,13 +216,6 @@ MonoBehaviour:
   Speed: 0
   rotationSpeed: 0
   canBeFished: 0
-  colliderSize: {x: 2, y: 4, z: 4}
-  colliderRange: 0
-  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
-  initialAngle: {x: 0, y: 0, z: 0}
-  newAngle: {x: 0, y: 0, z: 0}
-  rayMinDistance: 0
-  viewCollisionBox: 1
   startingScale: {x: 0, y: 0, z: 0}
   harpoonsAttached: []
 --- !u!65 &4327130950309090403
@@ -267,6 +261,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3782146992448641579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2352496131642363724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f23c7a4a21e3954e8146fed485e32b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderSize: {x: 2, y: 4, z: 4}
+  colliderRange: 5
+  rotationEnd: {x: 0, y: 0, z: 0, w: 0}
+  initialAngle: {x: 0, y: 0, z: 0}
+  newAngle: {x: 0, y: 0, z: 0}
+  rayMinDistance: 0
+  maxHeight: 0
+  maxDepth: 0
+  viewCollisionBox: 1
 --- !u!1 &3035464534690640553
 GameObject:
   m_ObjectHideFlags: 0
