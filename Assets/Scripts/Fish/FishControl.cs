@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(CollisionDetect))]
@@ -10,33 +9,29 @@ public class FishControl : MonoBehaviour
 
     public FishData Data;
     private CollisionDetect AI;
-
     private Rigidbody rb;
 
-    public bool isAboutToDie = false;
-
     private Transform attractPoint;
+    
+    [HideInInspector] public bool isAboutToDie = false;
+    [HideInInspector] public bool canBeFished;
 
-    [Header("Fish Data")]
-
-    public float _destroyRange;
+    //Fish Spawner
     private Transform spawnPosition;
+    [HideInInspector] public float _destroyRange;
 
-    [SerializeField] private float HeightMax;
-    [SerializeField] private float DepthMax;
+    //Move Limits
+    private float HeightMax;
+    private float DepthMax;
+
+    [Header("Fish Base Values")]
 
     public int HP;
     public float Speed;
-    public float rotationSpeed;
-
-    public bool canBeFished;
-
-
-    private int LayerIgnoreRaycast;
-    private LayerMask LayersToIgnore = -1;
+    private float rotationSpeed;
 
     //Fish To Player Variables
-    public Vector3 startingScale;
+    private Vector3 startingScale;
     private Vector3 startingPoint;
     private float pointInTravel = 1f;
 
@@ -53,24 +48,6 @@ public class FishControl : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         startingScale = transform.localScale;
-
-        /*        for (int i = 0; i < transform.childCount; i++)
-                {
-                    if (transform.GetChild(i).TryGetComponent<MeshCollider>(out var col))
-                        meshies.Add(col);
-                }*/
-
-        LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
-
-        LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "ignore raycast" layer
-
-        LayerIgnoreRaycast = LayerMask.NameToLayer("Water");
-
-        LayersToIgnore &= ~(1 << LayerIgnoreRaycast);   //sets layer to ignore "water" layer
-
-        /*        collisionBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                collisionBox.layer = LayerIgnoreRaycast;
-                collisionBox.SetActive(false);*/
     }
 
     private void OnEnable()
@@ -88,7 +65,7 @@ public class FishControl : MonoBehaviour
 
         transform.localScale = startingScale;
 
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
+        //transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
 
         AI = GetComponent<CollisionDetect>();
         AI.SetMoveValues(HeightMax, DepthMax, rotationSpeed);
@@ -110,8 +87,8 @@ public class FishControl : MonoBehaviour
 
         if (!isAboutToDie)
         {
-            if (transform.position.y > HeightMax || transform.position.y < DepthMax)
-                transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
+/*            if (transform.position.y > HeightMax || transform.position.y < DepthMax)
+                transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);*/
 
             if (distanceBetween > _destroyRange * _destroyRange)                                //squared to make up for no square rooting in previous line        
                 DIEFISHDIE();

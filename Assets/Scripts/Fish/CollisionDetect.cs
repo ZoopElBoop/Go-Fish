@@ -8,33 +8,38 @@ public class CollisionDetect : MonoBehaviour
 
     //public List<Collider> meshies = new();
 
+    //Collision Check States
     private bool canCheckCollisions = true;
+    private bool overrideFrontCheck = false;
 
-    //Front Collider Vaues
-    public Vector3 colliderSize;
-    public float colliderRange;
-
-    //Front Collider Full Values
-    //public float colliderFullSize;
-
-    private int moveDirection;
-
+    //Ray Layer Mask
     private int LayerIgnoreRaycast;
     private LayerMask LayersToIgnore = -1;
+
+    //Front Colliders Values
+    public Vector3 colliderSize;
+    public float colliderRange;
+    public float largeColliderRange;
+
+    //Ray Constants
+    private readonly float rayCheckDistance = 50f;
+    private readonly float rayMinDistance = 5f;
 
     [Header("Rotation Values")]
     public Quaternion rotationEnd;
     public Vector3 initialAngle = new();
     public Vector3 newAngle;
 
-    public float rayMinDistance;
+    //Move state & direction
     private bool isTurning;
+    private int moveDirection;
 
+    //Values From Fish Data
     private float rotationSpeed;
+    private float maxHeight;
+    private float maxDepth;
 
-    public float maxHeight;
-    public float maxDepth;
-
+    [Header("DEBUG")]
     public bool viewCollisionBox;
 
     private void Start()
@@ -58,6 +63,7 @@ public class CollisionDetect : MonoBehaviour
     private void FixedUpdate()
     {
         ChangeDirection();
+
         CheckForObjects();
     }
 
@@ -93,13 +99,18 @@ public class CollisionDetect : MonoBehaviour
             transform.position + (transform.forward * colliderRange),                                            //front
             transform.position + (transform.forward * colliderRange) + (transform.right * colliderSize.x),       //right
             transform.position + (transform.forward * colliderRange) + (-transform.right * colliderSize.x),      //left
-            transform.position + (transform.forward * colliderRange) + (transform.up * colliderSize.y),          //top-centre
-            transform.position + (transform.forward * colliderRange) + (-transform.up * colliderSize.y)          //bottom-centre
+            transform.position + (transform.forward * colliderRange) + (transform.up * colliderSize.y),          //top
+            transform.position + (transform.forward * colliderRange) + (-transform.up * colliderSize.y),         //bottom
+        };
+
+        Vector3[] ForwardClearPositionAndSize = {
+            transform.position + (transform.forward * (colliderSize.z / 2 + largeColliderRange / 2 + colliderRange)),   //postion of collider
+            new Vector3(colliderSize.x, colliderSize.y, largeColliderRange)                                             //size of collider
         };
 
         List<int> posClearIndex = new();
 
-        if (CheckPositionForColliders(Positions[0]))
+        if (!overrideFrontCheck && CheckPositionForColliders(Positions[0], colliderSize))  //checks if area is clear 
         {
             canCheckCollisions = true;
             return;
@@ -107,6 +118,10 @@ public class CollisionDetect : MonoBehaviour
         else if (!canCheckCollisions)
         {
             SetRotation();
+
+            if (CheckPositionForColliders(ForwardClearPositionAndSize[0], ForwardClearPositionAndSize[1]))
+                overrideFrontCheck = false;
+
             return;
         }
 
@@ -119,21 +134,19 @@ public class CollisionDetect : MonoBehaviour
 
             if (i == 3 && transform.position.y > maxHeight || i == 4 && transform.position.y < maxDepth)
             {
-                print(i + "ignored");
+                //print(i + "ignored");
                 continue;
             }
 
             if (rayDistance[i] == -1 || rayDistance[i] >= rayMinDistance)
             {
-                if (true)//CanMoveToPos(rayPoint[i]))
-                {
-                    posClearIndex.Add(i);
-                    //Debug.DrawLine(transform.position, Positions[i], Color.green, 4f);
-                }
+                posClearIndex.Add(i);
+                //print($"{i} {rayDistance[i]}");
             }
         }
 
         canCheckCollisions = false;
+        overrideFrontCheck = true;
 
         if (!posClearIndex.Any())   //rotates fish 180 if no suitable directions found
         {
@@ -152,7 +165,7 @@ public class CollisionDetect : MonoBehaviour
             {
                 if (rayDistance[i] < rayDistance[x] || rayDistance[x] == -1)
                 {
-                    print("REMOVED: " + rayDistance[i]);
+                    //print($"REMOVED: {posClearIndex[i]}  {rayDistance[i]}");
                     posClearIndex.Remove(i);
                     break;
                 }
@@ -166,16 +179,16 @@ public class CollisionDetect : MonoBehaviour
 
         moveDirection = posClearIndex[randPick];
 
-        SetRotation();
+        Debug.DrawLine(transform.position, Positions[posClearIndex[randPick]], Color.green, 5f);
 
-        print("picked " + randPick);
+        //print($"picked {posClearIndex[randPick]} at {rayDistance[posClearIndex[randPick]]}" );
     }
 
-    private bool CheckPositionForColliders(Vector3 positionToCheck)
+    private bool CheckPositionForColliders(Vector3 positionToCheck, Vector3 size)   //returns true if nothing found
     {
         Collider[] hitColliders = new Collider[1];
 
-        Physics.OverlapBoxNonAlloc(positionToCheck, colliderSize / 2, hitColliders, transform.rotation, LayersToIgnore, QueryTriggerInteraction.Ignore);
+        Physics.OverlapBoxNonAlloc(positionToCheck, size / 2, hitColliders, transform.rotation, LayersToIgnore, QueryTriggerInteraction.Ignore);
 
         return hitColliders[0] == null;
     }
@@ -186,7 +199,7 @@ public class CollisionDetect : MonoBehaviour
 
         RaycastHit[] colliderFound = new RaycastHit[10];
 
-        int hits = Physics.RaycastNonAlloc(ray, colliderFound, 30f, LayersToIgnore, QueryTriggerInteraction.Ignore);
+        int hits = Physics.RaycastNonAlloc(ray, colliderFound, rayCheckDistance, LayersToIgnore, QueryTriggerInteraction.Ignore);
 
         if (hits < 1)
         {
@@ -270,7 +283,7 @@ public class CollisionDetect : MonoBehaviour
 
     private void SetRotation()
     {
-        switch (moveDirection + 1)
+        switch (moveDirection)
         {
             case 1:
                 RotateTo(Vector2.up);
@@ -355,13 +368,12 @@ public class CollisionDetect : MonoBehaviour
         {
             Gizmos.matrix = transform.localToWorldMatrix;
 
-            Gizmos.DrawWireCube(transform.forward * colliderRange, colliderSize);
+            Gizmos.DrawWireCube(Vector3.forward * colliderRange, colliderSize);
 
-            //Gizmos.color = Color.red;
-            //Gizmos.DrawWireCube(transform.forward * colliderRange, new Vector3(colliderSize.x, colliderSize.y, colliderSize.z + colliderFullSize));
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(Vector3.forward * (colliderSize.z/2 + largeColliderRange/2 + colliderRange), new Vector3(colliderSize.x, colliderSize.y, largeColliderRange));
         }
     }
 
     #endregion
-
 }
