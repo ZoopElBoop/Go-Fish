@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: f6e1ebbfdd8303499ec3140a8a2eb19f
     GuidInternal: 
-    m_lastTime: -8584869969997520033
+    m_lastTime: -8584869101185055489
     List:
     - name: Main
       guid: f659b7fd05b4db41b550785d575e4dbe
@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 11c91fd6cb1f564886677d0aca3fbb2c
     GuidInternal: 
-    m_lastTime: -8584869969997595765
+    m_lastTime: -8584869101185201200
     List:
     - name: buy_upgrade
       guid: 709aa01a3d82594bac4a1ca37596bd0e
@@ -113,6 +113,40 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.6262966
       minDuration: 1.6262966
+    - name: Collisions
+      guid: 7e19e334d655b348ab1e51fa3c5cc78f
+      id: 824618274
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Collisions
+        ObjectType: 3
+        guid: 7e19e334d655b348ab1e51fa3c5cc78f
+      Path: Events\Default Work Unit\Collisions
+      maxAttenuation: 0
+      maxDuration: 1.5
+      minDuration: 0.5692292
+    - name: Deselect
+      guid: 785d5ece559f72469072e436f8b9b820
+      id: 214853820
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Deselect
+        ObjectType: 3
+        guid: 785d5ece559f72469072e436f8b9b820
+      Path: Events\Default Work Unit\Deselect
+      maxAttenuation: 0
+      maxDuration: 0.339498
+      minDuration: 0.339498
     - name: Fish_collected
       guid: 29545889412e124c821fcfe9c8dfb179
       id: 2360843467
@@ -164,6 +198,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.4915625
       minDuration: 0.4915625
+    - name: Line_snap
+      guid: 08a512f66e1432429d43a172b27c8cf3
+      id: 1797458246
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Line_snap
+        ObjectType: 3
+        guid: 08a512f66e1432429d43a172b27c8cf3
+      Path: Events\Default Work Unit\Line_snap
+      maxAttenuation: 0
+      maxDuration: 0.56427085
+      minDuration: 0.56427085
     - name: reel_in
       guid: 69d603a154994049a26552ad77c8cce1
       id: 11360165
@@ -289,8 +340,58 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
     GuidInternal: 
-    m_lastTime: -8584872127446390052
+    m_lastTime: -8584869101185125725
     List:
+    - name: collisions
+      guid: 1913e279bfc43045966df9f42ece97b8
+      id: 824618274
+      PathAndIcons:
+      - ElementName: Switches
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
+      - ElementName: collisions
+        ObjectType: 11
+        guid: 1913e279bfc43045966df9f42ece97b8
+      Path: Switches\Default Work Unit\collisions
+      values:
+      - name: water_collision
+        guid: 0a147f5e3d04f84ba2e40ae47eb98f5f
+        id: 561649031
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
+        - ElementName: collisions
+          ObjectType: 11
+          guid: 1913e279bfc43045966df9f42ece97b8
+        - ElementName: water_collision
+          ObjectType: 10
+          guid: 0a147f5e3d04f84ba2e40ae47eb98f5f
+      - name: Wood_collision
+        guid: daac13b23e83694eb705c28eb90956aa
+        id: 691204695
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
+        - ElementName: collisions
+          ObjectType: 11
+          guid: 1913e279bfc43045966df9f42ece97b8
+        - ElementName: Wood_collision
+          ObjectType: 10
+          guid: daac13b23e83694eb705c28eb90956aa
+      ValueGuids: []
+      ValueIcons: []
+      valuesInternal: []
     - name: Footstep_surface
       guid: d703282d06337b4ba38dde9d28b24d9b
       id: 1833605183

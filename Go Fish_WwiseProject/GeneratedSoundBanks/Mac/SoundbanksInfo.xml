@@ -22,6 +22,12 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 			<SwitchGroups>
+				<SwitchGroup Id="824618274" Name="collisions">
+					<Switches>
+						<Switch Id="561649031" Name="water_collision"/>
+						<Switch Id="691204695" Name="Wood_collision"/>
+					</Switches>
+				</SwitchGroup>
 				<SwitchGroup Id="1833605183" Name="Footstep_surface">
 					<Switches>
 						<Switch Id="803837735" Name="Sand"/>
@@ -32,7 +38,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{AA49AA39-EE69-7D23-A967-481202DCAC2F}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{1DE6A233-319E-9894-999C-3ACF082FC211}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -64,9 +70,17 @@
 					<ShortName>Sand (step 4).wav</ShortName>
 					<CachePath>SFX/Sand (step 4)_818F3B66.wem</CachePath>
 				</File>
+				<File Id="310988364" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>wood collision.wav</ShortName>
+					<CachePath>SFX/wood collision_818F3B66.wem</CachePath>
+				</File>
 				<File Id="384206844" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Gravel (step 1).wav</ShortName>
 					<CachePath>SFX/Gravel (step 1)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="513240276" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>deselect.wav</ShortName>
+					<CachePath>SFX/deselect_818F3B66.wem</CachePath>
 				</File>
 				<File Id="598946530" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Grass (step 1).wav</ShortName>
@@ -87,6 +101,10 @@
 				<File Id="738939123" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Cash register.wav</ShortName>
 					<CachePath>SFX/Cash register_F13BB2B0.wem</CachePath>
+				</File>
+				<File Id="775359942" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>line snap.wav</ShortName>
+					<CachePath>SFX/line snap_818F3B66.wem</CachePath>
 				</File>
 				<File Id="800354274" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Wood(steps5).wav</ShortName>
@@ -128,6 +146,10 @@
 					<ShortName>Sub door.wav</ShortName>
 					<CachePath>SFX/Sub door_818F3B66.wem</CachePath>
 				</File>
+				<File Id="1012456031" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>water splash.wav</ShortName>
+					<CachePath>SFX/water splash_0C398EE5.wem</CachePath>
+				</File>
 				<File Id="1029914345" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>reeling in.wav</ShortName>
 					<CachePath>SFX/reeling in_FBC78EF0.wem</CachePath>
@@ -137,6 +159,27 @@
 				<Event Id="1625736018" Name="buy_upgrade" DurationType="OneShot" DurationMin="1.6262966" DurationMax="1.6262966">
 					<MediaRefs>
 						<MediaRef Id="738939123"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="824618274" Name="Collisions" DurationType="OneShot" DurationMin="0.5692292" DurationMax="1.5">
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="824618274" Id="561649031" Default="true"/>
+							<MediaRefs>
+								<MediaRef Id="1012456031"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="824618274" Id="691204695"/>
+							<MediaRefs>
+								<MediaRef Id="310988364"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="214853820" Name="Deselect" DurationType="OneShot" DurationMin="0.339498" DurationMax="0.339498">
+					<MediaRefs>
+						<MediaRef Id="513240276"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="2360843467" Name="Fish_collected" DurationType="OneShot" DurationMin="0.4295603" DurationMax="0.4295603">
@@ -189,6 +232,11 @@
 						<MediaRef Id="912205608"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="1797458246" Name="Line_snap" DurationType="OneShot" DurationMin="0.56427085" DurationMax="0.56427085">
+					<MediaRefs>
+						<MediaRef Id="775359942"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="11360165" Name="reel_in" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="1029914345"/>
@@ -216,6 +264,12 @@
 				</Event>
 			</Events>
 			<SwitchGroups>
+				<SwitchGroup Id="824618274" Name="collisions">
+					<Switches>
+						<Switch Id="561649031" Name="water_collision"/>
+						<Switch Id="691204695" Name="Wood_collision"/>
+					</Switches>
+				</SwitchGroup>
 				<SwitchGroup Id="1833605183" Name="Footstep_surface">
 					<Switches>
 						<Switch Id="803837735" Name="Sand"/>
@@ -227,5 +281,5 @@
 			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{5C69E4EB-C29E-6833-C0C5-C60322C2244B}</FileHash>
+	<FileHash>{24B1C666-7910-1A6B-6051-BAEF195B0D49}</FileHash>
 </SoundBanksInfo>

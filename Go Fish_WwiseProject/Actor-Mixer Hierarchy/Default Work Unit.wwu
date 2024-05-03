@@ -790,6 +790,178 @@
 						<ActiveSource Name="reeling in" ID="{C94C3B4F-7617-4392-B26D-2FACE2EE463E}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
+				<SwitchContainer Name="Collisions" ID="{C49F1D08-5119-4CAA-9A89-B9AEE1E759AF}" ShortID="883506105">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+						</Reference>
+						<Reference Name="DefaultSwitchOrState">
+							<ObjectRef Name="water_collision" ID="{5E7F140A-043D-4BF8-A2E4-0AE47EB98F5F}" WorkUnitID="{EAD85618-1C7F-439D-A6A7-6CBF1E5DE71D}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+						</Reference>
+						<Reference Name="SwitchGroupOrStateGroup">
+							<ObjectRef Name="collisions" ID="{79E21319-C4BF-4530-966D-F9F42ECE97B8}" WorkUnitID="{EAD85618-1C7F-439D-A6A7-6CBF1E5DE71D}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="water splash" ID="{274D0981-CCBA-451B-9E5A-7BC68A9153DE}" ShortID="76006393">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{9ECA00C7-0683-48B3-91DD-747847A46393}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="4"/>
+													<Property Name="Min" Type="Real64" Value="-4"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="water splash" ID="{59DCE248-6E18-4679-9A50-D42FF7EC8419}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.137040099214551"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.12525837122778"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>water splash.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="1012456031"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="water splash" ID="{59DCE248-6E18-4679-9A50-D42FF7EC8419}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="wood collision" ID="{81FA32B5-536E-4F51-8C9F-84B8CE4FEE20}" ShortID="275363696">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{13B50985-A2B2-4311-98BB-12CE5DD1F372}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="4"/>
+													<Property Name="Min" Type="Real64" Value="-4"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="wood collision" ID="{17B56B97-B34A-4978-B052-56F6202CD18F}">
+									<Language>SFX</Language>
+									<AudioFile>wood collision.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="310988364"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="wood collision" ID="{17B56B97-B34A-4978-B052-56F6202CD18F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+					<GroupingInfo>
+						<GroupingBehaviorList>
+							<GroupingBehavior>
+								<ItemRef Name="water splash" ID="{274D0981-CCBA-451B-9E5A-7BC68A9153DE}"/>
+							</GroupingBehavior>
+							<GroupingBehavior>
+								<ItemRef Name="wood collision" ID="{81FA32B5-536E-4F51-8C9F-84B8CE4FEE20}"/>
+							</GroupingBehavior>
+						</GroupingBehaviorList>
+						<GroupingList>
+							<Grouping>
+								<SwitchRef Name="water_collision" ID="{5E7F140A-043D-4BF8-A2E4-0AE47EB98F5F}"/>
+								<ItemList>
+									<ItemRef Name="water splash" ID="{274D0981-CCBA-451B-9E5A-7BC68A9153DE}"/>
+								</ItemList>
+							</Grouping>
+							<Grouping>
+								<SwitchRef Name="Wood_collision" ID="{B213ACDA-833E-4E69-B705-C28EB90956AA}"/>
+								<ItemList>
+									<ItemRef Name="wood collision" ID="{81FA32B5-536E-4F51-8C9F-84B8CE4FEE20}"/>
+								</ItemList>
+							</Grouping>
+						</GroupingList>
+					</GroupingInfo>
+				</SwitchContainer>
+				<Sound Name="line snap" ID="{921DC4AC-F9BD-49A6-ACEF-B09F6567F916}" ShortID="921849330">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="line snap" ID="{B786AE41-4EC2-488C-8062-8275915AD19D}">
+							<Language>SFX</Language>
+							<AudioFile>line snap.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="775359942"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="line snap" ID="{B786AE41-4EC2-488C-8062-8275915AD19D}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="deselect" ID="{511D2091-F751-4633-BFA8-A02A7D65365B}" ShortID="813490602">
+					<PropertyList>
+						<Property Name="Pitch" Type="int32">
+							<ValueList>
+								<Value>-200</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="deselect" ID="{FE01E8FB-CDC0-4DE7-BD9C-76297822DD35}">
+							<Language>SFX</Language>
+							<AudioFile>deselect.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="513240276"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="deselect" ID="{FE01E8FB-CDC0-4DE7-BD9C-76297822DD35}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

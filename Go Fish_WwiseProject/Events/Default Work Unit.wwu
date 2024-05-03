@@ -102,6 +102,39 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Collisions" ID="{34E3197E-55D6-48B3-AB1E-51FA3C5CC78F}">
+					<ChildrenList>
+						<Action Name="" ID="{28DB5C57-153B-43FC-9B45-2CEC5FBF6A3C}" ShortID="118989771">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Collisions" ID="{C49F1D08-5119-4CAA-9A89-B9AEE1E759AF}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Line_snap" ID="{F612A508-146E-4232-9D43-A172B27C8CF3}">
+					<ChildrenList>
+						<Action Name="" ID="{25656E31-615D-48A8-B0ED-26489E7AB51E}" ShortID="865544042">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="line snap" ID="{921DC4AC-F9BD-49A6-ACEF-B09F6567F916}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Deselect" ID="{CE5E5D78-9F55-4672-9072-E436F8B9B820}">
+					<ChildrenList>
+						<Action Name="" ID="{0AA62CBF-B897-4981-9768-62878E318C8C}" ShortID="963069483">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="deselect" ID="{511D2091-F751-4633-BFA8-A02A7D65365B}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
