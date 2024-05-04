@@ -2,6 +2,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	11360165	reel_in			\Default Work Unit\reel_in	
 	214853820	Deselect			\Default Work Unit\Deselect	
 	824618274	Collisions			\Default Work Unit\Collisions	
+	1136596163	Ambient_beach_sound			\Default Work Unit\Ambient_beach_sound	
 	1432588725	select			\Default Work Unit\select	
 	1625736018	buy_upgrade			\Default Work Unit\buy_upgrade	
 	1797458246	Line_snap			\Default Work Unit\Line_snap	
@@ -19,6 +20,7 @@ Switch Group	ID	Name			Wwise Object Path	Notes
 Switch	ID	Name	Switch Group			Notes
 	561649031	water_collision	collisions			
 	691204695	Wood_collision	collisions			
+	1341439083	metal_collision	collisions			
 	803837735	Sand	Footstep_surface			
 	2058049674	Wood	Footstep_surface			
 	2185786256	Gravel	Footstep_surface			
@@ -30,7 +32,9 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	89073160	coin sound (pitched up)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\coin sound (pitched up)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\coin sound (pitched up)		146120
 	95651886	Sand (step 2)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Sand (step 2)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 2)		93808
 	104815867	Fish collected	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Fish collected_DE9327CF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Fish collected		37984
+	164533235	metal impact(low pitch)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\metal impact(low pitch)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Collisions\metal impact(low pitch)		109216
 	173829974	rod swish	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\rod swish_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rod swish		96096
+	217882091	beach	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\beach_6E54885C.wem		\Actor-Mixer Hierarchy\Default Work Unit\beach		24737632
 	255376140	Sand (step 4)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Sand (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 4)		107748
 	310988364	wood collision	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\wood collision_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Collisions\wood collision		109388
 	384206844	Gravel (step 1)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Gravel (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 1)		96096
@@ -51,6 +55,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	926304011	Sand (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Sand (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 3)		103012
 	962478843	Gravel (step 2)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Gravel (step 2)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 2)		70960
 	1011808839	Sub door	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Sub door_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sub door		105868
-	1012456031	water splash	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\water splash_0C398EE5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Collisions\water splash		288096
+	1012456031	water splash	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\water splash_F5C38D0E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Collisions\water splash		288096
 	1029914345	reeling in	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Windows\SFX\reeling in_FBC78EF0.wem		\Actor-Mixer Hierarchy\Default Work Unit\reeling in		3072096
 
