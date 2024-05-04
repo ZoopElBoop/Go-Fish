@@ -15,6 +15,7 @@
 					<ChildrenList>
 						<Switch Name="water_collision" ID="{5E7F140A-043D-4BF8-A2E4-0AE47EB98F5F}"/>
 						<Switch Name="Wood_collision" ID="{B213ACDA-833E-4E69-B705-C28EB90956AA}"/>
+						<Switch Name="metal_collision" ID="{76D1A628-8CFE-49E1-B87B-304D4F84D913}"/>
 					</ChildrenList>
 				</SwitchGroup>
 			</ChildrenList>

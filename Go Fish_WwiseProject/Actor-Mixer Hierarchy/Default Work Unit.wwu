@@ -791,6 +791,15 @@
 					</ActiveSourceList>
 				</Sound>
 				<SwitchContainer Name="Collisions" ID="{C49F1D08-5119-4CAA-9A89-B9AEE1E759AF}" ShortID="883506105">
+					<PropertyList>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{A5E91600-443E-4633-8662-2210DCA167A3}"/>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
@@ -808,6 +817,13 @@
 					<ChildrenList>
 						<Sound Name="water splash" ID="{274D0981-CCBA-451B-9E5A-7BC68A9153DE}" ShortID="76006393">
 							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{58E37A2F-82FE-4CFE-B94F-72C8A926798A}"/>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ModifierList>
 										<ModifierInfo>
@@ -850,6 +866,13 @@
 						</Sound>
 						<Sound Name="wood collision" ID="{81FA32B5-536E-4F51-8C9F-84B8CE4FEE20}" ShortID="275363696">
 							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{5A33C8CE-3675-4FF5-9504-DA4DEA5375DB}"/>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ModifierList>
 										<ModifierInfo>
@@ -885,9 +908,62 @@
 								<ActiveSource Name="wood collision" ID="{17B56B97-B34A-4978-B052-56F6202CD18F}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
+						<Sound Name="metal impact(low pitch)" ID="{DCBA2239-48BF-4FB7-B79D-08A4C2C5EE90}" ShortID="193867047">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{A439B703-7122-4449-B12F-90914D901B13}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="200"/>
+													<Property Name="Min" Type="Real64" Value="-200"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{2C8C93B7-FFEB-4D79-9F17-DDA308FA6F12}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="4"/>
+													<Property Name="Min" Type="Real64" Value="-4"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="metal impact(low pitch)" ID="{F8650F33-16F9-4531-B035-CFC4C19F7E73}">
+									<Language>SFX</Language>
+									<AudioFile>metal impact(low pitch).wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="164533235"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="metal impact(low pitch)" ID="{F8650F33-16F9-4531-B035-CFC4C19F7E73}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 					<GroupingInfo>
 						<GroupingBehaviorList>
+							<GroupingBehavior>
+								<ItemRef Name="metal impact(low pitch)" ID="{DCBA2239-48BF-4FB7-B79D-08A4C2C5EE90}"/>
+							</GroupingBehavior>
 							<GroupingBehavior>
 								<ItemRef Name="water splash" ID="{274D0981-CCBA-451B-9E5A-7BC68A9153DE}"/>
 							</GroupingBehavior>
@@ -900,6 +976,12 @@
 								<SwitchRef Name="water_collision" ID="{5E7F140A-043D-4BF8-A2E4-0AE47EB98F5F}"/>
 								<ItemList>
 									<ItemRef Name="water splash" ID="{274D0981-CCBA-451B-9E5A-7BC68A9153DE}"/>
+								</ItemList>
+							</Grouping>
+							<Grouping>
+								<SwitchRef Name="metal_collision" ID="{76D1A628-8CFE-49E1-B87B-304D4F84D913}"/>
+								<ItemList>
+									<ItemRef Name="metal impact(low pitch)" ID="{DCBA2239-48BF-4FB7-B79D-08A4C2C5EE90}"/>
 								</ItemList>
 							</Grouping>
 							<Grouping>
@@ -960,6 +1042,36 @@
 					</ChildrenList>
 					<ActiveSourceList>
 						<ActiveSource Name="deselect" ID="{FE01E8FB-CDC0-4DE7-BD9C-76297822DD35}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="beach" ID="{30B4C6AF-E42B-4B6D-93F3-AABBA92DFA57}" ShortID="960296461">
+					<PropertyList>
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="beach" ID="{BD5FAD2F-1051-4E9C-B324-700E274343E2}">
+							<PropertyList>
+								<Property Name="FadeInDuration" Type="Real64" Value="19.7070249414359"/>
+								<Property Name="FadeOutDuration" Type="Real64" Value="14.8068998208626"/>
+								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+							</PropertyList>
+							<Language>SFX</Language>
+							<AudioFile>beach.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="217882091"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="beach" ID="{BD5FAD2F-1051-4E9C-B324-700E274343E2}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
 			</ChildrenList>

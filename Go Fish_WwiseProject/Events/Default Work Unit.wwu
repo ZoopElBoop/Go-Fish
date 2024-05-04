@@ -135,6 +135,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Ambient_beach_sound" ID="{E385E401-1124-43A0-BD7D-07D66CBC331C}">
+					<ChildrenList>
+						<Action Name="" ID="{7F4021A5-BE38-4CB6-AA5C-EE36793DACD1}" ShortID="350813849">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="beach" ID="{30B4C6AF-E42B-4B6D-93F3-AABBA92DFA57}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

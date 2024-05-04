@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: f6e1ebbfdd8303499ec3140a8a2eb19f
     GuidInternal: 
-    m_lastTime: -8584869101185055489
+    m_lastTime: -8584868217636401898
     List:
     - name: Main
       guid: f659b7fd05b4db41b550785d575e4dbe
@@ -94,8 +94,25 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 11c91fd6cb1f564886677d0aca3fbb2c
     GuidInternal: 
-    m_lastTime: -8584869101185201200
+    m_lastTime: -8584868217636175427
     List:
+    - name: Ambient_beach_sound
+      guid: 01e485e32411a043bd7d07d66cbc331c
+      id: 1136596163
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Ambient_beach_sound
+        ObjectType: 3
+        guid: 01e485e32411a043bd7d07d66cbc331c
+      Path: Events\Default Work Unit\Ambient_beach_sound
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: buy_upgrade
       guid: 709aa01a3d82594bac4a1ca37596bd0e
       id: 1625736018
@@ -129,7 +146,7 @@ MonoBehaviour:
       Path: Events\Default Work Unit\Collisions
       maxAttenuation: 0
       maxDuration: 1.5
-      minDuration: 0.5692292
+      minDuration: 0.50632745
     - name: Deselect
       guid: 785d5ece559f72469072e436f8b9b820
       id: 214853820
@@ -340,7 +357,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
     GuidInternal: 
-    m_lastTime: -8584869101185125725
+    m_lastTime: -8584868217636326469
     List:
     - name: collisions
       guid: 1913e279bfc43045966df9f42ece97b8
@@ -357,6 +374,22 @@ MonoBehaviour:
         guid: 1913e279bfc43045966df9f42ece97b8
       Path: Switches\Default Work Unit\collisions
       values:
+      - name: metal_collision
+        guid: 28a6d176fe8ce149b87b304d4f84d913
+        id: 1341439083
+        PathAndIcons:
+        - ElementName: Switches
+          ObjectType: 5
+          guid: 00000000000000000000000000000000
+        - ElementName: Default Work Unit
+          ObjectType: 12
+          guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
+        - ElementName: collisions
+          ObjectType: 11
+          guid: 1913e279bfc43045966df9f42ece97b8
+        - ElementName: metal_collision
+          ObjectType: 10
+          guid: 28a6d176fe8ce149b87b304d4f84d913
       - name: water_collision
         guid: 0a147f5e3d04f84ba2e40ae47eb98f5f
         id: 561649031

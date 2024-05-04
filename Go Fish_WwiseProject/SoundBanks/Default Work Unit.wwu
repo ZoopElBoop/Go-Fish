@@ -7,6 +7,7 @@
 					<ObjectInclusionList>
 						<ObjectRef Name="select" ID="{4707DB8E-6B81-4212-AE3F-5795EC99E53A}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Line_snap" ID="{F612A508-146E-4232-9D43-A172B27C8CF3}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Ambient_beach_sound" ID="{E385E401-1124-43A0-BD7D-07D66CBC331C}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Footsteps" ID="{6F61DF4C-B23A-4470-B986-DDC49C8A7269}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Rod_swish" ID="{1865A04F-F27A-457C-B6D8-F01719E25664}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Deselect" ID="{CE5E5D78-9F55-4672-9072-E436F8B9B820}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
