@@ -12,7 +12,7 @@ public class FishSellShopManager : MonoBehaviour
 
     public TMP_Text fishCoinText;
 
-    public DoorControl confirmGameObject;
+    public GameObject confirmGameObject;
 
     private int selectedID = 0;
 
@@ -29,8 +29,8 @@ public class FishSellShopManager : MonoBehaviour
     {
         for (int i = 0; i < shopUiObject.Length; i++)
         {
-            if (shopUiObject[i].Name == null)
-                Debug.LogError($"{shopUiObject[i].name} missing fish name text!!!");
+/*            if (shopUiObject[i].Name == null)
+                Debug.LogError($"{shopUiObject[i].name} missing fish name text!!!");*/
 
             if (shopUiObject[i].Count == null)
                 Debug.LogError($"{shopUiObject[i].name} missing fish count text!!!");
@@ -42,9 +42,9 @@ public class FishSellShopManager : MonoBehaviour
         }
 
         if (shopUiObject.Length < FishDataManager.Instance.GetFishDataSize())
-        {
             Debug.LogWarning("Not Enough Ui elements for all fish!!!");
-        }
+
+        confirmGameObject.SetActive(false);
     }
     private void UpdateFishShopText()
     {
@@ -54,12 +54,12 @@ public class FishSellShopManager : MonoBehaviour
 
         for (int i = 0; i < FishDataManager.Instance.GetFishDataSize(); i++)
         {
-            shopUiObject[i].Name.text = fishStocks[i].fishName;
-            shopUiObject[i].Count.text = $"{fishStocks[i].count}x";
+            //shopUiObject[i].Name.text = fishStocks[i].fishName;
+            shopUiObject[i].Count.text = $"{fishStocks[i].count}";
             shopUiObject[i].Image.sprite = FishDataManager.Instance.GetFishImage(i);
         }
 
-        fishCoinText.text = $"{GameManager.Instance.fishCoin}\nFish Coin";
+        fishCoinText.text = $"{GameManager.Instance.fishCoin}";
 
         DisableInteractIfNoFishStock();
     }
@@ -81,14 +81,14 @@ public class FishSellShopManager : MonoBehaviour
         selectedID = selected.ID;
 
         fishToSellText.text = $"Trade {fishStocks[selectedID].count} X\n" +
-                              $"{fishStocks[selectedID].fishName}\n For:";
+                              $"{fishStocks[selectedID].fishName}\n For";
 
         fishToSellPrice.text = (FishDataManager.Instance.GetValue(selectedID) * fishStocks[selectedID].count).ToString();
 
         foreach (var UI in shopUiObject)
             UI.IsActive(false);
 
-        confirmGameObject.MoveDoor();
+        confirmGameObject.SetActive(true);
     }
 
     public void ConfirmToSell()
@@ -97,13 +97,15 @@ public class FishSellShopManager : MonoBehaviour
 
         InventoryManager.Instance.RemoveByType(selectedID);
 
-        confirmGameObject.MoveDoor();
+        confirmGameObject.SetActive(false);
+
         UpdateFishShopText();
     }
 
     public void RejectToSell()
     {
-        confirmGameObject.MoveDoor();
+        confirmGameObject.SetActive(false);
+
         DisableInteractIfNoFishStock();
     }
 

@@ -22,8 +22,8 @@ public class CollisionDetect : MonoBehaviour
     public float largeColliderRange;
 
     //Ray Constants
-    private readonly float rayCheckDistance = 50f;
-    private readonly float rayMinDistance = 5f;
+    private readonly float RAY_CHECK_DISTANCE = 50f;
+    private readonly float RAY_MINIMUM_DISTANCE = 5f;
 
     [Header("Rotation Values")]
     public Quaternion rotationEnd;
@@ -38,6 +38,9 @@ public class CollisionDetect : MonoBehaviour
     private float rotationSpeed;
     private float maxHeight;
     private float maxDepth;
+
+    //Rotation Limit
+    private readonly float X_ROTATION_LIMIT = 80f;
 
     [Header("DEBUG")]
     public bool viewCollisionBox;
@@ -62,9 +65,11 @@ public class CollisionDetect : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ChangeDirection();
-
         CheckForObjects();
+
+        CheckLimits();
+
+        ChangeDirection();
     }
 
     #region Collision Checks
@@ -76,8 +81,8 @@ public class CollisionDetect : MonoBehaviour
 
         1. Fish Front Detection
             Every 2ms a box check is made in front of the fish, if nothing is found the detection is complete,
-            If something is found the function will commit to the next system if it hasn't already been called in the previous frame,
-            If the next system has already been called the function calls a new Rotate() action with the already defined direction.
+            If something is found the function will determine the direction to rotate in if it hasn't already been done in the previous frame,
+            If the direction has already been d function calls a new Rotate() action with the already defined direction.
 
         2. Ray Checks
             Four rays are fired in front of the fish, each returns the distance & closest point of contact with a collider (if possible),
@@ -87,20 +92,19 @@ public class CollisionDetect : MonoBehaviour
 
         3. Rotation
             After the correct direction is found the angle of movement is converted to a quaternion (kill me) and the fish is lerped to the new rotation,
-            If the fish front check is still detecting something the fish will continue roatating in this direction.
+            If the extended fish front check is still detecting something the fish will continue roatating in this direction.
         
         ISSUES:
-
-            Fish cannot turn fast enough in tight corners.
-            If the collision box is detecting, a new rotation direction cannot be applied.
+            This is terrible, awful infact, kinda works but i am not good at ai stuff :(
         */
 
-        Vector3[] Positions = {
-            transform.position + (transform.forward * colliderRange),                                            //front
-            transform.position + (transform.forward * colliderRange) + (transform.right * colliderSize.x),       //right
-            transform.position + (transform.forward * colliderRange) + (-transform.right * colliderSize.x),      //left
-            transform.position + (transform.forward * colliderRange) + (transform.up * colliderSize.y),          //top
-            transform.position + (transform.forward * colliderRange) + (-transform.up * colliderSize.y),         //bottom
+        Vector3 FrontPosition = transform.position + (transform.forward * colliderRange);
+
+        Vector3[] CheckPositions = {
+            transform.position + (transform.forward * colliderRange) + (transform.right * colliderSize.x),       //right 
+            transform.position + (transform.forward * colliderRange) + (-transform.right * colliderSize.x),      //left 
+            transform.position + (transform.forward * colliderRange) + (transform.up * colliderSize.y),          //top 
+            transform.position + (transform.forward * colliderRange) + (-transform.up * colliderSize.y),         //bottom 
         };
 
         Vector3[] ForwardClearPositionAndSize = {
@@ -108,9 +112,8 @@ public class CollisionDetect : MonoBehaviour
             new Vector3(colliderSize.x, colliderSize.y, largeColliderRange)                                             //size of collider
         };
 
-        List<int> posClearIndex = new();
 
-        if (!overrideFrontCheck && CheckPositionForColliders(Positions[0], colliderSize))  //checks if area is clear 
+        if (!overrideFrontCheck && CheckPositionForColliders(FrontPosition, colliderSize))  //checks if area is clear 
         {
             canCheckCollisions = true;
             return;
@@ -125,63 +128,76 @@ public class CollisionDetect : MonoBehaviour
             return;
         }
 
-        float[] rayDistance = new float[4];
-        Vector3[] rayPoint = new Vector3[4];
-
-        for (int i = 0; i < 4; i++)
-        {
-            (rayDistance[i], rayPoint[i]) = DistanceFromContact(Positions[i + 1] - transform.position);
-
-            if (i == 3 && transform.position.y > maxHeight || i == 4 && transform.position.y < maxDepth)
-            {
-                //print(i + "ignored");
-                continue;
-            }
-
-            if (rayDistance[i] == -1 || rayDistance[i] >= rayMinDistance)
-            {
-                posClearIndex.Add(i);
-                //print($"{i} {rayDistance[i]}");
-            }
-        }
 
         canCheckCollisions = false;
         overrideFrontCheck = true;
 
-        if (!posClearIndex.Any())   //rotates fish 180 if no suitable directions found
+        float[] rayDistance = new float[4];
+        Vector3[] rayPoint = new Vector3[4];
+
+        List<int> positionsClearIndex = new();
+
+
+        for (int i = 0; i < 4; i++)
         {
-            RotateTo(new Vector3(transform.position.x - Positions[0].x, transform.position.y - Positions[0].y, 0f), false);
+            (rayDistance[i], rayPoint[i]) = DistanceFromContact(CheckPositions[i] - transform.position);
+
+            if (i == 2) 
+                if (HitHeighLimit(colliderSize.y) || HitRotationUpLimit())
+                    continue;
+
+            if (i == 3)
+                if (HitDepthLimit(colliderSize.y) || HitRotationDownLimit())
+                    continue;
+
+            if (rayDistance[i] == -1 || rayDistance[i] >= RAY_MINIMUM_DISTANCE)
+                positionsClearIndex.Add(i);
+        }
+
+
+        if (!positionsClearIndex.Any())   //rotates fish 180 if no suitable directions found
+        {
+            RotateTo(new Vector3(transform.position.x - FrontPosition.x, transform.position.y - FrontPosition.y, 0f), false);
             return;
         }
 
-        int arrSize = posClearIndex.Count;
+        List<int> finalPositions = new();
+        int arrSize = positionsClearIndex.Count;
 
         for (int i = 0; i < arrSize; i++)   //finds ray(s) that have no distance or the highest distance
         {
-            if (rayDistance[i] == -1)       //ignores rays with no hits recorded
+            if (rayDistance[positionsClearIndex[i]] == -1)       //adds rays with no hits recorded
+            {
+                finalPositions.Add(positionsClearIndex[i]);
                 continue;
+            }
 
             for (int x = 0; x < arrSize; x++)
             {
-                if (rayDistance[i] < rayDistance[x] || rayDistance[x] == -1)
-                {
-                    //print($"REMOVED: {posClearIndex[i]}  {rayDistance[i]}");
-                    posClearIndex.Remove(i);
+                Debug.DrawLine(transform.position, CheckPositions[positionsClearIndex[i]], Color.black, 5f);
+
+                if (rayDistance[positionsClearIndex[i]] < rayDistance[positionsClearIndex[x]] || rayDistance[x] == -1)
                     break;
-                }
+
+                if (x == arrSize - 1)
+                    finalPositions.Add(positionsClearIndex[i]); //sets to array if after comparision with all objec
             }
         }
 
-        for (int i = 0; i < posClearIndex.Count; i++)
-            Debug.DrawLine(transform.position, Positions[posClearIndex[i] + 1], Color.black, 5f);
+        if (!finalPositions.Any())   //rotates fish 180 if no suitable directions found
+        {
+            RotateTo(new Vector3(transform.position.x - FrontPosition.x, transform.position.y - FrontPosition.y, 0f), false);
+            return;
+        }
 
-        int randPick = Random.Range(0, posClearIndex.Count);
+        for (int i = 0; i < finalPositions.Count; i++)
+            Debug.DrawLine(transform.position, CheckPositions[finalPositions[i]], Color.black, 5f);
 
-        moveDirection = posClearIndex[randPick];
+        int randPick = Random.Range(0, finalPositions.Count);
 
-        Debug.DrawLine(transform.position, Positions[posClearIndex[randPick]], Color.green, 5f);
+        moveDirection = finalPositions[randPick];
 
-        //print($"picked {posClearIndex[randPick]} at {rayDistance[posClearIndex[randPick]]}" );
+        Debug.DrawLine(transform.position, CheckPositions[finalPositions[randPick]], Color.green, 5f);
     }
 
     private bool CheckPositionForColliders(Vector3 positionToCheck, Vector3 size)   //returns true if nothing found
@@ -199,7 +215,7 @@ public class CollisionDetect : MonoBehaviour
 
         RaycastHit[] colliderFound = new RaycastHit[10];
 
-        int hits = Physics.RaycastNonAlloc(ray, colliderFound, rayCheckDistance, LayersToIgnore, QueryTriggerInteraction.Ignore);
+        int hits = Physics.RaycastNonAlloc(ray, colliderFound, RAY_CHECK_DISTANCE, LayersToIgnore, QueryTriggerInteraction.Ignore);
 
         if (hits < 1)
         {
@@ -240,13 +256,9 @@ public class CollisionDetect : MonoBehaviour
 
         Quaternion angle = Quaternion.LookRotation(targetDir, transform.up);
 
-        //IgnoreColliders(false);
-
         Collider[] hitColliders = new Collider[10];
 
         int Hits = Physics.OverlapBoxNonAlloc((endPosition + transform.position) / 2, new Vector3(colliderSize.x, colliderSize.y, colliderRange) / 2, hitColliders, angle, LayersToIgnore, QueryTriggerInteraction.Ignore);
-
-        //IgnoreColliders(true);
 
         if (hitColliders[0] == null)
             return true;
@@ -258,24 +270,10 @@ public class CollisionDetect : MonoBehaviour
                 if (hitColliders[i] != null)
                     print("HIT:" + hitColliders[i].name);
             }
-
-            print("-----------------");
         }
-
         return false;
     }
 
-    /*    private void IgnoreColliders(bool reset)
-        {
-            for (int i = 0; i < meshies.Count; i++)
-            {
-                if (!reset)
-                    meshies[i].gameObject.layer = LayerIgnoreRaycast;
-                else
-                    meshies[i].gameObject.layer = 0;
-            }
-            print(meshies[0].gameObject.layer);
-        }*/
 
     #endregion
 
@@ -285,16 +283,16 @@ public class CollisionDetect : MonoBehaviour
     {
         switch (moveDirection)
         {
-            case 1:
+            case 0:
                 RotateTo(Vector2.up);
                 break;
-            case 2:
+            case 1:
                 RotateTo(-Vector2.up);
                 break;
-            case 3:
+            case 2:
                 RotateTo(-Vector2.right);
                 break;
-            case 4:
+            case 3:
                 RotateTo(Vector2.right);
                 break;
         }
@@ -314,9 +312,25 @@ public class CollisionDetect : MonoBehaviour
             else
                 turnSpeed = rotationSpeed;
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotationEnd, turnSpeed * Time.deltaTime);
+            transform.localRotation = Quaternion.Slerp(transform.rotation, rotationEnd, turnSpeed * Time.deltaTime);
         }
     }
+
+    private void ResetRotation()    //Resets objects x rotation
+    {
+        initialAngle.x = Mathf.DeltaAngle(0, transform.eulerAngles.x);
+        initialAngle.y = transform.eulerAngles.y;
+
+        newAngle = new(
+            0f,
+            Mathf.Clamp(newAngle.y, -360, 360),
+            0f);
+
+        rotationEnd = Quaternion.Euler(newAngle);
+
+        isTurning = true;
+    }
+
 
     public void RotateTo(Vector2 rotationAngle)    //Rotates object by set angle values
     {
@@ -326,7 +340,7 @@ public class CollisionDetect : MonoBehaviour
         newAngle = initialAngle + new Vector3(rotationAngle.x, rotationAngle.y, 0);
 
         newAngle = new(
-            Mathf.Clamp(newAngle.x, -80, 80),
+            Mathf.Clamp(newAngle.x, -X_ROTATION_LIMIT, X_ROTATION_LIMIT),
             Mathf.Clamp(newAngle.y, -360, 360),
             0f);
 
@@ -357,6 +371,24 @@ public class CollisionDetect : MonoBehaviour
 
         isTurning = true;
     }
+
+    #endregion
+
+    #region Limit Checks
+
+    private void CheckLimits() 
+    {
+        if (HitDepthLimit(0f) || HitHeighLimit(0f))
+            ResetRotation();
+    }
+
+    private bool HitRotationUpLimit() => Mathf.Approximately(Mathf.DeltaAngle(0, transform.eulerAngles.x), -X_ROTATION_LIMIT);
+
+    private bool HitRotationDownLimit() => Mathf.Approximately(Mathf.DeltaAngle(0, transform.eulerAngles.x), X_ROTATION_LIMIT);
+
+    private bool HitHeighLimit(float buffer) => transform.position.y + buffer > maxHeight;      //has buffer so rays dont check up/down when near limits
+
+    private bool HitDepthLimit(float buffer) => transform.position.y - buffer < maxDepth;
 
     #endregion
 

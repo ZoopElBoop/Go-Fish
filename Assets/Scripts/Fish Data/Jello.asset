@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfed5eab5039a546a85aa6bcf63148f, type: 3}
   m_Name: Jello
   m_EditorClassIdentifier: 
-  _Fishk: {fileID: 6885119008761653246, guid: 1dcec23ec15722641a7f2c897b678529, type: 3}
-  _Health: 1
+  _Fishk: {fileID: 3112513683378408523, guid: 1dcec23ec15722641a7f2c897b678529, type: 3}
+  _Health: 4
   _Speed: 3
   _rotationSpeed: 5
   _canBeCaught: 0
@@ -27,5 +27,5 @@ MonoBehaviour:
   _despawnRangeMulti: 1
   _baseValue: 2
   _valueChangeCoefficient: 0.1
-  _FishkImage: {fileID: 0}
+  _FishkImage: {fileID: 21300000, guid: 7295870ab3c7b764694965fab3076cfe, type: 3}
   _FishkDescription: 

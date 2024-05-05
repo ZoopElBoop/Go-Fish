@@ -224,7 +224,7 @@ public class Fishing : MonoBehaviour
             if (!isFishing)
             {
                 mouseFxInstance.SetActive(true);
-                mouseFxInstance.transform.position = position;
+                mouseFxInstance.transform.position = new(position.x, position.y + 1f, position.z);
             }
             else
                 mouseFxInstance.SetActive(false);

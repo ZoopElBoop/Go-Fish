@@ -8,23 +8,25 @@ public class SelectionInterface : MonoBehaviour
     public TMP_Text Name;
     public TMP_Text Count;
     public Image Image;
+    public GameObject selectedUI;
 
-    [HideInInspector] public int ID;
+    public int ID;
     [HideInInspector] public Interactable interact;
 
     private void Awake()
     {
         interact = GetComponent<Interactable>();
+        selectedUI.SetActive(false);
     }
 
     public void Selected()
     {
-        //change background to show selected
+        selectedUI.SetActive(true);
     }
 
     public void Deselected()
     {
-        //change background to show deselected
+        selectedUI.SetActive(false);
     }
 
     public void IsActive(bool status) 

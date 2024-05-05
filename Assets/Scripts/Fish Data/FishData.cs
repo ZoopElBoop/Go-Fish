@@ -95,10 +95,12 @@ public class FishData : ScriptableObject
         if (_Fishk.TryGetComponent<FishControl>(out var fs))
             fishScript = fs;
         else
-            Debug.LogError($"missing fish control script on {_Fishk.name} !!!");
+            Debug.LogError($"missing fish control script on {_Fishk.name}");
+
 
         if (fishScript.Data == this)
             return;
+
 
         if (fishScript.Data != null)
             Debug.Log($"Overwriting fish data on {_Fishk.name}");

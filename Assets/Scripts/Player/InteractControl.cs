@@ -20,10 +20,15 @@ public class InteractControl : MonoBehaviour
 	{
 		int ignoreLayer = LayerMask.NameToLayer("Interact");
         IgnoreinteractMask &= ~(1 << ignoreLayer);   //sets layer to ignore "Interact" layer
-        interactMask |= (1 << ignoreLayer);			 //sets layer to only "Interact" layer
+        interactMask |= (1 << ignoreLayer);          //sets layer to only "Interact" layer
+
+
+        ignoreLayer = LayerMask.NameToLayer("Ignore Raycast");
+        IgnoreinteractMask &= ~(1 << ignoreLayer);   //sets layer to ignore "Ignore Raycast" layer
+
     }
 
-	private void OnEnable()
+    private void OnEnable()
 	{
         GameManager.Instance.ShowPlayerMouse(false);
 	}
@@ -47,7 +52,7 @@ public class InteractControl : MonoBehaviour
                 objectHit = hit[0].transform.gameObject;
 				hitActive = true;
 
-				OnRayExit();
+                OnRayExitAndEnter();
 				return;
 			}
         }
@@ -55,18 +60,26 @@ public class InteractControl : MonoBehaviour
         objectHit = null;
 		hitActive = false;
 
-        OnRayExit();
+        OnRayExitAndEnter();
     }
 
-	void OnRayExit()
+	private void OnRayExitAndEnter()
 	{
-		if (objectHitLastFrame == null)
+		if (objectHitLastFrame == null && objectHit != null)
+		{
+            if (objectHit.TryGetComponent<Interactable>(out var temp))
+                temp.OnEnter();
+
 			return;
+        }
 
 		if (objectHitLastFrame != objectHit)
 		{
-            if (objectHitLastFrame.TryGetComponent<Interactable>(out var interactable))
-                interactable.OnExit();
+            if (objectHitLastFrame.TryGetComponent<Interactable>(out var temp))
+                temp.OnExit();
+
+			if (objectHit != null && objectHit.TryGetComponent<Interactable>(out var temp2))
+                temp2.OnEnter();
         }
     }
 

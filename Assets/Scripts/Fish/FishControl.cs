@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CollisionDetect))]
+[RequireComponent(typeof(Rigidbody))]
 public class FishControl : MonoBehaviour
 {
     #region Variables
@@ -65,7 +66,7 @@ public class FishControl : MonoBehaviour
 
         transform.localScale = startingScale;
 
-        //transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(-30, 30), transform.eulerAngles.y + Random.Range(-180, 180), 0f);
 
         AI = GetComponent<CollisionDetect>();
         AI.SetMoveValues(HeightMax, DepthMax, rotationSpeed);
@@ -87,9 +88,6 @@ public class FishControl : MonoBehaviour
 
         if (!isAboutToDie)
         {
-/*            if (transform.position.y > HeightMax || transform.position.y < DepthMax)
-                transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);*/
-
             if (distanceBetween > _destroyRange * _destroyRange)                                //squared to make up for no square rooting in previous line        
                 DIEFISHDIE();
 

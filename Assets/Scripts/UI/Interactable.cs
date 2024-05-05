@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 public class Interactable : MonoBehaviour
 {
     public UnityEvent interactEvent;
+    public UnityEvent OnEnterEvent;
     public UnityEvent OnExitEvent;
 
     [Header ("Interaction Setting")]
@@ -35,8 +36,15 @@ public class Interactable : MonoBehaviour
                 interact.Post(gameObject);
 
             interactEvent.Invoke();
-            StartCoroutine(DelayToActive());
+
+            if (timeInSecondsBeforeReActive > 0f)
+                StartCoroutine(DelayToActive());
         }
+    }
+
+    public void OnEnter()
+    {
+        OnEnterEvent.Invoke();
     }
 
     public void OnExit()
