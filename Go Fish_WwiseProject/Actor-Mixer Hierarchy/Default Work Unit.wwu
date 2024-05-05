@@ -1074,6 +1074,38 @@
 						<ActiveSource Name="beach" ID="{BD5FAD2F-1051-4E9C-B324-700E274343E2}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
+				<Sound Name="charge" ID="{032AC27F-E274-4EE2-856E-A04A24D7C594}" ShortID="236726551">
+					<PropertyList>
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1F09C81-9585-464A-B505-238A39639DF1}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{2F57ACF6-4F5D-4604-B4F3-DCDC6F884B9C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="charge" ID="{94779E12-7EDE-4965-9A6A-7A79282BB9CB}">
+							<PropertyList>
+								<Property Name="FadeInDuration" Type="Real64" Value="0.862760231746407"/>
+								<Property Name="FadeOutDuration" Type="Real64" Value="1.55754944492272"/>
+								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+								<Property Name="TrimBegin" Type="Real64" Value="0.836037569701163"/>
+								<Property Name="TrimEnd" Type="Real64" Value="8.29929532662251"/>
+							</PropertyList>
+							<Language>SFX</Language>
+							<AudioFile>charge.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="804323685"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="charge" ID="{94779E12-7EDE-4965-9A6A-7A79282BB9CB}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

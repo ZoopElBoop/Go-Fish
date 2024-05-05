@@ -146,6 +146,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Charge" ID="{D615B8CA-5085-4E70-AADC-848656E70D96}">
+					<ChildrenList>
+						<Action Name="" ID="{2A45FD77-6B8C-4C3B-8CC7-F7C2D848839B}" ShortID="668763386">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="charge" ID="{032AC27F-E274-4EE2-856E-A04A24D7C594}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

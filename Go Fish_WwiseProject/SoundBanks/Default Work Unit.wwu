@@ -18,6 +18,7 @@
 						<ObjectRef Name="buy_upgrade" ID="{1AA09A70-823D-4B59-AC4A-1CA37596BD0E}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Fish_collected" ID="{89585429-2E41-4C12-821F-CFE9C8DFB179}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Jump" ID="{01935AEA-25A7-4E3A-8D26-CAE2A8612901}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Charge" ID="{D615B8CA-5085-4E70-AADC-848656E70D96}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
