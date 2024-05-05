@@ -39,7 +39,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{428494BE-B503-A7EE-7108-175519305381}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{FDD44EFF-CE33-EE61-6B98-993BE2815239}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -73,7 +73,7 @@
 				</File>
 				<File Id="217882091" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>beach.wav</ShortName>
-					<CachePath>SFX/beach_6E54885C.wem</CachePath>
+					<CachePath>SFX/beach_2A323615.wem</CachePath>
 				</File>
 				<File Id="255376140" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Sand (step 4).wav</ShortName>
@@ -118,6 +118,10 @@
 				<File Id="800354274" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Wood(steps5).wav</ShortName>
 					<CachePath>SFX/Wood(steps5)_818F3B66.wem</CachePath>
+				</File>
+				<File Id="804323685" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>charge.wav</ShortName>
+					<CachePath>SFX/charge_33BE91FD.wem</CachePath>
 				</File>
 				<File Id="824573470" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Sand (step 1).wav</ShortName>
@@ -173,6 +177,11 @@
 				<Event Id="1625736018" Name="buy_upgrade" DurationType="OneShot" DurationMin="1.6262966" DurationMax="1.6262966">
 					<MediaRefs>
 						<MediaRef Id="738939123"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4285247397" Name="Charge" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="804323685"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="824618274" Name="Collisions" DurationType="OneShot" DurationMin="0.50632745" DurationMax="1.5">
@@ -302,5 +311,5 @@
 			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{F4C5F622-62CD-E07E-9FA3-C910436267BF}</FileHash>
+	<FileHash>{F5C3EFA9-9F57-08CD-3DAC-B76C4DCF5DB7}</FileHash>
 </SoundBanksInfo>

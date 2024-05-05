@@ -12,6 +12,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	2385628198	Footsteps			\Default Work Unit\Footsteps	
 	3320937167	Rod_swish			\Default Work Unit\Rod_swish	
 	3833651337	Jump			\Default Work Unit\Jump	
+	4285247397	Charge			\Default Work Unit\Charge	
 
 Switch Group	ID	Name			Wwise Object Path	Notes
 	824618274	collisions			\Default Work Unit\collisions	
@@ -34,7 +35,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	104815867	Fish collected	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Fish collected_DE9327CF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Fish collected		37984
 	164533235	metal impact(low pitch)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\metal impact(low pitch)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Collisions\metal impact(low pitch)		109216
 	173829974	rod swish	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\rod swish_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rod swish		96096
-	217882091	beach	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\beach_6E54885C.wem		\Actor-Mixer Hierarchy\Default Work Unit\beach		24737632
+	217882091	beach	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\beach_2A323615.wem		\Actor-Mixer Hierarchy\Default Work Unit\beach		24737632
 	255376140	Sand (step 4)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 4)		107748
 	310988364	wood collision	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\wood collision_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Collisions\wood collision		109388
 	384206844	Gravel (step 1)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Gravel (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 1)		96096
@@ -46,6 +47,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	738939123	Cash register	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Cash register_F13BB2B0.wem		\Actor-Mixer Hierarchy\Default Work Unit\Cash register		286976
 	775359942	line snap	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\line snap_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\line snap		108436
 	800354274	Wood(steps5)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Wood(steps5)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\WoodSteps\Wood(steps5)		93500
+	804323685	charge	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\charge_33BE91FD.wem		\Actor-Mixer Hierarchy\Default Work Unit\charge		1316664
 	824573470	Sand (step 1)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Sand (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 1)		90716
 	834857939	Grass (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Grass (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GrassSteps\Grass (step 3)		158604
 	864731088	Gravel (step 3)	C:\Users\rober\OneDrive\Documents\GitHub\Go-Fish\Go Fish_WwiseProject\.cache\Mac\SFX\Gravel (step 3)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 3)		64380
