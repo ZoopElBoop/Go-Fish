@@ -89,6 +89,9 @@ public class Fishing : MonoBehaviour
         fishLine.enabled = false;
 
         boatRB = GameObject.FindWithTag("Boat").GetComponent<Rigidbody>();
+
+        if (GameManager.Instance.cutSceneOverride)
+            FishingStatus(false);
     }
 
     public void FishingStatus(bool status)
@@ -171,7 +174,7 @@ public class Fishing : MonoBehaviour
 
                 float sliderVal = UIManager.Instance.GetFishingSliderValue();
 
-                if (sliderVal >= 0.4 && sliderVal <= 0.6)
+                if (sliderVal >= 0.25 && sliderVal <= 0.75)
                     Caught();
                 else
                     Escape();

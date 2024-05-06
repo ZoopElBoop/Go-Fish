@@ -83,6 +83,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 5765411752909056412, guid: f501ae92b9a1fdd489dce8972ac72bda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6024724179887145259, guid: f501ae92b9a1fdd489dce8972ac72bda,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

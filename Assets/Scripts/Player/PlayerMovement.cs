@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
 	[Range(0.1f, 20.0f)]
 	public float moveSpeed = 10.0f;
 	// /// The speed at which footstep sounds are triggered.
-	// [Range(0.01f, 1.0f)]
-	// public float footstepRate = 0.3f;
+	[Range(0.01f, 1.0f)]
+	public float footstepRate = 0.3f;
 	///	The amount of force to apply when the player jumps.
 	[Range(1.0f, 32.0f)]
 	public float jumpForce = 10.0f;
@@ -20,13 +20,13 @@ public class PlayerMovement : MonoBehaviour
 	public float gravity = 32.0f;
 
 	// /// The Wwise event to trigger a footstep sound.
-	// public AK.Wwise.Event footstepSound = new AK.Wwise.Event();
+	public AK.Wwise.Event footstepSound = new AK.Wwise.Event();
 	// ///	The Wwise event to trigger a jump sound.
-	// public AK.Wwise.Event jumpSound = new AK.Wwise.Event();
+	public AK.Wwise.Event jumpSound = new AK.Wwise.Event();
 	// ///	The Wwise event to trigger a jump landing sound.
-	// public AK.Wwise.Event jumpLandSound = new AK.Wwise.Event();
+	public AK.Wwise.Event jumpLandSound = new AK.Wwise.Event();
 
-	// public AK.Wwise.Event LandSound = new AK.Wwise.Event();
+	public AK.Wwise.Event LandSound = new AK.Wwise.Event();
 
 	/// Used to set the player's rotation around the y-axis.
 	private float playerRotation;
@@ -37,9 +37,9 @@ public class PlayerMovement : MonoBehaviour
 	private float jumpVelocity = 0.0f;
 
 	///	Used to determine when to trigger footstep sounds.
-	//private bool walking = false;
+	private bool walking = false;
 	///	Used to determine when to trigger footstep sounds.
-	//private float walkCount = 0.0f;
+	private float walkCount = 0.0f;
 
 	///	Used to ensure we play the Jump Land sound when we hit the ground.
 	private bool inAir = false;
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private bool isJumping = false;
 
-	// public AK.Wwise.RTPC rtpc = null;
+	public AK.Wwise.RTPC rtpc = null;
 
 	/// This is where we move the Player object and Camera.
 	public void Update()
@@ -67,13 +67,13 @@ public class PlayerMovement : MonoBehaviour
 		if(((Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.0f) ||
 			(Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.0f)))
 		{
-			//walking = true;
+			walking = true;
 		}
 		else
 		{
-			//walking = false;
+			walking = false;
 
-			// walkCount = footstepRate;
+			walkCount = footstepRate;
 		}
 
 		//Get our current mouse/camera rotation.
@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
 			
 				if (isJumping)
 				{
-					// jumpLandSound.Post(gameObject);
+					jumpLandSound.Post(gameObject);
 					isJumping = false;
 					//print("Landed: Jump");
 				}else if (inAirCount >= inAirMin){
@@ -130,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
 						inAirCount = 100;
 
 					// rtpc.SetValue(gameObject, inAirCount);
-					// LandSound.Post(gameObject);
+					LandSound.Post(gameObject);
 					//print("Landed: Fall " + inAirCount);
 				}
 				inAirCount = 0;
@@ -138,26 +138,26 @@ public class PlayerMovement : MonoBehaviour
 			inAir = false;
 		}
 
-		// if(inAir && inAirCount > 0)
-		// 	--inAirCount;
+		 if(inAir && inAirCount > 0)
+		 	--inAirCount;
 
-		// if(walking && !inAir)
-		// {
-		// 	walkCount += Time.deltaTime * (speed/10.0f);
+		if(walking && !inAir)
+		{
+		 	walkCount += Time.deltaTime * (speed/10.0f);
 
-		// 	if(walkCount > footstepRate)
-		// 	{
-		// 		footstepSound.Post(gameObject);
+		 	if(walkCount > footstepRate)
+		 	{
+		 		footstepSound.Post(gameObject);
 
-		// 		walkCount = 0.0f;
-		// 	}
-		// }
+		 		walkCount = 0.0f;
+		 	}
+		}
 
 		//If the player is holding the jump button down, AND they're not yet
 		//jumping AND on the ground, OR they are jumping but they've not reached
 		//the top of the jump, increase their jumpAmount and move them
 		//accordingly on the y-axis.
-		if(Input.GetButton("Jump"))
+		if (Input.GetButton("Jump"))
 		{
 			if((jumpVelocity <= 0.0f) && controller.isGrounded)
 			{

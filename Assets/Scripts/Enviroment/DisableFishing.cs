@@ -12,7 +12,9 @@ public class DisableFishing : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        print(gameObject);
+
+        if (other.CompareTag("Player") && !GameManager.Instance.cutSceneOverride)
             GameManager.Instance.CanFish(true);
     }
 }

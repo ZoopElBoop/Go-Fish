@@ -85,6 +85,7 @@ public class Intro : MonoBehaviour
 
             if (transitionTime >= 1f)
             {
+                GameManager.Instance.CanFish(true);
                 GameManager.Instance.InScene(false);
 
                 timeCycle.enabled = true;
@@ -97,7 +98,6 @@ public class Intro : MonoBehaviour
 
     private void ShowLetter() 
     {
-        print("aaaa");
         letterActive = true;
         UIManager.Instance.LetterStatus(letterActive);
 

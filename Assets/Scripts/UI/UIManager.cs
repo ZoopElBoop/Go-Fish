@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour
 
     public void FishingSliderActive(bool active)
     {
-        fishCaughtSlider.value = 0.5f;
+        fishCaughtSlider.value = Random.value;
         fishCaughtSlider.gameObject.SetActive(active);
     }
 
