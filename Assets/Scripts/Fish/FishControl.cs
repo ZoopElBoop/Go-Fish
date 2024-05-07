@@ -39,6 +39,8 @@ public class FishControl : MonoBehaviour
     [Header("Harpoons Attached")]
     public List<GameObject> harpoonsAttached = new();
 
+    public AK.Wwise.Event fishCollected;
+
     #endregion
 
     #region Start Functions
@@ -175,7 +177,10 @@ public class FishControl : MonoBehaviour
             transform.position = Vector3.Slerp(transform.position, spawnPosition.position, Time.deltaTime);
         }
         else
-            GameManager.Instance.DestroyFish(gameObject);
+        {
+            fishCollected.Post(gameObject);
+            DIEFISHDIE();
+        }
     }
 
     private float Vector3InverseLerp(Vector3 a, Vector3 b, Vector3 value)

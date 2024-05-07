@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: f6e1ebbfdd8303499ec3140a8a2eb19f
     GuidInternal: 
-    m_lastTime: -8584868217636401898
+    m_lastTime: -8584866513338933597
     List:
     - name: Main
       guid: f659b7fd05b4db41b550785d575e4dbe
@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 11c91fd6cb1f564886677d0aca3fbb2c
     GuidInternal: 
-    m_lastTime: -8584868217636175427
+    m_lastTime: -8584866513343494602
     List:
     - name: Ambient_beach_sound
       guid: 01e485e32411a043bd7d07d66cbc331c
@@ -130,6 +130,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.6262966
       minDuration: 1.6262966
+    - name: Charge
+      guid: cab815d68550704eaadc848656e70d96
+      id: 4285247397
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Charge
+        ObjectType: 3
+        guid: cab815d68550704eaadc848656e70d96
+      Path: Events\Default Work Unit\Charge
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: Collisions
       guid: 7e19e334d655b348ab1e51fa3c5cc78f
       id: 824618274
@@ -357,7 +374,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 1856d8ea7f1c9d43a6a76cbf1e5de71d
     GuidInternal: 
-    m_lastTime: -8584868217636326469
+    m_lastTime: -8584866594282839377
     List:
     - name: collisions
       guid: 1913e279bfc43045966df9f42ece97b8
@@ -522,8 +539,8 @@ MonoBehaviour:
     m_lastTime: -8584872127446233836
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 050000000600000007000000
-  AutoSyncSelection: 0
+  ExpandedWaapiItemIds: 010000000500000006000000070000000800000014000000150000001800000019000000
+  AutoSyncSelection: 1
   autoPopulateEnabled: 1
   currentDataSource: 0
   CurrentPluginConfig: 

@@ -1219,6 +1219,11 @@ MonoBehaviour:
   HP: 0
   Speed: 0
   harpoonsAttached: []
+  fishCollected:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7c7db736ba549c44abe210a4d240cab2,
+      type: 2}
 --- !u!65 &1443117136951497991
 BoxCollider:
   m_ObjectHideFlags: 0

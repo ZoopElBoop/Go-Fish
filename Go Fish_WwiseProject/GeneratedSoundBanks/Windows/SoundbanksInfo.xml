@@ -39,7 +39,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{FDD44EFF-CE33-EE61-6B98-993BE2815239}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{DAE1C579-4656-BE0A-BD22-F4CF0DE97640}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -121,7 +121,7 @@
 				</File>
 				<File Id="804323685" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>charge.wav</ShortName>
-					<CachePath>SFX/charge_33BE91FD.wem</CachePath>
+					<CachePath>SFX/charge_9C3D970B.wem</CachePath>
 				</File>
 				<File Id="824573470" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Sand (step 1).wav</ShortName>
@@ -174,6 +174,7 @@
 						<MediaRef Id="217882091"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="3388480558" Name="Ambient_beach_sound_STOP" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="1625736018" Name="buy_upgrade" DurationType="OneShot" DurationMin="1.6262966" DurationMax="1.6262966">
 					<MediaRefs>
 						<MediaRef Id="738939123"/>
@@ -184,6 +185,7 @@
 						<MediaRef Id="804323685"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="1451929320" Name="Charge_STOP" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="824618274" Name="Collisions" DurationType="OneShot" DurationMin="0.50632745" DurationMax="1.5">
 					<SwitchContainers>
 						<SwitchContainer>
@@ -311,5 +313,5 @@
 			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{A2023B25-E3BC-BA07-651F-E6DD23A124D1}</FileHash>
+	<FileHash>{AC1A7E35-AD81-817E-5E86-4E0666E84552}</FileHash>
 </SoundBanksInfo>

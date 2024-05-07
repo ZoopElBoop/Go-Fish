@@ -52,6 +52,13 @@ public class PlayerMovement : MonoBehaviour
 
 	public AK.Wwise.RTPC rtpc = null;
 
+	public AK.Wwise.Event waterAmbience;
+
+	public void Start()
+	{
+		waterAmbience.Post(gameObject);
+	}
+
 	/// This is where we move the Player object and Camera.
 	public void Update()
 	{
@@ -161,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			if((jumpVelocity <= 0.0f) && controller.isGrounded)
 			{
-				// jumpSound.Post(gameObject);
+				jumpSound.Post(gameObject);
 				isJumping = true;
 				
 				jumpVelocity = jumpForce;

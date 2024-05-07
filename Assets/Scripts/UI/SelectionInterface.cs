@@ -13,6 +13,9 @@ public class SelectionInterface : MonoBehaviour
     public int ID;
     [HideInInspector] public Interactable interact;
 
+    public AK.Wwise.Event select;
+    public AK.Wwise.Event deselect;
+
     private void Awake()
     {
         interact = GetComponent<Interactable>();
@@ -21,11 +24,13 @@ public class SelectionInterface : MonoBehaviour
 
     public void Selected()
     {
+        select.Post(gameObject);
         selectedUI.SetActive(true);
     }
 
     public void Deselected()
     {
+        deselect.Post(gameObject);
         selectedUI.SetActive(false);
     }
 

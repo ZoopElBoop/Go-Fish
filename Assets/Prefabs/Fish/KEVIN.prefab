@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 4467754544517137587}
   - component: {fileID: 995579798651336807}
   m_Layer: 0
-  m_Name: Kevin
+  m_Name: KEVIN
   m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,6 +291,11 @@ MonoBehaviour:
   HP: 0
   Speed: 0
   harpoonsAttached: []
+  fishCollected:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7c7db736ba549c44abe210a4d240cab2,
+      type: 2}
 --- !u!65 &995579798651336807
 BoxCollider:
   m_ObjectHideFlags: 0

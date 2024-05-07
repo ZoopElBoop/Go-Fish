@@ -16,6 +16,8 @@ public class FishSellShopManager : MonoBehaviour
 
     private int selectedID = 0;
 
+    public AK.Wwise.Event sold; 
+
     void Start()
     {
         FishShopTextInit();
@@ -29,9 +31,6 @@ public class FishSellShopManager : MonoBehaviour
     {
         for (int i = 0; i < shopUiObject.Length; i++)
         {
-/*            if (shopUiObject[i].Name == null)
-                Debug.LogError($"{shopUiObject[i].name} missing fish name text!!!");*/
-
             if (shopUiObject[i].Count == null)
                 Debug.LogError($"{shopUiObject[i].name} missing fish count text!!!");
 
@@ -54,7 +53,6 @@ public class FishSellShopManager : MonoBehaviour
 
         for (int i = 0; i < FishDataManager.Instance.GetFishDataSize(); i++)
         {
-            //shopUiObject[i].Name.text = fishStocks[i].fishName;
             shopUiObject[i].Count.text = $"{fishStocks[i].count}";
             shopUiObject[i].Image.sprite = FishDataManager.Instance.GetFishImage(i);
         }
@@ -93,6 +91,8 @@ public class FishSellShopManager : MonoBehaviour
 
     public void ConfirmToSell()
     {
+        sold.Post(gameObject);
+
         GameManager.Instance.fishCoin += (int) FishDataManager.Instance.GetValue(selectedID) * fishStocks[selectedID].count;
 
         InventoryManager.Instance.RemoveByType(selectedID);

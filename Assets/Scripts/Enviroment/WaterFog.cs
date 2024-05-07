@@ -17,6 +17,9 @@ public class WaterFog : MonoBehaviour
     public float underwaterBloomBaseValue;
     [Range(-1f, -5f)] public float bloomTransition = -2f;
 
+    public AK.Wwise.Event water;
+    public AK.Wwise.Event stopWater;
+
     void Start()
     {
         Volume underwaterVolume;
@@ -32,13 +35,21 @@ public class WaterFog : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
+            stopWater.Post(other.gameObject);
+
             DayAndNightCycle.Instance.OverrideFogColour = true;
+
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
+            water.Post(other.gameObject);
             DayAndNightCycle.Instance.OverrideFogColour = false;
+        }
     }
 
     void Update()

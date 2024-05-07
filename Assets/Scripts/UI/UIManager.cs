@@ -18,9 +18,6 @@ public class UIManager : MonoBehaviour
     [Header("Fish Caught")]
     [SerializeField] private TMP_Text catches;
 
-    [Header("Fish Active")]
-    [SerializeField] private TMP_Text active;
-
     [Header("Intro UI")]
     [SerializeField] private Image letter;
     [SerializeField] private TMP_Text presentsText;
@@ -43,8 +40,6 @@ public class UIManager : MonoBehaviour
     {
         if (fishCaughtSlider.gameObject.activeSelf)
             FishingSlider();
-
-        active.text = $"{GameManager.Instance.GetFishBufferSize()} Fishes";
 
         catches.text = $"CAUGHT FISH: {InventoryManager.Instance.TotalStored()}";
     }

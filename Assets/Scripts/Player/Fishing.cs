@@ -58,8 +58,13 @@ public class Fishing : MonoBehaviour
     private bool isFishing;
     private bool rodEquiped = true;
 
-    [Header("TESTING (WILL BE REMOVED)")]
+    [Header("HAHAHAHAHAHAHA LMAO  HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA")]
     [SerializeField] private float TestVelocityMultiplier; //remove once velocity range is fixed
+
+    public AK.Wwise.Event castBobber;
+    public AK.Wwise.Event chargeBobber;
+    public AK.Wwise.Event stopChargeBobber;
+    public AK.Wwise.Event linebrak;
 
     #endregion
 
@@ -151,6 +156,8 @@ public class Fishing : MonoBehaviour
         {
             if (Input.GetMouseButton(0) && !inBoat)
             {
+                chargeBobber.Post(gameObject);
+
                 //Used for charging up lob, if player is not in a boat
                 if (throwCharge < _chargeUpMax)
                     throwCharge += _chargeUpMultiplier;
@@ -161,7 +168,10 @@ public class Fishing : MonoBehaviour
                 UIManager.Instance.ThrowSlider(_chargeUpMax, throwCharge);
             }
             else if (Input.GetMouseButtonUp(0) && !inBoat)  //throws bobber when player not in boat
+            {
+                stopChargeBobber.Post(gameObject);
                 LobBobber();
+            }
             else if (Input.GetMouseButtonDown(0) && inBoat)     //throws bobber when player in boat
                 LobBobber();
         }
@@ -262,6 +272,8 @@ public class Fishing : MonoBehaviour
         {
             if (IsBobberTooFar())
             {
+                linebrak.Post(gameObject);
+
                 ObliterateBobber();
 
                 isFishing = false;
@@ -293,6 +305,8 @@ public class Fishing : MonoBehaviour
 
     private void LobBobber()
     {
+        castBobber.Post(gameObject);
+
         UIManager.Instance.ThrowSliderActive(false);
 
         ObliterateBobber();
