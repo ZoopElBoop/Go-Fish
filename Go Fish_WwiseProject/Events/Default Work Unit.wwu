@@ -157,6 +157,34 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Ambient_beach_sound_STOP" ID="{2AE25D9A-32C9-41F0-9057-F52618B19D90}">
+					<ChildrenList>
+						<Action Name="" ID="{12B54774-B0D9-444B-9EDF-24C44E2DCA98}" ShortID="1012513783">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="beach" ID="{30B4C6AF-E42B-4B6D-93F3-AABBA92DFA57}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Charge_STOP" ID="{99382E13-FA1F-43FC-B4F8-F0641733A605}">
+					<ChildrenList>
+						<Action Name="" ID="{B927D8DB-301D-4D6E-A559-E8B92E058E3F}" ShortID="379855511">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="charge" ID="{032AC27F-E274-4EE2-856E-A04A24D7C594}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

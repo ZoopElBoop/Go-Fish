@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: f6e1ebbfdd8303499ec3140a8a2eb19f
     GuidInternal: 
-    m_lastTime: -8584866513338933597
+    m_lastTime: -8584865117246394051
     List:
     - name: Main
       guid: f659b7fd05b4db41b550785d575e4dbe
@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 11c91fd6cb1f564886677d0aca3fbb2c
     GuidInternal: 
-    m_lastTime: -8584866513343494602
+    m_lastTime: -8584865117246434058
     List:
     - name: Ambient_beach_sound
       guid: 01e485e32411a043bd7d07d66cbc331c
@@ -113,6 +113,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: Ambient_beach_sound_STOP
+      guid: 9a5de22ac932f0419057f52618b19d90
+      id: 3388480558
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Ambient_beach_sound_STOP
+        ObjectType: 3
+        guid: 9a5de22ac932f0419057f52618b19d90
+      Path: Events\Default Work Unit\Ambient_beach_sound_STOP
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: buy_upgrade
       guid: 709aa01a3d82594bac4a1ca37596bd0e
       id: 1625736018
@@ -147,6 +164,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: Charge_STOP
+      guid: 132e38991ffafc43b4f8f0641733a605
+      id: 1451929320
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: Charge_STOP
+        ObjectType: 3
+        guid: 132e38991ffafc43b4f8f0641733a605
+      Path: Events\Default Work Unit\Charge_STOP
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Collisions
       guid: 7e19e334d655b348ab1e51fa3c5cc78f
       id: 824618274
