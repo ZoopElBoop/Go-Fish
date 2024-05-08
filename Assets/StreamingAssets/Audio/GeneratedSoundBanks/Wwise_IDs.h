@@ -20,6 +20,7 @@ namespace AK
         static const AkUniqueID CHARGE_STOP = 1451929320U;
         static const AkUniqueID COLLISIONS = 824618274U;
         static const AkUniqueID DESELECT = 214853820U;
+        static const AkUniqueID EXPLODED = 1925519412U;
         static const AkUniqueID FISH_COLLECTED = 2360843467U;
         static const AkUniqueID FOOTSTEPS = 2385628198U;
         static const AkUniqueID JUMP = 3833651337U;

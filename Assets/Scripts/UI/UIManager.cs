@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text presentsText;
     [SerializeField] private TMP_Text titleText;
 
+    [SerializeField] private TMP_Text day;
+
 
     private void Awake()
     {
@@ -42,6 +44,8 @@ public class UIManager : MonoBehaviour
             FishingSlider();
 
         catches.text = $"CAUGHT FISH: {InventoryManager.Instance.TotalStored()}";
+
+        day.text = $"Day {DayAndNightCycle.Instance.GetDay() + 1}";
     }
 
     #region FishingSliderFuncs

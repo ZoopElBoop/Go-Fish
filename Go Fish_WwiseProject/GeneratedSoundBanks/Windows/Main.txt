@@ -7,6 +7,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1451929320	Charge_STOP			\Default Work Unit\Charge_STOP	
 	1625736018	buy_upgrade			\Default Work Unit\buy_upgrade	
 	1797458246	Line_snap			\Default Work Unit\Line_snap	
+	1925519412	EXPLODED			\Default Work Unit\EXPLODED	
 	2282381988	Sub_door			\Default Work Unit\Sub_door	
 	2301772642	Sell_fish			\Default Work Unit\Sell_fish	
 	2360843467	Fish_collected			\Default Work Unit\Fish_collected	
@@ -40,6 +41,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	217882091	beach	D:\_Uni\2024.1\DES207\_Game\Go Fish\Go Fish_WwiseProject\.cache\Windows\SFX\beach_2A323615.wem		\Actor-Mixer Hierarchy\Default Work Unit\beach		24737632
 	255376140	Sand (step 4)	D:\_Uni\2024.1\DES207\_Game\Go Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Sand (step 4)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\SandSteps\Sand (step 4)		107748
 	310988364	wood collision	D:\_Uni\2024.1\DES207\_Game\Go Fish\Go Fish_WwiseProject\.cache\Windows\SFX\wood collision_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Collisions\wood collision		109388
+	325414844	35461__jobro__explosion-4	D:\_Uni\2024.1\DES207\_Game\Go Fish\Go Fish_WwiseProject\.cache\Windows\SFX\35461__jobro__explosion-4_B1A54E0E.wem		\Actor-Mixer Hierarchy\Default Work Unit\35461__jobro__explosion-4		529296
 	384206844	Gravel (step 1)	D:\_Uni\2024.1\DES207\_Game\Go Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Gravel (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GravelSteps\Gravel (step 1)		96096
 	513240276	deselect	D:\_Uni\2024.1\DES207\_Game\Go Fish\Go Fish_WwiseProject\.cache\Windows\SFX\deselect_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\deselect		58168
 	598946530	Grass (step 1)	D:\_Uni\2024.1\DES207\_Game\Go Fish\Go Fish_WwiseProject\.cache\Windows\SFX\Grass (step 1)_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\GrassSteps\Grass (step 1)		173416

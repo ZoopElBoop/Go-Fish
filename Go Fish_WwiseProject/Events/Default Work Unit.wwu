@@ -185,6 +185,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="EXPLODED" ID="{6B717B6D-CD31-4261-9DBC-112F23B8C59D}">
+					<ChildrenList>
+						<Action Name="" ID="{69720693-DA98-4876-8502-74684AD7F3CF}" ShortID="143301730">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="35461__jobro__explosion-4" ID="{DCA8BF09-51DD-45F6-871C-BB383CB50FD4}" WorkUnitID="{B75645F0-F5B9-4757-A3EB-E524F6D0FF3C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

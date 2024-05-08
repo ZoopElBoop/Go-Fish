@@ -39,7 +39,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{793ED204-2761-F6A6-A2DE-35FD3553A5D8}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{8EA29F0A-8BB1-93D1-30CF-DD1C2B14AF27}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -82,6 +82,10 @@
 				<File Id="310988364" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>wood collision.wav</ShortName>
 					<CachePath>SFX/wood collision_818F3B66.wem</CachePath>
+				</File>
+				<File Id="325414844" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>35461__jobro__explosion-4.wav</ShortName>
+					<CachePath>SFX/35461__jobro__explosion-4_B1A54E0E.wem</CachePath>
 				</File>
 				<File Id="384206844" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Gravel (step 1).wav</ShortName>
@@ -213,6 +217,11 @@
 						<MediaRef Id="513240276"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="1925519412" Name="EXPLODED" DurationType="OneShot" DurationMin="3" DurationMax="3">
+					<MediaRefs>
+						<MediaRef Id="325414844"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="2360843467" Name="Fish_collected" DurationType="OneShot" DurationMin="0.4295603" DurationMax="0.4295603">
 					<MediaRefs>
 						<MediaRef Id="104815867"/>
@@ -313,5 +322,5 @@
 			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{1C0F6301-7C6C-2645-8CF3-EB7379DAE474}</FileHash>
+	<FileHash>{5014B11B-B4D5-BB98-BE97-829A1CA6CE67}</FileHash>
 </SoundBanksInfo>

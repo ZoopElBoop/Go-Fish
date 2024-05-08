@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: f6e1ebbfdd8303499ec3140a8a2eb19f
     GuidInternal: 
-    m_lastTime: -8584865117246394051
+    m_lastTime: -8584864857382837056
     List:
     - name: Main
       guid: f659b7fd05b4db41b550785d575e4dbe
@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 11c91fd6cb1f564886677d0aca3fbb2c
     GuidInternal: 
-    m_lastTime: -8584865117246434058
+    m_lastTime: -8584864857382877064
     List:
     - name: Ambient_beach_sound
       guid: 01e485e32411a043bd7d07d66cbc331c
@@ -215,6 +215,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.339498
       minDuration: 0.339498
+    - name: EXPLODED
+      guid: 6d7b716b31cd61429dbc112f23b8c59d
+      id: 1925519412
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 11c91fd6cb1f564886677d0aca3fbb2c
+      - ElementName: EXPLODED
+        ObjectType: 3
+        guid: 6d7b716b31cd61429dbc112f23b8c59d
+      Path: Events\Default Work Unit\EXPLODED
+      maxAttenuation: 0
+      maxDuration: 3
+      minDuration: 3
     - name: Fish_collected
       guid: 29545889412e124c821fcfe9c8dfb179
       id: 2360843467

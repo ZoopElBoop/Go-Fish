@@ -4,6 +4,7 @@ public class ApplyUpgrades : MonoBehaviour
 {
     private Fishing fis;
     public Boat boatScript;
+    public GameObject sublight;
 
     private void Start()
     {
@@ -15,8 +16,6 @@ public class ApplyUpgrades : MonoBehaviour
         switch (upgrade.upgradeType)
         {
             case UpgradeData.UpgradeTo.Player:
-                fis._chargeUpMax += upgrade.rodThrowAddon;
-                fis._bobberMaxDistanceFromPlayer += upgrade.bobberRangeAddon;
                 break;
 
             case UpgradeData.UpgradeTo.Boat:
@@ -25,11 +24,12 @@ public class ApplyUpgrades : MonoBehaviour
                 break;
 
             case UpgradeData.UpgradeTo.Sub:
-                //TBD
+                sublight.SetActive(true);
                 break;
 
             case UpgradeData.UpgradeTo.Harpoon:
-                //TBD
+                GameManager.Instance.harpoonSpeed =+ upgrade.harpoonSpeed;
+                GameManager.Instance.harpoonDamage =+ upgrade.harpoonDamage;
                 break;
 
             default:
@@ -42,8 +42,6 @@ public class ApplyUpgrades : MonoBehaviour
         switch (upgrade.upgradeType)
         {
             case UpgradeData.UpgradeTo.Player:
-                fis._chargeUpMax -= upgrade.rodThrowAddon;
-                fis._bobberMaxDistanceFromPlayer -= upgrade.bobberRangeAddon;
                 break;
 
             case UpgradeData.UpgradeTo.Boat:
@@ -52,11 +50,12 @@ public class ApplyUpgrades : MonoBehaviour
                 break;
 
             case UpgradeData.UpgradeTo.Sub:
-                //TBD
+                sublight.SetActive(true);
                 break;
 
             case UpgradeData.UpgradeTo.Harpoon:
-                //TBD
+                GameManager.Instance.harpoonSpeed =+ upgrade.harpoonSpeed;
+                GameManager.Instance.harpoonDamage =+ upgrade.harpoonDamage;
                 break;
 
             default:

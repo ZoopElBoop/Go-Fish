@@ -7,8 +7,6 @@ public class Harpoon : MonoBehaviour
     private Rigidbody rb;
     private Collider col;
 
-    public int Damage = 1;
-
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -18,7 +16,7 @@ public class Harpoon : MonoBehaviour
     private void OnEnable()
     {
         rb.isKinematic = false;
-        rb.velocity = 15f * transform.forward;
+        rb.velocity = GameManager.Instance.harpoonSpeed * transform.forward;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -50,7 +48,7 @@ public class Harpoon : MonoBehaviour
 
             fs.harpoonsAttached.Add(gameObject);
 
-            fs.HP -= Damage;
+            fs.HP -= GameManager.Instance.harpoonDamage;
 
             rb.isKinematic = true;
 

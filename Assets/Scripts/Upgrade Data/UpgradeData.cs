@@ -39,8 +39,8 @@ public class UpgradeData : ScriptableObject
 
     [Header("Harpoon")]
     public GameObject harpoon;
-    [Range(1, 100)] public int harpoonDamage;
-    [Range(1, 100)] public int harpoonSpeed;
+    [Range(0, 100)] public int harpoonDamage;
+    [Range(0, 100)] public int harpoonSpeed;
 
     #endregion
 

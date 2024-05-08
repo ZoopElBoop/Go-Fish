@@ -8,6 +8,7 @@
 						<ObjectRef Name="Ambient_beach_sound_STOP" ID="{2AE25D9A-32C9-41F0-9057-F52618B19D90}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="select" ID="{4707DB8E-6B81-4212-AE3F-5795EC99E53A}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Line_snap" ID="{F612A508-146E-4232-9D43-A172B27C8CF3}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="EXPLODED" ID="{6B717B6D-CD31-4261-9DBC-112F23B8C59D}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Ambient_beach_sound" ID="{E385E401-1124-43A0-BD7D-07D66CBC331C}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Charge_STOP" ID="{99382E13-FA1F-43FC-B4F8-F0641733A605}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Footsteps" ID="{6F61DF4C-B23A-4470-B986-DDC49C8A7269}" WorkUnitID="{D61FC911-1FCB-4856-8667-7D0ACA3FBB2C}" Origin="Manual" Filter="7"/>

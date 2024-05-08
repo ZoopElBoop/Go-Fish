@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Variables")]
 
+    //lmao
+    public float harpoonSpeed = 15f;
+    public int harpoonDamage = 1;
+
     public int fishCoin;
     public bool InVessel { get; private set; } 
 

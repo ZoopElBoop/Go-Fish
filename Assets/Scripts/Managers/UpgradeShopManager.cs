@@ -10,14 +10,13 @@ public class UpgradeShopManager : MonoBehaviour
     public SelectionInterface[] shopUiObject;
 
     [Header("UI Elements")]
+    public GameObject confirmGameObject;
+
     public TMP_Text UpgradeToShowText;
     public TMP_Text UpgradeToShowPrice;
 
     public TMP_Text fishCoinText;
-    public TMP_Text switchStateText;
-
-    public DoorControl confirmBuyGameObject;
-    public DoorControl confirmSelectGameObject;
+    public GameObject hideCoin;
 
     private int selectedID = 0;
 
@@ -46,6 +45,8 @@ public class UpgradeShopManager : MonoBehaviour
 
     void Start()
     {
+        confirmGameObject.SetActive(false);
+
         upgrades = GetComponent<ApplyUpgrades>();
 
         upgradeStates = new UpgradeState[upgradeTypes.Count];
@@ -84,11 +85,9 @@ public class UpgradeShopManager : MonoBehaviour
             for (int i = 0; i < upgradeTypes.Count; i++)
             {
                 shopUiObject[i].Name.text = upgradeTypes[i].name;
-                shopUiObject[i].Count.text = $"{upgradeTypes[i].cost} fishcoin";
+                shopUiObject[i].Count.text = $"{upgradeTypes[i].cost}";
                 shopUiObject[i].Image.sprite = upgradeTypes[i].image;
             }
-
-            fishCoinText.text = $"{GameManager.Instance.fishCoin}\nFish Coin";
         }
         else
         {
@@ -98,9 +97,9 @@ public class UpgradeShopManager : MonoBehaviour
                 shopUiObject[i].Count.text = upgradeStates[i].ToString();
                 shopUiObject[i].Image.sprite = upgradeTypes[i].image;
             }
-
-            fishCoinText.text = $"";
         }
+
+        fishCoinText.text = $"{GameManager.Instance.fishCoin}";
 
         DisableInteractIfNoUpgradesToShow();
     }
@@ -121,7 +120,7 @@ public class UpgradeShopManager : MonoBehaviour
         {
             for (int i = 0; i < upgradeTypes.Count; i++)
             {
-                if (upgradeStates[i].HasFlag(UpgradeState.bought) && CheckIfSlotsFree(i) || upgradeStates[i].HasFlag(UpgradeState.equiped))
+                if (upgradeStates[i].HasFlag(UpgradeState.bought) || upgradeStates[i].HasFlag(UpgradeState.equiped))
                     shopUiObject[i].IsActive(true);
                 else
                     shopUiObject[i].IsActive(false);
@@ -179,9 +178,9 @@ public class UpgradeShopManager : MonoBehaviour
 
     //Switch between buying or equiping
     //Update fish coin text to slots
-    public void SwitchToBuy(bool status)
+    public void SwitchStates()
     {
-        isBuying = status;
+        isBuying = !isBuying;
 
         UpdateUpgradeShopText();
     }
@@ -192,25 +191,29 @@ public class UpgradeShopManager : MonoBehaviour
 
         if (isBuying)
         {
-            UpgradeToShowText.text = $"Buy {upgradeTypes[selectedID].name}\nFor: ";
+            UpgradeToShowText.text = $"Buy \n{upgradeTypes[selectedID].name}\nFor";
 
             UpgradeToShowPrice.text = upgradeTypes[selectedID].cost.ToString();
+
+            hideCoin.SetActive(true);
         }
         else 
         {
             if (upgradeStates[selectedID] == UpgradeState.equiped)
-                UpgradeToShowText.text = $"Unequip {upgradeTypes[selectedID].name}\n";
+                UpgradeToShowText.text = $"Unequip \n{upgradeTypes[selectedID].name}\n";
             else
-                UpgradeToShowText.text = $"Equip {upgradeTypes[selectedID].name}\n";
+                UpgradeToShowText.text = $"Equip \n{upgradeTypes[selectedID].name}\n";
 
             UpgradeToShowPrice.text = null;
+
+            hideCoin.SetActive(false);
+
         }
 
         foreach (var UI in shopUiObject)
             UI.IsActive(false);
 
-        confirmBuyGameObject.MoveDoor();
-        // confirmSelectGameObject.MoveDoor();
+        confirmGameObject.SetActive(true);
         print("selected");
     }
 
@@ -224,18 +227,16 @@ public class UpgradeShopManager : MonoBehaviour
                 EquipUpgrade();
             else
                 UnequipUpgrade();
-        }   
+        }
 
-        confirmBuyGameObject.MoveDoor();
-        //confirmSelectGameObject.MoveDoor();
+        confirmGameObject.SetActive(false);
 
         UpdateUpgradeShopText();
     }
 
     public void RejectChoice()
     {
-        confirmBuyGameObject.MoveDoor();
-        //confirmSelectGameObject.MoveDoor();
+        confirmGameObject.SetActive(false);
 
         DisableInteractIfNoUpgradesToShow();
     }
@@ -255,8 +256,6 @@ public class UpgradeShopManager : MonoBehaviour
 
     private void EquipUpgrade()
     {
-        if (!CheckIfSlotsFree(selectedID))
-            return;
 
         upgradeStates[selectedID] = UpgradeState.equiped;
 
